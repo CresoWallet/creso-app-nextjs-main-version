@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import Image from "next/image";
 import creso from "../../assets/eoa/cresoblack.svg";
 import create from "../../assets/eoa/createwallet.svg";
