@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import creso from "../../assets/eoa/cresoblack.svg";
 import secure from "../../assets/eoa/securepassword.svg";
+import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
+import lock2 from "../../assets/eoa/Lock2.png";
+import phone1 from "../../assets/eoa/Phone1.png";
 
 function YourComponent() {
   const secretPhrase = [
@@ -20,9 +23,9 @@ function YourComponent() {
     "kiwi",
   ];
 
-  // Randomly select 4 to 5 indexes to remove
+  // Randomly select 4 to 6 indexes to remove
   const removedIndexes = [];
-  while (removedIndexes.length < Math.floor(Math.random() * 2) + 4) {
+  while (removedIndexes.length < Math.floor(Math.random() * 6) + 7) {
     const index = Math.floor(Math.random() * secretPhrase.length);
     if (!removedIndexes.includes(index)) {
       removedIndexes.push(index);
@@ -81,7 +84,37 @@ function YourComponent() {
         <div className="text-center">
           <Image alt="" src={secure} className="mx-auto" />
         </div>
-        <hr />
+
+        <div className="flex ">
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={lockpassword1}
+              className="rounded-full bg-black border-black border-2 h-16 w-16 mx-2 p-4 "
+            />
+            <p className="text-sm font-semibold pt-3 ">Create Password</p>
+          </div>
+          <hr className="w-24 mt-7 border-black " />
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={lock2}
+              className="rounded-full bg-black border-black border-2 h-16 w-16 mx-2 p-4 "
+            />
+            <p className="text-sm font-semibold pt-3">Secure Wallet</p>
+          </div>
+          <hr className="w-24 mt-7 border-black " />
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={phone1}
+              className="rounded-full bg-[#D0F500] border-black border-2 h-16 w-16 mx-2 p-4 "
+            />
+            <p className="text-sm font-semibold  pt-3">Confirm Code</p>
+          </div>
+        </div>
+
+        <hr className="mt-6" />
 
         <div className="my-10 mx-4 px-4">
           <p className="text-xl text-center  mb-4 font-semibold my-8">

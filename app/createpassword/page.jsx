@@ -4,6 +4,9 @@ import Image from "next/image";
 import creso from "../../assets/eoa/cresoblack.svg";
 import create from "../../assets/eoa/createwallet.svg";
 import check from "../../assets/eoa/checkmark.png";
+import lockpassword from "../../assets/eoa/Lockpassword.png";
+import lock from "../../assets/eoa/Lock.png";
+import phone from "../../assets/eoa/Phone.png";
 
 function CreateEOAWallet() {
   const [password, setPassword] = useState("");
@@ -65,6 +68,7 @@ function CreateEOAWallet() {
         : "border border-black rounded-full"
     );
   };
+
   return (
     <div className="border-black border-2 mx-4">
       <div className="flex flex-col mx-auto max-w-xl">
@@ -75,8 +79,40 @@ function CreateEOAWallet() {
         <div className="m-4 px-10 text-xl text-center font-bold mb-4">
           <Image alt="" src={create} className="text-center" />
         </div>
-        <hr />
+        <div className="flex ">
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={lockpassword}
+              className="rounded-full bg-[#D0F500] border-black border-2 h-16 w-16 mx-2 p-3 "
+            />
+            <p className="text-sm font-semibold pt-3 ">Create Password</p>
+          </div>
+          <hr className="w-24 mt-7 border-black " />
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={lock}
+              className="rounded-full  border-gray-300 border-2 h-16 w-16 mx-2 p-3"
+            />
+            <p className="text-sm font-semibold text-gray-400 pt-3">
+              Secure Wallet
+            </p>
+          </div>
+          <hr className="w-24 mt-7 " />
+          <div className="flex flex-col">
+            <Image
+              alt=""
+              src={phone}
+              className="rounded-full  border-gray-300 border-2 h-16 w-16 mx-2 p-3"
+            />
+            <p className="text-sm font-semibold text-gray-400 pt-3">
+              Confirm Code
+            </p>
+          </div>
+        </div>
 
+        <hr className="mt-6" />
         <div className="my-10 mx-4 px-4">
           <h2 className="text-xl text-center font-bold mb-4">
             Create Password
@@ -86,7 +122,6 @@ function CreateEOAWallet() {
             device. Creso can not recover this password.
           </p>
         </div>
-
         <form onSubmit={handleCreatePassword}>
           <div className="my-4">
             <label
