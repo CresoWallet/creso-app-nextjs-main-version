@@ -12,21 +12,34 @@ function CreateEOAWallet() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [newPasswordBorder, setNewPasswordBorder] = useState(
+    "border rounded-full"
+  );
+  const [confirmPasswordBorder, setConfirmPasswordBorder] = useState(
+    "border rounded-full"
+  );
+  const [newPasswordButtonHover, setNewPasswordButtonHover] = useState(false);
+  const [confirmPasswordButtonHover, setConfirmPasswordButtonHover] =
+    useState(false);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
   const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
+    const { value } = event.target;
+    setConfirmPassword(value);
+    if (password && value && password !== value) {
+      setPasswordError("Passwords do not match");
+    } else {
+      setPasswordError("");
+    }
   };
 
   const handleCreatePassword = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
-    } else if (password.toLowerCase() === confirmPassword.toLowerCase()) {
-      setPasswordError("Passwords must not be case-insensitive");
     } else {
       setPasswordError("");
       // Handle password creation logic here
@@ -35,21 +48,32 @@ function CreateEOAWallet() {
 
   const toggleShowNewPassword = () => {
     setShowNewPassword(!showNewPassword);
+    setNewPasswordButtonHover(!showNewPassword); // Update hover state
+    setNewPasswordBorder(
+      showNewPassword
+        ? "border rounded-full"
+        : "border border-black rounded-full"
+    );
   };
 
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
+    setConfirmPasswordButtonHover(!showConfirmPassword); // Update hover state
+    setConfirmPasswordBorder(
+      showConfirmPassword
+        ? "border rounded-full"
+        : "border border-black rounded-full"
+    );
   };
-
   return (
-    <div className="border-black border-2 mx-2 ">
-      <div className="flex flex-col">
-        <h1 className="grid grid-cols-3 text-3xl font-bold w-full text-center rounded-t-xl py-8 ">
+    <div className="border-black border-2 mx-4">
+      <div className="flex flex-col mx-auto max-w-xl">
+        <h1 className="text-3xl font-bold text-center py-8 ">
           <Image alt="" src={creso} className="mx-4" />
           Create EOA Wallet
         </h1>
         <div className="m-4 px-10 text-xl text-center font-bold mb-4">
-          <Image alt="" src={create} className="text-center " />
+          <Image alt="" src={create} className="text-center" />
         </div>
         <hr />
 
@@ -72,8 +96,12 @@ function CreateEOAWallet() {
               New Password
               <button
                 type="button"
-                className="text-[#FF4085] m-2 justify-end items-end"
+                className={`text-[#FF4085] m-2 justify-end items-end ${
+                  newPasswordButtonHover ? "font-bold" : "font-normal"
+                }`}
                 onClick={toggleShowNewPassword}
+                onMouseEnter={() => setNewPasswordButtonHover(true)}
+                onMouseLeave={() => setNewPasswordButtonHover(false)}
               >
                 Show
               </button>
@@ -83,7 +111,7 @@ function CreateEOAWallet() {
               id="newPassword"
               value={password}
               onChange={handlePasswordChange}
-              className="shadow appearance-none border rounded-full w-full py-5 px-4 text-gray-700 leading-tight "
+              className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight ${newPasswordBorder}`}
             />
           </div>
 
@@ -95,8 +123,12 @@ function CreateEOAWallet() {
               Confirm Password
               <button
                 type="button"
-                className="text-[#FF4085] m-2 justify-end items-end"
+                className={`text-[#FF4085] m-2 justify-end items-end ${
+                  confirmPasswordButtonHover ? "font-bold" : "font-normal"
+                }`}
                 onClick={toggleShowConfirmPassword}
+                onMouseEnter={() => setConfirmPasswordButtonHover(true)}
+                onMouseLeave={() => setConfirmPasswordButtonHover(false)}
               >
                 Show
               </button>
@@ -106,7 +138,7 @@ function CreateEOAWallet() {
               id="confirmPassword"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
-              className="shadow appearance-none border rounded-full w-full py-5 px-4 text-gray-700 leading-tight "
+              className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border ${confirmPasswordBorder}`}
             />
           </div>
           {passwordError && <p className="text-red-500">{passwordError}</p>}
@@ -115,6 +147,7 @@ function CreateEOAWallet() {
             <button
               className="rounded-full p-2 border-black focus:outline-none"
               onClick={() => setIsChecked(!isChecked)}
+              disabled={passwordError || !password || !confirmPassword}
             >
               {isChecked ? (
                 <Image alt="" src={check} className="w-8 h-8 " />
@@ -132,16 +165,12 @@ function CreateEOAWallet() {
             <button
               type="submit"
               className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+              disabled={passwordError || !password || !confirmPassword}
             >
               Create New Password
             </button>
           </div>
         </form>
-      </div>
-
-      {/* Centered content */}
-      <div className="flex justify-center mt-4">
-        {/* Your centered content goes here */}
       </div>
     </div>
   );

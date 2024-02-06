@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import creso from "../../assets/eoa/cresoblack.svg";
-import secure from "../../assets/eoa/confirmpassword.svg";
+import secure from "../../assets/eoa/securepassword.svg";
 
-function CreateEOAWallet() {
+function YourComponent() {
   const secretPhrase = [
     "apple",
     "banana",
@@ -20,92 +20,116 @@ function CreateEOAWallet() {
     "kiwi",
   ];
 
-  // Step 1: Randomly select 4 to 5 indexes to remove
+  // Randomly select 4 to 5 indexes to remove
   const removedIndexes = [];
   while (removedIndexes.length < Math.floor(Math.random() * 2) + 4) {
-    const index = Math.floor(Math.random() * 12);
+    const index = Math.floor(Math.random() * secretPhrase.length);
     if (!removedIndexes.includes(index)) {
       removedIndexes.push(index);
     }
   }
 
+  // Initialize state for input words, user's input, and edit status
   const [inputWords, setInputWords] = useState(
-    secretPhrase.map((_, index) =>
-      removedIndexes.includes(index) ? "" : secretPhrase[index]
+    secretPhrase.map((word, index) =>
+      removedIndexes.includes(index) ? "" : word
     )
   );
+  const [userInput, setUserInput] = useState(
+    Array(removedIndexes.length).fill("")
+  );
+  const [editStatus, setEditStatus] = useState(
+    Array(removedIndexes.length).fill(true)
+  );
+  const [error, setError] = useState("");
 
-  const handleInputChange = (index, event) => {
-    const newInputWords = [...inputWords];
-    newInputWords[index] = event.target.value;
-    setInputWords(newInputWords);
+  // Handle click event to enable editing of a specific input field
+  const handleFieldClick = (index) => {
+    const newEditStatus = [...editStatus];
+    newEditStatus[index] = true;
+    setEditStatus(newEditStatus);
   };
 
-  const handleDone = () => {
-    // Step 2: Compare input with removed words and update state accordingly
-    const missingWords = [];
+  // Update user's input for removed words
+  const handleInputChange = (index, event) => {
+    const newValue = event.target.value;
+    const newInput = [...userInput];
+    newInput[index] = newValue;
+    setUserInput(newInput);
+  };
+
+  // Validate user's input
+  const handleDoneClick = () => {
     for (let i = 0; i < removedIndexes.length; i++) {
       const index = removedIndexes[i];
-      if (!inputWords[index]) {
-        missingWords.push(secretPhrase[index]);
+      if (inputWords[index] !== userInput[i]) {
+        setError("Please fill in all the missing words correctly.");
+        return;
       }
     }
-    setInputWords(
-      secretPhrase.map((word, index) =>
-        removedIndexes.includes(index) ? "" : word
-      )
-    );
-    alert("You missed: " + missingWords.join(", "));
+    setError("");
+    // Proceed with further actions upon successful validation
   };
 
   return (
-    <div className="border-black border-2 mx-2 px-3 items-center justify-center py-2  flex-1">
-      <div className="flex flex-col ">
-        <h1 className="grid grid-cols-3 text-3xl font-bold w-full    items-center justify-center rounded-t-xl py-8 ">
+    <div className="border-black border-2 mx-4 flex justify-center items-center">
+      <div className="max-w-xl">
+        <h1 className="text-3xl font-bold text-center py-8">
           <Image alt="" src={creso} className=" " />
           Create EOA Wallet
         </h1>
-
-        <div className=" justify-center content-center  place-content-center items-center m-4 px-10 ">
-          <Image alt="" src={secure} className="justify-center" />
+        <div className="text-center">
+          <Image alt="" src={secure} className="mx-auto" />
         </div>
-        <hr className="mt-10" />
-      </div>
+        <hr />
 
-      <div className="my-6 ">
-        <p className="text-xl font-semibold my-8">
-          Write down your Secret Recovery Phrase
-        </p>
-        <p className="font-light text-base my-8">
-          Write down this 12-word secret recovery phrase and save it in a place
-          that you trust and only you can access.
-        </p>
-      </div>
+        <div className="my-10 mx-4 px-4">
+          <p className="text-xl text-center  mb-4 font-semibold my-8">
+            Write down your Secret Recovery Phrase
+          </p>
+          <p className="font-normal text-base my-8">
+            Write down this 12-word secret recovery phrase and save it in a
+            place that you trust and only you can access.
+          </p>
+        </div>
 
-      <div className="h-56 rounded-xl border border-black px-8 grid grid-cols-4 gap-6 content-center">
-        {secretPhrase.map((word, index) => (
-          <input
-            key={index}
-            type="text"
-            className="border-black border-2 p-2 rounded-full bg-[#A66CFF] text-center"
-            value={inputWords[index]}
-            onChange={(event) => handleInputChange(index, event)}
-            disabled={!removedIndexes.includes(index)}
-          />
-        ))}
-      </div>
+        <div className="h-80 w-auto rounded-xl border border-black p-2 m-4 my-6 flex justify-center items-center flex-wrap gap-4">
+          {secretPhrase.map((word, index) => (
+            <div
+              key={index}
+              className="rounded-full border border-black bg-[#A66CFF] p-2 m-1"
+              style={{ width: "120px", textAlign: "center" }}
+              onClick={() => handleFieldClick(index)}
+            >
+              {removedIndexes.includes(index) && editStatus[index] ? (
+                <input
+                  type="text"
+                  value={userInput[removedIndexes.indexOf(index)]}
+                  onChange={(event) =>
+                    handleInputChange(removedIndexes.indexOf(index), event)
+                  }
+                  className="bg-transparent border-none focus:outline-none w-full"
+                />
+              ) : (
+                word
+              )}
+            </div>
+          ))}
+        </div>
 
-      <div className="flex items-center justify-center my-8">
-        <button
-          type="button"
-          className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white"
-          onClick={handleDone}
-        >
-          Done
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white"
+            onClick={handleDoneClick}
+          >
+            Done
+          </button>
+        </div>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
       </div>
     </div>
   );
 }
 
-export default CreateEOAWallet;
+export default YourComponent;

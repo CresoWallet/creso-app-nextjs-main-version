@@ -7,14 +7,14 @@ import pinkblub from "../../assets/eoa/pinkblub.png";
 import creso from "../../assets/eoa/cresoblack.svg";
 
 export default function CreateEoaWalletPage() {
-  const [buttonNo, buttonNo1] = useState(false);
-  const [buttonI, buttonI1] = useState(false);
+  const [buttonNo, setButtonNo] = useState(false);
+  const [buttonI, setButtonI] = useState(false);
 
   return (
-    <div className="border-black border-2 mx-2 ">
-      <div className="flex flex-col">
-        <h1 className=" grid grid-cols-3 text-3xl font-bold w-full text-center rounded-t-xl py-8 ">
-          <Image alt="" src={creso} className=" mx-4" />
+    <div className="border-black border-2 mx-4 flex justify-center items-center">
+      <div className="max-w-5xl">
+        <h1 className="text-3xl font-bold text-center py-8">
+          <Image alt="" src={creso} className=" " />
           Create EOA Wallet
         </h1>
 
@@ -65,36 +65,36 @@ export default function CreateEoaWalletPage() {
 
           {/* button*/}
           <div className=" m-4 py-4  mx-20 place-self-center">
-            <buttonNo
+            <button
               className={`${
                 buttonNo ? "bg-black text-white" : "bg-transparent text-black"
               } rounded-full py-4 mx-2 px-10 border-black ${
                 buttonNo ? "" : "border"
               }`}
-              onMouseEnter={() => buttonNo1(true)}
-              onMouseLeave={() => buttonNo1(false)}
+              onMouseEnter={() => setButtonNo(true)}
+              onMouseLeave={() => setButtonNo(false)}
               onClick={() => {
-                buttonNo1(true);
-                buttonI1(false);
+                setButtonNo(true);
+                setButtonI(false);
               }}
             >
               No Thanks
-            </buttonNo>
-            <buttonNo
+            </button>
+            <button
               className={`${
                 buttonI ? "bg-black text-white" : "bg-transparent text-black"
               } rounded-full py-4 px-14 mx-2 border-black ${
                 buttonI ? "" : "border"
               }`}
-              onMouseEnter={() => buttonI1(true)}
-              onMouseLeave={() => buttonI1(false)}
+              onMouseEnter={() => setButtonI(true)}
+              onMouseLeave={() => setButtonI(false)}
               onClick={() => {
-                buttonI1(true);
-                buttonNo1(false);
+                setButtonI(true);
+                setButtonNo(false);
               }}
             >
               I Agree
-            </buttonNo>
+            </button>
           </div>
         </div>
       </div>
