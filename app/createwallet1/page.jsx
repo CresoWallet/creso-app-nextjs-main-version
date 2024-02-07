@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import check from "../../assets/eoa/checkmark.png";
-import creso from "../../assets/eoa/cresoblack.svg";
+import Header from "@/components/HeaderEOA";
 
 export default function Eoawallet() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
@@ -11,11 +11,8 @@ export default function Eoawallet() {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div className="border-black border-2 items-center justify-center h-full  p-4 px-4 mx-4 py-4 flex flex-col ">
-      <h1 className=" grid grid-cols-3 text-3xl font-bold w-full text-center rounded-t-xl py-8 ">
-        <Image alt="" src={creso} className=" mx-4" />
-        Create EOA Wallet
-      </h1>
+    <div className="border-black border-2 items-center justify-center h-full p-4 px-4 mx-4 py-4 flex flex-col ">
+      <Header title="Create EOA Wallet" />
       <div className="text-center mb-8">
         <h2 className="font-bold text-2xl mb-4">Let&lsquo;s Get Started</h2>
         <p className="text-gray-500">
@@ -28,15 +25,15 @@ export default function Eoawallet() {
       <Image alt="" src={create} className="mb-8" />
 
       {/* Terms of Use */}
-      <div className="flex items-center mb-8">
+      <div className="flex items-center mb-8 pb-2">
         <button
           className="rounded-full p-2 border-black focus:outline-none"
           onClick={() => setIsChecked(!isChecked)}
         >
           {isChecked ? (
-            <Image alt="" src={check} className="w-8 h-8 " />
+            <Image alt="" src={check} className="w-8 h-8 my-1 " />
           ) : (
-            <div className="w-6 h-6 rounded-full border border-black"></div>
+            <div className="w-6 h-6 rounded-full border my-2 mr-1 border-black"></div>
           )}
         </button>
         <span className="ml-2">
@@ -46,13 +43,13 @@ export default function Eoawallet() {
       </div>
 
       {/* buttons */}
-      <div className="flex my-4">
+      <div className="flex flex-col sm:flex-row my-4">
         <button
           className={`${
             importWalletHovered
               ? "bg-black text-white"
               : "bg-transparent text-black"
-          } rounded-full py-5 m-4 px-20 border-black ${
+          } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
             importWalletHovered ? "" : "border"
           }`}
           onMouseEnter={() => setImportWalletHovered(true)}
@@ -69,7 +66,7 @@ export default function Eoawallet() {
             createWalletHovered
               ? "bg-black text-white"
               : "bg-transparent text-black"
-          } rounded-full py-5 m-4 px-20 border-black ${
+          } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
             createWalletHovered ? "" : "border"
           }`}
           onMouseEnter={() => setCreateWalletHovered(true)}
