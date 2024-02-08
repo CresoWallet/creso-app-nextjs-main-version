@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import greenblub from "../../assets/eoa/greenblub.png";
 import pinkblub from "../../assets/eoa/pinkblub.png";
 import Header from "@/components/HeaderEOA";
@@ -10,11 +11,11 @@ export default function CreateEoaWalletPage() {
   const [buttonI, setButtonI] = useState(false);
 
   return (
-    <div className="border-black border-2 items-center justify-center h-full p-4 px-4 mx-4 py-4 flex flex-col ">
+    <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
       <Header title="Create EOA Wallet" />
 
       <div className="text-center mx-auto mb-4 max-w-lg">
-        <h2 className="font-bold text-2xl mb-4">Let&lsquo;s Get Started</h2>
+        <h2 className="font-bold text-2xl mt-10 mb-4">Let&#39;s Get Started</h2>
         <p className="text-gray-500 mx-auto">
           Creso would like to gather usage data to better understand how our
           users interact with Creso. This data will be used to provide the
@@ -56,7 +57,7 @@ export default function CreateEoaWalletPage() {
         </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row ">
+      <div className="flex flex-col sm:flex-row items-center justify-center">
         <button
           className={`rounded-full py-4 px-10 mx-2 mb-2 border-black ${
             buttonNo ? "bg-black text-white" : "bg-transparent text-black"

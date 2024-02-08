@@ -84,7 +84,14 @@ const WalletContextProvider = ({ children }) => {
   const isLoginOrRegister =
     pathName === "/" ||
     pathName.includes("/register") ||
-    pathName.includes("/login");
+    pathName.includes("/login") ||
+    pathName.includes("/createwallet1") ||
+    pathName.includes("/createeoa2") ||
+    pathName.includes("/createpassword3") ||
+    pathName.includes("/createsecure4") ||
+    pathName.includes("/createpharse5") ||
+    pathName.includes("/createsecret6");
+
   // console.log(pathName);
 
   useEffect(() => {
