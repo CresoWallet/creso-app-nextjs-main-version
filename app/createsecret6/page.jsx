@@ -222,7 +222,7 @@ function CreateEOAWallet() {
       <div className="flex justify-center my-16">
         <button
           type="button"
-          className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white"
+          className="md:px-32 px-28 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white"
           onClick={handleConfirm}
         >
           Confirm

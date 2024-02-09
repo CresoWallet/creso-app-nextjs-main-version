@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
+import Link from "next/link";
 
 const CommonComponent = ({
   title,
@@ -23,10 +24,12 @@ const CommonComponent = ({
       <HeaderEOA title={title} />
       <div className="h-full md:p-4 p-4 md:px-4 md:mx-4 md:py-4 flex flex-col ">
         <div className="flex items-center pt-10">
-          <h1 className="flex items-center gap-2  text-xl font-bold md:text-black md:hidden ">
-            <BsArrowLeft />
-            {title}
-          </h1>
+          <Link href="createwallet1">
+            <h1 className="flex items-center gap-2  text-xl font-bold md:text-black md:hidden ">
+              <BsArrowLeft />
+              {title}
+            </h1>
+          </Link>
         </div>
         <div className="flex items-center justify-center mb-4 mt-6 ">
           <div className="flex flex-col">
