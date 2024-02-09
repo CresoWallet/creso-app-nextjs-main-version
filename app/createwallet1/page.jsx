@@ -33,9 +33,9 @@ export default function Eoawallet() {
             onClick={() => setIsChecked(!isChecked)}
           >
             {isChecked ? (
-              <Image alt="" src={check} className="w-8 h-8 my-1 " />
-            ) : (
               <div className="w-6 h-6 rounded-full border my-2 mr-1 border-black"></div>
+            ) : (
+              <Image alt="" src={check} className="w-8 h-8 my-1 " />
             )}
           </button>
           <span className="ml-2">

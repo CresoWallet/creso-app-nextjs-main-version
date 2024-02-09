@@ -9,7 +9,7 @@ import Language1 from "../../assets/eoa/languagewhite.png";
 const HeaderEOA = ({ title }) => {
   return (
     <>
-      <div className="flex items-center justify-between fixed top-0 md:bg-white bg-[#2100EC] text-white mb-44  p-4 w-full ">
+      <div className="flex items-center justify-between fixed top-0 md:bg-white bg-[#2100EC]  text-white mb-44  p-4 w-full ">
         <div className="flex items-center ">
           <Image
             alt=""
