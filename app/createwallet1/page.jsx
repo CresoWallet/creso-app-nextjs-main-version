@@ -13,7 +13,7 @@ export default function Eoawallet() {
   return (
     <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
       <Header title="Create EOA Wallet" />
-      <div className="items-center justify-center">
+      <div className="grid place-items-center">
         <div className="text-center ">
           <h2 className="font-bold text-2xl mt-10 mb-4">
             Let&#39;s Get Started
@@ -24,7 +24,7 @@ export default function Eoawallet() {
             <p>accessible to all.</p>
           </p>
         </div>
-        <Image alt="" src={create} className="mb-8  " />
+        <Image alt="" src={create} className="mb-8  mx-auto" />
 
         {/* Terms of Use */}
         <div className="flex items-center justify-center mb-8 pb-2">
@@ -47,13 +47,11 @@ export default function Eoawallet() {
         {/* buttons */}
         <div className="flex flex-col sm:flex-row my-4 justify-center items-center">
           <button
-            className={`${
-              importWalletHovered
-                ? "bg-black text-white"
-                : "bg-transparent text-black"
-            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
-              importWalletHovered ? "" : "border"
-            }`}
+            className={`${importWalletHovered
+              ? "bg-black text-white"
+              : "bg-transparent text-black"
+              } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${importWalletHovered ? "" : "border"
+              }`}
             onMouseEnter={() => setImportWalletHovered(true)}
             onMouseLeave={() => setImportWalletHovered(false)}
             onClick={() => {
@@ -65,13 +63,11 @@ export default function Eoawallet() {
           </button>
 
           <button
-            className={`${
-              createWalletHovered
-                ? "bg-black text-white"
-                : "bg-transparent text-black"
-            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
-              createWalletHovered ? "" : "border"
-            }`}
+            className={`${createWalletHovered
+              ? "bg-black text-white"
+              : "bg-transparent text-black"
+              } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${createWalletHovered ? "" : "border"
+              }`}
             onMouseEnter={() => setCreateWalletHovered(true)}
             onMouseLeave={() => setCreateWalletHovered(false)}
             onClick={() => {

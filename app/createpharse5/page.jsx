@@ -5,6 +5,8 @@ import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/CommonEOA";
 import eye from "../../assets/eoa/eye.png";
+import Image from "next/image";
+import { HiOutlineEye } from "react-icons/hi2";
 
 function CreateEOAWallet() {
   const secretPhrase = [
@@ -30,7 +32,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="border-black border-2 h-full px-4 mx-4 py-4 flex flex-col ">
+    <div className="h-full md:p-4 md:px-4 mx-2 md:mx-4 md:py-4 flex flex-col">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -46,40 +48,50 @@ function CreateEOAWallet() {
         textColor1="black"
         textColor2="gray-300"
       />
-      <hr className="mt-2 w-auto  " />
+      <div className=" md:w-[70%] lg:w-[45%] xl:w-[35%] container mx-auto ">
+        <hr className="mt-2 w-auto  " />
 
-      <div className="text-center mx-auto mb-4 max-w-xl">
-        <h2 className="text-xl text-center font-bold mb-4 mt-8">
-          Write down your Secret Recovery Phrase
-        </h2>
-        <p className="mx-auto">
-          Write down this 12-word secret recovery phrase and save it in a place
-          that you trust and only you can access.
-        </p>
-      </div>
+        <div className="text-center mx-auto mb-4 max-w-xl">
+          <h2 className="text-xl text-center font-bold mb-4 mt-8">
+            Write down your Secret Recovery Phrase
+          </h2>
+          <p className="mx-auto">
+            Write down this 12-word secret recovery phrase and save it in a place
+            that you trust and only you can access.
+          </p>
+        </div>
 
-      <div className="relative h-80 w-auto rounded-xl  my-16  border border-black flex justify-center items-center flex-wrap sm:gap-1 gap-2">
-        {inputWords.map((word, index) => (
-          <div
-            key={index}
-            className="rounded-full border border-black bg-[#A66CFF] p-2 md:m-1"
-            style={{ minWidth: "25%", textAlign: "center" }}
+        <div className={`rounded-3xl mx-auto py-3 md:py-4 border grid grid-cols-3  md:px-5 relative `}>
+          {inputWords.map((word, index) => (
+            <div
+              key={index}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${!revealed ? "blur-sm bg-black opacity-[10%] text-white" : "bg-[#A66CFF] border-black"}`}
+              style={{ minWidth: "25%", textAlign: "center" }}
+            >
+              {/* {revealed ? `${index + 1}. ${word}` : "•••••"} */}
+              {`${index + 1}. ${word.slice(0, 8)}`}
+            </div>
+          ))
+          }
+          {!revealed && <div className="absolute flex flex-col justify-center items-center inset-0">
+            {/* <Image src={""} alt="" /> */}
+            <div className="text-4xl">
+              <HiOutlineEye />
+            </div>
+            <p className="my-4 text-sm">Make sure nobody Looking</p>
+          </div>}
+        </div>
+
+        <div className="text-center mt-20 w-full rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer">
+          <button
+            className="p-2.5"
+            onClick={handleRevealClick}
           >
-            {revealed ? `${index + 1}. ${word}` : "•••••"}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex justify-center">
-        <button
-          type="button"
-          className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white"
-          onClick={handleRevealClick}
-        >
-          {revealed
-            ? "Hide Secret Recovery Phrase"
-            : "Reveal Secret Recovery Phrase"}
-        </button>
+            {revealed
+              ? "Hide Secret Recovery Phrase"
+              : "Reveal Secret Recovery Phrase"}
+          </button>
+        </div>
       </div>
     </div>
   );
