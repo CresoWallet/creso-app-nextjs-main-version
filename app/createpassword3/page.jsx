@@ -5,7 +5,7 @@ import check from "../../assets/eoa/checkmark.png";
 import lockpassword from "../../assets/eoa/Lockpassword.png";
 import lock from "../../assets/eoa/Lock.png";
 import phone from "../../assets/eoa/Phone.png";
-import CommonComponent from "@/components/CommonEOA";
+import CommonComponent from "@/components/common/CommonEOA";
 
 function CreateEOAWallet() {
   const [password, setPassword] = useState("");
@@ -69,7 +69,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
+    <div className=" h-full md:px-4  py-4  flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword}
@@ -86,12 +86,12 @@ function CreateEOAWallet() {
         textColor2="gray-300"
       />
 
-      <hr className="mt-6 w-auto  " />
-      <div className="text-center mx-auto mb-4 max-w-xl">
-        <h2 className="text-xl text-center font-bold mb-4 mt-8">
+      <hr className=" mt-4  w-auto  " />
+      <div className="text-center hidden sm:block mx-auto mb-4 max-w-xl">
+        <h2 className="text-xl  text-center font-bold mb-4 mt-8">
           Create Password
         </h2>
-        <p className=" mx-auto ">
+        <p className=" mx-auto mt-2 ">
           This password will unlock your Creso wallet only on this device. Creso
           cannot recover this password.
         </p>
@@ -101,7 +101,7 @@ function CreateEOAWallet() {
           <div className="my-4 mx-auto max-w-md">
             <label
               htmlFor="newPassword"
-              className="block text-gray-700 font-bold mb-2 items-center"
+              className="block text-gray-700 font-bold md:mb-2 mb-1 items-center"
             >
               New Password
               <button
@@ -125,10 +125,10 @@ function CreateEOAWallet() {
             />
           </div>
 
-          <div className="mb-4 mt-8 mx-auto max-w-md">
+          <div className="md:mb-4 md:mt-8 my-2 mx-auto max-w-md">
             <label
               htmlFor="confirmPassword"
-              className="block text-gray-700 font-bold mb-2 items-center"
+              className="block text-gray-700 font-bold md:mb-2 items-center"
             >
               Confirm Password
               <button
@@ -151,9 +151,9 @@ function CreateEOAWallet() {
               className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border ${confirmPasswordBorder}`}
             />
           </div>
-          {passwordError && <p className="text-red-500">{passwordError}</p>}
+          {passwordError && <p className="text-red-500 ">{passwordError}</p>}
           {/* Terms of Use */}
-          <div className="flex items-center mb-8 mx-auto max-w-md">
+          <div className="flex items-center md:mb-8 md:mt-2 mt-20 mb-2 mx-auto max-w-md">
             <button
               className="rounded-full p-2 border-black focus:outline-none"
               onClick={() => setIsChecked(!isChecked)}
@@ -165,7 +165,7 @@ function CreateEOAWallet() {
                 <div className="w-6 h-6 rounded-full border border-black"></div>
               )}
             </button>
-            <span className="ml-2">
+            <span className="md:ml-2 ">
               I understand that Creso cannot recover this password for me.
               <span className="text-[#FF4085] ml-1">Learn more</span>
             </span>

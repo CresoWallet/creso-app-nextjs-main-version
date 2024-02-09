@@ -8,6 +8,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import { UserProvider } from "@/providers/UserProvider";
 import NotistackProvider from "@/providers/NotistackProvider";
 import WalletContextProvider from "@/providers/WalletProvider";
+import HeaderEOA from "@/components/common/HeaderEOA";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         <ReduxProvider>
           <UserProvider>
             <WalletContextProvider>
+              {/* <HeaderEOA /> */}
               <NotistackProvider className="">{children}</NotistackProvider>
             </WalletContextProvider>
           </UserProvider>

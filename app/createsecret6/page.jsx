@@ -122,7 +122,7 @@ import React, { useState } from "react";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock2 from "../../assets/eoa/Lock2.png";
 import phone1 from "../../assets/eoa/Phone1.png";
-import CommonComponent from "@/components/CommonEOA";
+import CommonComponent from "@/components/common/CommonEOA";
 
 function CreateEOAWallet() {
   const secretPhrase = [
@@ -189,7 +189,6 @@ function CreateEOAWallet() {
         textColor2="black"
       />
       <div className=" md:w-[70%] lg:w-[45%] xl:w-[35%] container mx-auto ">
-
         <hr className="mt-6 w-auto  " />
 
         <div className="text-center mx-auto mb-12 max-w-xl">
@@ -197,8 +196,8 @@ function CreateEOAWallet() {
             Write down your Secret Recovery Phrase
           </h2>
           <p className="mx-auto">
-            Write down this 12-word secret recovery phrase and save it in a place
-            that you trust and only you can access.
+            Write down this 12-word secret recovery phrase and save it in a
+            place that you trust and only you can access.
           </p>
         </div>
 
@@ -206,7 +205,9 @@ function CreateEOAWallet() {
           {secretPhrase.map((word, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5 ${removedIndexes.includes(index) ? "" : "bg-[#A66CFF]"} `}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5 ${
+                removedIndexes.includes(index) ? "" : "bg-[#A66CFF]"
+              } `}
             >
               <span>{word.slice(0, 10)}</span>
             </div>
@@ -214,14 +215,10 @@ function CreateEOAWallet() {
         </div>
         {error && <p className="text-red-500 text-center ">{error}</p>}
         <div className="text-center mt-20 w-full rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer">
-          <button
-            className="p-2.5"
-            onClick={handleConfirm}
-          >
+          <button className="p-2.5" onClick={handleConfirm}>
             Confirm
           </button>
         </div>
-
       </div>
     </div>
   );
