@@ -122,7 +122,7 @@ import React, { useState } from "react";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock2 from "../../assets/eoa/Lock2.png";
 import phone1 from "../../assets/eoa/Phone1.png";
-import CommonComponent from "@/components/CommonEOA";
+import CommonComponent from "@/components/common/CommonEOA";
 
 function CreateEOAWallet() {
   const secretPhrase = [
@@ -172,7 +172,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
+    <div className="h-full md:px-4  py-4 flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -200,7 +200,7 @@ function CreateEOAWallet() {
         </p>
       </div>
 
-      <div className=" rounded-xl mx-auto py-5 border border-black flex justify-center items-center flex-wrap sm:gap-1 gap-2">
+      <div className=" rounded-xl mx-auto py-5 border border-black flex justify-evenly items-center flex-wrap ">
         {secretPhrase.map((word, index) => (
           <div
             key={index}

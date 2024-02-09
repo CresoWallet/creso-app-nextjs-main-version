@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
-import CommonComponent from "@/components/CommonEOA";
+import CommonComponent from "@/components/common/CommonEOA";
 import eye from "../../assets/eoa/eye.png";
 
 function CreateEOAWallet() {
@@ -30,7 +30,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="border-black border-2 h-full px-4 mx-4 py-4 flex flex-col ">
+    <div className=" h-full md:px-4  py-4  flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}

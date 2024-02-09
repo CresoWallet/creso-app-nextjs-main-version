@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import check from "../../assets/eoa/checkmark.png";
-import Header from "@/components/HeaderEOA";
+import Header from "@/components/common/HeaderEOA";
 
 export default function Eoawallet() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
@@ -11,11 +11,11 @@ export default function Eoawallet() {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
-      <Header title="Create EOA Wallet" />
-      <div className="items-center justify-center">
+    <div className=" h-full md:px-4  py-4 flex flex-col ">
+      <Header title="Create EOA Wallet" className="md:hidden block" />
+      <div className=" grid place-items-center">
         <div className="text-center ">
-          <h2 className="font-bold text-2xl mt-10 mb-4">
+          <h2 className="font-bold text-2xl mt-16  mb-4">
             Let&#39;s Get Started
           </h2>
           <p className="text-gray-500">
@@ -51,7 +51,7 @@ export default function Eoawallet() {
               importWalletHovered
                 ? "bg-black text-white"
                 : "bg-transparent text-black"
-            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
+            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12  border-black ${
               importWalletHovered ? "" : "border"
             }`}
             onMouseEnter={() => setImportWalletHovered(true)}
@@ -69,7 +69,7 @@ export default function Eoawallet() {
               createWalletHovered
                 ? "bg-black text-white"
                 : "bg-transparent text-black"
-            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 sm:px-20 border-black ${
+            } rounded-full py-3 sm:py-5 m-2 sm:m-4 px-16 border-black ${
               createWalletHovered ? "" : "border"
             }`}
             onMouseEnter={() => setCreateWalletHovered(true)}

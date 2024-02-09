@@ -6,7 +6,7 @@ import play from "../../assets/eoa/playbutton.png";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
-import CommonComponent from "@/components/commonEOA";
+import CommonComponent from "@/components/common/CommonEOA";
 
 function CreateWallet() {
   const [buttonNo, setButtonNo] = useState(false);
@@ -18,7 +18,7 @@ function CreateWallet() {
   };
 
   return (
-    <div className="border-black border-2 h-full p-4 px-4 mx-4 py-4 flex flex-col ">
+    <div className=" h-full md:px-4  py-4 flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -36,15 +36,15 @@ function CreateWallet() {
       />
       <hr className="mt-6 w-auto  " />
 
-      <div className="text-center mx-auto mb-4 max-w-xl">
+      <div className="text-center md:mx-auto  mb-4 max-w-xl">
         <h2 className="text-xl text-center font-bold mb-4 mt-8">
           Secure Your Wallet
         </h2>
-        <p className="mx-auto">
+        <p className="mx-auto ">
           Before getting started, watch this short video to learn about your
           Secret Recovery Phrase and how to keep your wallet safe.
         </p>
-        <div className="relative h-80 w-auto bg-slate-200 rounded-xl my-16">
+        <div className="relative md:h-80 md:w-auto h-48 w-80 sm:w-96 mx-auto px-2 md:bg-slate-200 bg-[#D0F500] rounded-xl md:my-16 my-4 ">
           {!videoPlayed && (
             <button
               onClick={handlePlayVideo}
@@ -67,7 +67,7 @@ function CreateWallet() {
           <button
             className={`${
               buttonNo ? "bg-black text-white" : "bg-transparent text-black"
-            } rounded-full py-4  my-2   mx-2 px-9 border-black ${
+            } rounded-full py-4  my-2   mx-2 md:px-16 px-20  border-black ${
               buttonNo ? "" : "border"
             }`}
             onMouseEnter={() => setButtonNo(true)}
@@ -82,7 +82,7 @@ function CreateWallet() {
           <button
             className={`${
               buttonI ? "bg-black text-white" : "bg-transparent text-black"
-            } rounded-full py-4 px-9 mx-2  border-black ${
+            } rounded-full py-4 md:px-16 px-20 mx-2  border-black ${
               buttonI ? "" : "border"
             }`}
             onMouseEnter={() => setButtonI(true)}
