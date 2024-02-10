@@ -132,11 +132,11 @@ function CreateEOAWallet() {
     "grape",
     "peach",
     "mango",
-    "pineapple",
-    "watermelon",
-    "strawberry",
-    "blueberry",
-    "raspberry",
+    "pine",
+    "water",
+    "berry",
+    "blue",
+    "peach",
     "kiwi",
   ];
 
@@ -172,7 +172,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="h-full md:p-4 md:px-4 mx-2 md:mx-4 md:py-4 flex flex-col">
+    <div className="h-full md:p-4 md:px-4 mx-2 md:mx-4 py-4 flex flex-col">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -209,7 +209,7 @@ function CreateEOAWallet() {
                 removedIndexes.includes(index) ? "" : "bg-[#A66CFF]"
               } `}
             >
-              <span>{word.slice(0, 10)}</span>
+              <span>{word.slice(0, 8)}</span>
             </div>
           ))}
         </div>
