@@ -32,7 +32,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="h-full md:p-4 md:px-4 mx-2 md:mx-4 py-4 flex flex-col">
+    <div className=" h-full md:px-4  py-4 flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -62,7 +62,7 @@ function CreateEOAWallet() {
         </div>
 
         <div
-          className={`rounded-3xl mx-auto py-3 md:py-4 border grid grid-cols-3  md:px-5 relative `}
+          className={`rounded-3xl mx-3 md:mx-auto py-3 md:py-4 border grid grid-cols-3  md:px-5 relative `}
         >
           {inputWords.map((word, index) => (
             <div
