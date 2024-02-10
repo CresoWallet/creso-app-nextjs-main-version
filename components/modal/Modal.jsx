@@ -448,7 +448,6 @@ import Cloud from "../../assets/backup/cloud.png";
 import Google from "../../assets/backup/google.png";
 import Baidu from "../../assets/backup/baidu.png";
 import { sendOTPMail, verifyOTP } from "@/clientApi/auth";
-// import { OtpInputCard } from "../cards/OtpInputCard";
 import FileSaver from "file-saver";
 import { backupWallet } from "@/clientApi/wallet";
 import { useUser } from "@/providers/UserProvider";
