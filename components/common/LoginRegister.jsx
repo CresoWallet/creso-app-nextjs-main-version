@@ -21,7 +21,7 @@ const Header = ({ pageTitle, pageLink }) => {
           </div>
         </div>
       </div>
-      <div className="md:hidden flex gap-4 mb-4 mt-14 ml-2 font-bold items-center ">
+      <div className="md:hidden flex gap-4 mb-4 mt-14 ml-2 font-bold text-lg items-center ">
         <Link href={pageLink}>
           <BsArrowLeft />
         </Link>
