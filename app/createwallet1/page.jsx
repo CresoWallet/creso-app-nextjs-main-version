@@ -4,6 +4,7 @@ import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import check from "../../assets/eoa/checkmark.png";
 import Header from "@/components/common/HeaderEOA";
+import Link from "next/link";
 
 export default function Eoawallet() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
@@ -61,7 +62,7 @@ export default function Eoawallet() {
               setCreateWalletHovered(false);
             }}
           >
-            Import an existing wallet
+            <Link href="/dashboard">Import an existing wallet</Link>
           </button>
 
           <button
@@ -79,7 +80,7 @@ export default function Eoawallet() {
               setImportWalletHovered(false);
             }}
           >
-            Create New Wallet
+            <Link href="/createeoa2">Create New Wallet</Link>
           </button>
         </div>
       </div>

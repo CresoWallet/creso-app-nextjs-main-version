@@ -321,7 +321,7 @@ const LoginPage = () => {
   return (
     <div className="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
       <div className="col-span-1 flex-col justify-center items-center bg-[#2100EC] md:py-8  hidden md:block rounded-2xl">
-        <div className=" flex-row items-center justify-center md:my-16 gap-1 relative hidden md:block Mainlogo text-white md:mt-4 ">
+        <div className=" flex-row items-center justify-center md:my-16  gap-1 relative hidden md:block text-white md:mt-4 ">
           <Image alt="creso-logo" src={cresow} className="md:h-16" />
         </div>
 
@@ -329,7 +329,7 @@ const LoginPage = () => {
           alt=""
           src={BgImage}
           height={650}
-          className="hidden xl:flex md:flex "
+          className="hidden xl:flex md:flex  mx-auto "
         />
       </div>
 
