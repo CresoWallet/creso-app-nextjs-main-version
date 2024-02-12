@@ -16,6 +16,7 @@ import cresow from "../../assets/Dashboard/creso_logo_white.svg";
 import Capcha from "@/components/Capcha";
 import { WalletContext } from "@/providers/WalletProvider";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import OTP from "@/components/OTP/OTP";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -145,6 +146,8 @@ const RegisterPage = () => {
           </div>
 
           {/* <Capcha onSubmit={onSubmit} /> */}
+
+          {/* <OTP /> */}
 
           <div className="flex flex-col space-y-2 !mt-10">
             {/* Sign-up button */}

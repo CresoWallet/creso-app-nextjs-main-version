@@ -23,6 +23,7 @@ import axios from "axios";
 import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
+import OTP from "@/components/OTP/OTP";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const MainLayout = () => {
   const { user, isAuthenticated, status } = useUser();
   const {
     secureWalletBalance,
-    eoaWalletBalance, 
+    eoaWalletBalance,
     wallets,
     secureWalletAddress,
     eoaWalletAddress,
