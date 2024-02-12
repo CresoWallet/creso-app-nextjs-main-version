@@ -90,7 +90,7 @@ export default function CreateEoaWalletPage() {
             setButtonNo(false);
           }}
         >
-          I Agree
+          <Link href="/createpassword3"> I Agree </Link>
         </button>
       </div>
     </div>

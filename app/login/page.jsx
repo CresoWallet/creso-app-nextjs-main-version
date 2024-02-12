@@ -359,7 +359,7 @@ const LoginPage = () => {
             validation={{ ...register("password", { required: true }) }}
           />
           <span className="text-[#FF4085] text-sm cursor-pointer hover:font-bold">
-            Forgot Password?
+            <Link href="/forgotpassword"> Forgot Password? </Link>
           </span>
           <Capcha onSubmit={onSubmit} />
 

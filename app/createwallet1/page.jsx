@@ -62,7 +62,7 @@ export default function Eoawallet() {
               setCreateWalletHovered(false);
             }}
           >
-            <Link href="/dashboard">Import an existing wallet</Link>
+            <Link href="/importwallet">Import an existing wallet</Link>
           </button>
 
           <button

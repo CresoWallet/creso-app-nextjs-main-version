@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import check from "../../assets/eoa/checkmark.png";
 import lockpassword from "../../assets/eoa/Lockpassword.png";
 import lock from "../../assets/eoa/Lock.png";

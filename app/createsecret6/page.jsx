@@ -142,7 +142,7 @@ function CreateEOAWallet() {
 
   // Randomly select 5 to 6 indexes to remove
   const removedIndexes = [];
-  console.log("removedIndexes --------------------->", removedIndexes);
+
   while (removedIndexes.length < Math.floor(Math.random() * 2) + 5) {
     const index = Math.floor(Math.random() * secretPhrase.length);
     if (!removedIndexes.includes(index)) {
