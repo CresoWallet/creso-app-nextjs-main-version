@@ -42,6 +42,7 @@ import NFT from "../../assets/discover/NFT.jpg";
 import NFT2 from "../../assets/discover/NFT2.png";
 import NFT3 from "../../assets/discover/NFT3.png";
 import NFT1 from "../../assets/discover/NFT1.png";
+import Header from "@/components/Header";
 
 const DiscoverPage = () => {
   const [isFavourite, setIsFavourite] = useState(false);
@@ -320,7 +321,7 @@ const DiscoverPage = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div className="lg:col-span-4 lg:pt-14 lg:px-10 px-6">
-          {/* <Header /> */}
+          <Header />
           <RightMain />
         </div>
       </div>

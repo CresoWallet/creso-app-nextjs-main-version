@@ -22,6 +22,7 @@ import { WalletContext } from "@/providers/WalletProvider";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AiTwotoneInfoCircle } from "react-icons/ai";
 import { CgTrash } from "react-icons/cg";
+import Header from "@/components/Header";
 
 const AboutPage = () => {
   const [activeAccordion, setActiveAccordion] = useState(1);
@@ -167,7 +168,7 @@ const AboutPage = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div className="pt-14 col-span-4 md:px-10 sm:px-6 hidden md:block">
-          {/* <Header /> */}
+          <Header />
           <RightMain />
         </div>
       </div>

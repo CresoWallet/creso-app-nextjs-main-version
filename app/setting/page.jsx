@@ -6,6 +6,7 @@ import Ham from "../../assets/Dashboard/ham.png";
 import Settings from "../../assets/Swap/settings.png";
 import Note from "../../assets/Swap/note.png";
 import { VscFeedback } from "react-icons/vsc";
+import Header from "@/components/Header";
 <VscFeedback />;
 
 const SupportPage = () => {
@@ -39,7 +40,7 @@ const SupportPage = () => {
         <hr className="lg:hidden mt-10 lg:mt-0" />
         {/* ------------ Rightside Main ---------- */}
         <div className="pt-14 col-span-4 px-10">
-          {/* <Header /> */}
+          <Header />
           <div className="relative">
             <a
               onMouseEnter={() => setHover(true)}

@@ -23,6 +23,7 @@ import axios from "axios";
 import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
+import Header from "@/components/Header";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -293,7 +294,7 @@ const MainLayout = () => {
           </div>
           {responsivCompo ? null : (
             <>
-              {/* <Header /> */}
+              <Header />
               <RightSide
                 showCoinWallet={showCoinWallet}
                 showModal={showModal}

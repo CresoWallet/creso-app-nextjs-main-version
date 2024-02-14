@@ -34,6 +34,7 @@ import LeftHeader from "@/components/LeftHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import RightMain from "../MainLayout/RightMain";
 import { IoIosClose } from "react-icons/io";
+import Header from "@/components/Header";
 
 const SwapPage = () => {
   const [showSwapForm, setShowSwapForm] = useState(false);
@@ -139,9 +140,9 @@ const SwapPage = () => {
             <LeftHeader
               title={"Swap & Bridge "}
               mobileImg={Ham}
-              navbarTrigger={navbarTrigger}
-              setNavbarTrigger={setNavbarTrigger}
-              isMobile={isMobile}
+              // navbarTrigger={navbarTrigger}
+              // setNavbarTrigger={setNavbarTrigger}
+              // isMobile={isMobile}
               iconImg1={Settings}
               iconImg2={Note}
             />
@@ -471,7 +472,7 @@ const SwapPage = () => {
             <SwapFrom handleClose={handleClose} />
           ) : (
             <>
-              {/* <Header /> */}
+              <Header />
               <RightMain />
             </>
           )}
