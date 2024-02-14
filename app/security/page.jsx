@@ -15,6 +15,9 @@ import AccountHeader from "@/components/AccountHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import { IoArrowBackCircle } from "react-icons/io5";
 import Header from "@/components/common/LoginRegister";
+import { RiArrowRightSLine } from "react-icons/ri";
+import { AiTwotoneInfoCircle } from "react-icons/ai";
+import { BsArrowLeft } from "react-icons/bs";
 
 const SecurityPage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);
@@ -40,7 +43,7 @@ const SecurityPage = () => {
         ></div>
       )}
       {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
-      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0">
+      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0 pt-6 md:pt-14">
         <AccountHeader
           isMobile={isMobile}
           navbarTrigger={navbarTrigger}
@@ -61,8 +64,8 @@ const SecurityPage = () => {
 
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row items-center">
-              <IoArrowBackCircle
-                className="h-8 w-8 lg:hidden"
+              <BsArrowLeft
+                className="h-6 w-6 lg:hidden"
                 onClick={() => setShowAccount(false)}
               />
 
@@ -90,21 +93,47 @@ const SecurityPage = () => {
           <div className="flex justify-center items-center xl:py-16 py-8">
             <Image alt="" src={SecurityImage} className="w-72" />
           </div>
-          <div className="flex flex-col space-y-2 items-center">
-            <Image alt="" src={Lock} />
-            <p className="text-xl font-semibold">Auto-Lock</p>
+          <div className="hidden md:block">
+            <div className="flex flex-col space-y-2 items-center">
+              <Image alt="" src={Lock} />
+              <p className="text-xl font-semibold">Auto-Lock</p>
+            </div>
+            <div className="text-center">
+              <p className="text-[#A09FAA] text-sm">
+                Choose the amount of time before
+                <br /> the application automatically locks
+              </p>
+            </div>
+            <div className="flex items-center justify-center xl:mt-12 mt-8">
+              <button className="text-white px-6 py-4 bg-black flex flex-row items-center justify-between gap-24 rounded-full">
+                <p>Never</p>
+                <MdKeyboardArrowDown />
+              </button>
+            </div>
           </div>
-          <div className="text-center">
-            <p className="text-[#A09FAA] text-sm">
-              Choose the amount of time before
-              <br /> the application automatically locks
-            </p>
-          </div>
-          <div className="flex items-center justify-center xl:mt-12 mt-8">
-            <button className="text-white px-6 py-4 bg-black flex flex-row items-center justify-between gap-24 rounded-full">
-              <p>Never</p>
-              <MdKeyboardArrowDown />
-            </button>
+          <div className="block md:hidden">
+            <div className="flex flex-row space-y-2 items-center justify-between px-4">
+              <span
+                className="text-xl 
+                font-semibold flex gap-2"
+              >
+                <Image alt="" src={Lock} className="h-8 w-8" />
+                Auto-Lock
+              </span>
+
+              <button className="  flex flex-row   rounded-full items-center">
+                <p className="text-[#2100EC]">Never</p>
+                <RiArrowRightSLine />
+              </button>
+            </div>
+            <div className="pt-4 flex gap-4 px-6">
+              <AiTwotoneInfoCircle className="h-8 w-8" />
+              <p className="text-[#A09FAA] text-sm">
+                Choose the amount of time before the application automatically
+                locks
+              </p>
+            </div>
+            <div className="flex items-center justify-center xl:mt-12 mt-8"></div>
           </div>
         </div>
       </div>

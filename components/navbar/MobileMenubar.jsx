@@ -377,7 +377,7 @@ const MobileMenubar = () => {
           </div>
 
           {/* Social icon */}
-          <div className="flex justify-center gap-4 my-8">
+          <div className="flex justify-center gap-3 my-8">
             <a
               href="https://twitter.com/cresowallet"
               target="_blank"
