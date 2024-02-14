@@ -401,7 +401,7 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
             {/* {arr.map((e, index) => {
               return <HistoryCardSkelton key={index} />;
             })} */}
-            <div className="text-gray-500 grid place-items-center pt-32 lg:pt-20 xl:pt-32">
+            <div className="text-gray-500 grid place-items-center md:pt-32 pt-20 lg:pt-20 xl:pt-32">
               No transaction to show
             </div>
           </>

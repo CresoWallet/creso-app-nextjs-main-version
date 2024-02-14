@@ -6,7 +6,7 @@ import LeftHeader from "@/components/LeftHeader";
 import React, { useState, useEffect, useContext } from "react";
 // import { useMediaQuery } from "react-responsive";
 import { CiSearch } from "react-icons/ci";
-import Ham from "../../assets/Dashboard/ham.png";
+import scanner from "../../assets/Dashboard/scanner.png";
 import LeftSide from "./LeftSide";
 import { useUser } from "@/providers/UserProvider";
 import RightSide from "./RightSide";
@@ -200,7 +200,7 @@ const MainLayout = () => {
             className={`${
               isMobile && responsivCompo
                 ? "hidden"
-                : "lg:col-span-6 pt-16 px-10"
+                : "lg:col-span-6 pt-16 md:px-10 px-6"
             }`}
           >
             <div className="">
@@ -230,7 +230,7 @@ const MainLayout = () => {
                     />
                   </div>
                 }
-                mobileImg={Ham}
+                mobileImg={scanner}
                 navbarTrigger={navbarTrigger}
                 setNavbarTrigger={setNavbarTrigger}
                 isMobile={isMobile}
@@ -258,7 +258,9 @@ const MainLayout = () => {
         {/* ------------ Rightside Main ---------- */}
         <div
           className={`${
-            responsivCompo ? "px-0  border-l-2 " : " px-10  pt-14"
+            responsivCompo
+              ? "px-0  border-l-2 "
+              : " md:px-10 px-6  md:pt-14 pt-8"
           } lg:col-span-4`}
         >
           <div className="hidden lg:block">
