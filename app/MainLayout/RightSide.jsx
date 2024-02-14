@@ -80,7 +80,7 @@ const RightSide = (props) => {
       <div className="grid relative  -mx-4 pb-32 lg:pb-0">
         {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
 
-        <div className="col-span-1 xl:px-7 md:px-2 px-2 xl:pt-8 md:pt-8 mt-6">
+        <div className="col-span-1 xl:px-7  px-2 xl:pt-8 md:pt-8 mt-6">
           {matchPath && (
             <CresoCard balance={secureWalletBalance + eoaWalletBalance} />
           )}
