@@ -14,11 +14,12 @@ import { useUser } from "@/providers/UserProvider";
 import AccountHeader from "@/components/AccountHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import { IoArrowBackCircle } from "react-icons/io5";
+import Header from "@/components/common/LoginRegister";
 
 const SecurityPage = () => {
-  const [ navbarTrigger, setNavbarTrigger] = useState(false);
+  const [navbarTrigger, setNavbarTrigger] = useState(false);
   const { user, isAuthenticated, status } = useUser();
-  const [ showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { showAccount, setShowAccount } = useContext(WalletContext);
 
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -64,6 +65,7 @@ const SecurityPage = () => {
                 className="h-8 w-8 lg:hidden"
                 onClick={() => setShowAccount(false)}
               />
+
               <p className="text-xl font-semibold ml-2">Security</p>
             </div>
 

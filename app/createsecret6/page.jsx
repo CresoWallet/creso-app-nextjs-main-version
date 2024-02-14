@@ -132,16 +132,17 @@ function CreateEOAWallet() {
     "grape",
     "peach",
     "mango",
-    "pineapple",
-    "watermelon",
-    "strawberry",
-    "blueberry",
-    "raspberry",
+    "pine",
+    "water",
+    "berry",
+    "blue",
+    "peach",
     "kiwi",
   ];
 
   // Randomly select 5 to 6 indexes to remove
   const removedIndexes = [];
+  console.log("removedIndexes --------------------->", removedIndexes);
   while (removedIndexes.length < Math.floor(Math.random() * 2) + 5) {
     const index = Math.floor(Math.random() * secretPhrase.length);
     if (!removedIndexes.includes(index)) {
@@ -172,7 +173,7 @@ function CreateEOAWallet() {
   };
 
   return (
-    <div className="h-full md:p-4 md:px-4 mx-2 md:mx-4 md:py-4 flex flex-col">
+    <div className=" h-full md:px-4  py-4 flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
@@ -201,7 +202,7 @@ function CreateEOAWallet() {
           </p>
         </div>
 
-        <div className=" rounded-3xl mx-auto py-3 md:py-4 border grid grid-cols-3  md:px-5">
+        <div className=" rounded-3xl  py-3 md:py-4 border grid grid-cols-3 md:px-5 mx-3 md:mx-auto">
           {secretPhrase.map((word, index) => (
             <div
               key={index}
@@ -209,7 +210,7 @@ function CreateEOAWallet() {
                 removedIndexes.includes(index) ? "" : "bg-[#A66CFF]"
               } `}
             >
-              <span>{word.slice(0, 10)}</span>
+              <span>{word.slice(0, 8)}</span>
             </div>
           ))}
         </div>

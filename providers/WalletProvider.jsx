@@ -90,7 +90,12 @@ const WalletContextProvider = ({ children }) => {
     pathName.includes("/createpassword3") ||
     pathName.includes("/createsecure4") ||
     pathName.includes("/createpharse5") ||
-    pathName.includes("/createsecret6");
+    pathName.includes("/createsecret6") ||
+    pathName.includes("/importwallet") ||
+    pathName.includes("/security1") ||
+    pathName.includes("/backuprestore") ||
+    pathName.includes("/transaction") ||
+    pathName.includes("/transfertoken");
 
   // console.log(pathName);
 
