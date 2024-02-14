@@ -7,7 +7,7 @@ import { RiPlayListAddFill } from "react-icons/ri";
 import Carousel from "@/components/discover/carousel";
 import RoundedNftAvatar from "@/components/discover/RoundedNftAvatar";
 import IconButton from "@/components/discover/IconButton";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import CapCard from "@/components/CapCard";
 import CustomButton2 from "@/components/CustomButton2";
 import User from "@/components/User";
@@ -308,7 +308,7 @@ const DiscoverPage = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div className="lg:col-span-4 pt-14 px-10">
-          <Header />
+          {/* <Header /> */}
           <RightMain />
         </div>
       </div>

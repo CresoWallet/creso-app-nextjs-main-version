@@ -119,7 +119,7 @@
 // export default MobileMenubar;
 
 "use client";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import creso1 from "../../assets/eoa/cresowhite.svg";
@@ -137,7 +137,7 @@ import Support from "../../assets/Dashboard/Support.png";
 import Support1 from "../../assets/Dashboard/Support.svg";
 import Info from "../../assets/Dashboard/info.png";
 import Info1 from "../../assets/Dashboard/info1.png";
-import { AiOutlineClose, AiOutlineDown } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDown, AiOutlineUser } from "react-icons/ai";
 import { useUser } from "@/providers/UserProvider";
 import { logOut } from "@/clientApi/auth";
 import Disconnect from "../../assets/network/disconnect.png";
@@ -148,15 +148,12 @@ import Github from "../../assets/Dashboard/github.png";
 import Discord from "../../assets/Dashboard/discord.png";
 import Profile from "../../assets/Profile.png";
 import Profile1 from "../../assets/profile1.svg";
-import { WalletContext } from "@/providers/WalletProvider";
 
 const MobileMenubar = () => {
   const { user } = useUser();
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [bodyOverflow, setBodyOverflow] = useState("auto");
-  const { setMenuOpen, menuOpen, setIsOpen, isOpen } =
-    useContext(WalletContext);
 
   useEffect(() => {
     document.body.style.overflow = bodyOverflow;
@@ -200,7 +197,7 @@ const MobileMenubar = () => {
   return (
     <>
       {/* mobile nav */}
-      <div className="flex  items-center justify-between fixed top-0  bg-[#2100EC] lg:hidden text-white p-4 w-full ">
+      <div className="flex  items-center justify-between fixed top-0  bg-[#2100EC] lg:hidden text-white p-4 w-full   ">
         {/* MOBILE NAV ICON */}
         <div onClick={handleNav}>
           <Image alt="" src={menu} className="cursor-pointer " />
@@ -209,8 +206,8 @@ const MobileMenubar = () => {
         <div
           className={
             menuOpen
-              ? "fixed left-0 top-0 w-[70%] md:w-[50%] h-screen overflow-y-auto bg-white text-black p-4 ease-in duration-500 rounded-r-3xl "
-              : "fixed left-[-100%]  top-0 p-4 ease-in duration-500"
+              ? "fixed left-0 top-0 w-[65%]  h-screen bg-white text-black p-4 ease-in duration-500 rounded-r-3xl "
+              : "fixed left-[-100%] top-0 p-4 ease-in duration-500"
           }
         >
           <div className="flex w-full items-center justify-start">
@@ -380,7 +377,7 @@ const MobileMenubar = () => {
           </div>
 
           {/* Social icon */}
-          <div className="flex justify-center gap-3 my-8">
+          <div className="flex justify-center gap-4 my-8">
             <a
               href="https://twitter.com/cresowallet"
               target="_blank"

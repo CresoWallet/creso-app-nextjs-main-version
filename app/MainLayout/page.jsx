@@ -1,6 +1,6 @@
 "use client";
 // import Image from "next/image";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import LeftHeader from "@/components/LeftHeader";
 // import SideNav from "@/components/navbar/SideNav";
 import React, { useState, useEffect, useContext } from "react";
@@ -42,7 +42,7 @@ const MainLayout = () => {
   const { user, isAuthenticated, status } = useUser();
   const {
     secureWalletBalance,
-    eoaWalletBalance, 
+    eoaWalletBalance,
     wallets,
     secureWalletAddress,
     eoaWalletAddress,
@@ -58,7 +58,7 @@ const MainLayout = () => {
     walletAddress,
     setWalletAddress,
     showCreateWallet,
-    setShowCreateWallet
+    setShowCreateWallet,
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -197,10 +197,11 @@ const MainLayout = () => {
         {/* ------------ Leftside Main ---------- */}
         {
           <div
-            className={`${isMobile && responsivCompo
-              ? "hidden"
-              : "lg:col-span-6 pt-16 px-10"
-              }`}
+            className={`${
+              isMobile && responsivCompo
+                ? "hidden"
+                : "lg:col-span-6 pt-16 px-10"
+            }`}
           >
             <div className="">
               <LeftHeader
@@ -256,8 +257,9 @@ const MainLayout = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div
-          className={`${responsivCompo ? "px-0  border-l-2 " : " px-10  pt-14"
-            } lg:col-span-4`}
+          className={`${
+            responsivCompo ? "px-0  border-l-2 " : " px-10  pt-14"
+          } lg:col-span-4`}
         >
           <div className="hidden lg:block">
             <div className="hidden lg:flex">
@@ -289,7 +291,7 @@ const MainLayout = () => {
           </div>
           {responsivCompo ? null : (
             <>
-              <Header />
+              {/* <Header /> */}
               <RightSide
                 showCoinWallet={showCoinWallet}
                 showModal={showModal}

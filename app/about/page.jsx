@@ -3,7 +3,7 @@ import CapCard from "@/components/CapCard";
 import CresoCard from "@/components/CresoCard";
 import CustomButton from "@/components/CustomButton";
 import CustomButton2 from "@/components/CustomButton2";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import SideNav from "@/components/navbar/SideNav";
 import User from "@/components/User";
 import React, { useContext, useEffect, useState } from "react";
@@ -157,7 +157,7 @@ const AboutPage = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div className="pt-14 col-span-4 px-10">
-          <Header />
+          {/* <Header /> */}
           <RightMain />
         </div>
       </div>

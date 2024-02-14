@@ -1,5 +1,5 @@
 "use client";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import LeftHeader from "@/components/LeftHeader";
 import React, { useState } from "react";
 import Ham from "../../assets/Dashboard/ham.png";
@@ -39,7 +39,7 @@ const SupportPage = () => {
         <hr className="lg:hidden mt-10 lg:mt-0" />
         {/* ------------ Rightside Main ---------- */}
         <div className="pt-14 col-span-4 px-10">
-          <Header />
+          {/* <Header /> */}
           <div className="relative">
             <a
               onMouseEnter={() => setHover(true)}

@@ -48,8 +48,6 @@ const WalletContextProvider = ({ children }) => {
   const [validCaptcha, setValidCaptcha] = useState(null);
   const [showCreateWallet, setShowCreateWallet] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   // useEffect(() => {
   //   (async () => {
@@ -245,10 +243,6 @@ const WalletContextProvider = ({ children }) => {
         setShowCreateWallet,
         showAccount,
         setShowAccount,
-        setMenuOpen,
-        menuOpen,
-        setIsOpen,
-        isOpen,
       }}
     >
       {/* {navbarTrigger && (
@@ -282,13 +276,7 @@ const WalletContextProvider = ({ children }) => {
       {(isMobile || isLoginOrRegister) && <div className="">{children}</div>}
 
       {/* ------------Mobile Menubar---------- */}
-      <div
-        className={`${
-          menuOpen || isOpen
-            ? "fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-filter backdrop-blur-xl  z-50"
-            : ""
-        }fixed bottom-0 w-full z-10 lg:block `}
-      >
+      <div className="fixed bottom-0 w-full z-10 lg:block bg-white">
         {isMobile && navbarTrigger && (
           <>
             {/* Conditionally render SideNav based on the path name */}

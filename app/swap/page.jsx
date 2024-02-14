@@ -23,7 +23,7 @@ import SwapFrom from "@/components/SwapFrom";
 import User from "@/components/User";
 import CapCard from "@/components/CapCard";
 import CresoCard from "@/components/CresoCard";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import CFX from "../../assets/gainers/cfx.png";
 import MINA from "../../assets/gainers/mina.png";
 import Sure from "../../assets/gainers/sure.png";
@@ -467,7 +467,7 @@ const SwapPage = () => {
             <SwapFrom handleClose={handleClose} />
           ) : (
             <>
-              <Header />
+              {/* <Header /> */}
               <RightMain />
             </>
           )}
