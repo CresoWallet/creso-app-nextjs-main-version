@@ -675,7 +675,7 @@ const Modal = ({ onClose, title, user }) => {
               <p className="text-sm font-bold mb-3 ">
                 An email with a verication code was just sent to
               </p>
-              <p className="px-3 py-1 bg-blue-700 text-sm text-white rounded-full mb-5">
+              <p className="p-4 bg-blue-700 text-base text-white rounded-full mb-5">
                 {user.email}
               </p>
 
@@ -687,6 +687,17 @@ const Modal = ({ onClose, title, user }) => {
                   setOtp(e.target.value);
                 }}
               />
+              {/* <div className="otp-container">
+                {[...Array(6)].map((_, index) => (
+                  <input
+                    key={index}
+                    type="number"
+                    placeholder=""
+                    className="otp-input"
+                    onChange={(e) => handleOtpChange(e, index)}
+                  />
+                ))}
+              </div> */}
               <div className="flex justify-start text-sm text-black mt-2 ">
                 <p>Not received?</p>
                 &nbsp;
@@ -696,7 +707,7 @@ const Modal = ({ onClose, title, user }) => {
                     handleSendOTPMail();
                   }}
                 >
-                  Resend
+                  Resend Code
                 </p>
               </div>
             </div>
@@ -753,9 +764,15 @@ const Modal = ({ onClose, title, user }) => {
             </div>
 
             <div className="flex items-center justify-center w-full flex-col">
-              <p className="text-lg font-bold ml-3 mb-1">
-                Back Up Personal Key Share
-              </p>
+              <span className="flex flex-col">
+                <p className="text-xl font-bold ml-3 mb-1">
+                  Back Up Personal Key Share
+                </p>
+                <p className="text-base ml-3 mb-1">
+                  Encrypted your key share with Recovery Key and store the
+                  encrypted data in Creso Server.
+                </p>
+              </span>
 
               <div className="border border-solid rounded-3xl border-[#E5E5F0] xl:py-4 md:py-2 xl:px-6 md:px-1 px-4 py-2 w-4/5 h-44 overflow-y-auto">
                 <p className="text-gray-600 sm:text-sm text-xs text-left mx-3 break-words">
