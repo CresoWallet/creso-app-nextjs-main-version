@@ -12,6 +12,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { VscFeedback } from "react-icons/vsc";
 import { WalletContext } from "@/providers/WalletProvider";
+import { IoLanguageOutline } from "react-icons/io5";
 
 <VscFeedback />;
 
@@ -23,6 +24,7 @@ const links = [
   { id: "session2", label: "V2 Sessions", icon: BiWifi2 },
   { id: "network", label: "Network Settings ", icon: GiAerialSignal },
   { id: "advance", label: "Advanced", icon: LuSettings2 },
+  { id: "language", label: "Language", icon: IoLanguageOutline },
 ];
 
 const Account = ({ setShowModal }) => {

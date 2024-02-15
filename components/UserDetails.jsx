@@ -75,7 +75,7 @@ const UserDetails = () => {
   return (
     <div className="flex flex-row gap-2 items-center">
       <div
-        className=" top-1 right-1 bg-red-500 text-white rounded-full w-10 h-10  items-center justify-center cursor-pointer hidden lg:block"
+        className=" top-1 right-1 bg-red-500 text-white rounded-full w-10 h-10  items-center justify-center cursor-pointer hidden lg:block  md:mt-6 mt-32"
         onClick={handleButton}
       >
         <p className=" font-semibold text-xs  " onClick={handleButton}>
