@@ -33,15 +33,15 @@ const TransferToken = () => {
 
   return (
     <div className="mt-20 block md:hidden">
-      <Header pageTitle="Transfer Token" pageLink="/" />
+      <Header pageTitle="Transfer Token" pageLink="/" className="px-4" />
       <div className=" block  justify-center flex-row items-center md:hidden gap-2 mx-4  ">
         <div className="my-8 gap-4">
-          <p>From</p>
-          <div className="rounded-full   py-1 border border-solid cursor-pointer ">
-            <div className="rounded-full flex flex-row gap-2  border-solid ">
-              <Image alt="" src={creso} className="h-10 w-10  " />
-              <p>ETH-1</p>
-              <span className=" rounded-full bg-[#EEEEF1] p-3 mx-2">EQA</span>
+          <p className="ml-5 my-2">From</p>
+          <div className="rounded-full px-5 py-4 border border-solid cursor-pointer ">
+            <div className="rounded-full border-solid flex justify-between gap-2 items-center text-xs">
+              <Image alt="" src={creso} className="h-7 w-7  " />
+              <p className="flex font-semibold">ETH-1</p>
+              <span className="rounded-full bg-[#EEEEF1] p-3 mx-2">EQA</span>
               <p className=" flex items-center">
                 0x53A...e4af
                 <MdOutlineKeyboardArrowDown size={20} />
@@ -51,11 +51,11 @@ const TransferToken = () => {
         </div>
       </div>
       <div className="my-8 gap-4 mx-4">
-        <p>To</p>
-        <div className="rounded-full  pl-2  pr-2  py-1 flex flex-row justify-between border border-solid cursor-pointer ">
-          <div className="rounded-full border-solid flex flex-row gap-2 items-center">
-            <Image alt="" src={creso1} className="h-10 w-10  " />
-            <p className="flex">ETH-2</p>
+        <p className="ml-5 my-2">To</p>
+        <div className="rounded-full px-5 py-4 border border-solid cursor-pointer ">
+          <div className="rounded-full border-solid flex justify-between gap-2 items-center text-xs">
+            <Image alt="" src={creso1} className="h-7 w-7  " />
+            <p className="flex font-semibold">ETH-2</p>
             <span className="rounded-full bg-[#EEEEF1] p-3 mx-2">AA</span>
             <p className=" flex items-center">
               0x53A...e4af
@@ -64,7 +64,8 @@ const TransferToken = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between mx-6">
+      <div className="flex justify-between mx-9
+       my-2">
         <p>Amount</p>
         <p>Balance:0ETH</p>
       </div>
@@ -78,12 +79,13 @@ const TransferToken = () => {
         />
       </div>
       {error && <p className="text-red-500 mx-4">{error}</p>}
-      <div className="text-center justify-center mt-20 mx-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer ">
+      <div className="text-center flex justify-center mt-20 rounded-full border border-white bg-black text-white hover:bg-white hover:text-black cursor-pointer mx-4">
         <button
-          className="p-3 flex justify-center items-center "
+          className="p-5 flex justify-center items-center "
           onClick={handleSend}
         >
-          <Image alt="" src={Send} className="  " /> Send
+          <Image alt="" src={Send} className="mx-2" />
+          Send
         </button>
       </div>
     </div>

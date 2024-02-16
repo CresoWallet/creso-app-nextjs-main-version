@@ -21,21 +21,26 @@ import LockPassword from "../../assets/eoa/Lockpassword.png";
 import Crypto from "../../assets/Dashboard/Crypto.png";
 import Bell from "../../assets/Dashboard/Bell.png";
 import Backup from "@/components/common/BackupAccount";
+
 const SecurityPage = () => {
   return (
     <div className="mt-20">
-      <Header pageTitle="Security" pageLink="/" />
-      <div className=" block  justify-center flex-row items-center md:hidden gap-2 mx-4  ">
-        <div className=" block   md:hidden mx-2">
+      <Header pageTitle="Security" pageLink="/" className="px-4" />
+      <div className=" block justify-center flex-row items-center md:hidden gap-2 mx-4  ">
+        <div className="block md:hidden mx-2">
           <div className="flex justify-center items-center xl:py-16 py-8">
             <Image alt="" src={SecurityImage} className="w-72" />
           </div>
-          <div className="flex items-center my-4 ">
+          <div className="flex items-center my-4">
             <Image alt="" src={Lock} className="h-6 w-6 " />
-            <p className=" flex text-base font-medium items-center  gap-2 ">
-              Auto - Lock
-              <p className="text-[#2100EC] ">Never</p>
-              <RiArrowRightSLine />
+            <p className="flex text-base font-medium items-center justify-between w-full gap-2 ">
+              <h3>
+                Auto - Lock
+              </h3>
+              <div className="flex items-center gap-2">
+                <p className="text-[#2100EC]">Never</p>
+                <RiArrowRightSLine />
+              </div>
             </p>
           </div>
           <div className="flex gap-2 my-4">

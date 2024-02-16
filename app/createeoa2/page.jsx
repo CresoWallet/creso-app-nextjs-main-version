@@ -24,29 +24,29 @@ export default function CreateEoaWalletPage() {
       </div>
 
       <ul className="md:w-full max-w-lg md:mx-auto mx-4 my-8 font-bold">
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={greenblub} />
           </div>
-          <div>Always allow you to opt-out via Settings</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">Always allow you to opt-out via Settings</div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={greenblub} />
           </div>
-          <div>Send anonymized click and pageview events</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">Send anonymized click and pageview events</div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={pinkblub} />
           </div>
-          <div>Never collect your full IP address</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">Never collect your full IP address</div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={pinkblub} />
           </div>
-          <div>Never sell data. Ever!</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">Never sell data. Ever!</div>
         </li>
       </ul>
 
@@ -67,9 +67,8 @@ export default function CreateEoaWalletPage() {
 
       <div className="flex flex-col sm:flex-row items-center justify-center">
         <button
-          className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${
-            buttonNo ? "bg-black text-white" : "bg-transparent text-black"
-          } ${buttonNo ? "" : "border"}`}
+          className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${buttonNo ? "bg-black text-white" : "bg-transparent text-black"
+            } ${buttonNo ? "" : "border"}`}
           onMouseEnter={() => setButtonNo(true)}
           onMouseLeave={() => setButtonNo(false)}
           onClick={() => {
@@ -80,9 +79,8 @@ export default function CreateEoaWalletPage() {
           No Thanks
         </button>
         <button
-          className={`rounded-full py-4 md:px-24 px-28 mx-2 mb-2 border-black ${
-            buttonI ? "bg-black text-white" : "bg-transparent text-black"
-          } ${buttonI ? "" : "border"}`}
+          className={`rounded-full py-4 md:px-24 px-28 mx-2 mb-2 border-black ${buttonI ? "bg-black text-white" : "bg-transparent text-black"
+            } ${buttonI ? "" : "border"}`}
           onMouseEnter={() => setButtonI(true)}
           onMouseLeave={() => setButtonI(false)}
           onClick={() => {
