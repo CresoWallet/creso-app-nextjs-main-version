@@ -28,7 +28,7 @@ const backup = () => {
           hrColor1="black"
           imagesrc2={key}
           color2="[#D0F500]"
-          borderColor2="gray-300"
+          borderColor2="black"
           textColor2="black"
           hrColor2="gray-300"
           imagesrc3={wallet}
