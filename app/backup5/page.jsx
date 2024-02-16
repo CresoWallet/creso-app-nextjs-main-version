@@ -7,6 +7,8 @@ import wallet from "../../assets/backup/Wallet1.png";
 import CommonComponent from "@/components/common/CommonBackup";
 import { BsArrowLeft } from "react-icons/bs";
 import CustomButton from "@/components/CustomButton";
+import Image from "next/image";
+import device2 from "../../assets/backup/device2.png";
 
 const backup = () => {
   return (
@@ -34,7 +36,17 @@ const backup = () => {
           borderColor3="black"
         />
       </div>
-      <div className=" justify-center items-center mt-40">
+      <div className="text-center md:mx-auto mx-4 mb-4 max-w-lg">
+        <p className="text-2xl font-extrabold my-4 ">
+          Back Up Personal Key Share
+        </p>
+        <p className="text-gray-400 my-6">
+          Encrypted your key share with Recovery Key and store the encrypted
+          data in Creso Server.
+        </p>
+        <Image alt="" src={device2} className=" mx-auto  " />
+      </div>
+      <div className=" md:mb-4 md:mt-8 my-2 mx-auto max-w-md mt-10">
         <CustomButton
           name="Next"
           // onClick={handleBackup}

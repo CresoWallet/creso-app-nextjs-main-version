@@ -8,6 +8,8 @@ import CommonComponent from "@/components/common/CommonBackup";
 import { BsArrowLeft } from "react-icons/bs";
 import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
+import device from "../../assets/backup/device.png";
+import Image from "next/image";
 
 const backup = () => {
   return (
@@ -35,9 +37,16 @@ const backup = () => {
           borderColor3="gray-300"
         />
       </div>
-      <div className=" justify-center items-center mt-40">
+      <div className="text-center md:mx-auto mx-4 mb-4 max-w-lg">
+        <p className="text-2xl font-extrabold my-4">Enable Device Lock</p>
+        <p className="text-gray-400 my-6">
+          Enable device lock to ensure that you can only access your account.
+        </p>
+        <Image alt="" src={device} className=" mx-auto  " />
+      </div>
+      <div className="  md:mb-4 md:mt-8 my-2 mx-auto max-w-md mt-10">
         <CustomButton
-          name="Next"
+          name="Enable Device Lock"
           // onClick={handleBackup}
           bgColor="black"
           nameColor="white"
