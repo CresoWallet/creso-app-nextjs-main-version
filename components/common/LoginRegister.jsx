@@ -11,7 +11,9 @@ const Header = ({ pageTitle, pageLink, className }) => {
   return (
     <>
       {/* mobile nav */}
-      <div className={`flex items-center justify-between fixed top-0  bg-[#2100EC] md:hidden text-white p-4 w-full `}>
+      <div
+        className={`flex items-center justify-between fixed top-0  bg-[#2100EC] md:hidden text-white p-4 w-full `}
+      >
         <Image alt="" src={creso1} className=" " />
         <div className="flex items-center mx-4 gap-2 sm:text-white  cursor-pointer ">
           <Image alt="" src={Language1} className="  w-6 h-6 " />
@@ -21,7 +23,9 @@ const Header = ({ pageTitle, pageLink, className }) => {
           </div>
         </div>
       </div>
-      <div className={`md:hidden flex gap-4 mb-4 mt-14 ml-2 font-bold text-lg items-center ${className} `}>
+      <div
+        className={`md:hidden flex gap-4 mb-4 mt-14 ml-2 font-bold text-lg items-center ${className} `}
+      >
         <Link href={pageLink}>
           <BsArrowLeft />
         </Link>

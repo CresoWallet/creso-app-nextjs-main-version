@@ -1,15 +1,15 @@
 "use client";
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
+
 import mail from "../../assets/backup/mail.png";
 import key from "../../assets/backup/Key.png";
 import wallet from "../../assets/backup/Wallet.png";
 import CommonComponent from "@/components/common/CommonBackup";
-import { CustomTextField } from "@/components/fields/CustomTextField";
 import { BsArrowLeft } from "react-icons/bs";
+import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 
-const BackupPage = () => {
+const backup = () => {
   return (
     <div>
       <div className=" h-full md:px-4 md:pt-6  pt-4 mx-4 py-4  flex flex-col ">
@@ -34,24 +34,17 @@ const BackupPage = () => {
           textColor3="gray-300"
           borderColor3="gray-300"
         />
-        <div className="justify-center mt-6 w-full">
-          <p className="justify-center my-2 px-4"> Email</p>
-          <CustomTextField
-            placeholder={"email"}
-            validation={{ email: true, required: true }} // Corrected validation prop
-          />
-        </div>
-        <div className=" justify-center items-center mt-40">
-          <CustomButton
-            name="Next"
-            // onClick={handleBackup}
-            bgColor="black"
-            nameColor="white"
-          />
-        </div>
+      </div>
+      <div className=" justify-center items-center mt-40">
+        <CustomButton
+          name="Next"
+          // onClick={handleBackup}
+          bgColor="black"
+          nameColor="white"
+        />
       </div>
     </div>
   );
 };
 
-export default BackupPage;
+export default backup;
