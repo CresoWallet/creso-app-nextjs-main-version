@@ -34,20 +34,22 @@ const BackupPage = () => {
           textColor3="gray-300"
           borderColor3="gray-300"
         />
-        <div className="justify-center mt-6 w-full">
-          <p className="justify-center my-2 px-4"> Email</p>
-          <CustomTextField
-            placeholder={"email"}
-            validation={{ email: true, required: true }} // Corrected validation prop
-          />
-        </div>
-        <div className=" justify-center items-center mt-40">
-          <CustomButton
-            name="Next"
-            // onClick={handleBackup}
-            bgColor="black"
-            nameColor="white"
-          />
+        <div className="justify-center mt-6 ">
+          <div className=" max-w-lg text-center justify-center gap-4 mb-4 mt-14 ml-2 font-bold text-lg mx-4 md:mx-auto items-center ">
+            <p className="justify-center my-2 px-4"> Email</p>
+            <CustomTextField
+              placeholder={"email"}
+              validation={{ email: true, required: true }} // Corrected validation prop
+            />
+          </div>
+          <div className=" md:mb-4  my-2 mx-auto max-w-md mt-28">
+            <CustomButton
+              name="Next"
+              // onClick={handleBackup}
+              bgColor="black"
+              nameColor="white"
+            />
+          </div>
         </div>
       </div>
     </div>
