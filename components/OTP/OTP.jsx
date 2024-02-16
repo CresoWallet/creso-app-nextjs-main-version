@@ -83,8 +83,7 @@ const OTP = () => {
           An email with a verication code was just sent to
         </p>
         <p className="px-3 py-1 bg-blue-700 text-sm text-white rounded-full mb-5">
-          {/* {user.email}
-           */}
+          {/* {user.email} */}
         </p>
         <OTPInput
           value={otp}

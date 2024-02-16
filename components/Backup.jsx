@@ -12,7 +12,7 @@ const Backup = (props) => {
         <Image
           src={Account}
           alt=""
-          className="w-32 h-24 user-select-none pointer-events-none"
+          className="sm:w-32 sm:h-24 w-28 h-20 user-select-none pointer-events-none"
           draggable="false"
         />
       </div>

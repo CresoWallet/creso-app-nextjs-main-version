@@ -1,12 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
-import eye from "../../assets/eoa/eye.png";
+
 import Image from "next/image";
+import { enqueueSnackbar } from "notistack";
 import { HiOutlineEye } from "react-icons/hi2";
+import { createEoaWallet } from "@/clientApi/auth";
 
 function CreateEOAWallet() {
   const secretPhrase = [
@@ -30,6 +32,32 @@ function CreateEOAWallet() {
   const handleRevealClick = () => {
     setRevealed(!revealed);
   };
+
+  const handleSendOTPMail = async () => {
+    try {
+      const res = await createEoaWallet({
+        walletName: "EOA Wallet",
+      });
+      console.log("🚀 ~ handleSendOTPMail ~ res:", res)
+      if (res?.status === 200) {
+        enqueueSnackbar(`Successful email transmission`, {
+          variant: "success",
+        });
+
+      } else {
+
+      }
+    } catch (err) {
+      enqueueSnackbar(`Something went wrong`, {
+        variant: "error",
+      });
+    } finally {
+      // setLoading(false);
+    }
+  };
+  useEffect(() => {
+    handleSendOTPMail()
+  }, [])
 
   return (
     <div className=" h-full md:px-4  py-4 flex flex-col ">
@@ -67,11 +95,10 @@ function CreateEOAWallet() {
           {inputWords.map((word, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                !revealed
-                  ? "blur-sm bg-black opacity-[10%] text-white"
-                  : "bg-[#A66CFF] border-black"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${!revealed
+                ? "blur-sm bg-black opacity-[10%] text-white"
+                : "bg-[#A66CFF] border-black"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {/* {revealed ? `${index + 1}. ${word}` : "•••••"} */}

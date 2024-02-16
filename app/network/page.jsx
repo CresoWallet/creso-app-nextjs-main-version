@@ -19,6 +19,7 @@ import { useUser } from "@/providers/UserProvider";
 import AccountHeader from "@/components/AccountHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { BsArrowLeft } from "react-icons/bs";
 
 const NetworkPage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);
@@ -81,7 +82,7 @@ const NetworkPage = () => {
       key={network.name}
     >
       {console.log("TCL: NetworkPage -> network", network)}
-      <div className="md:flex items-center justify-between hover:-translate-y-0.5 hover:font-semibold cursor-pointer">
+      <div className="flex items-center justify-between hover:-translate-y-0.5 hover:font-semibold cursor-pointer ">
         <div className="flex flex-row items-center gap-2 mb-2 md:mb-0">
           <Image alt="" src={network.icon} />
           <p>{network.name}</p>
@@ -108,7 +109,7 @@ const NetworkPage = () => {
         ></div>
       )}
       {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
-      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0">
+      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0 pt-6 md:pt-14">
         <AccountHeader
           isMobile={isMobile}
           navbarTrigger={navbarTrigger}
@@ -122,15 +123,15 @@ const NetworkPage = () => {
         >
           <div
             className={`${
-              showAccount ? "lg:hidden block":"lg:block hidden"
+              showAccount ? "lg:hidden block" : "lg:block hidden"
             } flex flex-col space-y-3`}
           ></div>
 
           <div className="flex flex-row justify-between items-center">
             {/* <p className="text-xl font-semibold">Network Settings </p> */}
             <div className="flex flex-row items-center">
-              <IoArrowBackCircle
-                className="h-8 w-8 lg:hidden"
+              <BsArrowLeft
+                className="h-6 w-6 lg:hidden"
                 onClick={() => setShowAccount(false)}
               />
               <p className="text-xl font-semibold ml-2">Network Settings </p>
@@ -153,7 +154,7 @@ const NetworkPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-end">
+          <div className=" justify-end  hidden lg:block ">
             <div className="flex w-64 mt-10">
               <CustomButton name="Add Network" img={Plus} bgColor="black" />
             </div>
@@ -166,6 +167,11 @@ const NetworkPage = () => {
                 <hr className="text-[#A09FAA] py-2 ml-12" />
               </React.Fragment>
             ))}
+          </div>
+          <div className="   block lg:hidden ">
+            <div className="flex w-full p-2 my-6 mt-10">
+              <CustomButton name="Add Network" bgColor="black" />
+            </div>
           </div>
         </div>
       </div>

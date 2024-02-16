@@ -1,12 +1,12 @@
 "use client";
 // import Image from "next/image";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import LeftHeader from "@/components/LeftHeader";
 // import SideNav from "@/components/navbar/SideNav";
 import React, { useState, useEffect, useContext } from "react";
 // import { useMediaQuery } from "react-responsive";
 import { CiSearch } from "react-icons/ci";
-import Ham from "../../assets/Dashboard/ham.png";
+import scanner from "../../assets/Dashboard/scanner.png";
 import LeftSide from "./LeftSide";
 import { useUser } from "@/providers/UserProvider";
 import RightSide from "./RightSide";
@@ -23,6 +23,8 @@ import axios from "axios";
 import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
+import Header from "@/components/Header";
+import OTP from "@/components/OTP/OTP";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -42,7 +44,7 @@ const MainLayout = () => {
   const { user, isAuthenticated, status } = useUser();
   const {
     secureWalletBalance,
-    eoaWalletBalance, 
+    eoaWalletBalance,
     wallets,
     secureWalletAddress,
     eoaWalletAddress,
@@ -58,7 +60,7 @@ const MainLayout = () => {
     walletAddress,
     setWalletAddress,
     showCreateWallet,
-    setShowCreateWallet
+    setShowCreateWallet,
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -197,10 +199,11 @@ const MainLayout = () => {
         {/* ------------ Leftside Main ---------- */}
         {
           <div
-            className={`${isMobile && responsivCompo
-              ? "hidden"
-              : "lg:col-span-6 pt-16 px-10"
-              }`}
+            className={`${
+              isMobile && responsivCompo
+                ? "hidden"
+                : "lg:col-span-6 pt-16 md:px-10 px-6"
+            }`}
           >
             <div className="">
               <LeftHeader
@@ -229,7 +232,7 @@ const MainLayout = () => {
                     />
                   </div>
                 }
-                mobileImg={Ham}
+                mobileImg={scanner}
                 navbarTrigger={navbarTrigger}
                 setNavbarTrigger={setNavbarTrigger}
                 isMobile={isMobile}
@@ -256,8 +259,11 @@ const MainLayout = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div
-          className={`${responsivCompo ? "px-0  border-l-2 " : " px-10  pt-14"
-            } lg:col-span-4`}
+          className={`${
+            responsivCompo
+              ? "px-0  border-l-2 "
+              : " md:px-10 px-6  md:pt-14 pt-8"
+          } lg:col-span-4`}
         >
           <div className="hidden lg:block">
             <div className="hidden lg:flex">

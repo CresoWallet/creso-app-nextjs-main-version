@@ -93,7 +93,7 @@ export default function Carousel({ slides }) {
 
   return (
     <div className="relative">
-      <div className="h-64 w-full rounded-3xl overflow-hidden relative">
+      <div className="md:h-72 h-44 w-full rounded-3xl overflow-hidden relative">
         <Image
           width={580}
           height={270}

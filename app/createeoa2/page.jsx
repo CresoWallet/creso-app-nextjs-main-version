@@ -24,38 +24,46 @@ export default function CreateEoaWalletPage() {
       </div>
 
       <ul className="md:w-full max-w-lg md:mx-auto mx-4 my-8 font-bold">
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={greenblub} />
           </div>
-          <div>Always allow you to opt-out via Settings</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">
+            Always allow you to opt-out via Settings
+          </div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={greenblub} />
           </div>
-          <div>Send anonymized click and pageview events</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">
+            Send anonymized click and pageview events
+          </div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={pinkblub} />
           </div>
-          <div>Never collect your full IP address</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">
+            Never collect your full IP address
+          </div>
         </li>
-        <li className="border border-solid  hover:border-black rounded-full p-2">
-          <div className="">
+        <li className="border border-solid  hover:border-black rounded-full p-3 mb-2 grid grid-cols-12">
+          <div className="col-span-2 md:col-span-1 my-auto mx-auto">
             <Image alt="" src={pinkblub} />
           </div>
-          <div>Never sell data. Ever!</div>
+          <div className="col-span-10 md:col-span-11 text-sm md:text-base">
+            Never sell data. Ever!
+          </div>
         </li>
       </ul>
 
-      <div className="text-gray-500 md:mx-auto mx-4 mb-8 max-w-lg">
-        <p className="mt-8">
+      <div className="text-gray-500 md:mx-auto mx-4 mb-8 max-w-lg mt-4">
+        <p className="">
           This data is aggregated and is therefore anonymous for the purposes of
           General Data Protection Regulation (EU) 2016/679.
         </p>
-        <p className="mt-4 ">
+        <p className=" ">
           When you use Infura as your default RPC provider in Creso, Infura will
           collect your IP address and your Ethereum wallet address when you send
           a transaction. We don&lsquo;s store this information in a way that
@@ -90,7 +98,7 @@ export default function CreateEoaWalletPage() {
             setButtonNo(false);
           }}
         >
-          I Agree
+          <Link href="/createpassword3"> I Agree </Link>
         </button>
       </div>
     </div>

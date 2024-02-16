@@ -12,7 +12,7 @@ const CustomButton3 = ({
   return (
     <div
       disabled={isDisabled}
-      className={`rounded-full justify-center flex bg-${buttonColor} disabled:opacity-10 xl:px-6 xl:py-4 py-1 px-4 md:px-3 md:py-2 enabled:hover:scale-105 cursor-pointer transition duration-300`}
+      className={`rounded-full justify-center flex bg-${buttonColor} disabled:opacity-10 xl:px-6 xl:py-4 py-1 sm:px-4 px-1 md:px-3 md:py-2 enabled:hover:scale-105 cursor-pointer transition duration-300`}
       onClick={onClick}
     >
       {isLoading ? (

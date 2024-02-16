@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import check from "../../assets/eoa/checkmark.png";
 import lockpassword from "../../assets/eoa/Lockpassword.png";
 import lock from "../../assets/eoa/Lock.png";
@@ -106,9 +107,8 @@ function CreateEOAWallet() {
               New Password
               <button
                 type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${
-                  newPasswordButtonHover ? "font-bold" : "font-normal"
-                }`}
+                className={`text-[#FF4085] m-2 justify-end items-end ${newPasswordButtonHover ? "font-bold" : "font-normal"
+                  }`}
                 onClick={toggleShowNewPassword}
                 onMouseEnter={() => setNewPasswordButtonHover(true)}
                 onMouseLeave={() => setNewPasswordButtonHover(false)}
@@ -121,6 +121,7 @@ function CreateEOAWallet() {
               id="newPassword"
               value={password}
               onChange={handlePasswordChange}
+              placeholder="Please Enter Your New Password"
               className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight ${newPasswordBorder}`}
             />
           </div>
@@ -133,9 +134,8 @@ function CreateEOAWallet() {
               Confirm Password
               <button
                 type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${
-                  confirmPasswordButtonHover ? "font-bold" : "font-normal"
-                }`}
+                className={`text-[#FF4085] m-2 justify-end items-end ${confirmPasswordButtonHover ? "font-bold" : "font-normal"
+                  }`}
                 onClick={toggleShowConfirmPassword}
                 onMouseEnter={() => setConfirmPasswordButtonHover(true)}
                 onMouseLeave={() => setConfirmPasswordButtonHover(false)}
@@ -148,6 +148,7 @@ function CreateEOAWallet() {
               id="confirmPassword"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              placeholder="Please Enter Your Confirm Password"
               className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border ${confirmPasswordBorder}`}
             />
           </div>
