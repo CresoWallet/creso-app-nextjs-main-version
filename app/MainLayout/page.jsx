@@ -24,6 +24,7 @@ import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
 import Header from "@/components/Header";
+import OTP from "@/components/OTP/OTP";
 
 const MainLayout = () => {
   const router = useRouter();

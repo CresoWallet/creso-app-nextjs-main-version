@@ -17,7 +17,7 @@ export const logOut = async (formData) => {
 };
 
 export const signUpAPI = async (formData) => {
-  const res = await axiosInstance(`/register`, {
+  const res = await axiosInstance(`/signup`, {
     method: "POST",
     data: formData,
   });
@@ -44,6 +44,15 @@ export const sendOTPMail = async (formData) => {
 
 export const verifyOTP = async (formData) => {
   const res = await axiosInstance(`/verifyOTP`, {
+    method: "POST",
+    data: formData,
+  });
+
+  return res;
+};
+
+export const createEoaWallet = async (formData) => {
+  const res = await axiosInstance(`/wallets/eoa`, {
     method: "POST",
     data: formData,
   });
