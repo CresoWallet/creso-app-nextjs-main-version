@@ -34,7 +34,7 @@ const BackupModal = ({ closeModal }) => {
       <div className={backupModalStyles.modalContent}>
         <div className={backupModalStyles.header}>
           <a
-            href="#"
+            href="/dashboard"
             className={backupModalStyles.backLink}
             onClick={closeModal}
           >

@@ -107,8 +107,9 @@ function CreateEOAWallet() {
               New Password
               <button
                 type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${newPasswordButtonHover ? "font-bold" : "font-normal"
-                  }`}
+                className={`text-[#FF4085] m-2 justify-end items-end ${
+                  newPasswordButtonHover ? "font-bold" : "font-normal"
+                }`}
                 onClick={toggleShowNewPassword}
                 onMouseEnter={() => setNewPasswordButtonHover(true)}
                 onMouseLeave={() => setNewPasswordButtonHover(false)}
@@ -134,8 +135,9 @@ function CreateEOAWallet() {
               Confirm Password
               <button
                 type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${confirmPasswordButtonHover ? "font-bold" : "font-normal"
-                  }`}
+                className={`text-[#FF4085] m-2 justify-end items-end ${
+                  confirmPasswordButtonHover ? "font-bold" : "font-normal"
+                }`}
                 onClick={toggleShowConfirmPassword}
                 onMouseEnter={() => setConfirmPasswordButtonHover(true)}
                 onMouseLeave={() => setConfirmPasswordButtonHover(false)}

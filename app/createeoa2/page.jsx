@@ -5,6 +5,7 @@ import Link from "next/link";
 import greenblub from "../../assets/eoa/greenblub.png";
 import pinkblub from "../../assets/eoa/pinkblub.png";
 import Header from "@/components/common/HeaderEOA";
+import CustomButton4 from "@/components/CustomButton4";
 
 export default function CreateEoaWalletPage() {
   const [buttonNo, setButtonNo] = useState(false);
@@ -74,7 +75,30 @@ export default function CreateEoaWalletPage() {
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-center">
-        <button
+        <CustomButton4
+          isHovered={buttonNo}
+          onMouseEnter={() => setButtonNo(true)}
+          onMouseLeave={() => setButtonNo(false)}
+          onClick={() => {
+            setButtonNo(true);
+            setButtonI(false);
+          }}
+        >
+          No Thanks
+        </CustomButton4>
+
+        <CustomButton4
+          isHovered={buttonI}
+          onMouseEnter={() => setButtonI(true)}
+          onMouseLeave={() => setButtonI(false)}
+          onClick={() => {
+            setButtonI(true);
+            setButtonNo(false);
+          }}
+        >
+          <Link href="/createpassword3"> I Agree </Link>
+        </CustomButton4>
+        {/* <button
           className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${
             buttonNo ? "bg-black text-white" : "bg-transparent text-black"
           } ${buttonNo ? "" : "border"}`}
@@ -99,7 +123,7 @@ export default function CreateEoaWalletPage() {
           }}
         >
           <Link href="/createpassword3"> I Agree </Link>
-        </button>
+        </button> */}
       </div>
     </div>
   );

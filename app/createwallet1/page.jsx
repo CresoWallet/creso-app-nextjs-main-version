@@ -5,6 +5,7 @@ import create from "../../assets/eoa/createeoa.svg";
 import check from "../../assets/eoa/checkmark.png";
 import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
+import CustomButton4 from "@/components/CustomButton4";
 
 export default function Eoawallet() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
@@ -47,7 +48,7 @@ export default function Eoawallet() {
 
         {/* buttons */}
         <div className="flex flex-col sm:flex-row my-4 justify-center items-center">
-          <button
+          {/* <button
             className={`${
               importWalletHovered
                 ? "bg-black text-white"
@@ -63,9 +64,30 @@ export default function Eoawallet() {
             }}
           >
             <Link href="/importwallet">Import an existing wallet</Link>
-          </button>
-
-          <button
+          </button> */}
+          <CustomButton4
+            isHovered={importWalletHovered}
+            onMouseEnter={() => setImportWalletHovered(true)}
+            onMouseLeave={() => setImportWalletHovered(false)}
+            onClick={() => {
+              setImportWalletHovered(true);
+              setCreateWalletHovered(false);
+            }}
+          >
+            <Link href="/importwallet">Import an existing wallet</Link>
+          </CustomButton4>
+          <CustomButton4
+            isHovered={createWalletHovered}
+            onMouseEnter={() => setCreateWalletHovered(true)}
+            onMouseLeave={() => setCreateWalletHovered(false)}
+            onClick={() => {
+              setCreateWalletHovered(true);
+              setImportWalletHovered(false);
+            }}
+          >
+            <Link href="/createeoa2">Create New Wallet</Link>
+          </CustomButton4>
+          {/*    <button
             className={`${
               createWalletHovered
                 ? "bg-black text-white"
@@ -81,7 +103,7 @@ export default function Eoawallet() {
             }}
           >
             <Link href="/createeoa2">Create New Wallet</Link>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
