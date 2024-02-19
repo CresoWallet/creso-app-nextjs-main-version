@@ -20,7 +20,6 @@ import Info from "../../assets/Dashboard/info.png";
 import LockPassword from "../../assets/eoa/Lockpassword.png";
 import Crypto from "../../assets/Dashboard/Crypto.png";
 import Bell from "../../assets/Dashboard/Bell.png";
-import Backup from "@/components/common/BackupAccount";
 
 const SecurityPage = () => {
   return (
@@ -34,9 +33,7 @@ const SecurityPage = () => {
           <div className="flex items-center my-4">
             <Image alt="" src={Lock} className="h-6 w-6 " />
             <p className="flex text-base font-medium items-center justify-between w-full gap-2 ">
-              <h3>
-                Auto - Lock
-              </h3>
+              <h3>Auto - Lock</h3>
               <div className="flex items-center gap-2">
                 <p className="text-[#2100EC]">Never</p>
                 <RiArrowRightSLine />

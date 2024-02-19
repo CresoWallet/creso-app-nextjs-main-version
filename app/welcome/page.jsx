@@ -6,6 +6,7 @@ import check from "../../assets/eoa/checkmark.png";
 import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
+import CustomButton1 from "@/components/CustomButton1";
 
 export default function Eoawallet() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);

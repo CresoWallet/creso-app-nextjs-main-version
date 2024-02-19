@@ -1,123 +1,3 @@
-// "use client";
-// import React, { useState, useContext } from "react";
-// import { usePathname } from "next/navigation";
-// import Image from "next/image";
-// import Wallet from "../../assets/Dashboard/Wallet.png";
-// import Wallet1 from "../../assets/Dashboard/Wallet1.png";
-// import Discover from "../../assets/Dashboard/Discover.png";
-// import Discover1 from "../../assets/Dashboard/Discover1.png";
-// import Swap from "../../assets/Dashboard/Swap.png";
-// import Swap1 from "../../assets/Dashboard/Swap1.png";
-// import Profile from "../../assets/Profile.png";
-// import Profile1 from "../../assets/profile1.svg";
-// import Link from "next/link";
-// import { WalletContext } from "@/providers/WalletProvider";
-// import { useRouter } from "next/router";
-
-// const MobileMenubar = () => {
-//   return (
-//     <div className="bg-[#2100EC] rounded-full grid grid-cols-4 my-5 place-items-center mobileMenu">
-//       <Link href="/dashboard">
-//         <Image alt="" src={Wallet} className="w-6 h-6 text-[#B1A6F8]" />
-//       </Link>
-//       <Link href="/discover">
-//         <Image alt="" src={Discover} className="w-6 h-6 text-[#B1A6F8]" />
-//       </Link>
-//       <Link href="/swap">
-//         <Image alt="" src={Swap} className="w-6 h-6 text-[#B1A6F8]" />
-//       </Link>
-//       <Link href="/account">
-//         <Image alt="" src={Profile} className="w-6 h-6 text-[#B1A6F8]" />
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default MobileMenubar;
-
-// const MobileMenubar = () => {
-//   const pathname = usePathname();
-//   const [hoveredLink, setHoveredLink] = useState(null);
-
-//   const handleMouseEnter = (link) => {
-//     setHoveredLink(link);
-//   };
-
-//   const handleMouseLeave = () => {
-//     setHoveredLink(null);
-//   };
-
-//   return (
-//     <div className="bg-[#2100EC] min-h-[10%] rounded-full grid grid-cols-4 my-5 place-items-center mobileMenu">
-//       <Link href="/dashboard">
-//         <div
-//           onMouseEnter={() => handleMouseEnter("/dashboard")}
-//           onMouseLeave={() => handleMouseLeave()}
-//           className={`${
-//             pathname === "/dashboard" ? "bg-white" : ""
-//           } rounded-full p-1`}
-//         >
-//           <Image
-//             alt=""
-//             src={pathname === "/dashboard" ? Wallet1 : Wallet}
-//             className="w-6 h-6 text-[#B1A6F8]"
-//           />
-//         </div>
-//       </Link>
-
-//       <Link href="/discover">
-//         <div
-//           onMouseEnter={() => handleMouseEnter("/discover")}
-//           onMouseLeave={() => handleMouseLeave()}
-//           className={`${
-//             pathname === "/discover" ? "bg-white" : ""
-//           } rounded-full p-1`}
-//         >
-//           <Image
-//             alt=""
-//             src={pathname === "/discover" ? Discover1 : Discover}
-//             className="w-6 h-6 text-[#B1A6F8]"
-//           />
-//         </div>
-//       </Link>
-
-//       <Link href="/swap">
-//         <div
-//           onMouseEnter={() => handleMouseEnter("/swap")}
-//           onMouseLeave={() => handleMouseLeave()}
-//           className={`${
-//             pathname === "/swap" ? "bg-white" : ""
-//           } rounded-full p-1`}
-//         >
-//           <Image
-//             alt=""
-//             src={pathname === "/swap" ? Swap1 : Swap}
-//             className="w-6 h-6 text-[#B1A6F8]"
-//           />
-//         </div>
-//       </Link>
-
-//       <Link href="/account">
-//         <div
-//           onMouseEnter={() => handleMouseEnter("/account")}
-//           onMouseLeave={() => handleMouseLeave()}
-//           className={`${
-//             pathname === "/account" ? "bg-white" : ""
-//           } rounded-full p-1`}
-//         >
-//           <Image
-//             alt=""
-//             src={pathname === "/account" ? Profile1 : Profile}
-//             className="w-6 h-6 text-[#B1A6F8]"
-//           />
-//         </div>
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default MobileMenubar;
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -141,13 +21,10 @@ import { AiOutlineClose, AiOutlineDown, AiOutlineUser } from "react-icons/ai";
 import { useUser } from "@/providers/UserProvider";
 import { logOut } from "@/clientApi/auth";
 import Disconnect from "../../assets/network/disconnect.png";
-import Twitter from "../../assets/Dashboard/twitter.png";
-import Telegram from "../../assets/Dashboard/telegram.png";
-import Etherscan from "../../assets/Dashboard/etherscan.png";
-import Github from "../../assets/Dashboard/github.png";
-import Discord from "../../assets/Dashboard/discord.png";
 import Profile from "../../assets/Profile.png";
 import Profile1 from "../../assets/profile1.svg";
+import NavigationButton from "./Navigation";
+import SocialLogin from "./SocialLogin";
 
 const MobileMenubar = () => {
   const { user } = useUser();
@@ -252,119 +129,66 @@ const MobileMenubar = () => {
           </div>
           {/* all pages */}
           <div className=" flex flex-col mt-4">
-            <Link href="/dashboard">
-              <div
-                onMouseEnter={() => handleMouseEnter("/dashboard")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/dashboard"
-                    ? "bg-white font-bold"
-                    : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/dashboard" ? Wallet1 : Wallet}
-                  className="w-6 h-6 text-[#B1A6F8] "
-                />
-                Dashboard
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/dashboard"
+              label="Dashboard"
+              icon={{
+                active: Wallet1,
+                inactive: Wallet,
+              }}
+              isActive={pathname === "/dashboard"}
+            />
             <hr />
-
-            <Link href="/discover">
-              <div
-                onMouseEnter={() => handleMouseEnter("/discover")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/discover"
-                    ? "bg-white font-bold"
-                    : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/discover" ? Discover1 : Discover}
-                  className="w-6 h-6 text-[#B1A6F8]"
-                />
-                Discover
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/discover"
+              label="Discover"
+              icon={{
+                active: Discover1,
+                inactive: Discover,
+              }}
+              isActive={pathname === "/discover"}
+            />
             <hr />
-
-            <Link href="/swap">
-              <div
-                onMouseEnter={() => handleMouseEnter("/swap")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/swap" ? "bg-white font-bold" : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/swap" ? Swap1 : Swap}
-                  className="w-6 h-6 text-[#B1A6F8]"
-                />
-                Swap & Bridge
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/swap"
+              label="Swap & Bridge"
+              icon={{
+                active: Swap1,
+                inactive: Swap,
+              }}
+              isActive={pathname === "/swap"}
+            />
             <hr />
-
-            <Link href="/about">
-              <div
-                onMouseEnter={() => handleMouseEnter("/about")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/about" ? "bg-white font-bold" : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/about" ? Info1 : Info}
-                  className="w-6 h-6 text-[#B1A6F8]"
-                />
-                About Us
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/about"
+              label="About Us"
+              icon={{
+                active: Info1,
+                inactive: Info,
+              }}
+              isActive={pathname === "/about"}
+            />
             <hr />
-            <Link href="/support">
-              <div
-                onMouseEnter={() => handleMouseEnter("/support")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/support"
-                    ? "bg-white font-bold"
-                    : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/support" ? Support1 : Support}
-                  className="w-6 h-6 text-[#B1A6F8]"
-                />
-                Support
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/support"
+              label="Support"
+              icon={{
+                active: Support1,
+                inactive: Support,
+              }}
+              isActive={pathname === "/support"}
+            />
             {/* Account page */}
             <hr />
-            <Link href="/account">
-              <div
-                onMouseEnter={() => handleMouseEnter("/account")}
-                onMouseLeave={() => handleMouseLeave()}
-                className={`${
-                  pathname === "/account"
-                    ? "bg-white font-bold"
-                    : " font-normal"
-                } rounded-full p-4 flex gap-2 place-content-start `}
-              >
-                <Image
-                  alt=""
-                  src={pathname === "/account" ? Profile1 : Profile}
-                  className="w-6 h-6 text-[#B1A6F8]"
-                />
-                Account
-              </div>
-            </Link>
+            <NavigationButton
+              pathname="/account"
+              label="Account"
+              icon={{
+                active: Profile1,
+                inactive: Profile,
+              }}
+              isActive={pathname === "/account"}
+            />
           </div>
           {/* disconnect button */}
           <hr />
@@ -378,50 +202,7 @@ const MobileMenubar = () => {
 
           {/* Social icon */}
           <div className="flex justify-center gap-3 my-8">
-            <a
-              href="https://twitter.com/cresowallet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer transform hover:-translate-y-1"
-            >
-              <Image
-                alt="Twitter"
-                src={Twitter}
-                className="  w-7 h-7  overflow-hidden"
-              />
-            </a>
-            <a
-              href="https://t.me/cresowallet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer transform hover:-translate-y-1"
-            >
-              <Image alt="Telegram" src={Telegram} className=" flex w-7 h-7" />
-            </a>
-            <a
-              href="https://etherscan.io/token/0x41ea5d41eeacc2d5c4072260945118a13bb7ebce"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer transform hover:-translate-y-1"
-            >
-              <Image alt="Etherscan" src={Etherscan} className="w-7 h-7" />
-            </a>
-            <a
-              href="https://discord.com/invite/creso"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer transform hover:-translate-y-1"
-            >
-              <Image alt="Discord" src={Discord} className="w-7 h-7" />
-            </a>
-            <a
-              href="https://github.com/CresoWallet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer transform hover:-translate-y-1"
-            >
-              <Image alt="Github" src={Github} className="w-7 h-7" />
-            </a>
+            <SocialLogin />
           </div>
         </div>
         <div className="lg:hidden block top-4 right-8 fixed">
