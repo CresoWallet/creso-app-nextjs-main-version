@@ -8,7 +8,7 @@ import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
 import CustomButton1 from "@/components/CustomButton1";
 
-export default function Eoawallet() {
+function Welcome() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -110,3 +110,5 @@ export default function Eoawallet() {
     </div>
   );
 }
+
+export default Welcome;

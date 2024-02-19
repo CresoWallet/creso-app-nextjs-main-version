@@ -12,7 +12,7 @@ import { WalletContext } from "@/providers/WalletProvider";
 import { BsArrowLeft } from "react-icons/bs";
 import CustomCheckbox from "@/components/customcheckbox";
 
-const SecurityPage = () => {
+const LanguagePage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);
   const { user, isAuthenticated, status } = useUser();
   const [showModal, setShowModal] = useState(false);
@@ -116,4 +116,4 @@ const SecurityPage = () => {
   );
 };
 
-export default SecurityPage;
+export default LanguagePage;

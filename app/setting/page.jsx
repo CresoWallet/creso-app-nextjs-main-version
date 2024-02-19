@@ -9,7 +9,7 @@ import { VscFeedback } from "react-icons/vsc";
 import Header from "@/components/Header";
 <VscFeedback />;
 
-const SupportPage = () => {
+const SettingPage = () => {
   const [hover, setHover] = useState(false);
   const style = { color: "white" };
   const hoverStyle = { color: "black" };
@@ -68,4 +68,4 @@ const SupportPage = () => {
   );
 };
 
-export default SupportPage;
+export default SettingPage;

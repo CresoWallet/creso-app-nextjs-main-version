@@ -177,17 +177,18 @@ function ConfirmRecovery() {
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
-        imageSrc2={lock2}
-        imageSrc3={phone1}
         color1="black"
-        color2="black"
-        color3="[#D0F500]"
         hrColor1="black"
-        hrColor2="black"
         borderColor1="black"
+        imageSrc2={lock2}
+        color2="black"
         borderColor2="black"
-        textColor1="black"
-        textColor2="black"
+        textColor2="text-black"
+        hrColor2="black"
+        imageSrc3={phone1}
+        color3="[#D0F500]"
+        textColor3="text-black"
+        borderColor3="black"
       />
       <div className=" md:w-[70%] lg:w-[45%] xl:w-[35%] container mx-auto ">
         <hr className="mt-6 w-auto  " />

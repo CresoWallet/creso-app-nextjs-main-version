@@ -16,8 +16,9 @@ const CommonComponent = ({
   hrColor2,
   borderColor1,
   borderColor2,
-  textColor1,
+  borderColor3,
   textColor2,
+  textColor3,
 }) => {
   return (
     <>
@@ -39,7 +40,7 @@ const CommonComponent = ({
               className={`rounded-full bg-${color1} border-${borderColor1} border-2 h-16 w-16 p-3 `}
             />
             <p
-              className={`absolute text-xs md:text-sm font-semibold pt-3 -ml-4 md:-ml-6 text-${textColor1}`}
+              className={`absolute text-xs md:text-sm font-semibold pt-3 -ml-4 md:-ml-6 text-black`}
               style={{ whiteSpace: "nowrap" }}
             >
               Create Password
@@ -55,7 +56,7 @@ const CommonComponent = ({
               className={` rounded-full bg-${color2} border-${borderColor2} border-2 h-16 w-16 p-3 `}
             />
             <p
-              className={`absolute text-xs md:text-sm font-semibold pt-3 -ml-2 md:-ml-3 text-${textColor1}`}
+              className={`absolute text-xs md:text-sm font-semibold pt-3 -ml-2 md:-ml-3 text-${textColor2}`}
               style={{ whiteSpace: "nowrap" }}
             >
               Secure Wallet
@@ -66,10 +67,10 @@ const CommonComponent = ({
             <Image
               alt=""
               src={imageSrc3}
-              className={`rounded-full bg-${color3} border-gray-300 border-2 h-16 w-16 p-3`}
+              className={`rounded-full bg-${color3} border-${borderColor3} border-2 h-16 w-16 p-3`}
             />
             <p
-              className={`absolute text-xs md:text-sm font-semibold text-gray-400 pt-3 -ml-2 md:-ml-3 text-${textColor2}`}
+              className={`absolute text-xs md:text-sm font-semibold text-gray-400 pt-3 -ml-2 md:-ml-3 text-${textColor3}`}
               style={{ whiteSpace: "nowrap" }}
             >
               Confirm Code

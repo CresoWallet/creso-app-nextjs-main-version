@@ -7,7 +7,7 @@ import pinkblub from "../../assets/eoa/pinkblub.png";
 import Header from "@/components/common/HeaderEOA";
 import CustomButton4 from "@/components/CustomButton4";
 
-export default function CreateEoaWalletPage() {
+function WalletMatrix() {
   const [buttonNo, setButtonNo] = useState(false);
   const [buttonI, setButtonI] = useState(false);
 
@@ -128,6 +128,7 @@ export default function CreateEoaWalletPage() {
     </div>
   );
 }
+export default WalletMatrix;
 
 // import { useState } from "react";
 // import Image from "next/image";

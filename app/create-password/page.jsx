@@ -246,17 +246,18 @@ function CreatePassword() {
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword}
-        imageSrc2={lock}
-        imageSrc3={phone}
         color1="[#D0F500]"
-        color2="gray-300"
-        color3="gray-300"
         hrColor1="black"
-        hrColor2="gray-300"
-        borderColor1="gray-300"
+        borderColor1="black"
+        imageSrc2={lock}
+        color2="gray-300"
         borderColor2="gray-300"
-        textColor1="gray-300"
-        textColor2="gray-300"
+        textColor2="text-gray-300"
+        hrColor2="gray-300"
+        imageSrc3={phone}
+        color3="gray-300"
+        textColor3="gray-300"
+        borderColor3="grey-300"
       />
 
       <hr className="mt-4 w-auto" />
