@@ -52,10 +52,10 @@ const SwapFrom = ({ handleClose }) => {
   );
 
   return (
-    <div className="lg:block ">
+    <div className="lg:block lg:mt-10 mt-20 ">
       {/* <div className="flex rounded-full bg-black h-8 w-8 items-center justify-center xl:-ml-4 md:-ml-4 mt-10 absolute">
         <IoIosClose className="text-white h-4 w-4" onClick={handleClose} /> */}
-      <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]">
+      <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]  ">
         <IoIosClose
           className="text-white h-7 w-7 cursor-pointer"
           onClick={handleClose}

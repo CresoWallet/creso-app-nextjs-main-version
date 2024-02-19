@@ -100,7 +100,7 @@ const SecureWallet = ({ handleClose, wallets, walletType }) => {
         </>
       )}
       {mainContentVisible && (
-        <div className="flex flex-col mx-8 mt-10 gap-8">
+        <div className="flex flex-col mx-8 lg:mt-16 mt-20 gap-8">
           <div className="flex items-center justify-between">
             <p className="text-xl font-bold ml-4 xl:ml-0 md:ml-0">
               {walletType === "AA" ? "Keyless Secure Wallet " : "EOA Wallet"}
@@ -197,8 +197,9 @@ const SecureWallet = ({ handleClose, wallets, walletType }) => {
               onMouseLeave={() => setHover(false)}
               href="https://forms.gle/GBEKLjSH7hxQiuPv8"
               target="_blank"
-              className={`${hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
-                } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
+              className={`${
+                hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
+              } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
             >
               <div className="absolute grid place-items-center">
                 <VscFeedback style={hover ? hoverStyle : style} size={30} />

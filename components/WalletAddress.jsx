@@ -28,8 +28,7 @@ const WalletAddress = ({ handleBackButton, wallet }) => {
   const style = { color: "white" };
   const hoverStyle = { color: "black" };
   return (
-    <div className="bg-white flex flex-col xl:pl-8 md:pl-4 mx-0 px-2 xl:px-0 md:px-2 pt-16 w-full xl:pr-10 pr-2 space-y-4 min-h-screen h-full z-20">
-      {/* <div className="bg-white flex flex-col xl:pl-8 md:pl-4 mx-0 px-2 xl:px-0 md:px-2 pt-16 w-full xl:pr-10 pr-2 space-y-4  h-[105vh] z-20"> */}
+    <div className="bg-white flex flex-col xl:pl-8 md:pl-4 mx-0 px-2 xl:px-0 md:px-2 pt-16 w-full xl:pr-10 pr-2 space-y-4 min-h-screen h-full z-20 lg:mt-10 mt-20">
       <div className="flex flex-row items-center justify-between">
         <p className="text-black font-bold text-xl">Wallet Address</p>
 
