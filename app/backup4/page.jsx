@@ -13,7 +13,7 @@ import CommonComponent from "@/components/common/CommonBackup";
 import CustomButton from "@/components/CustomButton";
 import CustomCheckbox from "@/components/customcheckbox";
 
-const Backup = () => {
+const Backup4 = () => {
   const [selectStorage, setSelectStorage] = useState("iCloud Drive");
 
   const handleStorageChange = (storage) => {
@@ -113,4 +113,4 @@ const Backup = () => {
   );
 };
 
-export default Backup;
+export default Backup4;

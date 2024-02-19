@@ -199,6 +199,7 @@ import lockpassword from "../../assets/eoa/Lockpassword.png";
 import lock from "../../assets/eoa/Lock.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
+import PasswordInput from "@/components/common/PasswordInput";
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
@@ -207,15 +208,6 @@ function CreatePassword() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [newPasswordBorder, setNewPasswordBorder] = useState(
-    "border rounded-full"
-  );
-  const [confirmPasswordBorder, setConfirmPasswordBorder] = useState(
-    "border rounded-full"
-  );
-  const [newPasswordButtonHover, setNewPasswordButtonHover] = useState(false);
-  const [confirmPasswordButtonHover, setConfirmPasswordButtonHover] =
-    useState(false);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -243,22 +235,10 @@ function CreatePassword() {
 
   const toggleShowNewPassword = () => {
     setShowNewPassword(!showNewPassword);
-    setNewPasswordButtonHover(!showNewPassword); // Update hover state
-    setNewPasswordBorder(
-      showNewPassword
-        ? "border rounded-full"
-        : "border border-black rounded-full"
-    );
   };
 
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
-    setConfirmPasswordButtonHover(!showConfirmPassword); // Update hover state
-    setConfirmPasswordBorder(
-      showConfirmPassword
-        ? "border rounded-full"
-        : "border border-black rounded-full"
-    );
   };
 
   return (
@@ -292,58 +272,22 @@ function CreatePassword() {
       <div className="items-center justify-center">
         <form onSubmit={handleCreatePassword} className="mx-4">
           <div className="my-4 mx-auto max-w-md">
-            <label
-              htmlFor="newPassword"
-              className="block text-gray-700 font-bold md:mb-2 mb-1 items-center"
-            >
-              New Password
-              <button
-                type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${
-                  newPasswordButtonHover ? "font-bold" : "font-normal"
-                }`}
-                onClick={toggleShowNewPassword}
-                onMouseEnter={() => setNewPasswordButtonHover(true)}
-                onMouseLeave={() => setNewPasswordButtonHover(false)}
-              >
-                Show
-              </button>
-            </label>
-            <input
-              type={showNewPassword ? "text" : "password"}
-              id="newPassword"
+            <PasswordInput
+              label="New Password"
               value={password}
-              onChange={handlePasswordChange}
-              placeholder=" Enter Your New Password"
-              className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight ${newPasswordBorder}`}
+              onChange={(e) => setPassword(e.target.value)}
+              showPassword={showNewPassword}
+              onToggle={toggleShowNewPassword}
             />
           </div>
 
           <div className="md:mb-4 md:mt-8 my-2 mx-auto max-w-md">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-gray-700 font-bold md:mb-2 items-center"
-            >
-              Confirm Password
-              <button
-                type="button"
-                className={`text-[#FF4085] m-2 justify-end items-end ${
-                  confirmPasswordButtonHover ? "font-bold" : "font-normal"
-                }`}
-                onClick={toggleShowConfirmPassword}
-                onMouseEnter={() => setConfirmPasswordButtonHover(true)}
-                onMouseLeave={() => setConfirmPasswordButtonHover(false)}
-              >
-                Show
-              </button>
-            </label>
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              id="confirmPassword"
+            <PasswordInput
+              label="Confirm Password"
               value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              placeholder=" Enter Your Confirm Password"
-              className={`shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border ${confirmPasswordBorder}`}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              showPassword={showConfirmPassword}
+              onToggle={toggleShowConfirmPassword}
             />
           </div>
           {passwordError && <p className="text-red-500 ">{passwordError}</p>}

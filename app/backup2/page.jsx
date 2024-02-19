@@ -9,7 +9,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 
-const backup = () => {
+const backup2 = () => {
   return (
     <div>
       <div className=" h-full md:px-4 md:pt-6  pt-4 mx-4 py-4  flex flex-col ">
@@ -47,4 +47,4 @@ const backup = () => {
   );
 };
 
-export default backup;
+export default backup2;

@@ -9,7 +9,7 @@ import { CustomTextField } from "@/components/fields/CustomTextField";
 import { BsArrowLeft } from "react-icons/bs";
 import CustomButton from "@/components/CustomButton";
 
-const BackupPage = () => {
+const Backup1 = () => {
   return (
     <div>
       <div className=" h-full md:px-4 md:pt-6  pt-4 mx-4 py-4  flex flex-col ">
@@ -56,4 +56,4 @@ const BackupPage = () => {
   );
 };
 
-export default BackupPage;
+export default Backup1;

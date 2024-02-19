@@ -221,6 +221,7 @@ import Image from "next/image";
 import check from "../../assets/eoa/checkmark.png";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
+import PasswordInput from "@/components/common/PasswordInput";
 
 function ImportWallet() {
   const secretPhrase = [
@@ -245,10 +246,34 @@ function ImportWallet() {
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
   const [showSecretPhrase, setShowSecretPhrase] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false); // Define isChecked state
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+    } else {
+      setPasswordError("");
+      // Proceed with password submission
+    }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   const handleInputChange = (index, value) => {
     const newUserInput = [...userInput];
     newUserInput[index] = value;
@@ -360,50 +385,22 @@ function ImportWallet() {
         <div className="items-center justify-center">
           <form className="mx-4">
             <div className="my-4 mx-auto max-w-md">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 font-bold md:mb-2 mb-1 items-center"
-              >
-                New Password
-                <button
-                  type="button"
-                  className="text-[#FF4085] m-2 justify-end items-end font-normal"
-                  onClick={() => toggleFieldVisibility("newPassword")}
-                >
-                  {showNewPassword ? "Hide" : "Show"}
-                </button>
-              </label>
-              <input
-                type={showNewPassword ? "text" : "password"}
-                id="password"
+              <PasswordInput
+                label=" New Password"
                 value={password}
-                placeholder=" Password"
-                onChange={(e) => setPassword(e.target.value)}
-                className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
+                onChange={handlePasswordChange}
+                showPassword={showPassword}
+                onToggle={toggleShowPassword}
               />
             </div>
 
             <div className="md:mb-4 md:mt-8 my-2 mx-auto max-w-md">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-gray-700 font-bold md:mb-2 items-center"
-              >
-                Confirm Password
-                <button
-                  type="button"
-                  className="text-[#FF4085] m-2 justify-end items-end font-normal"
-                  onClick={() => toggleFieldVisibility("confirmPassword")}
-                >
-                  {showConfirmPassword ? "Hide" : "Show"}
-                </button>
-              </label>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
+              <PasswordInput
+                label="Confirm Password"
                 value={confirmPassword}
-                placeholder="  Password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
+                onChange={handleConfirmPasswordChange}
+                showPassword={showConfirmPassword}
+                onToggle={toggleShowConfirmPassword}
               />
             </div>
             {passwordError && <p className="text-red-500 ">{passwordError}</p>}

@@ -124,7 +124,7 @@ import lock2 from "../../assets/eoa/Lock2.png";
 import phone1 from "../../assets/eoa/Phone1.png";
 import CommonComponent from "@/components/common/CommonEOA";
 
-function CreateEOAWallet() {
+function ConfirmRecovery() {
   const secretPhrase = [
     "apple",
     "banana",
@@ -225,4 +225,4 @@ function CreateEOAWallet() {
   );
 }
 
-export default CreateEOAWallet;
+export default ConfirmRecovery;

@@ -10,7 +10,7 @@ import CustomButton from "@/components/CustomButton";
 import Image from "next/image";
 import device2 from "../../assets/backup/device2.png";
 
-const backup = () => {
+const backup5 = () => {
   return (
     <div>
       <div className=" h-full md:px-4 md:pt-6  pt-4 mx-4 py-4  flex flex-col ">
@@ -58,4 +58,4 @@ const backup = () => {
   );
 };
 
-export default backup;
+export default backup5;

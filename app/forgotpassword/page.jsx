@@ -5,8 +5,9 @@ import Image from "next/image";
 import check from "../../assets/eoa/checkmark.png";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
+import PasswordInput from "@/components/common/PasswordInput";
 
-function ImportWallet() {
+function ForgotPassword() {
   // State variables
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,18 +20,14 @@ function ImportWallet() {
 
   // Function to handle confirmation of new password
   const handleNewPasswordConfirm = () => {
-    // Check if password and confirm password match
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
       return;
     }
-    // Check if terms are agreed
     if (!isChecked) {
       setError("Please agree to the Terms of Use.");
       return;
     }
-
-    // All checks passed, perform necessary actions
   };
 
   // Function to toggle visibility of password fields
@@ -70,56 +67,23 @@ function ImportWallet() {
         <div className="items-center justify-center">
           <form className="mx-4">
             {/* New Password field */}
-            <div className="my-4 mx-auto max-w-md">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 font-bold md:mb-2 mb-1 items-center"
-              >
-                New Password
-                {/* Button to toggle visibility */}
-                <button
-                  type="button"
-                  className="text-[#FF4085] m-2 justify-end items-end font-normal"
-                  onClick={() => toggleFieldVisibility("newPassword")}
-                >
-                  {showNewPassword ? "Hide" : "Show"}
-                </button>
-              </label>
-              {/* Input field for new password */}
-              <input
-                type={showNewPassword ? "text" : "password"}
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
-              />
-            </div>
+            <PasswordInput
+              label="New Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              showPassword={showNewPassword}
+              onToggle={() => toggleFieldVisibility("newPassword")}
+            />
 
             {/* Confirm Password field */}
-            <div className="md:mb-4 md:mt-8 my-2 mx-auto max-w-md">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-gray-700 font-bold md:mb-2 items-center"
-              >
-                Confirm Password
-                {/* Button to toggle visibility */}
-                <button
-                  type="button"
-                  className="text-[#FF4085] m-2 justify-end items-end font-normal"
-                  onClick={() => toggleFieldVisibility("confirmPassword")}
-                >
-                  {showConfirmPassword ? "Hide" : "Show"}
-                </button>
-              </label>
-              {/* Input field for confirming password */}
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
-              />
-            </div>
+            <PasswordInput
+              label="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              showPassword={showConfirmPassword}
+              onToggle={() => toggleFieldVisibility("confirmPassword")}
+            />
+
             {/* Display password error if any */}
             {passwordError && <p className="text-red-500 ">{passwordError}</p>}
             {/* Display general error if any */}
@@ -163,4 +127,4 @@ function ImportWallet() {
   );
 }
 
-export default ImportWallet;
+export default ForgotPassword;
