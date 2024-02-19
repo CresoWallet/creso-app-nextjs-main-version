@@ -85,7 +85,7 @@ export default function Eoawallet() {
               setImportWalletHovered(false);
             }}
           >
-            <Link href="/createeoa2">Create New Wallet</Link>
+            <Link href="/walletmatrix">Create New Wallet</Link>
           </CustomButton4>
           {/*    <button
             className={`${
@@ -102,7 +102,7 @@ export default function Eoawallet() {
               setImportWalletHovered(false);
             }}
           >
-            <Link href="/createeoa2">Create New Wallet</Link>
+            <Link href="/walletmatrix">Create New Wallet</Link>
           </button> */}
         </div>
       </div>

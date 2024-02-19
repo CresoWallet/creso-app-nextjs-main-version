@@ -16,6 +16,7 @@ import cresow from "../../assets/Dashboard/creso_logo_white.svg";
 import Capcha from "@/components/Capcha";
 import { WalletContext } from "@/providers/WalletProvider";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Header from "@/components/common/LoginRegister";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -67,39 +68,31 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 h-screen px-2 py-2 gap-2 xl:gap-0 md:gap-0">
-      <div className="col-span-1 flex flex-col justify-center xl:items-center md:items-center bg-[#2100EC] xl:py-8 md:py-8 rounded-2xl">
-        {/* Logo and background images */}
-        <div className="flex flex-row items-center justify-center my-16 gap-1 relative Mainlogo text-white mt-4 ">
-          <Image alt="creso-logo" src={cresow} className="h-16" />
+    <div className="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
+      <div className="col-span-1 flex-col justify-center items-center bg-[#2100EC] md:py-8  hidden md:block rounded-2xl">
+        <div className=" flex-row items-center justify-center md:my-16  gap-1 relative hidden md:block text-white md:mt-4 ">
+          <Image alt="creso-logo" src={cresow} className="md:h-16" />
         </div>
         <Image
           alt=""
           src={BgImage}
           height={650}
-          className="hidden xl:flex md:flex"
+          className="hidden xl:flex md:flex  mx-auto "
         />
-
-        {/* Centering the text at around 1024px (laptop size) */}
-        <div
-          className="flex xl:hidden md:hidden flex-col space-y-4 items-center justify-center px-4 py-4 Account Not Backed Up.
-        "
-        >
-          <Image alt="" src={MobileImage} />
-          <p className="font-bold text-3xl lg:text-center md:text-center text-center text-white lg:text-4xl xl:text-5xl ">
-            Keyless No risk of leakage
-          </p>
-        </div>
       </div>
 
-      <div className="col-span-1 space-y-8 xl:px-8 md:px-8 lg:px-24 px-4 flex flex-col xl:py-8 md:py-8">
+      <div className="md:col-span-1  xl:px-24 md:px-8  flex flex-col xl:py-16 md:py-8">
         {/* Registration form */}
-        <p className="font-bold md:text-2xl xl:text-4xl xl:mb-4 md:mb-4 text-xl">
+        <p className="font-bold md:text-2xl  hidden md:block xl:text-4xl xl:mb-8 md:mb-4 text-xl">
           Register
         </p>
+        {/* mobile nav */}
+        <div>
+          <Header pageTitle="Signup" pageLink="/" />
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
+          className="flex flex-col space-y-4 md:mx-0 mx-4 "
         >
           <div className="flex flex-col gap-2">
             {/* First Name and Last Name */}
