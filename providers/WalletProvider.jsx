@@ -85,12 +85,13 @@ const WalletContextProvider = ({ children }) => {
     pathName === "/" ||
     pathName.includes("/register") ||
     pathName.includes("/login") ||
-    pathName.includes("/createwallet1") ||
-    pathName.includes("/createeoa2") ||
-    pathName.includes("/createpassword3") ||
-    pathName.includes("/createsecure4") ||
-    pathName.includes("/createpharse5") ||
-    pathName.includes("/createsecret6") ||
+    pathName.includes("/welcome") ||
+    pathName.includes("/walletmatrix") ||
+    pathName.includes("/create-password") ||
+    pathName.includes("/secure-your-wallet") ||
+    pathName.includes("/review-recovery-pharse") ||
+    pathName.includes("/confirm-recovery-pharse") ||
+    pathName.includes("/completion") ||
     pathName.includes("/importwallet") ||
     pathName.includes("/security1") ||
     pathName.includes("/forgotpassword") ||
