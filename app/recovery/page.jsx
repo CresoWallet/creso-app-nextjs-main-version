@@ -211,6 +211,7 @@ import Currency from "../../assets/security/dollor2.png";
 import AccountHeader from "@/components/AccountHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { BsArrowLeft } from "react-icons/bs";
 
 const RecoveryPage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);
@@ -279,7 +280,7 @@ const RecoveryPage = () => {
         ></div>
       )}
       {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
-      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0">
+      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0 pt-6 md:pt-14">
         <AccountHeader
           isMobile={isMobile}
           navbarTrigger={navbarTrigger}
@@ -305,8 +306,8 @@ const RecoveryPage = () => {
 
           <div className="flex flex-row justify-between items-center ">
             <div className="flex flex-row items-center">
-              <IoArrowBackCircle
-                className="h-8 w-8 lg:hidden"
+              <BsArrowLeft
+                className="h-6 w-6 lg:hidden"
                 onClick={() => setShowAccount(false)}
               />
               <p className="text-xl font-semibold ml-2">Recovery </p>

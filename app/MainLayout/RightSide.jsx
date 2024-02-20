@@ -18,6 +18,7 @@ import {
 } from "@/components/TopGainer_Losers/GainersLosersList";
 
 import Image from "next/image";
+import CapCard from "@/components/CapCard";
 
 const RightSide = (props) => {
   const {
@@ -80,11 +81,45 @@ const RightSide = (props) => {
       <div className="grid relative  -mx-4 pb-32 lg:pb-0">
         {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
 
-        <div className="col-span-1 xl:px-7 md:px-2 px-2 xl:pt-8 md:pt-8 mt-6">
+        <div className="col-span-1 xl:px-7  px-2 xl:pt-8 md:pt-8 mt-6">
           {matchPath && (
             <CresoCard balance={secureWalletBalance + eoaWalletBalance} />
           )}
 
+          <div className="grid grid-cols-2 gap-2 my-8">
+            <CapCard
+              name="Market Cap"
+              amount="$1,312.6 B"
+              icon="down"
+              iconColor="[#FF4085]"
+              percentageColor="[#FF4085]"
+              percentage="9.39%"
+            />
+            <CapCard
+              name="NFT Cap"
+              amount="$2.16 B"
+              icon="up"
+              iconColor="[#14B195]"
+              percentageColor="[#14B195]"
+              percentage="2.91%"
+            />
+            <CapCard
+              name="24H Volume"
+              amount="$125.6 B"
+              icon="down"
+              iconColor="[#FF4085]"
+              percentageColor="[#FF4085]"
+              percentage="9.39%"
+            />
+            <CapCard
+              name="Gas Burn Leaderboard"
+              amount="$2.16 B"
+              // icon=""
+              // iconColor="[#FF4085]"
+              // percentageColor="[#FF4085]"
+              percentage="386.58 ETH"
+            />
+          </div>
           {isSwapPage || isAboutPage ? (
             <div className="flex flex-row items-center gap-2 mt-8">
               <p className="text-black text-2xl font-bold">Top Gainers</p>

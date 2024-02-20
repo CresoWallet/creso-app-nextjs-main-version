@@ -216,6 +216,9 @@ img {
     left: 0;
     z-index: 1001;
   } */
+  .placeholderStyle::placeholder {
+    font: 0.9rem sans-serif;
+  }
 }
 
 /*custom scrollbar in wallet.jsx*/

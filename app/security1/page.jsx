@@ -31,7 +31,7 @@ const SecurityPage = () => {
           <div className="flex justify-center items-center xl:py-16 py-8">
             <Image alt="" src={SecurityImage} className="w-72" />
           </div>
-          <div className="flex items-center my-4">
+          <div className="flex gap-2 items-center my-4">
             <Image alt="" src={Lock} className="h-6 w-6 " />
             <p className="flex text-base font-medium items-center justify-between w-full gap-2 ">
               <h3>
@@ -43,8 +43,8 @@ const SecurityPage = () => {
               </div>
             </p>
           </div>
-          <div className="flex gap-2 my-4">
-            <Image alt="" src={Info} className="h-4 w-4 " />
+          <div className="flex gap-2 my-4 w-full">
+            <Image alt="" src={Info} className="h-6 w-6 " />
             <p className="text-[#A09FAA] text-xs">
               Choose the amount of time before the application automatically
               locks
@@ -63,10 +63,15 @@ const SecurityPage = () => {
           </div>
           <hr className="my-6" />
           <div className="flex mt-6 gap-2 items-center">
+            <div>
+              
+            </div>
             <Image alt="" src={Bell} className="h-6 w-6 " />
             <p className="text-sm">Push Notification</p>
-            <p className="text-[#2100EC]  text-sm">Disabled</p>
-            <RiArrowRightSLine />
+            <div className="flex justify-between items-center">
+              <p className="text-[#2100EC]  text-sm">Disabled</p>
+              <RiArrowRightSLine />
+            </div>
           </div>
         </div>
       </div>

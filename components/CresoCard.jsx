@@ -15,18 +15,21 @@ const CresoCard = ({ balance }) => {
   const { totalBalance } = useContext(WalletContext);
   const [eye, setEye] = useState(true);
   return (
-    <div className="flex flex-col relative mb-8" style={{ userSelect: "none" }}>
+    <div
+      className="flex flex-col relative md:mb-8 mb-4"
+      style={{ userSelect: "none" }}
+    >
       <div className="">
         <div
-          className="flex justify-center h-72"
+          className="flex justify-center md:h-72 lg:h-60 h-60 lg:w-full"
           style={{ pointerEvents: "none" }}
         >
-          <Image alt="" src={Custom} className="h-auto md:w-full " />
+          <Image alt="" src={Custom} className="md:h-auto h-56 md:w-full  " />
         </div>
 
-        <div className="absolute flex flex-row items-center top-20 left-10 gap-1">
-          <Image alt="" src={Creso} className="h-6 w-6" />
-          <p className="font-bold text-2xl">creso</p>
+        <div className="absolute flex flex-row items-center top-20 left-10 gap-1 ">
+          <Image alt="" src={Creso} className="md:h-6 h-5 md:w-6 w-5" />
+          <p className="font-bold md:text-2xl text-xl ">creso</p>
         </div>
 
         <div className="absolute bottom-12 pl-10">

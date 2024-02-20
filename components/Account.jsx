@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import UserDetails from "./UserDetails";
 import CustomButton3 from "./CustomButton3";
 import { FiUser } from "react-icons/fi";
@@ -12,7 +13,10 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { VscFeedback } from "react-icons/vsc";
 import { WalletContext } from "@/providers/WalletProvider";
+import { IoLanguageOutline } from "react-icons/io5";
+import { PiCurrencyCircleDollarLight } from "react-icons/pi";
 
+import doller from "../assets/Dashboard/Dollar.png";
 <VscFeedback />;
 
 const links = [
@@ -23,6 +27,17 @@ const links = [
   { id: "session2", label: "V2 Sessions", icon: BiWifi2 },
   { id: "network", label: "Network Settings ", icon: GiAerialSignal },
   { id: "advance", label: "Advanced", icon: LuSettings2 },
+  { id: "language", label: "Language", icon: IoLanguageOutline },
+  {
+    id: "currency",
+    label: "Local currency",
+    icon: PiCurrencyCircleDollarLight,
+  },
+  // {
+  //   id: "currency",
+  //   label: "Local currency",
+  //   icon: () => <Image src={doller} width={24} height={24} alt="Dollar" />,
+  // },
 ];
 
 const Account = ({ setShowModal }) => {

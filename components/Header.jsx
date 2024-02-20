@@ -36,7 +36,7 @@ const Header = () => {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth <= 768);
+      setIsSmallScreen(window.innerWidth <= 1024);
     };
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
@@ -83,30 +83,25 @@ const Header = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between items-center xl:mx-10 md:mx-2 mb-10 lg:mb-0 mt-4">
-      <div className="flex flex-row items-center gap-4">
-        <Image alt="" src={Language} className="h-7 w-7" />
-        <div className="flex flex-row gap-1 items-center cursor-pointer group">
-          <p className="uppercase text-xs font-semibold group-hover:font-bold">
-            ENG
-          </p>
+    <div className="   flex-row justify-between items-center xl:mx-10 md:mx-2 mb-10 lg:mb-0 mt-4 hidden md:block">
+      <div className="flex  gap-4">
+        <p className="uppercase  flex  items-center text-xs font-semibold group-hover:font-bold gap-1 cursor-pointer group">
+          <Image alt="" src={Language} className="h-7 w-7" />
+          ENG
           <AiOutlineDown className="w-3 h-3" />
-        </div>
-      </div>
-      <div className="flex flex-row items-center gap-4 cursor-pointer group">
-        <Image alt="" src={Dollar} className="h-7 w-7" />
-        <div className="flex flex-row gap-1 items-center">
-          <p className="uppercase text-xs font-semibold group-hover:font-bold">
-            USD
-          </p>
+        </p>
+
+        <p className="uppercase flex items-center gap-1 text-xs font-semibold group-hover:font-bold cursor-pointer group">
+          <Image alt="" src={Dollar} className="h-7 w-7" />
+          USD
           <AiOutlineDown className="w-3 h-3" />
-        </div>
+        </p>
       </div>
       {/* Creso2 image  /> */}
-      <div className=" flex absolute left-5 top-3 lg:hidden  place-items-start ">
+      {/* <div className=" flex absolute left-5 top-3 lg:hidden  place-items-start ">
         <Image alt="" src={Creso2} className="h-10 w-10" />
         <p className="m-2 text-base lg:block ">creso</p>
-      </div>
+      </div> */}
 
       <div className="cursor-pointer mx-6" onClick={handleButton}>
         <div className="absolute top-2 md:-top-7 lg:top-3 sm:right-6 place-items-end bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center md:my-10  lg:mr-8 lg:my-14 md:mr-3 mr-10 ">

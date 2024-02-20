@@ -23,7 +23,7 @@ import SwapFrom from "@/components/SwapFrom";
 import User from "@/components/User";
 import CapCard from "@/components/CapCard";
 import CresoCard from "@/components/CresoCard";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import CFX from "../../assets/gainers/cfx.png";
 import MINA from "../../assets/gainers/mina.png";
 import Sure from "../../assets/gainers/sure.png";
@@ -34,6 +34,7 @@ import LeftHeader from "@/components/LeftHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import RightMain from "../MainLayout/RightMain";
 import { IoIosClose } from "react-icons/io";
+import Header from "@/components/Header";
 
 const SwapPage = () => {
   const [showSwapForm, setShowSwapForm] = useState(false);
@@ -134,14 +135,14 @@ const SwapPage = () => {
           isMobile && showSwapForm ? "hidden" : "lg:grid-cols-10"
         } lg:grid lg:divide-x`}
       >
-        <div className="lg:col-span-6 pt-16  px-10 relative">
+        <div className="lg:col-span-6 pt-16  md:px-10 px-6 relative">
           <div className="">
             <LeftHeader
               title={"Swap & Bridge "}
               mobileImg={Ham}
-              navbarTrigger={navbarTrigger}
-              setNavbarTrigger={setNavbarTrigger}
-              isMobile={isMobile}
+              // navbarTrigger={navbarTrigger}
+              // setNavbarTrigger={setNavbarTrigger}
+              // isMobile={isMobile}
               iconImg1={Settings}
               iconImg2={Note}
             />
@@ -412,7 +413,7 @@ const SwapPage = () => {
                       title="Recommended"
                       buttonColor="[#EEEEF1]"
                     />
-                    <div className="flex rounded-full bg-[#EEEEF1] h-10 w-10 items-center justify-center">
+                    <div className="flex rounded-full bg-[#EEEEF1] sm:h-10 sm:w-10 h-6 w-6 items-center justify-center">
                       <MdOutlineKeyboardArrowUp className="text-black h-5 w-5" />
                     </div>
                   </div>
@@ -458,11 +459,15 @@ const SwapPage = () => {
         </div>
         {/* </div> */}
 
-        <hr className="lg:hidden mt-10 lg:mt-0" />
+        <hr className="lg:hidden md:mt-10 mt-5 lg:mt-0" />
 
         {/* ------------ Rightside Main ---------- */}
 
-        <div className={`lg:col-span-4 ${!showSwapForm ? "pt-14 px-10" : ""}`}>
+        <div
+          className={`lg:col-span-4 ${
+            !showSwapForm ? "md:pt-14 pt-6 md:px-10 lg:px-6 px-6" : ""
+          }`}
+        >
           {showSwapForm ? (
             <SwapFrom handleClose={handleClose} />
           ) : (

@@ -8,6 +8,7 @@ import CoinCard from "@/components/cards/Coin";
 import History from "@/components/dashboard/History";
 import LeftHeader from "@/components/LeftHeader";
 import { useUser } from "@/providers/UserProvider";
+import WalletComponent from "@/components/common/mobilepopup";
 
 const LeftSide = (props) => {
   const {
@@ -62,6 +63,7 @@ const LeftSide = (props) => {
                 coinDataprice={coinDataprice}
               />
             </div>
+            {/* <WalletComponent /> */}
             <Mainnet
               handleOpenWallet={handleShowWallet}
               handleCreateWallet={handleCreateWallet}

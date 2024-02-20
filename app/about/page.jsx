@@ -3,7 +3,7 @@ import CapCard from "@/components/CapCard";
 import CresoCard from "@/components/CresoCard";
 import CustomButton from "@/components/CustomButton";
 import CustomButton2 from "@/components/CustomButton2";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import SideNav from "@/components/navbar/SideNav";
 import User from "@/components/User";
 import React, { useContext, useEffect, useState } from "react";
@@ -19,6 +19,10 @@ import Ham from "../../assets/Dashboard/ham.png";
 import LeftHeader from "@/components/LeftHeader";
 import RightMain from "../MainLayout/RightMain";
 import { WalletContext } from "@/providers/WalletProvider";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { AiTwotoneInfoCircle } from "react-icons/ai";
+import { CgTrash } from "react-icons/cg";
+import Header from "@/components/Header";
 
 const AboutPage = () => {
   const [activeAccordion, setActiveAccordion] = useState(1);
@@ -49,13 +53,13 @@ const AboutPage = () => {
     <>
       <div className="lg:grid lg:grid-cols-10 divide-x">
         {/* ------------ Leftside Main ---------- */}
-        <div className="lg:col-span-6 pt-16 px-12">
+        <div className="lg:col-span-6 pt-16 md:px-12 px-6">
           <div className="">
             <LeftHeader
               title={"About us"}
-              navbarTrigger={navbarTrigger}
-              setNavbarTrigger={setNavbarTrigger}
-              isMobile={isMobile}
+              // navbarTrigger={navbarTrigger}
+              // setNavbarTrigger={setNavbarTrigger}
+              // isMobile={isMobile}
             />
           </div>
 
@@ -69,12 +73,17 @@ const AboutPage = () => {
                 </div>
               </div>
               <div className="flex justify-start items-start gap-2">
-                <Image src={Info} alt="" />
+                <AiTwotoneInfoCircle className="sm:h-10 sm:w-10 h-14 w-14" />
                 <p className="text-gray-600 text-sm">
                   This is the Beta Version of Creso Wallet Ecosystem. To keep up
                   to date with all the upcoming updates of the Beta please join
                   our community.
                 </p>
+              </div>
+              <div className=" justify-center items-end my-2 bottom-0 block md:hidden w-full">
+                <button className="flex flex-row gap-2 items-center cursor-pointer hover:scale-105 justify-center py-4 border rounded-full w-full border-solid border-black bg-[#D0F500]">
+                  <p className="text-black text-sm hover:font-bold ">Update</p>
+                </button>
               </div>
             </div>
 
@@ -87,7 +96,7 @@ const AboutPage = () => {
               >
                 <div className="flex items-center justify-between mb-2 cursor-pointer">
                   <p className="text-xl font-semibold ">User Agreement</p>
-                  <Image src={Arrow} alt="" />
+                  <MdOutlineKeyboardArrowDown size={20} />
                 </div>
                 <hr />
               </div>
@@ -110,7 +119,7 @@ const AboutPage = () => {
               >
                 <div className="flex items-center justify-between mb-2 cursor-pointer ">
                   <p className="text-xl font-semibold ">Privacy Policy</p>
-                  <Image src={Arrow} alt="" />
+                  <MdOutlineKeyboardArrowDown size={20} />
                 </div>
                 <hr />
               </div>
@@ -134,7 +143,7 @@ const AboutPage = () => {
                   aria-expanded={isAccordionActive(3)}
                 >
                   <p className="text-xl font-semibold ">Official Website</p>
-                  <Image src={Arrow} alt="" />
+                  <MdOutlineKeyboardArrowDown size={20} />
                 </div>
                 <hr />
               </div>
@@ -146,17 +155,19 @@ const AboutPage = () => {
                 aria-labelledby="accordion-collapse-heading-1"
               >
                 <p className="mb-2 text-black ">
-                  {`Creso ecosystem's official website is https://creso.io . All other website claiming same are total scame. Please check domain authority before onboarding funds.`}
+                  Creso ecosystem&#39;s official website is https://creso.io .
+                  All other website claiming same are total scame. Please check
+                  domain authority before onboarding funds.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <hr className="lg:hidden mt-10 lg:mt-0" />
+        <hr className="lg:hidden mt-10 lg:mt-0 hidden md:block" />
 
         {/* ------------ Rightside Main ---------- */}
-        <div className="pt-14 col-span-4 px-10">
+        <div className="pt-14 col-span-4 md:px-10 sm:px-6 hidden md:block">
           <Header />
           <RightMain />
         </div>

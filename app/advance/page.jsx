@@ -13,6 +13,8 @@ import { useUser } from "@/providers/UserProvider";
 import AccountHeader from "@/components/AccountHeader";
 import { WalletContext } from "@/providers/WalletProvider";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { BsArrowLeft } from "react-icons/bs";
+import { AiTwotoneInfoCircle } from "react-icons/ai";
 
 const AdvancePage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);
@@ -32,7 +34,7 @@ const AdvancePage = () => {
         ></div>
       )}
       {showModal && <Modal onClose={() => setShowModal(false)} user={user} />}
-      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0">
+      <div className="grid lg:grid-cols-10 md:grid-cols-2 grid-cols-1 pb-32 lg:pb-0 pt-6 md:pt-14">
         <AccountHeader
           isMobile={isMobile}
           navbarTrigger={navbarTrigger}
@@ -52,8 +54,8 @@ const AdvancePage = () => {
           ></div>
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row items-center">
-              <IoArrowBackCircle
-                className="h-8 w-8 lg:hidden"
+              <BsArrowLeft
+                className="h-6 w-6 lg:hidden"
                 onClick={() => setShowAccount(false)}
               />
               <p className="text-xl font-semibold ml-2">Advanced</p>
@@ -94,7 +96,8 @@ const AdvancePage = () => {
               <div className="flex flex-col space-y-1">
                 <p className="font-semibold">RPC Fallback</p>
                 <div className="flex flex-row items-center gap-1">
-                  <p className="text-xs text-[#A09FAA]">
+                  <p className="text-xs flex mt-4 gap-2 text-[#A09FAA]">
+                    <AiTwotoneInfoCircle className="h-6 w-6" />
                     Automatically Switch RPC nodes when the current RPC is
                     unavailable
                   </p>
@@ -113,7 +116,15 @@ const AdvancePage = () => {
               </label>
             </div>
           </div>
-          <div className="flex justify-center items-end mt-96 bottom-0">
+          <div className=" justify-center items-end mt-96 bottom-0 hidden md:block">
+            <button className="flex flex-row gap-2 items-center cursor-pointer hover:scale-105 justify-center py-4 border rounded-full w-full border-solid border-[#FF4085] bg-[#FFF5F9]">
+              <CgTrash className="text-[#FF4085] w-6 h-6" />
+              <p className="text-[#FF4085] text-sm hover:font-bold ">
+                Clear Cache
+              </p>
+            </button>
+          </div>
+          <div className=" justify-center items-end mt-16 bottom-0 block md:hidden">
             <button className="flex flex-row gap-2 items-center cursor-pointer hover:scale-105 justify-center py-4 border rounded-full w-full border-solid border-[#FF4085] bg-[#FFF5F9]">
               <CgTrash className="text-[#FF4085] w-6 h-6" />
               <p className="text-[#FF4085] text-sm hover:font-bold ">

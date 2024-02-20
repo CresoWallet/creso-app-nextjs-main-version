@@ -10,21 +10,23 @@ import { RiArrowRightSLine } from "react-icons/ri";
 const BackupAccount = () => {
   return (
     <div className="mt-20">
-      <Header pageTitle="Backup & Restore" pageLink="/account" />
+      <Header pageTitle="Backup & Restore" className="px-4" pageLink="/account" />
       <div className=" block  justify-center items-center md:hidden gap-2 mx-4  ">
-        <div className="my-8 ">
-          <Image alt="" src={Backup} className="  " />
+        <div className="my-16">
+          <Image alt="" src={Backup} className="" />
         </div>
-        <div className="flex gap-2 my-4">
-          <Image alt="" src={Circle} className="  " />
-          <p className="text-sm">Create Encrypted Backup</p>
+        <div className="flex justify-between gap-2 my-4">
+          <div className="flex gap-2">
+            <Image alt="" src={Circle} className="  " />
+            <p className="text-sm">Create Encrypted Backup</p>
+          </div>
           <RiArrowRightSLine />
         </div>
         <hr className="my-6" />
         <div className="flex gap-2 my-4">
           <Image alt="" src={Round} className="  " />
           <p className="text-sm">Restore Wallet From A Backup</p>
-          <RiArrowRightSLine />
+          {/* <RiArrowRightSLine /> */}
         </div>
       </div>
     </div>

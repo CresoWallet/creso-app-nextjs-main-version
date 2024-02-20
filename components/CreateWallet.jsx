@@ -1,4 +1,4 @@
-"use client";`  `
+"use client"; `  `
 import React, { useState } from "react";
 import Image from "next/image";
 import Ethereum from "../assets/Dashboard/etherum.png";
@@ -58,13 +58,13 @@ const CreateWallet = ({ handleClose }) => {
   };
 
   return (
-    <div className=" ">
-      <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]">
+    <div className="">
+      {/* <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]">
         <IoIosClose
           className="text-white h-7 w-7 cursor-pointer"
           onClick={handleClose}
         />
-      </div>
+      </div> */}
 
       {wallet && (
         <LegacyWallet
@@ -77,7 +77,7 @@ const CreateWallet = ({ handleClose }) => {
 
       {!wallet && (
         <div className="flex flex-col xl:mx-8 md:mx-4 mt-10 space-y-8">
-          <p className="text-black font-bold text-xl ml-12 xl:ml-0 md:ml-2">
+          <p className="text-black font-bold text-xl xl:ml-0 md:ml-2">
             Create Wallet
           </p>
 

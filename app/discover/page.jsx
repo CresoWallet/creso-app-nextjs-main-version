@@ -7,7 +7,7 @@ import { RiPlayListAddFill } from "react-icons/ri";
 import Carousel from "@/components/discover/carousel";
 import RoundedNftAvatar from "@/components/discover/RoundedNftAvatar";
 import IconButton from "@/components/discover/IconButton";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import CapCard from "@/components/CapCard";
 import CustomButton2 from "@/components/CustomButton2";
 import User from "@/components/User";
@@ -28,17 +28,21 @@ import MINA from "../../assets/AboutUs/gainers/mina.png";
 import PEPE from "../../assets/discover/pepe.png";
 import Card1 from "../../assets/discover/poster-card/card-1.svg";
 import Card2 from "../../assets/discover/poster-card/card-2.svg";
+import card1m from "../../assets/discover/card1m.svg";
+import card2m from "../../assets/discover/card2m.svg";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
-import Ham from "../../assets/Dashboard/ham.png";
+import playlist from "../../assets/discover/Playlist.png";
 import RightMain from "../MainLayout/RightMain";
 import LeftHeader from "@/components/LeftHeader";
 import { CiSearch } from "react-icons/ci";
 import { WalletContext } from "@/providers/WalletProvider";
+
 import NFT from "../../assets/discover/NFT.jpg";
 import NFT2 from "../../assets/discover/NFT2.png";
 import NFT3 from "../../assets/discover/NFT3.png";
 import NFT1 from "../../assets/discover/NFT1.png";
+import Header from "@/components/Header";
 
 const DiscoverPage = () => {
   const [isFavourite, setIsFavourite] = useState(false);
@@ -131,7 +135,7 @@ const DiscoverPage = () => {
         {/* sidebar and discover content */}
         {/* <div className="col-span-6 "> */}
         {/* <div className="grid responsivemb-cols h-full"> */}
-        <div className="lg:col-span-6 pt-16  px-10 relative">
+        <div className="lg:col-span-6 pt-16  md:px-10 px-6 ">
           {/* <div className="block md:hidden">
               <Header />
             </div> */}
@@ -141,7 +145,7 @@ const DiscoverPage = () => {
               title={"Discover"}
               icon1={<AiOutlineStar />}
               icon2={<AiOutlineClockCircle />}
-              mobileImg={Ham}
+              mobileImg={playlist}
               navbarTrigger={navbarTrigger}
               setNavbarTrigger={setNavbarTrigger}
               isMobile={isMobile}
@@ -274,26 +278,35 @@ const DiscoverPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col xl:flex-row xl:gap-2 space-y-2 xl:space-y-0 md:space-y-0">
-              <Image src={Card1} alt="" className="w-full" />
-              <Image src={Card2} alt="" className="w-full" />
+            <div className="flex lg:flex-col flex-row xl:flex-row xl:gap-2 lg:space-y-2 xl:space-y-0 justify-center items-center">
+              {/* Conditional rendering based on screen size */}
+              <Image
+                src={window.innerWidth <= 768 ? card1m : Card1}
+                alt=""
+                className="lg:w-full lg:mx-auto  mx-2 w-1/2"
+              />
+              <Image
+                src={window.innerWidth <= 768 ? card2m : Card2}
+                alt=""
+                className="lg:w-full lg:mx-auto mx-2 w-1/2"
+              />
             </div>
 
-            <div className="flex flex-col xl:flex-row justify-between items-center gap-2">
-              <div className="flex justify-center items-center w-full py-8 rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
-                <div className="flex flex-col space-y-2 items-center">
+            <div className="flex flex-row justify-between items-center gap-2">
+              <div className="flex justify-center items-center w-full md:py-8 py-4  rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
+                <div className="flex flex-col space-y-2 items-center md:text-xl text-sm">
                   <Image alt="" src={GameButtonImage} />
                   <p>Games</p>
                 </div>
               </div>
-              <div className="flex justify-center items-center w-full py-8 rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
-                <div className="flex flex-col space-y-2 items-center">
+              <div className="flex justify-center items-center w-full md:py-8 py-4 rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
+                <div className="flex flex-col space-y-2 items-center md:text-xl text-sm">
                   <Image alt="" src={MarketPlaceImage} />
                   <p>MarketPlace</p>
                 </div>
               </div>
-              <div className="flex justify-center items-center w-full py-8 rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
-                <div className="flex flex-col space-y-2 items-center">
+              <div className="flex justify-center items-center w-full md:py-8 py-4  rounded-3xl border border-solid border-[#E5E5F0] cursor-pointer hover:scale-105 hover:bg-slate-100">
+                <div className="flex flex-col space-y-2 items-center md:text-xl text-sm">
                   <Image alt="" src={Defi} />
                   <p>DEFI</p>
                 </div>
@@ -307,7 +320,7 @@ const DiscoverPage = () => {
         <hr className="lg:hidden mt-10 lg:mt-0" />
 
         {/* ------------ Rightside Main ---------- */}
-        <div className="lg:col-span-4 pt-14 px-10">
+        <div className="lg:col-span-4 lg:pt-14 lg:px-10 px-6">
           <Header />
           <RightMain />
         </div>
