@@ -7,7 +7,7 @@ import party from "../../assets/eoa/party.jpg";
 import CustomButton from "@/components/CustomButton";
 import Header from "@/components/common/HeaderEOA";
 
-function Competion() {
+function Completion() {
   return (
     <div className="h-full md:px-4 py-4 flex flex-col">
       <Header />
@@ -53,4 +53,4 @@ function Competion() {
   );
 }
 
-export default Competion;
+export default Completion;

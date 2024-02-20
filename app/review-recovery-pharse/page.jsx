@@ -4,8 +4,6 @@ import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
-
-import Image from "next/image";
 import { enqueueSnackbar } from "notistack";
 import { HiOutlineEye } from "react-icons/hi2";
 import { createEoaWallet } from "@/clientApi/auth";
@@ -71,7 +69,7 @@ function ReviewRecovery() {
         textColor2="text-black"
         hrColor2="black"
         imageSrc3={phone}
-        color3="gray-300"
+        color3="white"
         textColor3="gray-300"
         borderColor3="grey-300"
       />
@@ -116,7 +114,7 @@ function ReviewRecovery() {
           )}
         </div>
 
-        <div className="text-center mt-20 w-full rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer">
+        <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleRevealClick}>
             {revealed
               ? "Hide Secret Recovery Phrase"

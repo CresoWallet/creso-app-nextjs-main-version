@@ -3,13 +3,23 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const NavigationButton = ({ pathname, label, icon, isActive }) => {
+const NavigationButton = ({
+  pathname,
+  label,
+  icon,
+  isActive,
+  closeMobileNav,
+}) => {
+  const handleClick = () => {
+    closeMobileNav(); // Close the mobile navigation
+  };
   return (
     <Link href={pathname}>
       <div
         className={`${
           isActive ? "bg-white font-bold" : "font-normal"
         } rounded-full p-4 flex gap-2 place-content-start`}
+        onClick={handleClick}
       >
         <Image
           alt=""

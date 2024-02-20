@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import React, { useContext, useState } from "react";
 import { WalletContext } from "@/providers/WalletProvider";
 import ReCAPTCHA from "react-google-recaptcha";

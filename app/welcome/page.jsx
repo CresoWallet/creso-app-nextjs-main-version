@@ -2,16 +2,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
-import check from "../../assets/eoa/checkmark.png";
 import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
-import CustomButton1 from "@/components/CustomButton1";
+import CustomCheckbox from "@/components/CustomCheckbox";
 
 function Welcome() {
-  const [importWalletHovered, setImportWalletHovered] = useState(false);
+  const [importWalletHovered, setImportWalletHovered] = useState(true);
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   return (
     <div className=" h-full md:px-4  py-4 flex flex-col ">
@@ -31,7 +30,7 @@ function Welcome() {
 
         {/* Terms of Use */}
         <div className="flex items-center justify-center mb-8 pb-2">
-          <button
+          {/* <button
             className="rounded-full p-2 border-black focus:outline-none"
             onClick={() => setIsChecked(!isChecked)}
           >
@@ -40,7 +39,8 @@ function Welcome() {
             ) : (
               <Image alt="" src={check} className="w-8 h-8 my-1 " />
             )}
-          </button>
+          </button> */}
+          <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
           <span className="ml-2">
             I agree to creso
             <span className="text-[#FF4085] ml-1">Terms of Use</span>
@@ -74,6 +74,7 @@ function Welcome() {
               setImportWalletHovered(true);
               setCreateWalletHovered(false);
             }}
+            padding="px-12 "
           >
             <Link href="/importwallet">Import an existing wallet</Link>
           </CustomButton4>
@@ -85,6 +86,7 @@ function Welcome() {
               setCreateWalletHovered(true);
               setImportWalletHovered(false);
             }}
+            padding="px-16 "
           >
             <Link href="/walletmatrix">Create New Wallet</Link>
           </CustomButton4>

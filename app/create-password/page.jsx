@@ -200,6 +200,8 @@ import lock from "../../assets/eoa/Lock.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
 import PasswordInput from "@/components/common/PasswordInput";
+import CustomButton4 from "@/components/CustomButton4";
+import CustomCheckbox from "@/components/customcheckbox";
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
@@ -207,7 +209,7 @@ function CreatePassword() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -233,12 +235,21 @@ function CreatePassword() {
     }
   };
 
+  // const toggleShowNewPassword = () => {
+  //   setShowNewPassword(!showNewPassword);
+  // };
+
+  // const toggleShowConfirmPassword = () => {
+  //   setShowConfirmPassword(!showConfirmPassword);
+  // };
   const toggleShowNewPassword = () => {
-    setShowNewPassword(!showNewPassword);
+    setShowNewPassword((prevShowNewPassword) => !prevShowNewPassword);
   };
 
   const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
+    setShowConfirmPassword(
+      (prevShowConfirmPassword) => !prevShowConfirmPassword
+    );
   };
 
   return (
@@ -250,12 +261,12 @@ function CreatePassword() {
         hrColor1="black"
         borderColor1="black"
         imageSrc2={lock}
-        color2="gray-300"
+        color2="white"
         borderColor2="gray-300"
-        textColor2="text-gray-300"
+        textColor2="gray-400"
         hrColor2="gray-300"
         imageSrc3={phone}
-        color3="gray-300"
+        color3="white"
         textColor3="gray-300"
         borderColor3="grey-300"
       />
@@ -294,7 +305,8 @@ function CreatePassword() {
           {passwordError && <p className="text-red-500 ">{passwordError}</p>}
           {/* Terms of Use */}
           <div className="flex items-center md:mb-8 md:mt-2 mt-20 mb-2 mx-auto max-w-md">
-            <button
+            <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
+            {/* <button
               className="rounded-full p-2 border-black focus:outline-none"
               onClick={() => setIsChecked(!isChecked)}
               disabled={passwordError || !password || !confirmPassword}
@@ -304,21 +316,29 @@ function CreatePassword() {
               ) : (
                 <div className="w-6 h-6 rounded-full border border-black"></div>
               )}
-            </button>
-            <span className="md:ml-2 ">
+            </button> */}
+            <span className="ml-2 ">
               I understand that Creso cannot recover this password for me.
               <span className="text-[#FF4085] ml-1">Learn more</span>
             </span>
           </div>
 
           <div className="flex items-center justify-center">
-            <button
+            {/* <button
               type="submit"
               className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
               disabled={passwordError || !password || !confirmPassword}
             >
               Create New Password
-            </button>
+            </button> */}
+            <CustomButton4
+              onClick={handleCreatePassword}
+              padding="px-14 py-4"
+              className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+              disabled={passwordError || !password || !confirmPassword}
+            >
+              Create New Password
+            </CustomButton4>
           </div>
         </form>
       </div>

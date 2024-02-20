@@ -9,16 +9,16 @@ const CustomButton4 = ({
   isHovered,
   onMouseEnter,
   onMouseLeave,
+  padding,
 }) => {
   return (
     <button
-      className={`rounded-full py-3 sm:py-5 m-2 sm:m-4 px-12 md:px-16 border-black ${
+      className={`rounded-full py-3 sm:py-5 m-2 sm:m-4 ${padding}border-black ${
         isHovered ? "bg-black text-white" : "bg-transparent text-black"
       } ${isHovered ? "" : "border"}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
-      style={{}}
     >
       {href ? <Link href={href}>{children}</Link> : children}
     </button>

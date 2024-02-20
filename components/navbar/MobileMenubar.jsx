@@ -25,12 +25,14 @@ import Profile from "../../assets/Profile.png";
 import Profile1 from "../../assets/profile1.svg";
 import NavigationButton from "./Navigation";
 import SocialLogin from "./SocialLogin";
+import { IoIosClose } from "react-icons/io";
 
 const MobileMenubar = () => {
   const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [bodyOverflow, setBodyOverflow] = useState("auto");
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.style.overflow = bodyOverflow;
@@ -40,19 +42,9 @@ const MobileMenubar = () => {
     };
   }, [bodyOverflow]);
 
-  const pathname = usePathname();
-  const [hoveredLink, setHoveredLink] = useState(null);
-
-  const handleMouseEnter = (link) => {
-    setHoveredLink(link);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredLink(null);
-  };
   const handleNav = () => {
     setMenuOpen(!menuOpen);
-    setBodyOverflow(menuOpen ? "auto" : "hidden");
+    document.body.style.overflow = menuOpen ? "auto" : "hidden";
   };
   const handleDisconnect = async () => {
     try {
@@ -64,7 +56,10 @@ const MobileMenubar = () => {
       console.error(err);
     }
   };
-
+  const closeMobileNav = () => {
+    setMenuOpen(false);
+    document.body.style.overflow = "auto";
+  };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -73,6 +68,11 @@ const MobileMenubar = () => {
   }
   return (
     <>
+      {/* Background blur
+      {menuOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50"></div>
+      )} */}
+
       {/* mobile nav */}
       <div className="flex  items-center justify-between fixed top-0  bg-[#2100EC] lg:hidden text-white p-4 w-full   ">
         {/* MOBILE NAV ICON */}
@@ -83,14 +83,20 @@ const MobileMenubar = () => {
         <div
           className={
             menuOpen
-              ? "fixed left-0 top-0 w-[65%]  h-screen bg-white text-black p-4 ease-in duration-500 rounded-r-3xl "
+              ? "fixed left-0 top-0 w-[65%] sm:text-base text-sm h-screen bg-white text-black p-4 ease-in duration-500 rounded-r-3xl "
               : "fixed left-[-100%] top-0 p-4 ease-in duration-500"
           }
         >
           <div className="flex w-full items-center justify-start">
-            <div onClick={handleNav} className="cursor-pointer">
+            <div
+              onClick={handleNav}
+              className="cursor-pointer bg-black rounded-full h-6 w-6 flex items-center justify-center  z-[99]"
+            >
               {/*close button of menu*/}
-              <AiOutlineClose size={25} className="rounded-full" />
+              <IoIosClose
+                size={25}
+                className=" text-white h-7 w-7 cursor-pointer"
+              />
             </div>
           </div>
           {/* user name incials */}
@@ -137,6 +143,7 @@ const MobileMenubar = () => {
                 inactive: Wallet,
               }}
               isActive={pathname === "/dashboard"}
+              closeMobileNav={closeMobileNav}
             />
             <hr />
             <NavigationButton
@@ -147,6 +154,7 @@ const MobileMenubar = () => {
                 inactive: Discover,
               }}
               isActive={pathname === "/discover"}
+              closeMobileNav={closeMobileNav}
             />
             <hr />
             <NavigationButton
@@ -157,6 +165,7 @@ const MobileMenubar = () => {
                 inactive: Swap,
               }}
               isActive={pathname === "/swap"}
+              closeMobileNav={closeMobileNav}
             />
             <hr />
             <NavigationButton
@@ -167,6 +176,7 @@ const MobileMenubar = () => {
                 inactive: Info,
               }}
               isActive={pathname === "/about"}
+              closeMobileNav={closeMobileNav}
             />
             <hr />
             <NavigationButton
@@ -177,6 +187,7 @@ const MobileMenubar = () => {
                 inactive: Support,
               }}
               isActive={pathname === "/support"}
+              closeMobileNav={closeMobileNav}
             />
             {/* Account page */}
             <hr />
@@ -188,6 +199,7 @@ const MobileMenubar = () => {
                 inactive: Profile,
               }}
               isActive={pathname === "/account"}
+              closeMobileNav={closeMobileNav}
             />
           </div>
           {/* disconnect button */}
