@@ -1,26 +1,14 @@
 "use client";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
-import Currency from "../../assets/security/dollor2.png";
-import Language from "../../assets/security/language.png";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import React from "react";
 import SecurityImage from "../../assets/security/securityImage.png";
-import Account from "@/components/Account";
 import Lock from "../../assets/security/Lock.png";
-import { useMediaQuery } from "react-responsive";
-import Ham from "../../assets/Dashboard/ham.png";
-import Modal from "@/components/modal/Modal";
-import { useUser } from "@/providers/UserProvider";
-import AccountHeader from "@/components/AccountHeader";
-import { WalletContext } from "@/providers/WalletProvider";
-import { IoArrowBackCircle } from "react-icons/io5";
 import Header from "@/components/common/LoginRegister";
 import { RiArrowRightSLine } from "react-icons/ri";
 import Info from "../../assets/Dashboard/info.png";
 import LockPassword from "../../assets/eoa/Lockpassword.png";
 import Crypto from "../../assets/Dashboard/Crypto.png";
 import Bell from "../../assets/Dashboard/Bell.png";
-import Backup from "@/components/common/BackupAccount";
 
 const SecurityPage = () => {
   return (
@@ -34,9 +22,7 @@ const SecurityPage = () => {
           <div className="flex gap-2 items-center my-4">
             <Image alt="" src={Lock} className="h-6 w-6 " />
             <p className="flex text-base font-medium items-center justify-between w-full gap-2 ">
-              <h3>
-                Auto - Lock
-              </h3>
+              <h3>Auto - Lock</h3>
               <div className="flex items-center gap-2">
                 <p className="text-[#2100EC]">Never</p>
                 <RiArrowRightSLine />

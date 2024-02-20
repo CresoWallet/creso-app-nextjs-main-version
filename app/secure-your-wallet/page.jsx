@@ -8,7 +8,7 @@ import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
 
-function CreateWallet() {
+function SecureYourWallet() {
   const [buttonNo, setButtonNo] = useState(false);
   const [buttonI, setButtonI] = useState(false);
   const [videoPlayed, setVideoPlayed] = useState(false);
@@ -22,17 +22,18 @@ function CreateWallet() {
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
-        imageSrc2={lock1}
-        imageSrc3={phone}
         color1="black"
-        color2="[#D0F500]"
-        color3="gray-300"
         hrColor1="black"
-        hrColor2="gray"
-        borderColor1="black"
-        borderColor2="gray-300"
-        textColor1="black"
-        textColor2="gray-300"
+        borderColor1="white"
+        imageSrc2={lock1}
+        color2="[#D0F500]"
+        borderColor2="black"
+        textColor2="text-black"
+        hrColor2="black"
+        imageSrc3={phone}
+        color3="gray-300"
+        textColor3="gray-300"
+        borderColor3="grey-300"
       />
       <hr className="mt-6 w-auto  " />
 
@@ -100,4 +101,4 @@ function CreateWallet() {
   );
 }
 
-export default CreateWallet;
+export default SecureYourWallet;

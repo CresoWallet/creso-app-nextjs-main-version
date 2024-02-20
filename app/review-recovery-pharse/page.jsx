@@ -10,7 +10,7 @@ import { enqueueSnackbar } from "notistack";
 import { HiOutlineEye } from "react-icons/hi2";
 import { createEoaWallet } from "@/clientApi/auth";
 
-function CreateEOAWallet() {
+function ReviewRecovery() {
   const secretPhrase = [
     "apple",
     "banana",
@@ -38,14 +38,12 @@ function CreateEOAWallet() {
       const res = await createEoaWallet({
         walletName: "EOA Wallet",
       });
-      console.log("🚀 ~ handleSendOTPMail ~ res:", res)
+      console.log("🚀 ~ handleSendOTPMail ~ res:", res);
       if (res?.status === 200) {
         enqueueSnackbar(`Successful email transmission`, {
           variant: "success",
         });
-
       } else {
-
       }
     } catch (err) {
       enqueueSnackbar(`Something went wrong`, {
@@ -56,25 +54,26 @@ function CreateEOAWallet() {
     }
   };
   useEffect(() => {
-    handleSendOTPMail()
-  }, [])
+    handleSendOTPMail();
+  }, []);
 
   return (
     <div className=" h-full md:px-4  py-4 flex flex-col ">
       <CommonComponent
         title="Create EOA Wallet"
         imageSrc1={lockpassword1}
-        imageSrc2={lock1}
-        imageSrc3={phone}
         color1="black"
-        color2="[#D0F500]"
-        color3="gray-300"
         hrColor1="black"
-        hrColor2="gray"
-        borderColor1="black"
-        borderColor2="gray-300"
-        textColor1="black"
-        textColor2="gray-300"
+        borderColor1="white"
+        imageSrc2={lock1}
+        color2="[#D0F500]"
+        borderColor2="black"
+        textColor2="text-black"
+        hrColor2="black"
+        imageSrc3={phone}
+        color3="gray-300"
+        textColor3="gray-300"
+        borderColor3="grey-300"
       />
       <div className=" md:w-[70%] lg:w-[45%] xl:w-[35%] container mx-auto ">
         <hr className="mt-2 w-auto  " />
@@ -95,10 +94,11 @@ function CreateEOAWallet() {
           {inputWords.map((word, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${!revealed
-                ? "blur-sm bg-black opacity-[10%] text-white"
-                : "bg-[#A66CFF] border-black"
-                }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
+                !revealed
+                  ? "blur-sm bg-black opacity-[10%] text-white"
+                  : "bg-[#A66CFF] border-black"
+              }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {/* {revealed ? `${index + 1}. ${word}` : "•••••"} */}
@@ -128,4 +128,4 @@ function CreateEOAWallet() {
   );
 }
 
-export default CreateEOAWallet;
+export default ReviewRecovery;

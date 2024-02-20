@@ -6,6 +6,7 @@ import creso1 from "../../assets/Dashboard/cresopurple.png";
 import Header from "../../components/common/LoginRegister";
 import Send from "../../assets/Dashboard/send.png";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { CustomTextField } from "@/components/fields/CustomTextField";
 
 const TransferToken = () => {
   const [amount, setAmount] = useState("");
@@ -64,20 +65,32 @@ const TransferToken = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between mx-9
-       my-2">
+      <div
+        className="flex justify-between mx-9
+       my-2"
+      >
         <p>Amount</p>
         <p>Balance:0ETH</p>
       </div>
       <div className="rounded-full  pl-2  pr-2  py-1 flex flex-row justify-between border border-solid cursor-pointer mx-4 ">
         <input
-          type="text"
+          type="number"
           className="rounded-full p-3 border-solid w-full"
           placeholder="Enter amount"
           value={amount}
           onChange={handleAmountChange}
         />
       </div>
+      {/* <div className=" pl-2 pr-2 py-1 flex flex-row justify-between  cursor-pointer mx-4  ">
+        <CustomTextField
+          placeholder="Enter amount"
+          type="number"
+          validation={{
+            onChange: handleAmountChange,
+          }}
+          error={error}
+        />
+      </div> */}
       {error && <p className="text-red-500 mx-4">{error}</p>}
       <div className="text-center flex justify-center mt-20 rounded-full border border-white bg-black text-white hover:bg-white hover:text-black cursor-pointer mx-4">
         <button

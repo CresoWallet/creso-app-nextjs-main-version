@@ -44,7 +44,7 @@ import NFT3 from "../../assets/discover/NFT3.png";
 import NFT1 from "../../assets/discover/NFT1.png";
 import Header from "@/components/Header";
 
-const DiscoverPage = () => {
+const Discover = () => {
   const [isFavourite, setIsFavourite] = useState(false);
   const [show, setShow] = useState(false);
   const { navbarTrigger, setNavbarTrigger, isMobile } =
@@ -329,4 +329,4 @@ const DiscoverPage = () => {
   );
 };
 
-export default DiscoverPage;
+export default Discover;

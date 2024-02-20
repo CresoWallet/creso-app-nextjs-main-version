@@ -14,17 +14,12 @@ import Support from "../../assets/Dashboard/Support.png";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
 import NavItem from "./NavItem";
-import Twitter from "../../assets/Dashboard/twitter.png";
-import Telegram from "../../assets/Dashboard/telegram.png";
-import Etherscan from "../../assets/Dashboard/etherscan.png";
-import Github from "../../assets/Dashboard/github.png";
-import Discord from "../../assets/Dashboard/discord.png";
 import creso from "../../assets/Dashboard/creso_logo_white.svg";
 import Setting from "../../assets/Dashboard/setting.png";
 import Setting1 from "../../assets/Dashboard/setting1.png";
 import Link from "next/link";
 import support1 from "../../assets/Dashboard/Support.svg";
-// import cresob from "../../assets/Dashboard/creso logo black.svg";
+import SocialLogin from "./SocialLogin";
 
 const SideNav = () => {
   const pathName = usePathname();
@@ -43,12 +38,6 @@ const SideNav = () => {
           className="flex flex-row items-center gap-1 px-8 relative Mainlogo text-white"
         >
           <Image alt="creso-logo" src={creso} className="h-10 my-8 mb-14" />
-
-          {/* 
-        <p className=" text-4xl hidden lg:block items-center">creso</p>
-        <p className="text-sm mt-4 text-[#D0F500]">Beta</p>
-
-         */}
         </Link>
         <div className={`flex flex-col ${isMobile ? "mr-5" : "mr-10"}`}>
           <NavItem
@@ -114,52 +103,7 @@ const SideNav = () => {
         </div>
       </div>
       {/* Add social media icons */}
-      <div className="flex justify-between item-center gap-2 border-white rounded-full bg-white border border-solid p-2 mt-8 mx-5 ">
-        <a
-          href="https://twitter.com/cresowallet"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer transform hover:-translate-y-1"
-        >
-          <Image
-            alt="Twitter"
-            src={Twitter}
-            className="  w-7 h-7  overflow-hidden"
-          />
-        </a>
-        <a
-          href="https://t.me/cresowallet"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer transform hover:-translate-y-1"
-        >
-          <Image alt="Telegram" src={Telegram} className=" flex w-7 h-7" />
-        </a>
-        <a
-          href="https://etherscan.io/token/0x41ea5d41eeacc2d5c4072260945118a13bb7ebce"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer transform hover:-translate-y-1"
-        >
-          <Image alt="Etherscan" src={Etherscan} className="w-7 h-7" />
-        </a>
-        <a
-          href="https://discord.com/invite/creso"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer transform hover:-translate-y-1"
-        >
-          <Image alt="Discord" src={Discord} className="w-7 h-7" />
-        </a>
-        <a
-          href="https://github.com/CresoWallet"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer transform hover:-translate-y-1"
-        >
-          <Image alt="Github" src={Github} className="w-7 h-7" />
-        </a>
-      </div>
+      <SocialLogin />
     </div>
   );
 };

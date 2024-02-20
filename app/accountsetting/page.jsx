@@ -9,7 +9,7 @@ import password from "../../assets/Dashboard/password.png";
 import Header from "../../components/common/LoginRegister";
 import { RiArrowRightSLine } from "react-icons/ri";
 
-const BackupAccount = () => {
+const AccountSetting = () => {
   return (
     <div className="mt-20   ">
       <Header pageTitle="Account Setting" pageLink="/account" />
@@ -51,4 +51,4 @@ const BackupAccount = () => {
   );
 };
 
-export default BackupAccount;
+export default AccountSetting;

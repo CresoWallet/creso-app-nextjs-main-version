@@ -7,7 +7,7 @@ import Round from "../../assets/Dashboard/Roundes.png";
 import Header from "../../components/common/LoginRegister";
 import { RiArrowRightSLine } from "react-icons/ri";
 
-const BackupAccount = () => {
+const BackupRestore = () => {
   return (
     <div className="mt-20">
       <Header pageTitle="Backup & Restore" className="px-4" pageLink="/account" />
@@ -33,4 +33,4 @@ const BackupAccount = () => {
   );
 };
 
-export default BackupAccount;
+export default BackupRestore;

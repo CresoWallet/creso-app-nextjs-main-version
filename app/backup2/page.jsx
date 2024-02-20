@@ -1,15 +1,15 @@
 "use client";
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
+
 import mail from "../../assets/backup/mail.png";
 import key from "../../assets/backup/Key.png";
 import wallet from "../../assets/backup/Wallet.png";
 import CommonComponent from "@/components/common/CommonBackup";
-import { CustomTextField } from "@/components/fields/CustomTextField";
 import { BsArrowLeft } from "react-icons/bs";
+import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 
-const Backup1 = () => {
+const backup2 = () => {
   return (
     <div>
       <div className=" h-full md:px-4 md:pt-6  pt-4 mx-4 py-4  flex flex-col ">
@@ -34,26 +34,17 @@ const Backup1 = () => {
           textColor3="gray-300"
           borderColor3="gray-300"
         />
-        <div className="justify-center mt-6 ">
-          <div className=" max-w-lg text-center justify-center gap-4 mb-4 mt-14 ml-2 font-bold text-lg mx-4 md:mx-auto items-center ">
-            <p className="justify-center my-2 px-4"> Email</p>
-            <CustomTextField
-              placeholder={"email"}
-              validation={{ email: true, required: true }} // Corrected validation prop
-            />
-          </div>
-          <div className=" md:mb-4  my-2 mx-auto max-w-md mt-28">
-            <CustomButton
-              name="Next"
-              // onClick={handleBackup}
-              bgColor="black"
-              nameColor="white"
-            />
-          </div>
-        </div>
+      </div>
+      <div className=" justify-center items-center mt-40">
+        <CustomButton
+          name="Next"
+          // onClick={handleBackup}
+          bgColor="black"
+          nameColor="white"
+        />
       </div>
     </div>
   );
 };
 
-export default Backup1;
+export default backup2;
