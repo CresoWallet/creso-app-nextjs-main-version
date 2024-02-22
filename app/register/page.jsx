@@ -9,7 +9,7 @@ import Link from "next/link";
 import MobileImage from "../../assets/auth/Group.png";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { signUpAPI } from "@/clientApi/auth";
+import { signUpApi } from "@/clientApi/auth";
 import { CustomTextField } from "@/components/fields/CustomTextField";
 import { enqueueSnackbar } from "notistack";
 import cresow from "../../assets/Dashboard/creso_logo_white.svg";
@@ -44,7 +44,7 @@ const RegisterPage = () => {
       password: data.password,
     };
     try {
-      const res = await signUpAPI(signUpData);
+      const res = await signUpApi(signUpData);
       if (res) {
         // console.log(res);
         router.push("/otp");

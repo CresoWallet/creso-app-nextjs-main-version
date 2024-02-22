@@ -47,6 +47,7 @@ const WalletContextProvider = ({ children }) => {
   const [validCaptcha, setValidCaptcha] = useState(null);
   const [showCreateWallet, setShowCreateWallet] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
+  const [authToken, setAuthToken] = useState("");
 
   // useEffect(() => {
   //   (async () => {
@@ -199,12 +200,12 @@ const WalletContextProvider = ({ children }) => {
       fetchUsdValue();
       fetchWallet();
     }
-  }, [user]);
+    setAuthToken(localStorage.getItem("authToken"));
+  }, [user, authToken]);
 
   useEffect(() => {
     secureWalletAddress && eoaWalletAddress && fetchHistory();
   }, [secureWalletAddress, eoaWalletAddress]);
-
   return (
     <WalletContext.Provider
       value={{
@@ -243,6 +244,8 @@ const WalletContextProvider = ({ children }) => {
         setShowCreateWallet,
         showAccount,
         setShowAccount,
+        authToken,
+        setAuthToken,
       }}
     >
       {/* {navbarTrigger && (

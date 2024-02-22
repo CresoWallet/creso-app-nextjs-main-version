@@ -23,6 +23,7 @@ import Header from "@/components/common/LoginRegister";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { validCaptcha, setAuthToken, authToken } = useContext(WalletContext);
 
   const { user, isAuthenticated, handleAuthentication } = useUser();
   const [loading, setLoading] = useState(false);
@@ -30,11 +31,13 @@ const LoginPage = () => {
   const { register, handleSubmit, watch, formState } = useForm();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push(`/dashboard`);
+    if (authToken) {
+      router.push(`/welcome`);
     }
-  }, [user]);
-  const { validCaptcha } = useContext(WalletContext);
+  }, [authToken]);
+  console.log("====================================");
+  console.log(authToken, "authToken");
+  console.log("====================================");
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     router.push(`/dashboard`);
@@ -46,13 +49,15 @@ const LoginPage = () => {
     try {
       const res = await loginApi(data);
       console.log(res);
-      const tk = res.data.token;
-      //console.log(tk);
+      const tk = res?.data?.data?.token;
+      localStorage.setItem("authToken", tk);
+      console.log(tk, "<---------tokrn");
       if (tk) {
         // localStorage.setItem(AUTH_TOKEN, tk);
         // authenticate();
         // setLoading(false);
         handleAuthentication();
+        router.push(`/welcome`);
       }
     } catch (err) {
       enqueueSnackbar(`${err?.response?.data?.message}`, {
