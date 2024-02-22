@@ -47,7 +47,7 @@ const RegisterPage = () => {
       const res = await signUpAPI(signUpData);
       if (res) {
         // console.log(res);
-        router.push("/");
+        router.push("/otp");
         enqueueSnackbar(`User successfully registered`, {
           variant: "success",
         });
