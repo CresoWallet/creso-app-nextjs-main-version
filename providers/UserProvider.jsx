@@ -36,6 +36,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
+
   const [authenticate, { data, error }] = useAuthenticateUserMutation();
   const [status, setStatus] = useState("idle");
 
@@ -44,7 +45,7 @@ export const UserProvider = ({ children }) => {
       const res = await authenticateUser();
       console.log(res);
       if (res) {
-        setUser(res.data.user);
+        setUser(res?.data?.user);
         setStatus("authenticated");
       }
     } catch (error) {

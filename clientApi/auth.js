@@ -24,15 +24,22 @@ import { axiosInstance } from "@/services/axios";
 
 //   return res;
 // };
-
-// export const authenticateUser = async (formData) => {
-//   const res = await axiosInstance(`/authenticate`, {
-//     method: "GET",
+// export const signUpApi = async (formData) => {
+//   const res = await axiosInstance("/signup", {
+//     method: "POST",
 //     data: formData,
 //   });
-
 //   return res;
 // };
+
+export const authenticateUser = async (formData) => {
+  const res = await axiosInstance(`/authenticate`, {
+    method: "GET",
+    data: formData,
+  });
+
+  return res;
+};
 
 // export const sendOTPMail = async (formData) => {
 //   const res = await axiosInstance(`/sendOTP`, {
@@ -62,7 +69,7 @@ import { axiosInstance } from "@/services/axios";
 
 //-------------------Creso API-v1----------------
 
-// User Registration and Authentication
+//User Registration and Authentication
 export const signUpApi = async (formData) => {
   const res = await axiosInstance("/signup", {
     method: "POST",
