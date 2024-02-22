@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/react": "^2.7.1",
     "alchemy-sdk": "^3.1.0",
     "axios": "^1.6.6",
-    "ethers": "^6.8.1",
+    "ethers": "^6.11.1",
     "file-saver": "^2.0.5",
     "lucide-react": "^0.303.0",
     "next": "^14.1.0",
@@ -32,7 +34,8 @@
     "react-redux": "^8.1.3",
     "react-responsive": "^9.0.2",
     "react-responsive-carousel": "^3.2.23",
-    "viem": "^1.21.1"
+    "viem": "^1.21.1",
+    "web3modal": "^1.9.12"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

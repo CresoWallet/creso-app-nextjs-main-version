@@ -4,13 +4,32 @@ import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+import ConnectWallet from "@/components/connectbutton/ConnectWallet";
 import CustomButton4 from "@/components/CustomButton4";
 import CustomCheckbox from "@/components/CustomCheckbox";
 
 function Welcome() {
-  const [importWalletHovered, setImportWalletHovered] = useState(true);
+  const [importWalletHovered, setImportWalletHovered] = useState(false);
+  const [connectWallet, setConnectWallet] = useState(false);
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
+
+  // const initWeb3Modal = async () => {
+  //   const web3Modal = new Web3Modal({
+  //     cacheProvider: true,
+  //     providerOptions: {}, // You can customize this based on the providers you want to support
+  //   });
+  //   const provider = await web3Modal.connect();
+
+  //   // Once connected, you can use the provider to interact with the user's wallet
+  //   const signer = new ethers.providers.Web3Provider(provider).getSigner();
+
+  //   console.log("Connected to wallet:", signer._address);
+
+  //   // Handle any further actions after connecting
+  // };
 
   return (
     <div className=" h-full md:px-4  py-4 flex flex-col ">
@@ -30,6 +49,7 @@ function Welcome() {
 
         {/* Terms of Use */}
         <div className="flex items-center justify-center mb-8 pb-2">
+          <ConnectWallet />
           {/* <button
             className="rounded-full p-2 border-black focus:outline-none"
             onClick={() => setIsChecked(!isChecked)}
@@ -66,6 +86,27 @@ function Welcome() {
           >
             <Link href="/importwallet">Import an existing wallet</Link>
           </button> */}
+          {/* <CustomButton4
+            isHovered={connectWallet}
+            onMouseEnter={() => setConnectWallet(true)}
+            onMouseLeave={() => setConnectWallet(false)}
+            onClick={initWeb3Modal} 
+            padding="px-12 "
+          >
+            Connect Wallet
+          </CustomButton4> */}
+          {/* <CustomButton4
+            isHovered={connectWallet}
+            onMouseEnter={() => setConnectWallet(true)}
+            onMouseLeave={() => setConnectWallet(false)}
+            onClick={() => {
+              setConnectWallet(true);
+              setCreateWalletHovered(false);
+            }}
+            padding="px-12 "
+          >
+            Connect Wallet
+          </CustomButton4> */}
           <CustomButton4
             isHovered={importWalletHovered}
             onMouseEnter={() => setImportWalletHovered(true)}
