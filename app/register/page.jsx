@@ -204,71 +204,36 @@ const RegisterPage = () => {
 
 export default RegisterPage;
 
-//use with bcrypt.js we cannot store password show password in hash
-// "use client";
-// import React, { useContext, useState } from "react";
-// import Image from "next/image";
-// import BgImage from "../../assets/auth/bgImage.png";
-// import CustomButton from "@/components/CustomButton";
-// import Apple from "../../assets/auth/Apple.png";
-// import X from "../../assets/auth/x.png";
-// import Link from "next/link";
-// import MobileImage from "../../assets/auth/Group.png";
+//chatgpt
+// import React, { useState } from "react";
 // import { useForm } from "react-hook-form";
-// import { useRouter } from "next/navigation";
-// import { signUpAPI } from "@/clientApi/auth";
-// import { CustomTextField } from "@/components/fields/CustomTextField";
 // import { enqueueSnackbar } from "notistack";
-// import cresow from "../../assets/Dashboard/creso_logo_white.svg";
-// import Capcha from "@/components/Capcha";
-// import { WalletContext } from "@/providers/WalletProvider";
-
-// import Lock from "../../assets/Dashboard/Lock.png";
-// import { RiArrowRightSLine, RiCheckboxCircleLine } from "react-icons/ri";
-// import Header from "@/components/common/LoginRegister";
-
-// // Import bcryptjs library
-// import bcrypt from 'bcryptjs';
+// import { CustomTextField } from "@/components/fields/CustomTextField";
+// import { signUpAPI, verifyEmailAPI, resendOTPAPI } from "@/clientApi/auth"; // Import necessary API functions
 
 // const RegisterPage = () => {
-//   const router = useRouter();
 //   const {
 //     register,
 //     handleSubmit,
-//     watch,
-//     formState: { errors, isLoading },
+//     formState: { errors },
 //   } = useForm();
 //   const [loading, setLoading] = useState(false);
-//   const { validCaptcha } = useContext(WalletContext);
-//   const password = watch("password");
-//   const confirmPassword = watch("confirmPassword");
-
-//   const validatePassword = (value) => {
-//     return value === password || "Passwords do not match";
-//   };
 
 //   const onSubmit = async (data) => {
 //     setLoading(true);
-//     const username = generateUsername(data.firstName, data.lastName);
-
-//     // Hash the password using bcrypt
-//     const hashedPassword = await bcrypt.hash(data.password, 10);
-
-//     const signUpData = {
-//       email: data.email.toLowerCase(),
-//       username: username,
-//       password: hashedPassword, // Store the hashed password
-//     };
 //     try {
-//       const res = await signUpAPI(signUpData);
-//       if (res) {
-//         // console.log(res);
-//         router.push("/");
+//       const signUpRes = await signUpAPI(data); // Call sign-up API
+//       if (signUpRes) {
 //         enqueueSnackbar(`User successfully registered`, {
 //           variant: "success",
 //         });
+//         // After successful sign-up, call email verification API
+//         const verifyEmailRes = await verifyEmailAPI(data.email, data.otp);
+//         if (verifyEmailRes) {
+//           // Handle success
+//           // Redirect or show a success message
+//         }
 //       }
-//       setLoading(false);
 //     } catch (error) {
 //       enqueueSnackbar(`${error?.response?.data?.message}`, {
 //         variant: "error",
@@ -278,122 +243,169 @@ export default RegisterPage;
 //     }
 //   };
 
-//   const generateUsername = (firstName, lastName) => {
-//     const username = `${firstName.toLowerCase()}${lastName.toLowerCase()}`;
-//     return username;
+//   const handleResendOTP = async (email) => {
+//     try {
+//       const resendOTPRes = await resendOTPAPI(email); // Call resend OTP API
+//       if (resendOTPRes) {
+//         enqueueSnackbar(`OTP resent successfully`, {
+//           variant: "success",
+//         });
+//       }
+//     } catch (error) {
+//       enqueueSnackbar(`${error?.response?.data?.message}`, {
+//         variant: "error",
+//       });
+//     }
 //   };
 
 //   return (
-//     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
+//     <div className="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
+//       {/* Your left side content */}
 //       <div className="col-span-1 flex-col justify-center items-center bg-[#2100EC] md:py-8  hidden md:block rounded-2xl">
-//         {/* Logo and background images */}
-//         <div className=" flex-row items-center justify-center md:my-16 gap-1 relative hidden md:block Mainlogo text-white md:mt-4 ">
-//           <Image alt="creso-logo" src={cresow} className="md:h-16" />
-//         </div>
-//         <Image
-//           alt=""
-//           src={BgImage}
-//           height={650}
-//           className="hidden xl:flex md:flex"
-//         />
+//         {/* Your left side content */}
 //       </div>
+
+//       {/* Your right side content */}
 //       <div className="md:col-span-1  xl:px-24 md:px-8  flex flex-col xl:py-16 md:py-8">
-//         <p className="font-bold md:text-2xl  hidden md:block xl:text-4xl xl:mb-8 md:mb-4 text-xl">
-//           Register
-//         </p>
-
-//         {/* mobile nav */}
-//         <div>
-//           <Header pageTitle="Register" pageLink="/" />
-//         </div>
-
-//         <form
-//           onSubmit={handleSubmit(onSubmit)}
-//           className="flex flex-col space-y-4 md:mx-0 mx-4 "
-//         >
-//           <div className="flex flex-col gap-2">
-//             {/* First Name and Last Name */}
-//             <CustomTextField
-//               label={"First Name "}
-//               placeholder={"first name"}
-//               validation={{ ...register("firstName", { required: true }) }}
-//             />
-//             <CustomTextField
-//               label={"Last Name"}
-//               placeholder={"last name"}
-//               validation={{ ...register("lastName", { required: true }) }}
-//             />
-//           </div>
-
-//           {/* Email */}
+//         <form onSubmit={handleSubmit(onSubmit)}>
 //           <CustomTextField
 //             label={"Email"}
 //             placeholder={"email"}
 //             validation={{ ...register("email", { required: true }) }}
 //           />
+//           {errors.email && <span>Email is required</span>}
 
-//           <div className="flex flex-col gap-2">
-//             {/* Password and Confirm Password */}
-//             <CustomTextField
-//               label={"Password"}
-//               placeholder={"password"}
-//               type={"password"}
-//               validation={{ ...register("password", { required: true }) }}
-//             />
-//             <CustomTextField
-//               label={"Confirm Password"}
-//               placeholder={"confirm password"}
-//               validation={{
-//                 ...register("confirmPassword", {
-//                   required: true,
-//                   validate: validatePassword,
-//                 }),
-//               }}
-//               type="password"
-//               error={errors.confirmPassword && errors.confirmPassword.message}
-//             />
-//             <div className="flex md:hidden  items-center gap-1 text-sm">
-//               <Image alt="" src={Lock} className=" " />
-//               <p>Authentication Method</p>
+//           <CustomTextField
+//             label={"Password"}
+//             placeholder={"password"}
+//             type={"password"}
+//             validation={{ ...register("password", { required: true }) }}
+//           />
+//           {errors.password && <span>Password is required</span>}
 
-//               <p className="text-[#2100EC] ">Face Id</p>
-//               <RiArrowRightSLine />
-//             </div>
-//           </div>
+//           <CustomTextField
+//             label={"OTP"}
+//             placeholder={"OTP"}
+//             validation={{ ...register("otp", { required: true }) }}
+//           />
+//           {errors.otp && <span>OTP is required</span>}
 
-//           {/* <Capcha onSubmit={onSubmit} /> */}
-
-//           <div className="flex flex-col space-y-2 !mt-10">
-//             <div className="flex flex-row md:hidden  items-center gap-1 text-xs sm:text-sm">
-//               <p>I have agree to Creso</p>
-
-//               <p className="text-[#FF4085] text-xs">Terms and Conditions</p>
-//             </div>
-//             {/* Sign-up button */}
-//             <CustomButton
-//               isLoading={loading}
-//               hoverColor={"zinc-800"}
-//               name="Sign up"
-//               bgColor="black"
-//               type={"submit"}
-//             />
-//           </div>
-
-//           {/* Login link */}
-//           <div className=" justify-center hidden md:block ">
-//             <p className="text-sm text-[#A09FAA]">
-//               Already have an account?{" "}
-//               <Link href="/">
-//                 <span className="text-[#FF4085] cursor-pointer hover:font-bold">
-//                   Login
-//                 </span>
-//               </Link>
-//             </p>
-//           </div>
+//           <button type="submit" disabled={loading}>
+//             {loading ? "Loading..." : "Sign Up"}
+//           </button>
 //         </form>
+
+//         {/* Resend OTP button */}
+//         <button onClick={() => handleResendOTP(email)}>Resend OTP</button>
 //       </div>
 //     </div>
 //   );
 // };
+
+// export default RegisterPage;
+
+//gemini
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import axios from "axios";
+
+// function RegisterPage() {
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors, isSubmitting },
+//   } = useForm();
+//   const [loading, setLoading] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState("");
+
+//   const signupUrl = "/api/signup"; // Replace with your signup API endpoint
+//   const emailVerificationUrl = "/api/verify_email"; // Replace with your email verification API endpoint
+
+//   const onSubmit = async (data) => {
+//     setLoading(true);
+
+//     try {
+//       const signupData = {
+//         email: data.email.toLowerCase(),
+//         password: data.password,
+//       };
+
+//       const response = await axios.post(signupUrl, signupData);
+
+//       if (response.data.success) {
+//         await axios.post(emailVerificationUrl, { email: signupData.email });
+//         console.log("Signup successful! Please verify your email.");
+//         // Redirect the user or show a success message
+//       } else {
+//         setErrorMessage(response.data.message);
+//       }
+//     } catch (error) {
+//       console.error("Signup error:", error);
+//       setErrorMessage("An error occurred. Please try again later.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
+//       <div className="col-span-1 flex-col justify-center items-center bg-[#2100EC] md:py-8  hidden md:block rounded-2xl">
+//         {/* Your image and content */}
+//       </div>
+
+//       <div className="md:col-span-1  xl:px-24 md:px-8  flex flex-col xl:py-16 md:py-8">
+//         <form onSubmit={handleSubmit(onSubmit)}>
+//           <div className="flex flex-col gap-2">
+//             <input
+//               type="text"
+//               placeholder="First Name"
+//               {...register("firstName", { required: true })}
+//             />
+//             {errors.firstName && <span>First Name is required</span>}
+//             <input
+//               type="text"
+//               placeholder="Last Name"
+//               {...register("lastName", { required: true })}
+//             />
+//             {errors.lastName && <span>Last Name is required</span>}
+//           </div>
+
+//           <input
+//             type="email"
+//             placeholder="Email"
+//             {...register("email", { required: true })}
+//           />
+//           {errors.email && <span>Email is required</span>}
+
+//           <div className="flex flex-col gap-2">
+//             <input
+//               type="password"
+//               placeholder="Password"
+//               {...register("password", { required: true })}
+//             />
+//             {errors.password && <span>Password is required</span>}
+//             <input
+//               type="password"
+//               placeholder="Confirm Password"
+//               {...register("confirmPassword", {
+//                 required: true,
+//                 validate: (value) =>
+//                   value === data.password || "The passwords do not match",
+//               })}
+//             />
+//             {errors.confirmPassword && (
+//               <span>{errors.confirmPassword.message}</span>
+//             )}
+//           </div>
+
+//           <button type="submit" disabled={isSubmitting || loading}>
+//             {isSubmitting || loading ? "Loading..." : "Sign Up"}
+//           </button>
+//           {errorMessage && <p className="error-message">{errorMessage}</p>}
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
 
 // export default RegisterPage;

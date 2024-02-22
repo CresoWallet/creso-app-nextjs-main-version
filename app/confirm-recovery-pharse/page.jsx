@@ -216,7 +216,7 @@ function ConfirmRecovery() {
           ))}
         </div>
         {error && <p className="text-red-500 text-center ">{error}</p>}
-        <div className="text-center mt-20 w-full rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer">
+        <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleConfirm}>
             Confirm
           </button>

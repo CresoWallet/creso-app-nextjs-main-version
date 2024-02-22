@@ -7,10 +7,11 @@ import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
+import CustomButton4 from "@/components/CustomButton4";
 
 function SecureYourWallet() {
   const [buttonNo, setButtonNo] = useState(false);
-  const [buttonI, setButtonI] = useState(false);
+  const [buttonI, setButtonI] = useState(true);
   const [videoPlayed, setVideoPlayed] = useState(false);
 
   const handlePlayVideo = () => {
@@ -24,14 +25,14 @@ function SecureYourWallet() {
         imageSrc1={lockpassword1}
         color1="black"
         hrColor1="black"
-        borderColor1="white"
+        borderColor1="black"
         imageSrc2={lock1}
         color2="[#D0F500]"
         borderColor2="black"
         textColor2="text-black"
         hrColor2="black"
         imageSrc3={phone}
-        color3="gray-300"
+        color3="white"
         textColor3="gray-300"
         borderColor3="grey-300"
       />
@@ -95,6 +96,26 @@ function SecureYourWallet() {
           >
             Secure My Wallet
           </button>
+          {/* <CustomButton4
+            onClick={() => {
+              setButtonNo(true);
+              setButtonI(false);
+            }}
+            selected={buttonNo}
+            padding="px-16 py-4"
+          >
+            Remind Me later
+          </CustomButton4>
+          <CustomButton4
+            onClick={() => {
+              setButtonI(true);
+              setButtonNo(false);
+            }}
+            selected={buttonI}
+            padding="px-16  py-4"
+          >
+            Secure My Wallet
+          </CustomButton4> */}
         </div>
       </div>
     </div>
