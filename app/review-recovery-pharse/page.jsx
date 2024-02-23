@@ -152,7 +152,9 @@ function ReviewRecovery() {
         const { data } = res;
         console.log(data?.data, "dssssssssssssssssss");
 
-        setRecoveryPhrases(data?.data?.seedPhrase);
+        // setRecoveryPhrases(data?.data?.seedPhrase);
+        setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
+
         setRevealed(true);
         console.log("Token:", data.token);
       } catch (err) {
@@ -200,11 +202,10 @@ function ReviewRecovery() {
           {recoveryPhrases.map((word, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
-                  ? "bg-[#A66CFF] border-black"
-                  : "blur-sm bg-black opacity-[10%] text-white"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
+                ? "bg-[#A66CFF] border-black"
+                : "blur-sm bg-black opacity-[10%] text-white"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${word}`}

@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
-  const [authenticate, { data, error }] = useAuthenticateUserMutation();
+  // const [authenticate, { data, error }] = useAuthenticateUserMutation();
   const [status, setStatus] = useState("idle");
 
   const handleAuthentication = async () => {
