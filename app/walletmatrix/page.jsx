@@ -100,7 +100,7 @@ function WalletMatrix() {
           onMouseEnter={() => setButtonI(true)}
           onMouseLeave={() => setButtonI(false)}
         >
-          <Link href="/createpassword3">I Agree</Link>
+          <Link href="/create-password">I Agree</Link>
         </CustomButton4>
         {/* <button
           className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${
