@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import OTPInput from "react-otp-input";
 import "./OTP.css";
 import { enqueueSnackbar } from "notistack";
-import { sendOTPMail, verifyEmailApi, verifyOTP } from "@/clientApi/auth";
+import { sendOTPMail, verifyEmailApi, resendOTPApi, verifyOTP } from "@/clientApi/auth";
 import CustomButton from "../CustomButton";
 import { useUser } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
@@ -52,6 +52,30 @@ const OTP = () => {
       }
     }
   };
+  const handleSendOTPMail = async () => {
+
+    setLoading(true);
+
+    try {
+      const res = await resendOTPApi({
+        email: userEmail,
+      });
+      console.log("🚀 ~ handleSendOTPMail ~ res:", res)
+      if (res?.status === 200) {
+        enqueueSnackbar(`otp resed successfully`, {
+          variant: "success",
+        });
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log("err : ", err);
+      // enqueueSnackbar(`${err.response.data.message}`, {
+      //   variant: "error",
+      // });
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-center w-full flex-col ">

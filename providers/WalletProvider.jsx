@@ -17,6 +17,7 @@ import { useMediaQuery } from "react-responsive";
 import { usePathname } from "next/navigation";
 import MobileMenubar from "@/components/navbar/MobileMenubar";
 import { VscFeedback } from "react-icons/vsc";
+import { useRouter } from "next/navigation";
 
 export const WalletContext = createContext();
 
@@ -62,6 +63,14 @@ const WalletContextProvider = ({ children }) => {
   //     }
   //   })();
   // }, [user]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const matchEmail = userEmail !== localStorage.getItem("userEmail")
+    if (!authToken && matchEmail) {
+      router.push(`/`);
+    }
+  }, [authToken]);
   const getBlnce = async (address) => {
     let balance = {};
     let totalUsd = 0;
@@ -203,7 +212,7 @@ const WalletContextProvider = ({ children }) => {
       fetchWallet();
     }
     setAuthToken(localStorage.getItem("authToken"));
-    setUserEmail(localStorage.getItem("userEmail"));
+    // setUserEmail(localStorage.getItem("userEmail"));
   }, [user, authToken, userEmail]);
 
   useEffect(() => {
