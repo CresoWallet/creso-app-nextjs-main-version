@@ -6,7 +6,7 @@ import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
 import { HiOutlineEye } from "react-icons/hi2";
 import { createEOAWalletApi } from "@/clientApi/auth";
-
+import { MdOutlineFileCopy } from "react-icons/md";
 function ReviewRecovery() {
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -15,13 +15,17 @@ function ReviewRecovery() {
       .map((word) => ({ word, revealed: false }))
   );
 
+  console.log(recoveryPhrases, "<------------------------recoveryPhrases");
+
   const handleRevealClick = async () => {
     if (!revealed) {
       try {
         const res = await createEOAWalletApi({
           walletName: "EOA",
-        });
+        }); // Call the API
         const { data } = res;
+        console.log(data?.data, "dssssssssssssssssss");
+
         const seedPhrase = data?.data?.seedPhrase || "";
         if (seedPhrase.length > 0) {
           const seedPhraseArray = seedPhrase.split(" ");
@@ -99,6 +103,14 @@ function ReviewRecovery() {
               </div>
               <p className="my-4 text-sm">Make sure nobody Looking</p>
             </div>
+          )}
+        </div>
+        <div className="my-4 flex gap-2 justify-end items-center">
+          {revealed && (
+            <>
+              <MdOutlineFileCopy />
+              <p>copy to clipboard</p>
+            </>
           )}
         </div>
 
