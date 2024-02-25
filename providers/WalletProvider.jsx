@@ -17,6 +17,7 @@ import { useMediaQuery } from "react-responsive";
 import { usePathname } from "next/navigation";
 import MobileMenubar from "@/components/navbar/MobileMenubar";
 import { VscFeedback } from "react-icons/vsc";
+import { useRouter } from "next/navigation";
 
 export const WalletContext = createContext();
 
@@ -48,6 +49,8 @@ const WalletContextProvider = ({ children }) => {
   const [showCreateWallet, setShowCreateWallet] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const [authToken, setAuthToken] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {
   //   (async () => {
@@ -60,6 +63,14 @@ const WalletContextProvider = ({ children }) => {
   //     }
   //   })();
   // }, [user]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const matchEmail = userEmail !== localStorage.getItem("userEmail")
+    if (!authToken && matchEmail) {
+      router.push(`/`);
+    }
+  }, [authToken]);
   const getBlnce = async (address) => {
     let balance = {};
     let totalUsd = 0;
@@ -201,7 +212,8 @@ const WalletContextProvider = ({ children }) => {
       fetchWallet();
     }
     setAuthToken(localStorage.getItem("authToken"));
-  }, [user, authToken]);
+    // setUserEmail(localStorage.getItem("userEmail"));
+  }, [user, authToken, userEmail]);
 
   useEffect(() => {
     secureWalletAddress && eoaWalletAddress && fetchHistory();
@@ -219,33 +231,21 @@ const WalletContextProvider = ({ children }) => {
         smartWallets,
         eoaWallets,
         isLoaded,
-        navbarTrigger,
-        setNavbarTrigger,
+        navbarTrigger, setNavbarTrigger,
         isMobile,
-        allToken,
-        setAllToken,
-        totalBalance,
-        setTotalBalance,
-        activeButton,
-        setActiveButton,
-        filteredData,
-        setFilteredData,
-        originalData,
-        setOriginalData,
-        send,
-        setSend,
-        setMainContentVisible,
-        mainContentVisible,
-        setWalletAddress,
-        walletAddress,
-        validCaptcha,
-        setValidCaptcha,
-        showCreateWallet,
-        setShowCreateWallet,
-        showAccount,
-        setShowAccount,
-        authToken,
-        setAuthToken,
+        allToken, setAllToken,
+        totalBalance, setTotalBalance,
+        activeButton, setActiveButton,
+        filteredData, setFilteredData,
+        originalData, setOriginalData,
+        send, setSend,
+        mainContentVisible, setMainContentVisible,
+        walletAddress, setWalletAddress,
+        validCaptcha, setValidCaptcha,
+        showCreateWallet, setShowCreateWallet,
+        showAccount, setShowAccount,
+        authToken, setAuthToken,
+        userEmail, setUserEmail
       }}
     >
       {/* {navbarTrigger && (

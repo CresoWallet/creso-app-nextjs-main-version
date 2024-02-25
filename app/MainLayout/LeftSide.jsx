@@ -63,7 +63,7 @@ const LeftSide = (props) => {
                 coinDataprice={coinDataprice}
               />
             </div>
-            {/* <WalletComponent /> */}
+            <WalletComponent />
             <Mainnet
               handleOpenWallet={handleShowWallet}
               handleCreateWallet={handleCreateWallet}

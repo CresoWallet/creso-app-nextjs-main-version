@@ -27,7 +27,8 @@ const RegisterPage = () => {
     formState: { errors, isLoading },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const { validCaptcha } = useContext(WalletContext);
+  const { setUserEmail, validCaptcha } = useContext(WalletContext);
+
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
 
@@ -47,6 +48,8 @@ const RegisterPage = () => {
       const res = await signUpApi(signUpData);
       if (res) {
         // console.log(res);
+        setUserEmail(signUpData?.email)
+        localStorage.setItem("userEmail", signUpData?.email)
         router.push("/otp");
         enqueueSnackbar(`User successfully registered`, {
           variant: "success",

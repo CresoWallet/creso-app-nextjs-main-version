@@ -161,7 +161,7 @@ const CreateWallet = ({ handleClose }) => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          {/* <div className="relative">
             <a
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
@@ -180,7 +180,7 @@ const CreateWallet = ({ handleClose }) => {
                 </p>
               )}
             </a>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

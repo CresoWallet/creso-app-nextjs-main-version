@@ -89,7 +89,7 @@ export const verifyEmailApi = async (formData) => {
 export const resendOTPApi = async (email) => {
   const res = await axiosInstance("/resend_otp", {
     method: "POST",
-    data: { email },
+    data: email,
   });
   return res;
 };

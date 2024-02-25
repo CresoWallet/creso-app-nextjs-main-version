@@ -19,6 +19,7 @@ import {
 
 import Image from "next/image";
 import CapCard from "@/components/CapCard";
+import { WalletContext } from "@/providers/WalletProvider";
 
 const RightSide = (props) => {
   const {
@@ -37,7 +38,8 @@ const RightSide = (props) => {
     handleClose,
     user,
   } = props;
-
+  const { isMobile } =
+    useContext(WalletContext);
   const [hover, setHover] = useState(false);
 
   const [activeButton, setActiveButton] = useState("TopGainers");
@@ -306,12 +308,11 @@ const RightSide = (props) => {
           onMouseLeave={() => setHover(false)}
           href="https://forms.gle/GBEKLjSH7hxQiuPv8"
           target="_blank"
-          className={`${
-            hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
-          } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
+          className={`${hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
+            } fixed bottom-2 lg:bottom-12 right-2 lg:right-12 cursor-pointer shadow-2xl z-50  ${isMobile ? "w-10 h-10" : "w-20 h-20"} grid place-items-center rounded-full `}
         >
           <div className="absolute grid place-items-center">
-            <VscFeedback style={hover ? hoverStyle : style} size={30} />
+            <VscFeedback style={hover ? hoverStyle : style} size={isMobile ? 15 : 30} />
           </div>
           {hover && (
             <p className="absolute p-2 rounded-lg font-semibold  -top-12 bg-black text-white ">

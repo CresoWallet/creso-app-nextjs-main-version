@@ -26,21 +26,26 @@ function ReviewRecovery() {
         const { data } = res;
         console.log(data?.data, "dssssssssssssssssss");
 
-        const seedPhrase = data?.data?.seedPhrase || "";
-        if (seedPhrase.length > 0) {
-          const seedPhraseArray = seedPhrase.split(" ");
+        // setRecoveryPhrases(data?.data?.seedPhrase);
+        setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
 
-          const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-            word,
-            revealed: true,
-          }));
+        setRevealed(true);
+        console.log("Token:", data.token);
+        // const seedPhrase = data?.data?.seedPhrase || "";
+        // if (seedPhrase.length > 0) {
+        //   const seedPhraseArray = seedPhrase.split(" ");
 
-          setRecoveryPhrases(phrasesWithRevealed);
-          setRevealed(true);
-          console.log("Token:", data.token);
-        } else {
-          console.error("Seed phrase is empty or not provided.");
-        }
+        //   const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+        //     word,
+        //     revealed: true,
+        //   }));
+
+        //   setRecoveryPhrases(phrasesWithRevealed);
+        //   setRevealed(true);
+        //   console.log("Token:", data.token);
+        // } else {
+        //   console.error("Seed phrase is empty or not provided.");
+        // }
       } catch (err) {
         console.error("Error fetching recovery phrases:", err);
       }
@@ -86,11 +91,10 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
-                  ? "bg-[#A66CFF] border-black"
-                  : "blur-sm bg-black opacity-[10%] text-white"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
+                ? "bg-[#A66CFF] border-black"
+                : "blur-sm bg-black opacity-[10%] text-white"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
