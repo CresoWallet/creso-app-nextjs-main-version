@@ -22,7 +22,7 @@ const CommonComponent = ({
 }) => {
   return (
     <>
-      <HeaderEOA title={title} />
+      <HeaderEOA title={title} className="ml-4" />
       <div className="h-full md:p-4 p-4 md:px-4 md:mx-4 md:py-4 flex flex-col ">
         <div className="flex items-center pt-10">
           <Link href="createwallet1">
@@ -32,7 +32,7 @@ const CommonComponent = ({
             </h1>
           </Link>
         </div>
-        <div className="flex items-center justify-center mb-4 mt-6 ">
+        <div className="flex items-center justify-center mb-4 mt-6 md:mr-4 ">
           <div className="relative">
             <Image
               alt=""

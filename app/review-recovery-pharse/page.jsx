@@ -7,6 +7,8 @@ import CommonComponent from "@/components/common/CommonEOA";
 import { HiOutlineEye } from "react-icons/hi2";
 import { createEOAWalletApi } from "@/clientApi/auth";
 import { MdOutlineFileCopy } from "react-icons/md";
+import CustomButton4 from "@/components/CustomButton4";
+import Link from "next/link";
 function ReviewRecovery() {
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -91,10 +93,11 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
-                ? "bg-[#A66CFF] border-black"
-                : "blur-sm bg-black opacity-[10%] text-white"
-                }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
+                revealed
+                  ? "bg-[#A66CFF] border-black"
+                  : "blur-sm bg-black opacity-[10%] text-white"
+              }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
@@ -125,6 +128,12 @@ function ReviewRecovery() {
               : "Reveal Secret Recovery Phrase"}
           </button>
         </div>
+        <CustomButton4
+          padding="px-14 py-4"
+          className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+        >
+          <Link href="/completion">Confirm</Link>
+        </CustomButton4>
       </div>
     </div>
   );

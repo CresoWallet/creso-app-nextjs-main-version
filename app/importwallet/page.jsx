@@ -76,7 +76,7 @@ function ImportWallet() {
 
   return (
     <div className="h-full md:px-4 py-4 flex flex-col">
-      <HeaderEOA title="Import Existing Wallet " className="md:hidden block" />
+      <HeaderEOA title="Import Existing Wallet " className="md:hidden block " />
       <div className="md:w-[70%] lg:w-[45%] xl:w-[35%] container mx-auto">
         <hr className="mt-6 w-auto" />
 

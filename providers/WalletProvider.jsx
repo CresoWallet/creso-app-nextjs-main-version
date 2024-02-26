@@ -50,7 +50,7 @@ const WalletContextProvider = ({ children }) => {
   const [showAccount, setShowAccount] = useState(false);
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
+  console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail);
 
   // useEffect(() => {
   //   (async () => {
@@ -66,7 +66,7 @@ const WalletContextProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const matchEmail = userEmail !== localStorage.getItem("userEmail")
+    const matchEmail = userEmail !== localStorage.getItem("userEmail");
     if (!authToken && matchEmail) {
       router.push(`/`);
     }
@@ -231,21 +231,35 @@ const WalletContextProvider = ({ children }) => {
         smartWallets,
         eoaWallets,
         isLoaded,
-        navbarTrigger, setNavbarTrigger,
+        navbarTrigger,
+        setNavbarTrigger,
         isMobile,
-        allToken, setAllToken,
-        totalBalance, setTotalBalance,
-        activeButton, setActiveButton,
-        filteredData, setFilteredData,
-        originalData, setOriginalData,
-        send, setSend,
-        mainContentVisible, setMainContentVisible,
-        walletAddress, setWalletAddress,
-        validCaptcha, setValidCaptcha,
-        showCreateWallet, setShowCreateWallet,
-        showAccount, setShowAccount,
-        authToken, setAuthToken,
-        userEmail, setUserEmail
+        allToken,
+        setAllToken,
+        totalBalance,
+        setTotalBalance,
+        activeButton,
+        setActiveButton,
+        filteredData,
+        setFilteredData,
+        originalData,
+        setOriginalData,
+        send,
+        setSend,
+        mainContentVisible,
+        setMainContentVisible,
+        walletAddress,
+        setWalletAddress,
+        validCaptcha,
+        setValidCaptcha,
+        showCreateWallet,
+        setShowCreateWallet,
+        showAccount,
+        setShowAccount,
+        authToken,
+        setAuthToken,
+        userEmail,
+        setUserEmail,
       }}
     >
       {/* {navbarTrigger && (

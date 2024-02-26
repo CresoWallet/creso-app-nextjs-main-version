@@ -195,7 +195,7 @@ function Welcome() {
       <Header title="Create EOA Wallet" className="md:hidden block" />
       <div className=" grid place-items-center">
         <div className="text-center ">
-          <h2 className="font-bold text-2xl mt-16  mb-4">
+          <h2 className="font-bold text-2xl mt-16  mb-4 md:mr-2">
             Let&#39;s Get Started
           </h2>
           <p className="text-gray-500">
