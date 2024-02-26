@@ -6,7 +6,7 @@ import check from "../../assets/eoa/checkmark.png";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
 import PasswordInput from "@/components/common/PasswordInput";
-import { createEOAWalletApi } from "@/clientApi/auth";
+import { importEOAWalletApi } from "@/clientApi/auth"; // Import the importEOAWalletApi function
 
 function ImportWallet() {
   const seedPhraseLength = 12;
@@ -20,14 +20,16 @@ function ImportWallet() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState("");
+  const [walletName, setWalletName] = useState(""); // State for wallet name
+  const [walletAddress, setWalletAddress] = useState(""); // State for wallet address
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // };
 
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
+  // const handleConfirmPasswordChange = (e) => {
+  //   setConfirmPassword(e.target.value);
+  // };
 
   const handleInputChange = (index, value) => {
     const newUserInput = [...userInput];
@@ -38,24 +40,56 @@ function ImportWallet() {
   const handleVerify = async () => {
     try {
       const authToken = localStorage.getItem("authToken");
-      const res = await createEOAWalletApi({ walletName: "EOA" });
+      const res = await importEOAWalletApi({
+        walletName: walletName,
+        walletAddress: walletAddress,
+        formData: userInput.join(" "),
+        authToken: authToken,
+      });
+      // Extract generated seed phrase from the API response
       const generatedPhrase = res?.data?.data?.seedPhrase || "";
-      const userInputPhrase = userInput.join(" ");
-      if (generatedPhrase === userInputPhrase) {
-        setVerificationStatus("Success");
-      } else {
-        setVerificationStatus("Failure");
+
+      // Check if the generated seed phrase matches the user input
+      if (
+        generatedPhrase === userInput.join(" ") &&
+        verificationStatus === "Success"
+      ) {
+        // If verification is successful, redirect to /dashboard
+        router.push("/dashboard");
       }
     } catch (err) {
       console.error("Error verifying recovery phrase:", err);
-      setVerificationStatus("Error");
+      // Handle error
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    // This function will be called when the user clicks the "Confirm" button
+    setError("");
+    // Check if seed phrase is not filled
+    if (userInput.some((value) => !value.trim())) {
+      setError("Seed phrase is required.");
+      return;
+    }
+    // Check if wallet name is empty
+    if (!walletName) {
+      setError("Wallet name is required.");
+      return;
+    }
+    // Check if wallet address is empty
+    if (!walletAddress) {
+      setError("Wallet address is required.");
+      return;
+    }
+    // Check if checkbox is checked
+    if (!isChecked) {
+      setError("You must agree to the Terms of Use.");
+      return;
+    }
+    try {
+    } catch (err) {
+      console.error("Error submitting form:", err);
+    }
   };
 
   const toggleFieldVisibility = (fieldName) => {
@@ -119,9 +153,46 @@ function ImportWallet() {
             />
           ))}
         </div>
+
+        {/* Wallet Name and Address */}
+        <div className="my-4 px-4 mx-auto max-w-md">
+          <div className="my-4 mx-auto max-w-md">
+            <label
+              htmlFor="walletName"
+              className="block text-gray-700 font-bold md:mb-2 mb-1"
+            >
+              Wallet Name
+            </label>
+            <input
+              type="text"
+              id="walletName"
+              value={walletName}
+              onChange={(e) => setWalletName(e.target.value)}
+              placeholder="Enter Wallet Name"
+              className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
+            />
+          </div>
+          <div className="my-4 mx-auto max-w-md">
+            <label
+              htmlFor="walletAddress"
+              className="block text-gray-700 font-bold md:mb-2 mb-1"
+            >
+              Wallet Address
+            </label>
+            <input
+              type="text"
+              id="WalletAddress"
+              value={walletAddress}
+              onChange={(e) => setWalletAddress(e.target.value)}
+              placeholder="Enter Wallet Address"
+              className="shadow appearance-none w-full py-5 px-4 text-gray-700 leading-tight border rounded-full"
+            />
+          </div>
+        </div>
+
         <div className="items-center justify-center">
           <form className="mx-4" onSubmit={handleSubmit}>
-            <div className="my-4 mx-auto max-w-md">
+            {/* <div className="my-4 mx-auto max-w-md">
               <PasswordInput
                 label=" New Password"
                 value={password}
@@ -139,7 +210,7 @@ function ImportWallet() {
                 showPassword={showConfirmPassword}
                 onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
               />
-            </div>
+            </div> */}
             {passwordError && <p className="text-red-500 ">{passwordError}</p>}
             {error && <p className="text-red-500 text-center ">{error}</p>}
             {/* Terms of Use */}

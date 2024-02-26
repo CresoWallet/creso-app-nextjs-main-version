@@ -179,7 +179,7 @@
 // export default CreatePassword;
 
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import check from "../../assets/eoa/checkmark.png";
@@ -193,7 +193,12 @@ import CustomCheckbox from "@/components/customcheckbox";
 import { createEOAWalletApi } from "@/clientApi/auth";
 import { useRouter } from "next/navigation";
 import { WalletContext } from "@/providers/WalletProvider";
-
+import {
+  encryptData,
+  decryptData,
+  storeEncryptedDataInLocalStorage,
+  retrieveEncryptedDataFromLocalStorage,
+} from "@/utils/encryption";
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
@@ -206,35 +211,30 @@ function CreatePassword() {
   const router = useRouter();
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    const { value } = event.target;
-    setConfirmPassword(value);
-    if (password && value && password !== value) {
-      setPasswordError("Passwords do not match");
-    } else {
-      setPasswordError("");
-    }
-  };
-
   const handleCreatePassword = async (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
+    if (!walletName) {
+      setPasswordError("Please enter a wallet name.");
+    } else if (!password || !confirmPassword) {
+      setPasswordError("Please enter both password and confirm password.");
+    } else if (password.length < 7) {
+      setPasswordError("Password must be at least 7 characters long");
+    } else if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
+    } else if (!isChecked) {
+      setError("Please agree to the Terms of Use.");
     } else {
       setPasswordError("");
+      router.push(`/review-recovery-pharse`);
+
       try {
         const res = await createEOAWalletApi({
           walletName: walletName,
         });
-        console.log("Response:", res?.data); // Log the response data
-        // Handle success scenario, if needed
-        setSeedPhrase(res?.data?.data?.seedPhrase)
+        console.log("Response:", res?.data);
+        setSeedPhrase(res?.data?.data?.seedPhrase);
         if (res?.data?.message === "EOA wallet Successfully created") {
-          router.push(`/review-recovery-pharse`);
+          // router.push(`/review-recovery-pharse`);
         }
       } catch (error) {
         console.error("Error creating wallet:", error);
@@ -254,45 +254,6 @@ function CreatePassword() {
   const handleWalletNameChange = (event) => {
     setWalletName(event.target.value);
   };
-  useEffect(() => {
-    // Example usage
-    const secretKey = 'YourSecretKey'; // Replace with your secret key
-    const walletAddress = 'YourWalletAddress';
-    const mnemonicSeedPhrase = 'YourMnemonicSeedPhrase';
-
-    // Encrypt data
-    encryptData(walletAddress, secretKey)
-      .then(encryptedWalletAddress => {
-        storeEncryptedDataInLocalStorage('walletAddress', encryptedWalletAddress.encryptedData, encryptedWalletAddress.iv);
-      })
-      .catch(error => console.error("Encryption error:", error));
-
-    encryptData(mnemonicSeedPhrase, secretKey)
-      .then(encryptedMnemonicSeedPhrase => {
-        storeEncryptedDataInLocalStorage('mnemonicSeedPhrase', encryptedMnemonicSeedPhrase.encryptedData, encryptedMnemonicSeedPhrase.iv);
-      })
-      .catch(error => console.error("Encryption error:", error));
-
-    // Retrieve encrypted data from local storage
-    const encryptedWalletAddress = retrieveEncryptedDataFromLocalStorage('walletAddress');
-    const encryptedMnemonicSeedPhrase = retrieveEncryptedDataFromLocalStorage('mnemonicSeedPhrase');
-
-    // Decrypt data when needed
-    if (encryptedWalletAddress && encryptedMnemonicSeedPhrase) {
-      decryptData(encryptedWalletAddress.encryptedData, secretKey, encryptedWalletAddress.iv)
-        .then(decryptedWalletAddress => {
-          console.log("Decrypted wallet address:", decryptedWalletAddress);
-        })
-        .catch(error => console.error("Decryption error:", error));
-
-      decryptData(encryptedMnemonicSeedPhrase.encryptedData, secretKey, encryptedMnemonicSeedPhrase.iv)
-        .then(decryptedMnemonicSeedPhrase => {
-          console.log("Decrypted mnemonic seed phrase:", decryptedMnemonicSeedPhrase);
-        })
-        .catch(error => console.error("Decryption error:", error));
-    }
-  }, []);
-
 
   return (
     <div className="h-full md:px-4 py-4 flex flex-col">
@@ -360,21 +321,14 @@ function CreatePassword() {
               onToggle={toggleShowConfirmPassword}
             />
           </div>
-          {passwordError && <p className="text-red-500 ">{passwordError}</p>}
+          {passwordError && (
+            <p className="text-red-500 text-center ">{passwordError}</p>
+          )}
+
           {/* Terms of Use */}
           <div className="flex items-center md:mb-8 md:mt-2 mt-20 mb-2 mx-auto max-w-md">
             <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
-            {/* <button
-              className="rounded-full p-2 border-black focus:outline-none"
-              onClick={() => setIsChecked(!isChecked)}
-              disabled={passwordError || !password || !confirmPassword}
-            >
-              {isChecked ? (
-                <Image alt="" src={check} className="w-8 h-8" />
-              ) : (
-                <div className="w-6 h-6 rounded-full border border-black"></div>
-              )}
-            </button> */}
+
             <span className="ml-2 ">
               I understand that Creso cannot recover this password for me.
               <span className="text-[#FF4085] ml-1">Learn more</span>
@@ -382,20 +336,15 @@ function CreatePassword() {
           </div>
 
           <div className="flex items-center justify-center">
-            {/* <button
-              type="submit"
-              className="px-14 py-4 rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
-              disabled={passwordError || !password || !confirmPassword}
-            >
-              Create New Password
-            </button> */}
             <CustomButton4
               onClick={handleCreatePassword}
               padding="px-14 py-4"
               className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
-              disabled={passwordError || !password || !confirmPassword}
+              disabled={
+                passwordError || !password || !confirmPassword || !walletName
+              }
             >
-              <Link href="/secure-your-wallet">Create New Password</Link>
+              Create New Password
             </CustomButton4>
           </div>
         </form>

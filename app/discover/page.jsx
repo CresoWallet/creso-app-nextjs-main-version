@@ -39,9 +39,10 @@ import { CiSearch } from "react-icons/ci";
 import { WalletContext } from "@/providers/WalletProvider";
 
 import NFT from "../../assets/discover/NFT.jpg";
-import NFT2 from "../../assets/discover/NFT2.png";
-import NFT3 from "../../assets/discover/NFT3.png";
-import NFT1 from "../../assets/discover/NFT1.png";
+import NFT1 from "../../assets/discover/NFT1.jpg";
+import NFT2 from "../../assets/discover/NFT2.jpg";
+import NFT3 from "../../assets/discover/NFT3.jpg";
+import NFT4 from "../../assets/discover/NFT4.jpg";
 import Header from "@/components/Header";
 
 const Discover = () => {
@@ -65,7 +66,7 @@ const Discover = () => {
     }
   }, [navbarTrigger]);
 
-  let slides = [NFT, NFT1, NFT2, NFT3];
+  let slides = [NFT, NFT1, NFT2, NFT3, NFT4];
 
   let coins = [
     {

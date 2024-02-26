@@ -30,11 +30,11 @@ const LoginPage = () => {
 
   const { register, handleSubmit, watch, formState } = useForm();
 
-  useEffect(() => {
-    if (authToken) {
-      router.push(`/welcome`);
-    }
-  }, [authToken]);
+  // useEffect(() => {
+  //   if (authToken) {
+  //     router.push(`/welcome`);
+  //   }
+  // }, [authToken]);
   console.log("====================================");
   console.log(authToken, "authToken");
   console.log("====================================");
@@ -124,7 +124,7 @@ const LoginPage = () => {
             validation={{ ...register("password", { required: true }) }}
           />
           <span className="text-[#FF4085] text-sm cursor-pointer hover:font-bold">
-            <Link href="/forgotpassword"> Forgot Password? </Link>
+            <Link href="/changepassword"> change Password? </Link>
           </span>
           <Capcha onSubmit={onSubmit} />
 

@@ -3,6 +3,8 @@ import eth from "../assets/Swap/etherum.png";
 import Image from "next/image";
 import { MdArrowBack, MdDownloadDone } from "react-icons/md";
 import { WalletContext } from "@/providers/WalletProvider";
+import { getWalletBalanceApi } from "@/clientApi/auth";
+
 const Wallet = ({ setOpenWallet }) => {
   const [activeButton1, setActiveButton1] = useState(0);
   const [detailstoken, setDetailstoken] = useState([]);
@@ -29,6 +31,30 @@ const Wallet = ({ setOpenWallet }) => {
       setOpenWallet(false);
     }
   };
+
+  // Function to fetch wallet balance
+  const fetchWalletBalance = async () => {
+    try {
+      const walletAddress =
+        activeButton1 === 0 ? secureWalletAddress : eoaWalletAddress;
+      const network = "mainnet"; // Assuming you're using the mainnet
+      const response = await getWalletBalanceApi(walletAddress, network);
+      if (response.status === 200) {
+        const balance = response.data.balance;
+        console.log("Wallet Balance:", balance);
+        // Do something with the balance if needed
+      } else {
+        console.error("Failed to fetch wallet balance:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching wallet balance:", error);
+    }
+  };
+
+  // Fetch wallet balance when component mounts or activeButton1 changes
+  useEffect(() => {
+    fetchWalletBalance();
+  }, [activeButton1]);
 
   return (
     <div

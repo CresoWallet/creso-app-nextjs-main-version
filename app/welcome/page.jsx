@@ -171,7 +171,14 @@ function Welcome() {
   const [connectWallet, setConnectWallet] = useState(false);
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
+
   const handleConnectWallet = async () => {
+    if (!isChecked) {
+      // Check if user has agreed to the Terms of Use
+      setError("Please agree to the Terms of Use.");
+      return;
+    }
+
     try {
       const formData = {
         userId: "yourUserId",

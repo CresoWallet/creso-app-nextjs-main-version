@@ -201,7 +201,32 @@ const MobileMenubar = () => {
               isActive={pathname === "/account"}
               closeMobileNav={closeMobileNav}
             />
+            {/* transfertoken */}
+            <hr />
+            <NavigationButton
+              pathname="/transfertoken"
+              label="Transfer Token"
+              icon={{
+                active: Profile1,
+                inactive: Profile,
+              }}
+              isActive={pathname === "/transfertoken"}
+              closeMobileNav={closeMobileNav}
+            />
+            {/* accountsetting */}
+            <hr />
+            <NavigationButton
+              pathname="/accountsetting"
+              label="Account Settings"
+              icon={{
+                active: Profile1,
+                inactive: Profile,
+              }}
+              isActive={pathname === "/accountsetting"}
+              closeMobileNav={closeMobileNav}
+            />
           </div>
+
           {/* disconnect button */}
           <hr />
           <div

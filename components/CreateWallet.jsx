@@ -1,4 +1,5 @@
-"use client"; `  `
+"use client";
+`  `;
 import React, { useState } from "react";
 import Image from "next/image";
 import Ethereum from "../assets/Dashboard/etherum.png";
@@ -58,7 +59,7 @@ const CreateWallet = ({ handleClose }) => {
   };
 
   return (
-    <div className="">
+    <div className=" ">
       {/* <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]">
         <IoIosClose
           className="text-white h-7 w-7 cursor-pointer"

@@ -108,7 +108,7 @@ const WalletContextProvider = ({ children }) => {
     pathName.includes("/completion") ||
     pathName.includes("/importwallet") ||
     pathName.includes("/security1") ||
-    pathName.includes("/forgotpassword") ||
+    pathName.includes("/changepassword") ||
     pathName.includes("/backuprestore") ||
     pathName.includes("/accountsetting") ||
     pathName.includes("/transaction") ||

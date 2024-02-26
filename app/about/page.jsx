@@ -73,14 +73,14 @@ const AboutPage = () => {
                 </div>
               </div>
               <div className="flex justify-start items-start gap-2">
-                <AiTwotoneInfoCircle className="sm:h-10 sm:w-10 h-14 w-14" />
+                <AiTwotoneInfoCircle className="h-14 w-14 md:h-8 md:w-8 lg:h-10 lg:w-10 xl:h-8 xl:w-8 " />
                 <p className="text-gray-600 text-sm">
                   This is the Beta Version of Creso Wallet Ecosystem. To keep up
                   to date with all the upcoming updates of the Beta please join
                   our community.
                 </p>
               </div>
-              <div className=" justify-center items-end my-2 bottom-0 block md:hidden w-full">
+              <div className=" justify-center items-end my-2 bottom-0  w-full">
                 <button className="flex flex-row gap-2 items-center cursor-pointer hover:scale-105 justify-center py-4 border rounded-full w-full border-solid border-black bg-[#D0F500]">
                   <p className="text-black text-sm hover:font-bold ">Update</p>
                 </button>
