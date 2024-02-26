@@ -8,6 +8,10 @@ import { useUser } from "@/providers/UserProvider";
 import { logOut } from "@/clientApi/auth";
 import { useRouter } from "next/navigation";
 import Wallet from "./Wallet";
+import {
+  getUserInformationApi,
+  updateUserInformationApi,
+} from "@/clientApi/auth";
 
 const UserDetails = () => {
   const router = useRouter();
@@ -16,6 +20,7 @@ const UserDetails = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [openWallet, setOpenWallet] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   const popupRef = useRef();
 
@@ -28,6 +33,20 @@ const UserDetails = () => {
     return () => {
       window.removeEventListener("resize", checkScreenSize);
     };
+  }, []);
+
+  useEffect(() => {
+    // Fetch user information when the component mounts
+    async function fetchUserInformation() {
+      try {
+        const res = await getUserInformationApi();
+        setUserInfo(res.data); // Update user information state
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    }
+
+    fetchUserInformation();
   }, []);
 
   const handleButton = () => {
@@ -70,7 +89,7 @@ const UserDetails = () => {
   return (
     <div className="flex flex-row gap-2 items-center">
       <div
-        className=" top-1 right-1 bg-red-500 text-white rounded-full w-10 h-10  items-center justify-center cursor-pointer hidden lg:block  md:mt-6 mt-32"
+        className=" bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center"
         onClick={handleButton}
       >
         <p className=" font-semibold text-xs  " onClick={handleButton}>
@@ -113,8 +132,8 @@ const UserDetails = () => {
 
       {/* <Image alt="" src={User} /> */}
       <div className="flex flex-col space-y-2">
-        <p className="font-bold text-xl">{user?.username}</p>
-        <p className="text-sm text-[#A09FAA]">{user?.email}</p>
+        <p className="font-bold text-xl">{userInfo?.username}</p>
+        <p className="text-sm text-[#A09FAA]">{userInfo?.email}</p>
         <p className="text-xs text-[#A09FAA] mr-xside">
           Last Backup test:{" "}
           <span className="text-sm text-black">28 OCT 2023 </span>{" "}

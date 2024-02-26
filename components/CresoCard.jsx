@@ -21,7 +21,7 @@ const CresoCard = ({ balance }) => {
     >
       <div className="">
         <div
-          className="flex justify-center md:h-72 lg:h-60 h-60 lg:w-full"
+          className="flex justify-center md:h-72 lg:h-60 h-60 lg:w-full xl:h-full"
           style={{ pointerEvents: "none" }}
         >
           <Image alt="" src={Custom} className="md:h-auto h-56 md:w-full  " />
