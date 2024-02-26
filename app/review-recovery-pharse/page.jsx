@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
@@ -9,6 +9,7 @@ import { createEOAWalletApi } from "@/clientApi/auth";
 import { MdOutlineFileCopy } from "react-icons/md";
 import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
+import { WalletContext } from "@/providers/WalletProvider";
 function ReviewRecovery() {
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -16,6 +17,7 @@ function ReviewRecovery() {
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
+  const { seedPhrase } = useContext(WalletContext);
 
   console.log(recoveryPhrases, "<------------------------recoveryPhrases");
 
@@ -29,25 +31,26 @@ function ReviewRecovery() {
         console.log(data?.data, "dssssssssssssssssss");
 
         // setRecoveryPhrases(data?.data?.seedPhrase);
-        setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
+        // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
 
-        setRevealed(true);
-        console.log("Token:", data.token);
+        // setRevealed(true);
+        // console.log("Token:", data.token);
         // const seedPhrase = data?.data?.seedPhrase || "";
-        // if (seedPhrase.length > 0) {
-        //   const seedPhraseArray = seedPhrase.split(" ");
+        const SeedPhrase = data?.data?.seedPhrase || "";
+        if (SeedPhrase.length > 0) {
+          const seedPhraseArray = SeedPhrase.split(" ");
 
-        //   const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-        //     word,
-        //     revealed: true,
-        //   }));
+          const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+            word,
+            revealed: true,
+          }));
 
-        //   setRecoveryPhrases(phrasesWithRevealed);
-        //   setRevealed(true);
-        //   console.log("Token:", data.token);
-        // } else {
-        //   console.error("Seed phrase is empty or not provided.");
-        // }
+          setRecoveryPhrases(phrasesWithRevealed);
+          setRevealed(true);
+          console.log("Token:", data.token);
+        } else {
+          console.error("Seed phrase is empty or not provided.");
+        }
       } catch (err) {
         console.error("Error fetching recovery phrases:", err);
       }
