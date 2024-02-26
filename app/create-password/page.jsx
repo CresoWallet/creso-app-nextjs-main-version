@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import check from "../../assets/eoa/checkmark.png";
@@ -11,6 +11,9 @@ import PasswordInput from "@/components/common/PasswordInput";
 import CustomButton4 from "@/components/CustomButton4";
 import CustomCheckbox from "@/components/customcheckbox";
 import { createEOAWalletApi } from "@/clientApi/auth";
+import { useRouter } from "next/navigation";
+import { WalletContext } from "@/providers/WalletProvider";
+
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
@@ -20,6 +23,8 @@ function CreatePassword() {
   const [passwordError, setPasswordError] = useState("");
   const [isChecked, setIsChecked] = useState(true);
   const [walletName, setWalletName] = useState("");
+  const router = useRouter();
+  const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -45,8 +50,12 @@ function CreatePassword() {
         const res = await createEOAWalletApi({
           walletName: walletName,
         });
-        console.log("Response:", res.data); // Log the response data
+        console.log("Response:", res?.data); // Log the response data
         // Handle success scenario, if needed
+        setSeedPhrase(res?.data?.data?.seedPhrase)
+        if (res?.data?.message === "EOA wallet Successfully created") {
+          router.push(`/review-recovery-pharse`);
+        }
       } catch (error) {
         console.error("Error creating wallet:", error);
         // Handle error scenario
@@ -65,6 +74,45 @@ function CreatePassword() {
   const handleWalletNameChange = (event) => {
     setWalletName(event.target.value);
   };
+  useEffect(() => {
+    // Example usage
+    const secretKey = 'YourSecretKey'; // Replace with your secret key
+    const walletAddress = 'YourWalletAddress';
+    const mnemonicSeedPhrase = 'YourMnemonicSeedPhrase';
+
+    // Encrypt data
+    encryptData(walletAddress, secretKey)
+      .then(encryptedWalletAddress => {
+        storeEncryptedDataInLocalStorage('walletAddress', encryptedWalletAddress.encryptedData, encryptedWalletAddress.iv);
+      })
+      .catch(error => console.error("Encryption error:", error));
+
+    encryptData(mnemonicSeedPhrase, secretKey)
+      .then(encryptedMnemonicSeedPhrase => {
+        storeEncryptedDataInLocalStorage('mnemonicSeedPhrase', encryptedMnemonicSeedPhrase.encryptedData, encryptedMnemonicSeedPhrase.iv);
+      })
+      .catch(error => console.error("Encryption error:", error));
+
+    // Retrieve encrypted data from local storage
+    const encryptedWalletAddress = retrieveEncryptedDataFromLocalStorage('walletAddress');
+    const encryptedMnemonicSeedPhrase = retrieveEncryptedDataFromLocalStorage('mnemonicSeedPhrase');
+
+    // Decrypt data when needed
+    if (encryptedWalletAddress && encryptedMnemonicSeedPhrase) {
+      decryptData(encryptedWalletAddress.encryptedData, secretKey, encryptedWalletAddress.iv)
+        .then(decryptedWalletAddress => {
+          console.log("Decrypted wallet address:", decryptedWalletAddress);
+        })
+        .catch(error => console.error("Decryption error:", error));
+
+      decryptData(encryptedMnemonicSeedPhrase.encryptedData, secretKey, encryptedMnemonicSeedPhrase.iv)
+        .then(decryptedMnemonicSeedPhrase => {
+          console.log("Decrypted mnemonic seed phrase:", decryptedMnemonicSeedPhrase);
+        })
+        .catch(error => console.error("Decryption error:", error));
+    }
+  }, []);
+
 
   return (
     <div className="h-full md:px-4 py-4 flex flex-col">

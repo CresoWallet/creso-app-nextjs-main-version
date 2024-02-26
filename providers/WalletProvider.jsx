@@ -50,7 +50,9 @@ const WalletContextProvider = ({ children }) => {
   const [showAccount, setShowAccount] = useState(false);
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
+  const [seedPhrase, setSeedPhrase] = useState("")
+  console.log("🚀 ~ WalletContextProvider ~ seedPhrase:", seedPhrase)
+  // console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {
   //   (async () => {
@@ -65,12 +67,13 @@ const WalletContextProvider = ({ children }) => {
   // }, [user]);
   const router = useRouter();
 
-  useEffect(() => {
-    const matchEmail = userEmail !== localStorage.getItem("userEmail")
-    if (!authToken && matchEmail) {
-      router.push(`/`);
-    }
-  }, [authToken]);
+  // useEffect(() => {
+  //   const matchEmail = userEmail !== localStorage.getItem("userEmail")
+  //   if (!authToken && matchEmail) {
+  //     router.push(`/`);
+  //   }
+  // }, [authToken]);
+
   const getBlnce = async (address) => {
     let balance = {};
     let totalUsd = 0;
@@ -245,7 +248,8 @@ const WalletContextProvider = ({ children }) => {
         showCreateWallet, setShowCreateWallet,
         showAccount, setShowAccount,
         authToken, setAuthToken,
-        userEmail, setUserEmail
+        userEmail, setUserEmail,
+        seedPhrase, setSeedPhrase
       }}
     >
       {/* {navbarTrigger && (
