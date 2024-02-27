@@ -7,6 +7,7 @@ import Ethereum from "../assets/Dashboard/etherum.png";
 import CustomButton1 from "./CustomButton1";
 import CreateWallet from "./CreateWallet";
 import { createEOAWalletAPI, createSmartWalletAPI } from "@/clientApi/wallet";
+import { createAAWalletApi } from "@/clientApi/auth";
 import { enqueueSnackbar } from "notistack";
 import { WalletContext } from "@/providers/WalletProvider";
 import { FiInfo } from "react-icons/fi";
@@ -25,7 +26,6 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [networkFirstValue] = networks.values();
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
-
   const [selectedNetwork, setSelectedNetwork] = useState();
 
   const handleBackgroundClick = (e) => {
@@ -52,6 +52,40 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
 
   const handleCreateEOAWallet = async () => {
     setLoading(true);
+
+    const handleCreateAAWallet = async () => {
+      setLoading(true);
+
+      // Check if the inputText (name field) is empty
+      if (inputText.trim() === "") {
+        setError(true); // Set error state to true to indicate an issue
+        setLoading(false);
+        enqueueSnackbar(`Please fill in the name field.`, {
+          variant: "error",
+        });
+        return; // Exit the function early if the name field is empty
+      }
+
+      try {
+        // Call the API to create AA Wallet
+        const res = await createAAWalletApi();
+
+        if (res) {
+          await fetchWallet();
+          enqueueSnackbar(`Successful wallet creation`, {
+            variant: "success",
+          });
+          handleClose();
+        }
+      } catch (error) {
+        console.log(error);
+        enqueueSnackbar(`Something went wrong`, {
+          variant: "error",
+        });
+      } finally {
+        setLoading(false); // Close loading button in both success and error scenarios
+      }
+    };
 
     // Check if the inputText (name field) is empty
     if (inputText.trim() === "") {
@@ -118,7 +152,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
           walletName: inputText,
         };
         res = await createEOAWalletAPI(payload);
-      } else if (type === "AAA") {
+      } else if (type === "AA") {
         const payload = {
           walletName: inputText,
           network: "",

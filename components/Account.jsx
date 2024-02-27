@@ -134,7 +134,7 @@ const Account = ({ setShowModal }) => {
           ))}
         </div>
         <div className="relative">
-          <a
+          <div
             onMouseEnter={() => setHovere(true)}
             onMouseLeave={() => setHovere(false)}
             href="https://forms.gle/GBEKLjSH7hxQiuPv8"
@@ -152,7 +152,7 @@ const Account = ({ setShowModal }) => {
                 Feedback
               </p>
             )}
-          </a>
+          </div>
         </div>
       </div>
     </>

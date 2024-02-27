@@ -113,7 +113,7 @@ const SecureWallet = ({ handleClose, wallets, walletType }) => {
             balance={totalBalance}
           />
 
-          <div className="flex xl:flex-row flex-row items-center md:flex-col xl:gap-2 gap-2 md:gap-0 space-y-0 xl:space-y-0 md:space-y-2">
+          <div className="flex xl:flex-row  justify-center flex-row items-center md:flex-col xl:gap-2 gap-2 md:gap-0 space-y-0 xl:space-y-0 md:space-y-2">
             <CustomButton
               name="Send"
               img={Send}

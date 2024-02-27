@@ -8,6 +8,7 @@ import Dai2 from "../../assets/Dashboard/Dai2.png";
 
 import { ethers } from "ethers";
 import { ETHERSCAN } from "@/constants";
+import { viewTransactionHistoryApi } from "@/clientApi/auth";
 
 const HistoryCard = ({
   secureWalletAddress,
@@ -17,6 +18,22 @@ const HistoryCard = ({
   value,
   usd,
 }) => {
+  // const [transactionDetails, setTransactionDetails] = useState(null);
+  // useEffect(() => {
+  //   // Fetch transaction details when component mounts
+  //   if (hash) {
+  //     fetchTransactionDetails(hash);
+  //   }
+  // }, [hash]);
+
+  // const fetchTransactionDetails = async (transactionId) => {
+  //   try {
+  //     const response = await axiosInstance.get(`/transactions/${transactionId}`);
+  //     setTransactionDetails(response.data); // Assuming response contains transaction details
+  //   } catch (error) {
+  //     console.error("Error fetching transaction details:", error);
+  //   }
+  // };
   const cryptoValue =
     value &&
     (value?.hex ? ethers.formatEther(value.hex) : ethers.formatEther(value));
@@ -61,6 +78,12 @@ const HistoryCard = ({
           <div className="flex flex-row"></div>
         </div>
       </div>
+      {/* {transactionDetails && (
+        <div> */}
+      {/* Render transaction details here */}
+      {/* <p>Transaction Details: {JSON.stringify(transactionDetails)}</p>
+        </div>
+      )} */}
     </div>
   );
 };

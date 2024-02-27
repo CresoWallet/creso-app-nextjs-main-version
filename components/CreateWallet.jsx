@@ -59,7 +59,7 @@ const CreateWallet = ({ handleClose }) => {
   };
 
   return (
-    <div className=" ">
+    <div className="">
       {/* <div className="grid place-items-center rounded-full bg-black h-8 w-8 absolute cursor-pointer md:-ml-4 ml-2 lg:mt-0 z-[99]">
         <IoIosClose
           className="text-white h-7 w-7 cursor-pointer"
@@ -139,7 +139,7 @@ const CreateWallet = ({ handleClose }) => {
                   <div className="flex flex-row items-center justify-between">
                     <div className="flex flex-col">
                       <p className="font-semibold md:text-xs">Smart Wallet</p>
-                      <p className="text-[#A09FAA] text-sm md:text-xs">AAA</p>
+                      <p className="text-[#A09FAA] text-sm md:text-xs">AA</p>
                     </div>
                     <CustomButton3
                       title="Recommend"

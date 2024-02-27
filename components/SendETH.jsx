@@ -22,6 +22,9 @@ import { getTokenBalance } from "@/services/ethers/wallet";
 import { VscFeedback } from "react-icons/vsc";
 <VscFeedback />;
 
+// Import the sendTransactionApi function
+import { sendTransactionApi } from "@/clientApi/auth";
+
 const SendETH = ({
   handleOpenWallet,
   handleBackButton,
@@ -37,12 +40,13 @@ const SendETH = ({
     watch,
     formState: { errors, isLoading },
   } = useForm();
+  const [loading, setLoading] = useState(false);
+  const { fetchWallet } = useContext(WalletContext);
+
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
   const [openCoinList, setOpenCoinList] = useState(false);
   const [selectedWallet, setSelectedWallet] = useState({});
-  const [loading, setLoading] = useState(false);
-  const { fetchWallet } = useContext(WalletContext);
   const [selectedNetwork, setSelectedNetwork] = useState();
   const [selectedCoin, setSelectedCoin] = useState();
   const [standard, setStandard] = useState("native");
@@ -85,6 +89,25 @@ const SendETH = ({
       setStandard("native");
     }
   };
+  // // Handle form submission
+  // const onSubmit = async (data) => {
+  //   const transferPayload = {
+  //     senderWalletAddress: selectedWallet.address,
+  //     recipientAddress: data.to,
+  //     amount: data.amount,
+  //     gasPrice: data.gasPrice,
+  //     gasLimit: data.gasLimit,
+  //     network: selectedNetwork
+  //       ? selectedNetwork?.value
+  //       : networkFirstValue.value,
+  //     standard: standard,
+  //     tokenAddress:
+  //       standard === "stable"
+  //         ? selectedCoin
+  //           ? selectedCoin?.tokenContractAddress
+  //           : initialToken?.tokenContractAddress
+  //         : "",
+  //   };
 
   const onSubmit = async (data) => {
     const transferPayload = {
@@ -109,7 +132,7 @@ const SendETH = ({
 
     try {
       setLoading(true);
-      const res = await transferEthAPI(transferPayload);
+      const res = await sendTransactionApi(transferPayload);
       if (res) {
         await fetchWallet();
         enqueueSnackbar(`Transaction successful`, {
