@@ -17,25 +17,72 @@ function ReviewRecovery() {
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
-  const { seedPhrase } = useContext(WalletContext);
+  const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-  console.log(recoveryPhrases, "<------------------------recoveryPhrases");
 
+  // const handleRevealClick = async () => {
+  //   if (!revealed) {
+  //     try {
+  //       const res = await createEOAWalletApi({
+  //         walletName: "EOA",
+  //       }); // Call the API
+  //       const { data } = res;
+  //       console.log(data?.data, "<------------handleRevealClick Data");
+  //       localStorage.setItem("seedPhrase", data?.data?.seedPhrase)
+  //       // setRecoveryPhrases(data?.data?.seedPhrase);
+  //       // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
+
+  //       // setRevealed(true);
+  //       // console.log("Token:", data.token);
+  //       // const seedPhrase = data?.data?.seedPhrase || "";
+  //       const SeedPhrase = data?.data?.seedPhrase || "";
+  //       if (SeedPhrase.length > 0) {
+  //         const seedPhraseArray = SeedPhrase.split(" ");
+
+  //         const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+  //           word,
+  //           revealed: true,
+  //         }));
+
+  //         setRecoveryPhrases(phrasesWithRevealed);
+  //         setRevealed(true);
+  //         // console.log("Token:", data?.token);
+  //       } else {
+  //         console.error("Seed phrase is empty or not provided.");
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching recovery phrases:", err);
+  //     }
+  //   } else {
+  //     setRevealed(false); // Toggle the revealed state only if the phrase was previously revealed
+  //   }
+  // };
   const handleRevealClick = async () => {
-    if (!revealed) {
+    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+
+    if (storedSeedPhrase) {
+      // Seed phrase already exists in local storage
+      const seedPhraseArray = storedSeedPhrase.split(" ");
+
+      const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+        word,
+        revealed: true,
+      }));
+
+      setRecoveryPhrases(phrasesWithRevealed);
+      setRevealed(true);
+    } else {
+      // Seed phrase doesn't exist in local storage, make API call
       try {
         const res = await createEOAWalletApi({
           walletName: "EOA",
-        }); // Call the API
+        });
         const { data } = res;
-        console.log(data?.data, "dssssssssssssssssss");
+        console.log(data?.data, "<------------handleRevealClick Data");
 
-        // setRecoveryPhrases(data?.data?.seedPhrase);
-        // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
+        // Update local storage with the newly generated seed phrase
+        localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
 
-        // setRevealed(true);
-        // console.log("Token:", data.token);
-        // const seedPhrase = data?.data?.seedPhrase || "";
         const SeedPhrase = data?.data?.seedPhrase || "";
         if (SeedPhrase.length > 0) {
           const seedPhraseArray = SeedPhrase.split(" ");
@@ -47,15 +94,12 @@ function ReviewRecovery() {
 
           setRecoveryPhrases(phrasesWithRevealed);
           setRevealed(true);
-          console.log("Token:", data.token);
         } else {
           console.error("Seed phrase is empty or not provided.");
         }
       } catch (err) {
         console.error("Error fetching recovery phrases:", err);
       }
-    } else {
-      setRevealed(false); // Toggle the revealed state only if the phrase was previously revealed
     }
   };
 
@@ -96,11 +140,10 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
-                  ? "bg-[#A66CFF] border-black"
-                  : "blur-sm bg-black opacity-[10%] text-white"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
+                ? "bg-[#A66CFF] border-black"
+                : "blur-sm bg-black opacity-[10%] text-white"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
