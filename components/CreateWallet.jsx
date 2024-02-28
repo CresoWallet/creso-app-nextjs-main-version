@@ -1,4 +1,5 @@
-"use client"; `  `
+"use client";
+`  `;
 import React, { useState } from "react";
 import Image from "next/image";
 import Ethereum from "../assets/Dashboard/etherum.png";
@@ -138,7 +139,7 @@ const CreateWallet = ({ handleClose }) => {
                   <div className="flex flex-row items-center justify-between">
                     <div className="flex flex-col">
                       <p className="font-semibold md:text-xs">Smart Wallet</p>
-                      <p className="text-[#A09FAA] text-sm md:text-xs">AAA</p>
+                      <p className="text-[#A09FAA] text-sm md:text-xs">AA</p>
                     </div>
                     <CustomButton3
                       title="Recommend"

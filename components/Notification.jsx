@@ -1,5 +1,6 @@
 // NotificationPopup.jsx
 import React, { useEffect, useRef, useState } from "react";
+import { IoIosClose } from "react-icons/io";
 
 const NotificationPopup = ({ handleClose }) => {
   const [hover, setHover] = useState(false);
@@ -65,12 +66,18 @@ const NotificationPopup = ({ handleClose }) => {
           </div>
         ))}
         <div className="flex flex-col text-sm text-start"></div>
-        {/* Use a rounded black close button with black background */}
+        {/* Use a rounded black close button with black background
         <div
           className="absolute top-4 right-4 cursor-pointer bg-black rounded-full p-2 hover:font-bold"
           onClick={handleClose}
         >
           <span className="text-white text-2xl">&times;</span>
+        </div> */}
+        <div className="absolute top-2 right-2 bg-black rounded-full h-6 w-6  flex items-center justify-center cursor-pointer z-[99]">
+          <IoIosClose
+            className="text-white h-7 w-7 cursor-pointer"
+            onClick={handleClose}
+          />
         </div>
       </div>
     </div>

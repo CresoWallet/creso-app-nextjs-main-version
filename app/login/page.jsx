@@ -23,22 +23,21 @@ import Header from "@/components/common/LoginRegister";
 
 const LoginPage = () => {
   const router = useRouter();
-  const { validCaptcha, userEmail, setUserEmail, setAuthToken, authToken } = useContext(WalletContext);
-  console.log("🚀 ~ LoginPage ~ userEmail:", userEmail)
+  const { validCaptcha, setAuthToken, authToken } = useContext(WalletContext);
+
   const { user, isAuthenticated, handleAuthentication } = useUser();
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, watch, formState } = useForm();
 
-  useEffect(() => {
-    const matchEmail = userEmail === localStorage.getItem("userEmail")
-    if (authToken && matchEmail) {
-      router.push(`/welcome`);
-    }
-  }, [authToken]);
-  // console.log("====================================");
-  // console.log(authToken, "authToken");
-  // console.log("====================================");
+  // useEffect(() => {
+  //   if (authToken) {
+  //     router.push(`/welcome`);
+  //   }
+  // }, [authToken]);
+  console.log("====================================");
+  console.log(authToken, "authToken");
+  console.log("====================================");
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     router.push(`/dashboard`);
@@ -46,13 +45,13 @@ const LoginPage = () => {
   // }, [isAuthenticated, user]);
 
   const onSubmit = async (data) => {
-    console.log("🚀 ~ onSubmit ~ data:", data)
     setLoading(true);
     try {
       const res = await loginApi(data);
+      console.log(res);
       const tk = res?.data?.data?.token;
       localStorage.setItem("authToken", tk);
-      setUserEmail(data?.email)
+      console.log(tk, "<---------tokrn");
       if (tk) {
         // localStorage.setItem(AUTH_TOKEN, tk);
         // authenticate();
@@ -109,12 +108,8 @@ const LoginPage = () => {
           <Header pageTitle="Login" pageLink="/" />
         </div>
 
-        {/* <form
+        <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4 md:mx-0 mx-4 "
-        > */}
-        <div
-          // onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col space-y-4 md:mx-0 mx-4 "
         >
           <CustomTextField
@@ -129,15 +124,13 @@ const LoginPage = () => {
             validation={{ ...register("password", { required: true }) }}
           />
           <span className="text-[#FF4085] text-sm cursor-pointer hover:font-bold">
-            <Link href="/forgotpassword"> Forgot Password? </Link>
+            <Link href="/changepassword"> change Password? </Link>
           </span>
-
           <Capcha onSubmit={onSubmit} />
 
           <div className="flex flex-col space-y-2">
             <button
               disabled={!validCaptcha}
-              onClick={handleSubmit(onSubmit)}
               type="submit"
               className={`transition duration-500 ease-in-out bg-black disabled:opacity-40 xl:py-4 py-2 text-white px-12 flex justify-center rounded-full w-full enabled:hover:bg-zinc-800 enabled:hover:font-semibold cursor-pointer border border-solid border-black tracking-wider transform hover:-translate-y-1`}
             >
@@ -208,7 +201,7 @@ const LoginPage = () => {
               </Link>
             </p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

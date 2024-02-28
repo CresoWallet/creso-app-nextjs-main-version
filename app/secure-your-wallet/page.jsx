@@ -8,6 +8,7 @@ import lock1 from "../../assets/eoa/Lock1.png";
 import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
 import CustomButton4 from "@/components/CustomButton4";
+import Link from "next/link";
 
 function SecureYourWallet() {
   const [buttonNo, setButtonNo] = useState(false);
@@ -94,7 +95,12 @@ function SecureYourWallet() {
               setButtonNo(false);
             }}
           >
-            Secure My Wallet
+            <Link
+              href="/review-recovery-pharse
+          "
+            >
+              Secure My Wallet
+            </Link>
           </button>
           {/* <CustomButton4
             onClick={() => {

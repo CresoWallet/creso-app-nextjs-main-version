@@ -115,6 +115,8 @@ import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock2 from "../../assets/eoa/Lock2.png";
 import phone1 from "../../assets/eoa/Phone1.png";
 import CommonComponent from "@/components/common/CommonEOA";
+import Link from "next/link";
+import CustomButton4 from "@/components/CustomButton4";
 
 function ConfirmRecovery() {
   const secretPhrase = [
@@ -225,7 +227,7 @@ function ConfirmRecovery() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         <div className="text-center mt-20 w-full rounded-full border border-black bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleConfirm}>
-            Confirm
+            <Link href="/completion">Confirm</Link>
           </button>
         </div>
       </div>

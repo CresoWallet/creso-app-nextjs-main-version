@@ -9,9 +9,9 @@ import Header from "@/components/common/HeaderEOA";
 
 function Completion() {
   return (
-    <div className="h-full md:px-4 py-4 flex flex-col">
+    <div className="h-full md:px-4  py-4 flex flex-col">
       <Header />
-      <div className=" md:mx-auto mt-16 mb-4 max-w-xl border-black border-2 p-4 rounded-xl">
+      <div className=" md:mx-auto mx-4 mt-16 mb-4 max-w-xl border-black border-2 p-4 rounded-xl">
         <Image
           src={party}
           alt=""
@@ -27,9 +27,9 @@ function Completion() {
             Recovery Phrase safe and secret -- it&#39;s your responsibility!
           </p>
           <br />
-          <p className=" text-center"> Remember:</p>
-          <div className="ml-6 ">
-            <ul className="list-disc justify-start">
+          <p className="text-center"> Remember:</p>
+          <div className="ml-6">
+            <ul className="list-disc">
               <li>Creso can&#39;t recover your Secret Recovery Phrase.</li>
               <li>Creso will never ask you for your Secret Recovery Phrase.</li>
               <li>
@@ -39,7 +39,7 @@ function Completion() {
               <li className="text-[#FF4085]">Learn more</li>
             </ul>
           </div>
-          <p className="text-[#FF4085] md:text-base text-sm my-4 text-center">
+          <p className="text-[#FF4085] md:text-base text-center text-sm my-4">
             Advanced configuration{" "}
           </p>
           <div className=" md:px-20 px-16 ">

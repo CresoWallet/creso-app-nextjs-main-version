@@ -50,8 +50,8 @@ const WalletContextProvider = ({ children }) => {
   const [showAccount, setShowAccount] = useState(false);
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [seedPhrase, setSeedPhrase] = useState("")
-  console.log("🚀 ~ WalletContextProvider ~ seedPhrase:", seedPhrase)
+  const [seedPhrase, setSeedPhrase] = useState("");
+  console.log("🚀 ~ WalletContextProvider ~ seedPhrase:", seedPhrase);
   // console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {
@@ -108,7 +108,7 @@ const WalletContextProvider = ({ children }) => {
     pathName.includes("/completion") ||
     pathName.includes("/importwallet") ||
     pathName.includes("/security1") ||
-    pathName.includes("/forgotpassword") ||
+    pathName.includes("/changepassword") ||
     pathName.includes("/backuprestore") ||
     pathName.includes("/accountsetting") ||
     pathName.includes("/transaction") ||
@@ -234,22 +234,37 @@ const WalletContextProvider = ({ children }) => {
         smartWallets,
         eoaWallets,
         isLoaded,
-        navbarTrigger, setNavbarTrigger,
+        navbarTrigger,
+        setNavbarTrigger,
         isMobile,
-        allToken, setAllToken,
-        totalBalance, setTotalBalance,
-        activeButton, setActiveButton,
-        filteredData, setFilteredData,
-        originalData, setOriginalData,
-        send, setSend,
-        mainContentVisible, setMainContentVisible,
-        walletAddress, setWalletAddress,
-        validCaptcha, setValidCaptcha,
-        showCreateWallet, setShowCreateWallet,
-        showAccount, setShowAccount,
-        authToken, setAuthToken,
-        userEmail, setUserEmail,
-        seedPhrase, setSeedPhrase
+        allToken,
+        setAllToken,
+        totalBalance,
+        setTotalBalance,
+        activeButton,
+        setActiveButton,
+        filteredData,
+        setFilteredData,
+        originalData,
+        setOriginalData,
+        send,
+        setSend,
+        mainContentVisible,
+        setMainContentVisible,
+        walletAddress,
+        setWalletAddress,
+        validCaptcha,
+        setValidCaptcha,
+        showCreateWallet,
+        setShowCreateWallet,
+        showAccount,
+        setShowAccount,
+        authToken,
+        setAuthToken,
+        userEmail,
+        setUserEmail,
+        seedPhrase,
+        setSeedPhrase,
       }}
     >
       {/* {navbarTrigger && (

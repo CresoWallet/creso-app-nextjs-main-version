@@ -263,7 +263,7 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
           <div
             className={`${
               showCreateWallet === true && "font-bold"
-            } flex  gap-2 items-center cursor-pointer group`}
+            } flex  gap-2 items-center cursor-pointer group  `}
             onClick={handleCreateWallet}
           >
             <Image src={PinkPlus} alt="" />

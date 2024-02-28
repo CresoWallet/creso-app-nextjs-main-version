@@ -34,7 +34,11 @@ const TransferToken = () => {
 
   return (
     <div className="mt-20 block md:hidden">
-      <Header pageTitle="Transfer Token" pageLink="/" className="px-4" />
+      <Header
+        pageTitle="Transfer Token"
+        pageLink="/dashboard"
+        className="px-4"
+      />
       <div className=" block  justify-center flex-row items-center md:hidden gap-2 mx-4  ">
         <div className="my-8 gap-4">
           <p className="ml-5 my-2">From</p>

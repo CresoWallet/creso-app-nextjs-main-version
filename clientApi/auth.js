@@ -8,13 +8,13 @@ import { axiosInstance } from "@/services/axios";
 //   return res;
 // };
 
-// export const logOut = async (formData) => {
-//   const res = await axiosInstance(`/logout`, {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
+export const logOut = async (formData) => {
+  const res = await axiosInstance(`/logout`, {
+    method: "POST",
+    data: formData,
+  });
+  return res;
+};
 
 // export const signUpAPI = async (formData) => {
 //   const res = await axiosInstance(`/signup`, {
@@ -22,13 +22,6 @@ import { axiosInstance } from "@/services/axios";
 //     data: formData,
 //   });
 
-//   return res;
-// };
-// export const signUpApi = async (formData) => {
-//   const res = await axiosInstance("/signup", {
-//     method: "POST",
-//     data: formData,
-//   });
 //   return res;
 // };
 

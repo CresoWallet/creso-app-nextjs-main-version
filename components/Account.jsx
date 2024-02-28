@@ -33,11 +33,6 @@ const links = [
     label: "Local currency",
     icon: PiCurrencyCircleDollarLight,
   },
-  // {
-  //   id: "currency",
-  //   label: "Local currency",
-  //   icon: () => <Image src={doller} width={24} height={24} alt="Dollar" />,
-  // },
 ];
 
 const Account = ({ setShowModal }) => {
@@ -66,8 +61,6 @@ const Account = ({ setShowModal }) => {
         isHovered || isClicked
           ? "linear-gradient(-270deg, rgba(33, 0, 236, 0.1056) 5.3%, rgba(33, 0, 236, 0) 98.01%)"
           : "transparent",
-      // Add other styles based on your requirements
-      // fontWeight: isHovered || isClicked ? "bold" : "normal",
     };
   };
   const [hovere, setHovere] = useState(false);
@@ -141,7 +134,7 @@ const Account = ({ setShowModal }) => {
           ))}
         </div>
         <div className="relative">
-          <a
+          <div
             onMouseEnter={() => setHovere(true)}
             onMouseLeave={() => setHovere(false)}
             href="https://forms.gle/GBEKLjSH7hxQiuPv8"
@@ -159,7 +152,7 @@ const Account = ({ setShowModal }) => {
                 Feedback
               </p>
             )}
-          </a>
+          </div>
         </div>
       </div>
     </>

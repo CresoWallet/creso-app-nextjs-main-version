@@ -16,7 +16,9 @@ function WalletMatrix() {
       <Header title="Create EOA Wallet" className="md:hidden block" />
 
       <div className="text-center md:mx-auto mx-4 mb-4 max-w-lg">
-        <h2 className="font-bold text-2xl mt-16 mb-4">Let&#39;s Get Started</h2>
+        <h2 className="font-bold text-2xl mt-16 md:mr-2 mb-4">
+          Let&#39;s Get Started
+        </h2>
         <p className="text-gray-500 mx-auto">
           Creso would like to gather usage data to better understand how our
           users interact with Creso. This data will be used to provide the
@@ -100,7 +102,13 @@ function WalletMatrix() {
           onMouseEnter={() => setButtonI(true)}
           onMouseLeave={() => setButtonI(false)}
         >
-          <Link href="/create-password">I Agree</Link>
+          {/* <Link href="/create-password">I Agree</Link> */}
+          <Link
+            href="/create-password
+          "
+          >
+            I Agree
+          </Link>
         </CustomButton4>
         {/* <button
           className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${
