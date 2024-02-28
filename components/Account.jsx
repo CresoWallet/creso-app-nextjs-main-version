@@ -90,7 +90,7 @@ const Account = ({ setShowModal }) => {
               className="hover:bg-violet-100 py-5 border-b-2"
               style={getLinkStyle(id)}
             >
-              {id === "session2" ? (
+              {id === "session2" || id === "currency" ? (
                 <div
                   className={`flex flex-row justify-between items-center mx-4 text-black cursor-not-allowed ${
                     hover === id || clicked === "/" + id

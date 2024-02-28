@@ -11,9 +11,9 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 const AccountSetting = () => {
   return (
-    <div className="mt-20   ">
+    <div className="mt-20 md:mt-5    ">
       <Header pageTitle="Account Setting" pageLink="/dashboard" />
-      <div className=" block md:hidden mx-4">
+      <div className="  mx-4">
         <div className="  flex  flex-row  gap-4  my-6 overflow-x-auto  ">
           <Image alt="" src={user1} className=" h-24 w-24 " />
 
