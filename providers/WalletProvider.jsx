@@ -112,7 +112,9 @@ const WalletContextProvider = ({ children }) => {
     pathName.includes("/backuprestore") ||
     pathName.includes("/accountsetting") ||
     pathName.includes("/transaction") ||
-    pathName.includes("/transfertoken");
+    pathName.includes("/transfertoken") ||
+    pathName.includes("/otp");
+    
 
   // console.log(pathName);
 
