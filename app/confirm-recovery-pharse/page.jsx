@@ -138,9 +138,12 @@ function ConfirmRecovery() {
   const [userInput, setUserInput] = useState(
     Array(secretPhrase.length).fill("")
   );
+  const [seedPhraseData, setseedPhraseData] = useState([])
   const [error, setError] = useState("");
   const [readOnly, setReadOnly] = useState(true);
 
+  console.log("🚀 ~ ConfirmRecovery ~ secretPhrase:", secretPhrase)
+  console.log("🚀 ~ ConfirmRecovery ~ userInput:", userInput)
   useEffect(() => {
     const numToRemove = Math.floor(Math.random() * 2) + 3;
     const removedPhrases = [];
@@ -151,6 +154,7 @@ function ConfirmRecovery() {
       }
     }
     setRemovedPhrases(removedPhrases);
+    setseedPhraseData(localStorage.getItem('seedPhraseData'))
   }, []);
 
   const handleInputChange = (index, value) => {
@@ -208,11 +212,10 @@ function ConfirmRecovery() {
             <input
               key={index}
               type="text"
-              className={`rounded-full border text-center text-sm md:text-base break-words m-1 p-1 lg:p-2 ${
-                removedPhrases.includes(index)
-                  ? ""
-                  : "bg-[#A66CFF] cursor-pointer"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words m-1 p-1 lg:p-2 ${removedPhrases.includes(index)
+                ? ""
+                : "bg-[#A66CFF] cursor-pointer"
+                }`}
               value={userInput[index]}
               onChange={(e) => handleInputChange(index, e.target.value)}
               readOnly={!removedPhrases.includes(index) || !readOnly}
