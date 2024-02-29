@@ -58,6 +58,7 @@ function ReviewRecovery() {
   // };
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const storedWalletAddress = localStorage.getItem("walletAddress");
 
     if (storedSeedPhrase) {
       // Seed phrase already exists in local storage
@@ -81,6 +82,7 @@ function ReviewRecovery() {
 
         // Update local storage with the newly generated seed phrase
         localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
+        localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
         const SeedPhrase = data?.data?.seedPhrase || "";
         if (SeedPhrase.length > 0) {
