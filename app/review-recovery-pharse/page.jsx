@@ -19,7 +19,6 @@ function ReviewRecovery() {
   );
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-
   // const handleRevealClick = async () => {
   //   if (!revealed) {
   //     try {
