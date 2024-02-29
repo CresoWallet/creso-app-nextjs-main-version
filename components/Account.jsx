@@ -114,7 +114,7 @@ const Account = ({ setShowModal }) => {
                   href={`/${id}`}
                   className="flex flex-row justify-between items-center cursor-pointer mx-4"
                 >
-                  <a
+                  <div
                     className={`flex flex-row gap-2 items-center ${
                       hover === id || path === "/" + id
                         ? "text-purple-800 font-bold"
@@ -126,7 +126,7 @@ const Account = ({ setShowModal }) => {
                   >
                     <Icon />
                     <p className="text-sm">{label}</p>
-                  </a>
+                  </div>
                   <MdKeyboardArrowRight />
                 </Link>
               )}
