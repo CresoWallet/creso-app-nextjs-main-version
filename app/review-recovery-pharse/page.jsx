@@ -38,9 +38,11 @@ function ReviewRecovery() {
     } else {
       // Seed phrase doesn't exist in local storage, make API call
       try {
+        console.log("Calling createEOAWalletApi...");
         const res = await createEOAWalletApi({
           walletName: storedWalletName,
         });
+        console.log("createEOAWalletApi response:", res);
         const { data } = res;
         console.log(data?.data, "<------------handleRevealClick Data");
 

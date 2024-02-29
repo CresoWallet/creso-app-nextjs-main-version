@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import Link from "next/link";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
@@ -16,20 +17,6 @@ function ImportWallet() {
   const [walletName, setWalletName] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
 
-  useEffect(() => {
-    // Retrieve data from localStorage
-    const storedWalletName = localStorage.getItem("walletName");
-    const storedWalletAddress = localStorage.getItem("walletAddress");
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
-
-    // Update states if data exists
-    if (storedWalletName && storedWalletAddress && storedSeedPhrase) {
-      setWalletName(storedWalletName);
-      setWalletAddress(storedWalletAddress);
-      setUserInput(storedSeedPhrase.split(" "));
-    }
-  }, []);
-
   const handleInputChange = (index, value) => {
     const newUserInput = [...userInput];
     newUserInput[index] = value;
@@ -38,38 +25,36 @@ function ImportWallet() {
 
   const handleVerify = async () => {
     try {
-      // Retrieve stored data from localStorage
+      // Get seed phrase from local storage
       const storedSeedPhrase = localStorage.getItem("seedPhrase");
-      const storedWalletName = localStorage.getItem("walletName");
-      const storedWalletAddress = localStorage.getItem("walletAddress");
-      const authToken = localStorage.getItem("authToken");
+      // Compare entered seed phrase with stored one
+      if (userInput.join(" ") !== storedSeedPhrase) {
+        setError("Invalid seed phrase.");
+        return;
+      }
 
-      // Verify user input with stored data
-      if (
-        userInput.join(" ") === storedSeedPhrase &&
-        walletName === storedWalletName &&
-        walletAddress === storedWalletAddress
-      ) {
-        // If verification is successful, call import wallet API
-        const res = await importEOAWalletApi({
-          walletName: walletName,
-          walletAddress: walletAddress,
-          formData: userInput.join(" "),
-          authToken: authToken,
-        });
-        // Log response data to console
-        console.log("Import wallet response:", res.data);
-        if (res?.data?.data?.message === "Successfully import EOA wallet") {
-          // If wallet import is successful, redirect to dashboard
-          router.push(`/dashboard`);
-        }
+      const authToken = localStorage.getItem("authToken");
+      const res = await importEOAWalletApi({
+        walletName: walletName,
+        walletAddress: walletAddress,
+        formData: userInput.join(" "),
+        authToken: authToken,
+      });
+      console.log("Import wallet response:", res.data);
+      if (res?.data?.data?.message === "Successfully import EOA wallet") {
+        router.push(`/dashboard`);
+        // If wallet import is successful, store wallet name and address in local storage
+        localStorage.setItem("walletName", walletName);
+        localStorage.setItem("walletAddress", walletAddress);
+        // Redirect to dashboard
+        // router.push(`/dashboard`);
       } else {
         setVerificationStatus("Failed");
         setError("Verification failed.");
       }
     } catch (err) {
       console.error("Error verifying recovery phrase:", err);
-      // Handle error
+      setError("Error verifying recovery phrase.");
     }
   };
 
@@ -77,7 +62,6 @@ function ImportWallet() {
     e.preventDefault();
     setError("");
 
-    // Check if seed phrase, wallet name, and wallet address are not empty
     if (
       userInput.some((value) => !value.trim()) ||
       !walletName ||
@@ -87,13 +71,11 @@ function ImportWallet() {
       return;
     }
 
-    // Check if checkbox is checked
     if (!isChecked) {
       setError("You must agree to the Terms of Use.");
       return;
     }
 
-    // Verify the user's input
     handleVerify();
   };
 
@@ -120,8 +102,8 @@ function ImportWallet() {
             Import Wallet From Secret Recovery Phrase
           </h2>
           <p className="mx-auto">
-            Write down this 12-word secret recovery phrase and password after
-            you can access your creso wallet.
+            Write down this 12-word secret recovery phrase after you can access
+            your creso wallet.
           </p>
         </div>
         <h2 className="my-4 max-w-md font-bold md:mb-2 mb-1 mx-4">
@@ -147,7 +129,6 @@ function ImportWallet() {
           ))}
         </div>
 
-        {/* Wallet Name and Address */}
         <div className="my-4 px-4 mx-auto max-w-md">
           <div className="my-4 mx-auto max-w-md">
             <label
@@ -186,8 +167,7 @@ function ImportWallet() {
         <div className="items-center justify-center">
           <form className="mx-4" onSubmit={handleSubmit}>
             {error && <p className="text-red-500 text-center ">{error}</p>}
-            {/* Terms of Use */}
-            <div className="flex items-center   pb-2">
+            <div className="flex items-center  my-6 pb-2">
               <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
               <span className="ml-2">
                 I agree to creso
@@ -196,9 +176,9 @@ function ImportWallet() {
             </div>
 
             <div className="text-center  w-full rounded-full border border-black bg-white text-black hover:bg-black hover:text-white cursor-pointer">
-              <button className="p-2.5" onClick={handleVerify}>
+              <button className="p-2.5" type="submit">
                 Verify
-              </button>
+              </button>{" "}
             </div>
             {verificationStatus && (
               <p
