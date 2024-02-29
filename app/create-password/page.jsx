@@ -44,7 +44,7 @@ function CreatePassword() {
     } else if (!isChecked) {
       setError("Please agree to the Terms of Use.");
     } else {
-      setPasswordError("");
+      localStorage.setItem("walletName", walletName);
       router.push(`/review-recovery-pharse`);
 
       try {

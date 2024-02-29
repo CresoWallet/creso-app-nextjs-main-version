@@ -19,7 +19,6 @@ function ReviewRecovery() {
   );
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-
   // const handleRevealClick = async () => {
   //   if (!revealed) {
   //     try {
@@ -140,10 +139,11 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
-                ? "bg-[#A66CFF] border-black"
-                : "blur-sm bg-black opacity-[10%] text-white"
-                }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
+                revealed
+                  ? "bg-[#A66CFF] border-black"
+                  : "blur-sm bg-black opacity-[10%] text-white"
+              }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
@@ -158,14 +158,14 @@ function ReviewRecovery() {
             </div>
           )}
         </div>
-        <div className="my-4 flex gap-2 justify-end items-center">
+        {/* <div className="my-4 flex gap-2 justify-end items-center">
           {revealed && (
             <>
               <MdOutlineFileCopy />
               <p>copy to clipboard</p>
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleRevealClick}>
