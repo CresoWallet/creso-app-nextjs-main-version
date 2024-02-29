@@ -19,46 +19,10 @@ function ReviewRecovery() {
   );
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-  // const handleRevealClick = async () => {
-  //   if (!revealed) {
-  //     try {
-  //       const res = await createEOAWalletApi({
-  //         walletName: "EOA",
-  //       }); // Call the API
-  //       const { data } = res;
-  //       console.log(data?.data, "<------------handleRevealClick Data");
-  //       localStorage.setItem("seedPhrase", data?.data?.seedPhrase)
-  //       // setRecoveryPhrases(data?.data?.seedPhrase);
-  //       // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
-
-  //       // setRevealed(true);
-  //       // console.log("Token:", data.token);
-  //       // const seedPhrase = data?.data?.seedPhrase || "";
-  //       const SeedPhrase = data?.data?.seedPhrase || "";
-  //       if (SeedPhrase.length > 0) {
-  //         const seedPhraseArray = SeedPhrase.split(" ");
-
-  //         const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-  //           word,
-  //           revealed: true,
-  //         }));
-
-  //         setRecoveryPhrases(phrasesWithRevealed);
-  //         setRevealed(true);
-  //         // console.log("Token:", data?.token);
-  //       } else {
-  //         console.error("Seed phrase is empty or not provided.");
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching recovery phrases:", err);
-  //     }
-  //   } else {
-  //     setRevealed(false); // Toggle the revealed state only if the phrase was previously revealed
-  //   }
-  // };
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
     const storedWalletAddress = localStorage.getItem("walletAddress");
+    const storedWalletName = localStorage.getItem("walletName");
 
     if (storedSeedPhrase) {
       // Seed phrase already exists in local storage
@@ -75,7 +39,7 @@ function ReviewRecovery() {
       // Seed phrase doesn't exist in local storage, make API call
       try {
         const res = await createEOAWalletApi({
-          walletName: "EOA",
+          walletName: storedWalletName,
         });
         const { data } = res;
         console.log(data?.data, "<------------handleRevealClick Data");
