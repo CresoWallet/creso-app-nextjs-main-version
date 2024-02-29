@@ -188,7 +188,7 @@ function ConfirmRecovery() {
         textColor2="text-black"
         hrColor2="black"
         imageSrc3={phone1}
-        color3="#D0F500"
+        color3="[#D0F500]"
         textColor3="text-black"
         borderColor3="black"
       />
