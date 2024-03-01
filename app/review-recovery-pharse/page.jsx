@@ -19,45 +19,10 @@ function ReviewRecovery() {
   );
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
 
-  // const handleRevealClick = async () => {
-  //   if (!revealed) {
-  //     try {
-  //       const res = await createEOAWalletApi({
-  //         walletName: "EOA",
-  //       }); // Call the API
-  //       const { data } = res;
-  //       console.log(data?.data, "<------------handleRevealClick Data");
-  //       localStorage.setItem("seedPhrase", data?.data?.seedPhrase)
-  //       // setRecoveryPhrases(data?.data?.seedPhrase);
-  //       // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
-
-  //       // setRevealed(true);
-  //       // console.log("Token:", data.token);
-  //       // const seedPhrase = data?.data?.seedPhrase || "";
-  //       const SeedPhrase = data?.data?.seedPhrase || "";
-  //       if (SeedPhrase.length > 0) {
-  //         const seedPhraseArray = SeedPhrase.split(" ");
-
-  //         const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-  //           word,
-  //           revealed: true,
-  //         }));
-
-  //         setRecoveryPhrases(phrasesWithRevealed);
-  //         setRevealed(true);
-  //         // console.log("Token:", data?.token);
-  //       } else {
-  //         console.error("Seed phrase is empty or not provided.");
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching recovery phrases:", err);
-  //     }
-  //   } else {
-  //     setRevealed(false); // Toggle the revealed state only if the phrase was previously revealed
-  //   }
-  // };
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const storedWalletAddress = localStorage.getItem("walletAddress");
+    const storedWalletName = localStorage.getItem("walletName");
 
     if (storedSeedPhrase) {
       // Seed phrase already exists in local storage
@@ -73,14 +38,17 @@ function ReviewRecovery() {
     } else {
       // Seed phrase doesn't exist in local storage, make API call
       try {
+        console.log("Calling createEOAWalletApi...");
         const res = await createEOAWalletApi({
-          walletName: "EOA",
+          walletName: storedWalletName,
         });
+        console.log("createEOAWalletApi response:", res);
         const { data } = res;
         console.log(data?.data, "<------------handleRevealClick Data");
 
         // Update local storage with the newly generated seed phrase
         localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
+        localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
         const SeedPhrase = data?.data?.seedPhrase || "";
         if (SeedPhrase.length > 0) {
@@ -139,10 +107,11 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
-                ? "bg-[#A66CFF] border-black"
-                : "blur-sm bg-black opacity-[10%] text-white"
-                }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
+                revealed
+                  ? "bg-[#A66CFF] border-black"
+                  : "blur-sm bg-black opacity-[10%] text-white"
+              }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
@@ -157,14 +126,14 @@ function ReviewRecovery() {
             </div>
           )}
         </div>
-        <div className="my-4 flex gap-2 justify-end items-center">
+        {/* <div className="my-4 flex gap-2 justify-end items-center">
           {revealed && (
             <>
               <MdOutlineFileCopy />
               <p>copy to clipboard</p>
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleRevealClick}>

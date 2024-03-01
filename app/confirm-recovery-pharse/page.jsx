@@ -117,56 +117,72 @@ import phone1 from "../../assets/eoa/Phone1.png";
 import CommonComponent from "@/components/common/CommonEOA";
 import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
+import { useRouter } from "next/navigation";
 
 function ConfirmRecovery() {
-  const secretPhrase = [
-    "apple",
-    "banana",
-    "orange",
-    "grape",
-    "peach",
-    "mango",
-    "pine",
-    "water",
-    "berry",
-    "blue",
-    "peach",
-    "kiwi",
-  ];
+
 
   const [removedPhrases, setRemovedPhrases] = useState([]);
-  const [userInput, setUserInput] = useState(
-    Array(secretPhrase.length).fill("")
-  );
-  const [seedPhraseData, setseedPhraseData] = useState([])
+  // const [userInput, setUserInput] = useState(
+  //   Array(secretPhrase.length).fill("")
+  // );
+  const [seedPhraseData, setseedPhraseData] = useState(Array(12)
+    .fill("")
+    .map((word) => ({ word, revealed: false })))
+  console.log("🚀 ~ ConfirmRecovery ~ seedPhraseData:", seedPhraseData)
   const [error, setError] = useState("");
+  const navigation = useRouter()
   const [readOnly, setReadOnly] = useState(true);
 
-  console.log("🚀 ~ ConfirmRecovery ~ secretPhrase:", secretPhrase)
-  console.log("🚀 ~ ConfirmRecovery ~ userInput:", userInput)
+
+
+  const handleRevealClick = async () => {
+    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    console.log("🚀 ~ handleRevealClick ~ storedSeedPhrase:", storedSeedPhrase)
+    if (storedSeedPhrase) {
+      // Seed phrase already exists in local storage
+      const seedPhraseArray = storedSeedPhrase.split(" ");
+
+      const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+        word,
+        revealed: true,
+      }));
+
+      setseedPhraseData(phrasesWithRevealed);
+    } else {
+      // Seed phrase doesn't exist in local storage, make API call
+    }
+  };
+
   useEffect(() => {
     const numToRemove = Math.floor(Math.random() * 2) + 3;
     const removedPhrases = [];
     while (removedPhrases.length < numToRemove) {
-      const index = Math.floor(Math.random() * secretPhrase.length);
+      const index = Math.floor(Math.random() * seedPhraseData.length);
       if (!removedPhrases.includes(index)) {
         removedPhrases.push(index);
       }
     }
     setRemovedPhrases(removedPhrases);
-    setseedPhraseData(localStorage.getItem('seedPhraseData'))
+    handleRevealClick()
   }, []);
-
   const handleInputChange = (index, value) => {
-    const newUserInput = [...userInput];
-    newUserInput[index] = value;
-    setUserInput(newUserInput);
+    setseedPhraseData((prevSeedPhraseData) => {
+      const newUserInput = [...prevSeedPhraseData];
+      newUserInput[index] = { ...newUserInput[index], word: value };
+      return newUserInput;
+    });
+    // setseedPhraseData(...seedPhraseData,value)
   };
 
+
   const handleConfirm = () => {
+    const storedSeedPhrase = localStorage.getItem("seedPhrase");
     for (let i = 0; i < removedPhrases.length; i++) {
+      const storedSeedPhraseAry = storedSeedPhrase.split(' ');
       const index = removedPhrases[i];
-      if (secretPhrase[index] !== userInput[index]) {
+      console.log("local", storedSeedPhraseAry, "user", seedPhraseData)
+      if (seedPhraseData[index].word !== storedSeedPhraseAry[index]) {
         setError("Incorrect phrase. Please try again.");
         return;
       }
@@ -176,6 +192,7 @@ function ConfirmRecovery() {
     // Persist removedPhrases and readOnly if needed
     // For now, I'm just alerting "Confirmed!"
     alert("Confirmed!");
+    navigation.push("/completion")
   };
 
   return (
@@ -192,7 +209,7 @@ function ConfirmRecovery() {
         textColor2="text-black"
         hrColor2="black"
         imageSrc3={phone1}
-        color3="#D0F500"
+        color3="[#D0F500]"
         textColor3="text-black"
         borderColor3="black"
       />
@@ -208,7 +225,7 @@ function ConfirmRecovery() {
           </p>
         </div>
         <div className="rounded-3xl py-3 md:py-4 border grid grid-cols-3 md:px-5 mx-3 md:mx-auto">
-          {secretPhrase.map((word, index) => (
+          {seedPhraseData.map((item, index) => (
             <input
               key={index}
               type="text"
@@ -216,21 +233,15 @@ function ConfirmRecovery() {
                 ? ""
                 : "bg-[#A66CFF] cursor-pointer"
                 }`}
-              value={userInput[index]}
+              value={removedPhrases.includes(index) === false ? (item.revealed ? item.word : "") : null}
               onChange={(e) => handleInputChange(index, e.target.value)}
-              readOnly={!removedPhrases.includes(index) || !readOnly}
-              onClick={() => {
-                if (removedPhrases.includes(index)) {
-                  setReadOnly(false); // Enable editing when clicked
-                }
-              }}
             />
           ))}
         </div>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <div className="text-center mt-20 w-full rounded-full border border-black bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleConfirm}>
-            <Link href="/completion">Confirm</Link>
+            Confirm
           </button>
         </div>
       </div>

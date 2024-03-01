@@ -49,10 +49,10 @@ const NetworkRPCPage = () => {
           user={user}
         />
 
-        <div className="col-span-6 xl:mx-8 md:mx-4 mx-2 xl:mt-10 mt-4">
+        <div className="col-span-6 xl:mx-8 md:mx-4 mx-2 xl:mt-10 mt-10">
           <div className="flex flex-row justify-between items-center">
             <Link href="networkPage">
-              <div className="flex flex-row items-center gap-2">
+              <div className="flex flex-row items-center gap-2 md:hidden block">
                 <BsArrowLeft />
                 <p className="xl:text-xl md:text-lg font-semibold">
                   RPC Nodes Setting

@@ -149,12 +149,8 @@ const AccountPage = () => {
                 </p>                                                                                                                                      
               </div> */}
 
-              <div className="flex flex-row items-center mx-4">
-                <Image
-                  alt=""
-                  src={Info}
-                  className="w-12 h-6 md:w-6 xl:w-6 xl:h-6"
-                />
+              <div className="flex flex-row items-center mx-4 gap-2">
+                <Image alt="" src={Info} className="w-6 h-6 " />
                 <p className="text-xs text-[#A09FAA]">
                   Either email or phone can be used to access your wallet. It is
                   recommended to add both in case either of them is lost.
@@ -180,12 +176,8 @@ const AccountPage = () => {
                   Connected
                 </button>
               </div>
-              <div className="flex flex-row items-center mx-4">
-                <Image
-                  alt=""
-                  src={Info}
-                  className="w-12 h-6 md:w-6 xl:w-6 xl:h-6"
-                />
+              <div className="flex flex-row items-center mx-4 gap-2">
+                <Image alt="" src={Info} className="w-6 h-6  " />
                 <p className="text-xs text-[#A09FAA]">
                   Either email or phone can be used to access your wallet. It is
                   recommended to add both in case either of them is lost.
