@@ -8,7 +8,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     sha256Hash: sha256HashReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware().concat(userApi.middleware),
 });
 
