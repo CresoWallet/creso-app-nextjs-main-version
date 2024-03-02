@@ -107,11 +107,10 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
-                  ? "bg-[#A66CFF] border-black"
-                  : "blur-sm bg-black opacity-[10%] text-white"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
+                ? "bg-[#A66CFF] border-black"
+                : "blur-sm bg-black opacity-[10%] text-white"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
