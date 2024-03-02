@@ -10,6 +10,9 @@ import { MdOutlineFileCopy } from "react-icons/md";
 import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
 import { WalletContext } from "@/providers/WalletProvider";
+import { bip39 } from "bip39";
+import { hdkey } from "ethereumjs-wallet";
+
 function ReviewRecovery() {
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -17,7 +20,8 @@ function ReviewRecovery() {
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
-  const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
+  const { seedPhrase: storedSeedPhrase } = useContext(WalletContext);
+  const [seedPhrase, setSeedPhrase] = useState(storedSeedPhrase || "");
 
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
@@ -50,6 +54,9 @@ function ReviewRecovery() {
         localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
         localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
+        // Set the seed phrase state
+        setSeedPhrase(data?.data?.seedPhrase || "");
+
         const SeedPhrase = data?.data?.seedPhrase || "";
         if (SeedPhrase.length > 0) {
           const seedPhraseArray = SeedPhrase.split(" ");
@@ -68,6 +75,29 @@ function ReviewRecovery() {
         console.error("Error fetching recovery phrases:", err);
       }
     }
+  };
+  const handleConfirmClick = async () => {
+    // Ensure seedPhrase is set
+    if (!seedPhrase) {
+      console.error("Seed phrase is not set.");
+      return;
+    }
+
+    // Generate private key from seed phrase
+    const masterPrivateKey = bip39
+      .mnemonicToSeedSync(seedPhrase)
+      .toString("hex");
+    const hdwallet = hdkey.fromMasterSeed(Buffer.from(masterPrivateKey, "hex"));
+    const wallet = hdwallet.derivePath(`m/44'/60'/0'/0/0`).getWallet();
+    const privateKey = wallet.getPrivateKeyString();
+
+    // Store private key securely
+    localStorage.setItem("privateKey", privateKey);
+
+    // Redirect to completion page
+    // You may replace this with your logic to navigate to the completion page
+    // For example, using Next.js router: router.push("/completion");
+    // window.location.href = "/confirm-recovery-pharse";
   };
 
   return (
@@ -142,11 +172,18 @@ function ReviewRecovery() {
               : "Reveal Secret Recovery Phrase"}
           </button>
         </div>
-        <CustomButton4
+        {/* <CustomButton4
           padding="px-14 py-4"
           className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
         >
           <Link href="/completion">Confirm</Link>
+        </CustomButton4> */}
+        <CustomButton4
+          padding="px-14 py-4"
+          className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+          onClick={handleConfirmClick}
+        >
+          Confirm
         </CustomButton4>
       </div>
     </div>
