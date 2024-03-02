@@ -29,6 +29,9 @@ function ReviewRecovery() {
 
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const sha256Hash = generateSHA256Hash(storedSeedPhrase);
+    console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash)
+
     // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
 
