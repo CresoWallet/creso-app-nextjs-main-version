@@ -36,6 +36,8 @@
     "react-redux": "^8.1.3",
     "react-responsive": "^9.0.2",
     "react-responsive-carousel": "^3.2.23",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
     "viem": "^1.21.1",
     "web3modal": "^1.9.12"
   },

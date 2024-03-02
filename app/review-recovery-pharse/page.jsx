@@ -10,6 +10,8 @@ import { MdOutlineFileCopy } from "react-icons/md";
 import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
 import { WalletContext } from "@/providers/WalletProvider";
+import { createHash } from 'crypto';
+
 function ReviewRecovery() {
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -17,11 +19,17 @@ function ReviewRecovery() {
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
-  const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
+  // const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
+  // const seedPhrasecreateHash = recoveryPhrases;
+  const generateSHA256Hash = (data) => {
+    const hash = createHash('sha256');
+    hash.update(data);
+    return hash.digest('hex');
+  };
 
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
-    const storedWalletAddress = localStorage.getItem("walletAddress");
+    // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
 
     if (storedSeedPhrase) {
@@ -51,6 +59,7 @@ function ReviewRecovery() {
         localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
         const SeedPhrase = data?.data?.seedPhrase || "";
+        console.log("🚀 ~ handleRevealClick ~ SeedPhrase:", SeedPhrase)
         if (SeedPhrase.length > 0) {
           const seedPhraseArray = SeedPhrase.split(" ");
 
@@ -61,6 +70,9 @@ function ReviewRecovery() {
 
           setRecoveryPhrases(phrasesWithRevealed);
           setRevealed(true);
+          const sha256Hash = generateSHA256Hash(SeedPhrase);
+          console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash)
+
         } else {
           console.error("Seed phrase is empty or not provided.");
         }
