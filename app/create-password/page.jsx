@@ -46,6 +46,22 @@ function CreatePassword() {
     } else {
       localStorage.setItem("walletName", walletName);
       router.push(`/review-recovery-pharse`);
+      localStorage.setItem("walletName", walletName)
+
+      // try {
+      //   const res = await createEOAWalletApi({
+      //     walletName: walletName,
+      //   });
+      //   console.log("Response:", res?.data);
+      //   setSeedPhrase(res?.data?.data?.seedPhrase);
+      //   if (res?.data?.message === "EOA wallet Successfully created") {
+      //     // router.push(`/review-recovery-pharse`);
+      //     // localStorage.setItem("walletName", walletName)
+      //   }
+      // } catch (error) {
+      //   console.error("Error creating wallet:", error);
+      //   // Handle error scenario
+      // }
     }
   };
   const toggleShowNewPassword = () => {
