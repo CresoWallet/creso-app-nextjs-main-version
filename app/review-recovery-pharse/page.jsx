@@ -11,8 +11,14 @@ import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
 import { WalletContext } from "@/providers/WalletProvider";
 import { createHash } from 'crypto';
+import { setStoredSeedPhrase, selectStoredSeedPhrase } from "@/store/sha256HashSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function ReviewRecovery() {
+  const dispatch = useDispatch();
+  const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
+  console.log("🚀 ~ ReviewRecovery ~ getStoredSeedPhrase:", getStoredSeedPhrase)
+
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
     Array(12)
@@ -22,15 +28,23 @@ function ReviewRecovery() {
   // const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
   // const seedPhrasecreateHash = recoveryPhrases;
   const generateSHA256Hash = (data) => {
+    if (data === null) {
+      console.error("Data is null");
+      return null; // or handle the case appropriately
+    }
+
     const hash = createHash('sha256');
     hash.update(data);
     return hash.digest('hex');
   };
-
+  // const generateSHA256Hash = (data) => {
+  //   const hash = createHash('sha256');
+  //   hash.update(data);
+  //   return hash.digest('hex');
+  // };
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
-    const sha256Hash = generateSHA256Hash(storedSeedPhrase);
-    console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash)
+
 
     // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
@@ -46,6 +60,10 @@ function ReviewRecovery() {
 
       setRecoveryPhrases(phrasesWithRevealed);
       setRevealed(true);
+
+      const sha256Hash = generateSHA256Hash(storedSeedPhrase);
+      console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash)
+      dispatch(setStoredSeedPhrase(sha256Hash));
     } else {
       // Seed phrase doesn't exist in local storage, make API call
       try {
@@ -73,9 +91,10 @@ function ReviewRecovery() {
 
           setRecoveryPhrases(phrasesWithRevealed);
           setRevealed(true);
+
           const sha256Hash = generateSHA256Hash(SeedPhrase);
           console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash)
-
+          dispatch(setStoredSeedPhrase(sha256Hash));
         } else {
           console.error("Seed phrase is empty or not provided.");
         }
