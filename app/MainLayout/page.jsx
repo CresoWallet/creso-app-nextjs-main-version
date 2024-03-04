@@ -1,30 +1,30 @@
 "use client";
 // import Image from "next/image";
 // import Header from "@/components/Header";
-import LeftHeader from "@/components/LeftHeader";
+import LeftHeader from "../../components/LeftHeader";
 // import SideNav from "@/components/navbar/SideNav";
 import React, { useState, useEffect, useContext } from "react";
 // import { useMediaQuery } from "react-responsive";
 import { CiSearch } from "react-icons/ci";
 import scanner from "../../assets/Dashboard/scanner.png";
 import LeftSide from "./LeftSide";
-import { useUser } from "@/providers/UserProvider";
+import { useUser } from "../../providers/UserProvider";
 import RightSide from "./RightSide";
 import { useRouter } from "next/navigation";
-import { WalletContext } from "@/providers/WalletProvider";
-import SecureWallet from "@/components/SecureWallet";
+import { WalletContext } from "../../providers/WalletProvider";
+import SecureWallet from "../../components/SecureWallet";
 // import TokenComponent from "@/components/Tokens/TokensComponent";
 // import TokensComponent from "@/components/Tokens/TokensComponent";
-import CoinWallet from "@/components/CoinWallet";
-import CreateWallet from "@/components/CreateWallet";
+import CoinWallet from "../../components/CoinWallet";
+import CreateWallet from "../../components/CreateWallet";
 // import SendETH from "@/components/SendETH";
 // import { network } from "@/utils/data/coinlist";
 import axios from "axios";
 import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
-import Header from "@/components/Header";
-import OTP from "@/components/OTP/OTP";
+import Header from "../../components/Header";
+import OTP from "../../components/OTP/OTP";
 
 const MainLayout = () => {
   const router = useRouter();
