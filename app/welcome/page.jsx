@@ -162,9 +162,10 @@ import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
-import ConnectWallet from "@/components/connectbutton/ConnectWallet";
+// import ConnectWallet from "@/components/connectbutton/ConnectWallet";
 import CustomButton4 from "@/components/CustomButton4";
 import CustomCheckbox from "@/components/CustomCheckbox";
+// import { ConnectWallet } from "@thirdweb-dev/react";
 
 function Welcome() {
   const [importWalletHovered, setImportWalletHovered] = useState(false);
@@ -215,7 +216,7 @@ function Welcome() {
 
         {/* Terms of Use */}
         <div className="flex items-center justify-center mb-8 pb-2">
-          <ConnectWallet />
+          {/* <ConnectWallet /> */}
 
           <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
           <span className="ml-2">
@@ -237,6 +238,7 @@ function Welcome() {
             }}
             padding="px-20 "
           >
+            {/* <ConnectWallet /> */}
             Connect Wallet
           </CustomButton4>
           <CustomButton4
