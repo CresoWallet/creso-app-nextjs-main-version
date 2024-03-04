@@ -10,14 +10,23 @@ import { MdOutlineFileCopy } from "react-icons/md";
 import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
 import { WalletContext } from "@/providers/WalletProvider";
-import { createHash } from 'crypto';
-import { setStoredSeedPhrase, selectStoredSeedPhrase } from "@/store/sha256HashSlice";
+import { createHash } from "crypto";
+import {
+  setStoredSeedPhrase,
+  selectStoredSeedPhrase,
+} from "@/store/sha256HashSlice";
 import { useDispatch, useSelector } from "react-redux";
+import useEncryption from "@/components/EncryptData/EncryptData";
+import instanceEnDe from "@/components/EncryptData/BaseURL";
 
 function ReviewRecovery() {
+  const encrypt = useEncryption();
   const dispatch = useDispatch();
   const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
-  console.log("🚀 ~ ReviewRecovery ~ getStoredSeedPhrase:", getStoredSeedPhrase)
+  console.log(
+    "🚀 ~ ReviewRecovery ~ getStoredSeedPhrase:",
+    getStoredSeedPhrase
+  );
 
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
@@ -33,9 +42,9 @@ function ReviewRecovery() {
       return null; // or handle the case appropriately
     }
 
-    const hash = createHash('sha256');
+    const hash = createHash("sha256");
     hash.update(data);
-    return hash.digest('hex');
+    return hash.digest("hex");
   };
   // const generateSHA256Hash = (data) => {
   //   const hash = createHash('sha256');
@@ -44,7 +53,6 @@ function ReviewRecovery() {
   // };
   const handleRevealClick = async () => {
     const storedSeedPhrase = localStorage.getItem("seedPhrase");
-
 
     // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
@@ -62,7 +70,7 @@ function ReviewRecovery() {
       setRevealed(true);
 
       const sha256Hash = generateSHA256Hash(storedSeedPhrase);
-      console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash)
+      console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
       dispatch(setStoredSeedPhrase(sha256Hash));
     } else {
       // Seed phrase doesn't exist in local storage, make API call
@@ -76,11 +84,13 @@ function ReviewRecovery() {
         console.log(data?.data, "<------------handleRevealClick Data");
 
         // Update local storage with the newly generated seed phrase
+        const enSeedPharsh = encrypt(data?.data?.seedPhrase);
+        console.log("encrpty", enSeedPharsh);
         localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
         localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
         const SeedPhrase = data?.data?.seedPhrase || "";
-        console.log("🚀 ~ handleRevealClick ~ SeedPhrase:", SeedPhrase)
+        console.log("🚀 ~ handleRevealClick ~ SeedPhrase:", SeedPhrase);
         if (SeedPhrase.length > 0) {
           const seedPhraseArray = SeedPhrase.split(" ");
 
@@ -93,7 +103,7 @@ function ReviewRecovery() {
           setRevealed(true);
 
           const sha256Hash = generateSHA256Hash(SeedPhrase);
-          console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash)
+          console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash);
           dispatch(setStoredSeedPhrase(sha256Hash));
         } else {
           console.error("Seed phrase is empty or not provided.");
@@ -141,10 +151,11 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
-                ? "bg-[#A66CFF] border-black"
-                : "blur-sm bg-black opacity-[10%] text-white"
-                }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
+                revealed
+                  ? "bg-[#A66CFF] border-black"
+                  : "blur-sm bg-black opacity-[10%] text-white"
+              }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
