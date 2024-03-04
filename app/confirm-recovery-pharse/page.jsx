@@ -118,10 +118,10 @@ import CommonComponent from "@/components/common/CommonEOA";
 import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
 import { useRouter } from "next/navigation";
-
+import useEncryption from "@/components/EncryptData/EncryptData";
 function ConfirmRecovery() {
 
-
+  const { encryptData, decryptData } = useEncryption();
   const [removedPhrases, setRemovedPhrases] = useState([]);
   // const [userInput, setUserInput] = useState(
   //   Array(secretPhrase.length).fill("")
@@ -137,9 +137,10 @@ function ConfirmRecovery() {
 
 
   const handleRevealClick = async () => {
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
-    console.log("🚀 ~ handleRevealClick ~ storedSeedPhrase:", storedSeedPhrase)
-    if (storedSeedPhrase) {
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    console.log("🚀 ~ handleRevealClick ~ storedSeedPhrase:", deStoredSeedPhrase)
+    if (deStoredSeedPhrase) {
+      const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
       // Seed phrase already exists in local storage
       const seedPhraseArray = storedSeedPhrase.split(" ");
 
@@ -177,7 +178,8 @@ function ConfirmRecovery() {
 
 
   const handleConfirm = () => {
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
     for (let i = 0; i < removedPhrases.length; i++) {
       const storedSeedPhraseAry = storedSeedPhrase.split(' ');
       const index = removedPhrases[i];
@@ -191,7 +193,7 @@ function ConfirmRecovery() {
     setReadOnly(true); // Disable editing after confirmation
     // Persist removedPhrases and readOnly if needed
     // For now, I'm just alerting "Confirmed!"
-    alert("Confirmed!");
+    localStorage.removeItem("seedPhrase")
     navigation.push("/completion")
   };
 
