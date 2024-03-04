@@ -273,7 +273,7 @@ export const updateUserInformationApi = async (updatedInfo) => {
 
 export const changePasswordApi = async (passwords) => {
   const res = await axiosInstance("/users/change_password", {
-    method: "POST",
+    method: "PUT",
     data: passwords,
   });
   return res;

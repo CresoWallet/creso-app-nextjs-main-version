@@ -8,7 +8,7 @@ import Dai2 from "../../assets/Dashboard/Dai2.png";
 
 import { ethers } from "ethers";
 import { ETHERSCAN } from "@/constants";
-import { viewTransactionHistoryApi } from "@/clientApi/auth";
+import { getTransactionHistoryApi } from "@/clientApi/auth";
 
 const HistoryCard = ({
   secureWalletAddress,

@@ -16,20 +16,20 @@
 //   const [createWalletHovered, setCreateWalletHovered] = useState(false);
 //   const [isChecked, setIsChecked] = useState(true);
 
-//   // const initWeb3Modal = async () => {
-//   //   const web3Modal = new Web3Modal({
-//   //     cacheProvider: true,
-//   //     providerOptions: {}, // You can customize this based on the providers you want to support
-//   //   });
-//   //   const provider = await web3Modal.connect();
+//   const initWeb3Modal = async () => {
+//     const web3Modal = new Web3Modal({
+//       cacheProvider: true,
+//       providerOptions: {}, // You can customize this based on the providers you want to support
+//     });
+//     const provider = await web3Modal.connect();
 
-//   //   // Once connected, you can use the provider to interact with the user's wallet
-//   //   const signer = new ethers.providers.Web3Provider(provider).getSigner();
+//     // Once connected, you can use the provider to interact with the user's wallet
+//     const signer = new ethers.providers.Web3Provider(provider).getSigner();
 
-//   //   console.log("Connected to wallet:", signer._address);
+//     console.log("Connected to wallet:", signer._address);
 
-//   //   // Handle any further actions after connecting
-//   // };
+//     // Handle any further actions after connecting
+//   };
 
 //   return (
 //     <div className=" h-full md:px-4  py-4 flex flex-col ">
