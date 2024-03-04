@@ -127,7 +127,7 @@ const SecurityPage = () => {
               </button>
             </div>
             <div className="pt-4 flex gap-4 px-6">
-              <AiTwotoneInfoCircle className="h-8 w-8" />
+              <AiTwotoneInfoCircle className="h-6 w-6" />
               <p className="text-[#A09FAA] text-sm">
                 Choose the amount of time before the application automatically
                 locks

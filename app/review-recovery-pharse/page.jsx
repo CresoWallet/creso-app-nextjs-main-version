@@ -10,33 +10,77 @@ import { MdOutlineFileCopy } from "react-icons/md";
 import CustomButton4 from "@/components/CustomButton4";
 import Link from "next/link";
 import { WalletContext } from "@/providers/WalletProvider";
+import { createHash } from 'crypto';
+import { setStoredSeedPhrase, selectStoredSeedPhrase } from "@/store/sha256HashSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 function ReviewRecovery() {
+  const dispatch = useDispatch();
+  const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
+  console.log("🚀 ~ ReviewRecovery ~ getStoredSeedPhrase:", getStoredSeedPhrase)
+
   const [revealed, setRevealed] = useState(false);
   const [recoveryPhrases, setRecoveryPhrases] = useState(
     Array(12)
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
-  const { seedPhrase } = useContext(WalletContext);
+  // const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
+  // const seedPhrasecreateHash = recoveryPhrases;
+  const generateSHA256Hash = (data) => {
+    if (data === null) {
+      console.error("Data is null");
+      return null; // or handle the case appropriately
+    }
 
-  console.log(recoveryPhrases, "<------------------------recoveryPhrases");
-
+    const hash = createHash('sha256');
+    hash.update(data);
+    return hash.digest('hex');
+  };
+  // const generateSHA256Hash = (data) => {
+  //   const hash = createHash('sha256');
+  //   hash.update(data);
+  //   return hash.digest('hex');
+  // };
   const handleRevealClick = async () => {
-    if (!revealed) {
+    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+
+
+    // const storedWalletAddress = localStorage.getItem("walletAddress");
+    const storedWalletName = localStorage.getItem("walletName");
+
+    if (storedSeedPhrase) {
+      // Seed phrase already exists in local storage
+      const seedPhraseArray = storedSeedPhrase.split(" ");
+
+      const phrasesWithRevealed = seedPhraseArray.map((word) => ({
+        word,
+        revealed: true,
+      }));
+
+      setRecoveryPhrases(phrasesWithRevealed);
+      setRevealed(true);
+
+      const sha256Hash = generateSHA256Hash(storedSeedPhrase);
+      console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash)
+      dispatch(setStoredSeedPhrase(sha256Hash));
+    } else {
+      // Seed phrase doesn't exist in local storage, make API call
       try {
+        console.log("Calling createEOAWalletApi...");
         const res = await createEOAWalletApi({
-          walletName: "EOA",
-        }); // Call the API
+          walletName: storedWalletName,
+        });
+        console.log("createEOAWalletApi response:", res);
         const { data } = res;
-        console.log(data?.data, "dssssssssssssssssss");
+        console.log(data?.data, "<------------handleRevealClick Data");
 
-        // setRecoveryPhrases(data?.data?.seedPhrase);
-        // setRecoveryPhrases(data?.data?.seedPhrase.split(" "));
+        // Update local storage with the newly generated seed phrase
+        localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
+        localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
-        // setRevealed(true);
-        // console.log("Token:", data.token);
-        // const seedPhrase = data?.data?.seedPhrase || "";
         const SeedPhrase = data?.data?.seedPhrase || "";
+        console.log("🚀 ~ handleRevealClick ~ SeedPhrase:", SeedPhrase)
         if (SeedPhrase.length > 0) {
           const seedPhraseArray = SeedPhrase.split(" ");
 
@@ -47,15 +91,16 @@ function ReviewRecovery() {
 
           setRecoveryPhrases(phrasesWithRevealed);
           setRevealed(true);
-          console.log("Token:", data.token);
+
+          const sha256Hash = generateSHA256Hash(SeedPhrase);
+          console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash)
+          dispatch(setStoredSeedPhrase(sha256Hash));
         } else {
           console.error("Seed phrase is empty or not provided.");
         }
       } catch (err) {
         console.error("Error fetching recovery phrases:", err);
       }
-    } else {
-      setRevealed(false); // Toggle the revealed state only if the phrase was previously revealed
     }
   };
 
@@ -96,11 +141,10 @@ function ReviewRecovery() {
           {recoveryPhrases.map((phraseObj, index) => (
             <div
               key={index}
-              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
-                  ? "bg-[#A66CFF] border-black"
-                  : "blur-sm bg-black opacity-[10%] text-white"
-              }`}
+              className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${revealed
+                ? "bg-[#A66CFF] border-black"
+                : "blur-sm bg-black opacity-[10%] text-white"
+                }`}
               style={{ minWidth: "25%", textAlign: "center" }}
             >
               {`${index + 1}. ${phraseObj.word}`}
@@ -115,14 +159,14 @@ function ReviewRecovery() {
             </div>
           )}
         </div>
-        <div className="my-4 flex gap-2 justify-end items-center">
+        {/* <div className="my-4 flex gap-2 justify-end items-center">
           {revealed && (
             <>
               <MdOutlineFileCopy />
               <p>copy to clipboard</p>
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={handleRevealClick}>

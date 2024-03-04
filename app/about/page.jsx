@@ -1,27 +1,16 @@
 "use client";
-import CapCard from "@/components/CapCard";
-import CresoCard from "@/components/CresoCard";
-import CustomButton from "@/components/CustomButton";
-import CustomButton2 from "@/components/CustomButton2";
-// import Header from "@/components/Header";
-import SideNav from "@/components/navbar/SideNav";
-import User from "@/components/User";
+
 import React, { useContext, useEffect, useState } from "react";
-import Sure from "../../assets/Dashboard/gainers/sure.png";
+
 import Vector from "../../assets/AboutUs/Vector.png";
 import Image from "next/image";
-import Info from "../../assets/AboutUs/info.png";
-import Arrow from "../../assets/AboutUs/Arrow.2.png";
-import CFX from "../../assets/AboutUs/gainers/cfx.png";
-import MINA from "../../assets/AboutUs/gainers/mina.png";
-import { useMediaQuery } from "react-responsive";
-import Ham from "../../assets/Dashboard/ham.png";
+
 import LeftHeader from "@/components/LeftHeader";
 import RightMain from "../MainLayout/RightMain";
 import { WalletContext } from "@/providers/WalletProvider";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AiTwotoneInfoCircle } from "react-icons/ai";
-import { CgTrash } from "react-icons/cg";
+
 import Header from "@/components/Header";
 
 const AboutPage = () => {

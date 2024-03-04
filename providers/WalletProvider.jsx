@@ -51,7 +51,6 @@ const WalletContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [seedPhrase, setSeedPhrase] = useState("");
-  console.log("🚀 ~ WalletContextProvider ~ seedPhrase:", seedPhrase);
   // console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {

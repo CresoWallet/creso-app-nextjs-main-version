@@ -20,10 +20,6 @@ import Etherscan from "../assets/Dashboard/etherscan.png";
 import Github from "../assets/Dashboard/github.png";
 import Discord from "../assets/Dashboard/discord.png";
 
-// import UserDetails from "./UserDetails";
-// import { AUTH_TOKEN } from "@/constants";
-// import User from "../assets/Dashboard/User.png";
-
 const Header = () => {
   const router = useRouter();
 
@@ -73,7 +69,7 @@ const Header = () => {
         window.location.href = "/";
       }
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     } finally {
     }
   };
@@ -132,6 +128,7 @@ const Header = () => {
               <p className="text-xm text-black">28 OCT 2023 </p>{" "}
             </div>
             <hr />
+
             <Link href="/account">
               <div className="flex flex-row items-center -between cursor-pointer hover:scale-105 py-4 hover:font-bold">
                 <div className="flex flex-row gap-2 pl-2 items-center">

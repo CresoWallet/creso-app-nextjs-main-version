@@ -29,12 +29,14 @@ function ChangePassword() {
 
     if (!currentPassword || !password || !confirmPassword) {
       setError("Please fill all required fields.");
+    } else if (password.length < 8) {
+      setError("New password must be at least 8 characters long.");
     } else if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
+      setError("Passwords do not match");
     } else if (!isChecked) {
       setError("Please agree to the Terms of Use.");
     } else {
-      setPasswordError("");
+      setError("");
       router.push(`/`);
     }
 
