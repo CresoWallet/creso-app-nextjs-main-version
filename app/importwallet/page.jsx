@@ -6,6 +6,12 @@ import { BsArrowLeft } from "react-icons/bs";
 import { importEOAWalletApi } from "@/clientApi/auth";
 import CustomCheckbox from "@/components/CustomCheckbox";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectStoredSeedPhrase,
+  setStoredSeedPhrase,
+} from "@/store/sha256HashSlice";
+import { createHash } from "crypto";
 function ImportWallet() {
   const seedPhraseLength = 12;
   const [userInput, setUserInput] = useState(Array(seedPhraseLength).fill(""));
@@ -21,13 +27,28 @@ function ImportWallet() {
     newUserInput[index] = value;
     setUserInput(newUserInput);
   };
+  const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
+  const dispatch = useDispatch();
+  const generateSHA256Hash = (data) => {
+    if (data === null) {
+      console.error("Data is null");
+      return null; // or handle the case appropriately
+    }
 
+    const hash = createHash("sha256");
+    hash.update(data);
+    return hash.digest("hex");
+  };
   const handleVerify = async () => {
     try {
       // Get seed phrase from local storage
-      const storedSeedPhrase = localStorage.getItem("seedPhrase");
+      const storedSeedPhrase = localStorage.getItem("seedshash");
+      const userInputSeeds = userInput.join(" ");
+      const sha256Hash = generateSHA256Hash(userInputSeeds);
+      console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
+      dispatch(setStoredSeedPhrase(sha256Hash));
       // Compare entered seed phrase with stored one
-      if (userInput.join(" ") !== storedSeedPhrase) {
+      if (sha256Hash !== storedSeedPhrase) {
         setError("Invalid seed phrase.");
         return;
       }
