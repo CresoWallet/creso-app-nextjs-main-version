@@ -215,7 +215,7 @@ function Welcome() {
 
         {/* Terms of Use */}
         <div className="flex items-center justify-center mb-8 pb-2">
-          <ConnectWallet />
+          <w3m-button />
 
           <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
           <span className="ml-2">
@@ -251,6 +251,7 @@ function Welcome() {
           >
             <Link href="/importwallet">Import an existing wallet</Link>
           </CustomButton4>
+          {/* <ConnectWallet /> */}
           <CustomButton4
             isHovered={createWalletHovered}
             onMouseEnter={() => setCreateWalletHovered(true)}
