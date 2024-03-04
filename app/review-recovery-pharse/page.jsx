@@ -20,7 +20,7 @@ import useEncryption from "@/components/EncryptData/EncryptData";
 import instanceEnDe from "@/components/EncryptData/BaseURL";
 
 function ReviewRecovery() {
-  const encrypt = useEncryption();
+  const { encryptData, decryptData } = useEncryption();
   const dispatch = useDispatch();
   const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
   console.log(
@@ -52,12 +52,12 @@ function ReviewRecovery() {
   //   return hash.digest('hex');
   // };
   const handleRevealClick = async () => {
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
-
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
     // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
 
-    if (storedSeedPhrase) {
+    if (deStoredSeedPhrase) {
+      const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
       // Seed phrase already exists in local storage
       const seedPhraseArray = storedSeedPhrase.split(" ");
 
@@ -84,9 +84,13 @@ function ReviewRecovery() {
         console.log(data?.data, "<------------handleRevealClick Data");
 
         // Update local storage with the newly generated seed phrase
-        const enSeedPharsh = encrypt(data?.data?.seedPhrase);
-        console.log("encrpty", enSeedPharsh);
-        localStorage.setItem("seedPhrase", data?.data?.seedPhrase);
+        const enSeedPharsh = encryptData(
+          JSON.stringify({
+            seeds: data?.data?.seedPhrase,
+          })
+        );
+        // console.log("encrypt-------------------->", enSeedPharsh);
+        localStorage.setItem("seedPhrase", enSeedPharsh);
         localStorage.setItem("walletAddress", data?.data?.walletAddress);
 
         const SeedPhrase = data?.data?.seedPhrase || "";
@@ -190,7 +194,7 @@ function ReviewRecovery() {
           padding="px-14 py-4"
           className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
         >
-          <Link href="/completion">Confirm</Link>
+          <Link href="/confirm-recovery-pharse">Confirm</Link>
         </CustomButton4>
       </div>
     </div>
