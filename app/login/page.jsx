@@ -35,9 +35,9 @@ const LoginPage = () => {
   //     router.push(`/welcome`);
   //   }
   // }, [authToken]);
-  console.log("====================================");
+
   console.log(authToken, "authToken");
-  console.log("====================================");
+
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     router.push(`/dashboard`);
