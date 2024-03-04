@@ -37,7 +37,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     // Fetch user information when the component mounts
-    async function fetchUserInformation() {
+    async function updateUserInformationApi() {
       try {
         const res = await getUserInformationApi();
         setUserInfo(res.data); // Update user information state
@@ -46,7 +46,7 @@ const UserDetails = () => {
       }
     }
 
-    fetchUserInformation();
+    updateUserInformationApi();
   }, []);
 
   const handleButton = () => {
