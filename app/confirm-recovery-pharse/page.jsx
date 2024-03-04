@@ -118,28 +118,39 @@ import CommonComponent from "@/components/common/CommonEOA";
 import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
 import { useRouter } from "next/navigation";
+import useEncryption from "@/components/EncryptData/EncryptData";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  setStoredSeedPhrase,
+  selectStoredSeedPhrase,
+} from "@/store/sha256HashSlice";
+import { createHash } from "crypto";
 function ConfirmRecovery() {
-
-
+  const { encryptData, decryptData } = useEncryption();
   const [removedPhrases, setRemovedPhrases] = useState([]);
   // const [userInput, setUserInput] = useState(
   //   Array(secretPhrase.length).fill("")
   // );
-  const [seedPhraseData, setseedPhraseData] = useState(Array(12)
-    .fill("")
-    .map((word) => ({ word, revealed: false })))
-  console.log("🚀 ~ ConfirmRecovery ~ seedPhraseData:", seedPhraseData)
+  const [seedPhraseData, setseedPhraseData] = useState(
+    Array(12)
+      .fill("")
+      .map((word) => ({ word, revealed: false }))
+  );
+  console.log("🚀 ~ ConfirmRecovery ~ seedPhraseData:", seedPhraseData);
   const [error, setError] = useState("");
-  const navigation = useRouter()
+  const navigation = useRouter();
   const [readOnly, setReadOnly] = useState(true);
-
-
-
+  const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
+  const dispatch = useDispatch();
   const handleRevealClick = async () => {
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
-    console.log("🚀 ~ handleRevealClick ~ storedSeedPhrase:", storedSeedPhrase)
-    if (storedSeedPhrase) {
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    console.log(
+      "🚀 ~ handleRevealClick ~ storedSeedPhrase:",
+      deStoredSeedPhrase
+    );
+    if (deStoredSeedPhrase) {
+      const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
       // Seed phrase already exists in local storage
       const seedPhraseArray = storedSeedPhrase.split(" ");
 
@@ -164,7 +175,7 @@ function ConfirmRecovery() {
       }
     }
     setRemovedPhrases(removedPhrases);
-    handleRevealClick()
+    handleRevealClick();
   }, []);
   const handleInputChange = (index, value) => {
     setseedPhraseData((prevSeedPhraseData) => {
@@ -175,13 +186,24 @@ function ConfirmRecovery() {
     // setseedPhraseData(...seedPhraseData,value)
   };
 
+  const generateSHA256Hash = (data) => {
+    if (data === null) {
+      console.error("Data is null");
+      return null; // or handle the case appropriately
+    }
+
+    const hash = createHash("sha256");
+    hash.update(data);
+    return hash.digest("hex");
+  };
 
   const handleConfirm = () => {
-    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
     for (let i = 0; i < removedPhrases.length; i++) {
-      const storedSeedPhraseAry = storedSeedPhrase.split(' ');
+      const storedSeedPhraseAry = storedSeedPhrase.split(" ");
       const index = removedPhrases[i];
-      console.log("local", storedSeedPhraseAry, "user", seedPhraseData)
+      console.log("local", storedSeedPhraseAry, "user", seedPhraseData);
       if (seedPhraseData[index].word !== storedSeedPhraseAry[index]) {
         setError("Incorrect phrase. Please try again.");
         return;
@@ -191,8 +213,12 @@ function ConfirmRecovery() {
     setReadOnly(true); // Disable editing after confirmation
     // Persist removedPhrases and readOnly if needed
     // For now, I'm just alerting "Confirmed!"
-    alert("Confirmed!");
-    navigation.push("/completion")
+    const sha256Hash = generateSHA256Hash(storedSeedPhrase);
+    console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
+    dispatch(setStoredSeedPhrase(sha256Hash));
+    localStorage.setItem("seedshash", sha256Hash);
+    localStorage.removeItem("seedPhrase");
+    navigation.push("/completion");
   };
 
   return (
@@ -229,11 +255,18 @@ function ConfirmRecovery() {
             <input
               key={index}
               type="text"
-              className={`rounded-full border text-center text-sm md:text-base break-words m-1 p-1 lg:p-2 ${removedPhrases.includes(index)
-                ? ""
-                : "bg-[#A66CFF] cursor-pointer"
-                }`}
-              value={removedPhrases.includes(index) === false ? (item.revealed ? item.word : "") : null}
+              className={`rounded-full border text-center text-sm md:text-base break-words m-1 p-1 border-black lg:p-2 ${
+                removedPhrases.includes(index)
+                  ? ""
+                  : "bg-[#A66CFF] cursor-pointer"
+              }`}
+              value={
+                removedPhrases.includes(index) === false
+                  ? item.revealed
+                    ? item.word
+                    : ""
+                  : null
+              }
               onChange={(e) => handleInputChange(index, e.target.value)}
             />
           ))}
