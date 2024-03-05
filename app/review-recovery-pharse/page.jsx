@@ -15,15 +15,17 @@ import {
   setStoredSeedPhrase,
   selectStoredSeedPhrase,
 } from "@/store/sha256HashSlice";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import useEncryption from "@/components/EncryptData/EncryptData";
 import instanceEnDe from "@/components/EncryptData/BaseURL";
 
-
 function ReviewRecovery() {
   const { encryptData, decryptData } = useEncryption();
   const dispatch = useDispatch();
+  const navigation = useRouter();
   const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
+  const [hideSeed, setHideSeed] = useState(false);
   console.log(
     "🚀 ~ ReviewRecovery ~ getStoredSeedPhrase:",
     getStoredSeedPhrase
@@ -52,11 +54,24 @@ function ReviewRecovery() {
   //   hash.update(data);
   //   return hash.digest('hex');
   // };
-  const handleRevealClick = async () => {
+  const handleConfirmClick = () => {
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    if (deStoredSeedPhrase || revealed) {
+      navigation.push("/confirm-recovery-pharse");
+    } else {
+      alert("Reveal Seeds");
+    }
+  };
+  const handleRevealClick = async (e) => {
+    console.log("true or false", e.target.textContent);
+    if (e.target.textContent === "Hide Secret Recovery Phrase") {
+      setHideSeed(true);
+    } else {
+      setHideSeed(false);
+    }
     const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
     // const storedWalletAddress = localStorage.getItem("walletAddress");
     const storedWalletName = localStorage.getItem("walletName");
-
     if (deStoredSeedPhrase) {
       const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
       // Seed phrase already exists in local storage
@@ -157,7 +172,9 @@ function ReviewRecovery() {
             <div
               key={index}
               className={`rounded-full border text-center text-sm md:text-base break-words  m-1 p-1 lg:p-2 md:my-1.5  ${
-                revealed
+                hideSeed
+                  ? "blur-sm bg-black opacity-[10%] text-white"
+                  : revealed
                   ? "bg-[#A66CFF] border-black"
                   : "blur-sm bg-black opacity-[10%] text-white"
               }`}
@@ -166,7 +183,7 @@ function ReviewRecovery() {
               {`${index + 1}. ${phraseObj.word}`}
             </div>
           ))}
-          {!revealed && (
+          {(!revealed || hideSeed) && (
             <div className="absolute flex flex-col justify-center items-center inset-0">
               <div className="text-4xl">
                 <HiOutlineEye />
@@ -185,18 +202,24 @@ function ReviewRecovery() {
         </div> */}
 
         <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
-          <button className="p-2.5" onClick={handleRevealClick}>
-            {revealed
+          <button className="p-2.5" onClick={(e) => handleRevealClick(e)}>
+            {hideSeed
+              ? "Reveal Secret Recovery Phrase"
+              : revealed
               ? "Hide Secret Recovery Phrase"
               : "Reveal Secret Recovery Phrase"}
           </button>
         </div>
-        <CustomButton4
-          padding="px-14 py-4"
-          className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
-        >
-          <Link href="/confirm-recovery-pharse">Confirm</Link>
-        </CustomButton4>
+        {revealed ? (
+          <CustomButton4
+            padding="px-14 py-4"
+            className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+          >
+            <div onClick={handleConfirmClick} className="">
+              Confirm
+            </div>
+          </CustomButton4>
+        ) : null}
       </div>
     </div>
   );
