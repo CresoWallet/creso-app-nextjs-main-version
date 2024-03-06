@@ -25,7 +25,9 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
 import Header from "@/components/Header";
 import OTP from "@/components/OTP/OTP";
-import createAAWalletApi from "../../clientApi/auth"
+import createAAWalletApi, { getAAWallet } from "../../clientApi/auth";
+import WalletAddress from "@/components/WalletAddress";
+import { getUserWallets } from "@/clientApi/wallet";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -62,6 +64,8 @@ const MainLayout = () => {
     setWalletAddress,
     showCreateWallet,
     setShowCreateWallet,
+    aaWalletList,
+    setAaWalletList,
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -69,9 +73,15 @@ const MainLayout = () => {
       router.push("/");
     }
   }, [status]);
-
+  async function getAAWalletList(walletAddress) {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------", res);
+    setAaWalletList(res?.data);
+  }
   useEffect(() => {
     fetchWallet();
+    const walletAddress = localStorage.getItem("walletAddress");
+    getAAWalletList(walletAddress);
   }, []);
 
   const gettokenprice = async (data) => {

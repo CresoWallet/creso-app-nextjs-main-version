@@ -16,6 +16,19 @@ export const logOut = async (formData) => {
   return res;
 };
 
+export const getAAWallet = async ( address) => {
+  const res = await axiosInstance(`/wallets/aa/${address}`, {
+    method: "GET",
+  });
+  return res
+};
+export const getEoaWallet = async () => {
+  const res = await axiosInstance(`/wallets/Eoa`, {
+    method: "GET",
+  });
+  return res
+};
+
 // export const signUpAPI = async (formData) => {
 //   const res = await axiosInstance(`/signup`, {
 //     method: "POST",
@@ -131,7 +144,7 @@ export const connectExternalEOAWalletApi = async (formData) => {
 export const createAAWalletApi = async (formData) => {
   const res = await axiosInstance("/wallet/aa", {
     method: "POST",
-    data: formData
+    data: formData,
   });
   return res;
 };
