@@ -51,6 +51,7 @@ const WalletContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [seedPhrase, setSeedPhrase] = useState("");
+  const [aaWalletList, setaaWalletList] = useState([])
   // console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {
@@ -130,6 +131,7 @@ const WalletContextProvider = ({ children }) => {
 
     try {
       const res = await getUserWallets();
+      console.log("🚀 ~ fetchWal ~ res:", res)
 
       if (res?.data) {
         setEoaWalletAddress(res?.data?.wallets[0].address);
@@ -265,6 +267,8 @@ const WalletContextProvider = ({ children }) => {
         setUserEmail,
         seedPhrase,
         setSeedPhrase,
+        aaWalletList,
+        setaaWalletList
       }}
     >
       {/* {navbarTrigger && (
