@@ -25,6 +25,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
 import Header from "@/components/Header";
 import OTP from "@/components/OTP/OTP";
+import createAAWalletApi from "../../clientApi/auth"
 
 const MainLayout = () => {
   const router = useRouter();
@@ -80,7 +81,8 @@ const MainLayout = () => {
     // console.log("Tokenprice😁--->", Tokenprice.data);
     setCoinDataprice(Tokenprice.data);
   };
-  const handleCreateWallet = () => {
+  const handleCreateWallet = async () => {
+    // const res = await createAAWalletApi({walletAddress,})
     setShowCreateWallet(!showCreateWallet);
     setActiveButton("");
 
