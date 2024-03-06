@@ -106,8 +106,8 @@ const LoginPage = () => {
         />
       </div>
 
-      <div className="md:col-span-1  xl:px-24 md:px-8  flex flex-col xl:py-16 md:py-8">
-        <p className="font-bold md:text-2xl  hidden md:block xl:text-4xl xl:mb-8 md:mb-4 text-xl">
+      <div className="md:col-span-1 xl:px-24 md:px-8  flex flex-col xl:py-16 md:py-8">
+        <p className="font-bold md:text-2xl  hidden md:block xl:text-4xl xl:mb-8 md:mb-4 text-2xl">
           Login
         </p>
 
@@ -118,22 +118,24 @@ const LoginPage = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4 md:mx-0 mx-4 "
+          className="flex flex-col space-y-4 md:mx-0 mx-4 mt-5"
         >
           <CustomTextField
             label={"Email"}
             placeholder={"email"}
             validation={{ ...register("email", { required: true }) }}
+            className="ml-4 font-bold"
           />
           <CustomTextField
             label={"Password"}
             placeholder={"password"}
             type={"password"}
             validation={{ ...register("password", { required: true }) }}
+            className="ml-4 font-bold"
           />
-          <span className="text-[#FF4085] text-sm cursor-pointer hover:font-bold">
+          <div className="text-[#FF4085] text-sm cursor-pointer hover:font-bold text-end">
             <Link href="/changepassword"> change Password? </Link>
-          </span>
+          </div>
           <Capcha onSubmit={onSubmit} />
 
           <div className="flex flex-col space-y-2">

@@ -4,10 +4,11 @@ export function CustomTextField({
   validation,
   error,
   type,
+  className
 }) {
   return (
     <div className="flex flex-col space-y-1 w-full">
-      <p className="text-sm">{label}</p>
+      <p className={`text-sm ${className}`}>{label}</p>
       <input
         {...validation}
         type={type ? type : "text"}
