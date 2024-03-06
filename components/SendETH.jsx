@@ -89,33 +89,14 @@ const SendETH = ({
       setStandard("native");
     }
   };
-  // // Handle form submission
-  // const onSubmit = async (data) => {
-  //   const transferPayload = {
-  //     senderWalletAddress: selectedWallet.address,
-  //     recipientAddress: data.to,
-  //     amount: data.amount,
-  //     gasPrice: data.gasPrice,
-  //     gasLimit: data.gasLimit,
-  //     network: selectedNetwork
-  //       ? selectedNetwork?.value
-  //       : networkFirstValue.value,
-  //     standard: standard,
-  //     tokenAddress:
-  //       standard === "stable"
-  //         ? selectedCoin
-  //           ? selectedCoin?.tokenContractAddress
-  //           : initialToken?.tokenContractAddress
-  //         : "",
-  //   };
-
+  // Handle form submission
   const onSubmit = async (data) => {
     const transferPayload = {
-      type: selectedWallet.type,
-      sendTo: data.to,
+      senderWalletAddress: selectedWallet.address,
+      recipientAddress: data.to,
       amount: data.amount,
-      from: selectedWallet.address,
-      // network: "goerli",
+      gasPrice: data.gasPrice,
+      gasLimit: data.gasLimit,
       network: selectedNetwork
         ? selectedNetwork?.value
         : networkFirstValue.value,
@@ -127,6 +108,24 @@ const SendETH = ({
             : initialToken?.tokenContractAddress
           : "",
     };
+
+    // const onSubmit = async (data) => {
+    //   const transferPayload = {
+    //     type: selectedWallet.type,
+    //     sendTo: data.to,
+    //     amount: data.amount,
+    //     from: selectedWallet.address,
+    //     network: selectedNetwork
+    //       ? selectedNetwork?.value
+    //       : networkFirstValue.value,
+    //     standard: standard,
+    //     tokenAddress:
+    //       standard === "stable"
+    //         ? selectedCoin
+    //           ? selectedCoin?.tokenContractAddress
+    //           : initialToken?.tokenContractAddress
+    //         : "",
+    //   };
 
     // console.log(transferPayload);
 
@@ -231,7 +230,7 @@ const SendETH = ({
                     alt=""
                     src={
                       selectedNetwork.value === "ethereum" ||
-                      selectedNetwork.value === "goerli"
+                      selectedNetwork.value === "Mumbai"
                         ? Ethereum
                         : selectedNetwork.value === "bnb"
                         ? BNB
@@ -246,7 +245,7 @@ const SendETH = ({
                     alt=""
                     src={
                       networkFirstValue?.value === "ethereum" ||
-                      networkFirstValue?.value === "goerli"
+                      networkFirstValue?.value === "Mumbai"
                         ? Ethereum
                         : networkFirstValue.value === "bnb"
                         ? BNB
@@ -277,10 +276,10 @@ const SendETH = ({
                   <div
                     key={key}
                     className={`${
-                      item.key === "Goerli Testnet" && "cursor-pointer"
+                      item.key === "Mumbai Testnet" && "cursor-pointer"
                     } flex flex-col gap-4`}
                     onClick={() =>
-                      item.key === "Goerli Testnet" && handleSelectNetwork(item)
+                      item.key === "Mumbai Testnet" && handleSelectNetwork(item)
                     }
                   >
                     <div className="flex flex-row items-center justify-between min-h-[50px]">
@@ -303,7 +302,7 @@ const SendETH = ({
                         <div className="flex flex-col items-start gap-2">
                           <p
                             className={`${
-                              item.key === "Goerli Testnet"
+                              item.key === "Mumbai Testnet"
                                 ? "text-black"
                                 : "text-sm text-gray-500"
                             } `}
