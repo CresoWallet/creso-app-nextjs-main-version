@@ -105,7 +105,7 @@ export const socialLoginApi = async (provider, credentials) => {
 
 // Wallet Management
 export const createEOAWalletApi = async (formData) => {
-  const res = await axiosInstance("/wallets/eoa", {
+  const res = await axiosInstance("/wallet/eoa", {
     method: "POST",
     data: formData,
   });
@@ -113,7 +113,7 @@ export const createEOAWalletApi = async (formData) => {
 };
 
 export const importEOAWalletApi = async (formData) => {
-  const res = await axiosInstance("/wallets/import", {
+  const res = await axiosInstance("/wallet/import", {
     method: "POST",
     data: formData,
   });
@@ -121,7 +121,7 @@ export const importEOAWalletApi = async (formData) => {
 };
 
 export const connectExternalEOAWalletApi = async (formData) => {
-  const res = await axiosInstance("/wallets/connect", {
+  const res = await axiosInstance("/wallet/connect", {
     method: "POST",
     data: formData,
   });
@@ -129,14 +129,14 @@ export const connectExternalEOAWalletApi = async (formData) => {
 };
 
 export const createAAWalletApi = async () => {
-  const res = await axiosInstance("/wallets/aa", {
+  const res = await axiosInstance("/wallet/aa", {
     method: "POST",
   });
   return res;
 };
 
 export const setMultiSigThresholdApi = async (address, threshold) => {
-  const res = await axiosInstance(`/wallets/aa/${address}/threshold`, {
+  const res = await axiosInstance(`/wallet/aa/${address}/threshold`, {
     method: "POST",
     data: { threshold },
   });

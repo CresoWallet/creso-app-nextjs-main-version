@@ -26,18 +26,15 @@ const CresoCard = ({ balance }) => {
         >
           <Image alt="" src={Custom} className="md:h-auto h-56 md:w-full  " />
         </div>
-
         <div className="absolute flex flex-row items-center top-20 left-10 gap-1 ">
           <Image alt="" src={Creso} className="md:h-6 h-5 md:w-6 w-5" />
           <p className="font-bold md:text-2xl text-xl ">creso</p>
         </div>
-
         <div className="absolute bottom-12 pl-10">
           <div className="flex flex-row gap-2 items-center">
             <div>
               <Image alt="" src={card_creso} className="h-14" />
             </div>
-
             <div className="flex flex-col">
               <p className="text-base  text-black">Total Assets:</p>
               <div className="flex flex-row gap-2 items-center">

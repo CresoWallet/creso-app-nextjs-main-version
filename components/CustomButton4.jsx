@@ -13,7 +13,7 @@ const CustomButton4 = ({
 }) => {
   return (
     <button
-      className={`rounded-full py-3 sm:py-5 m-2 sm:m-4 ${padding}border-black ${
+      className={`rounded-full py-3 sm:py-5 m-2 sm:m-4 ${padding} border-black ${
         isHovered ? "bg-black text-white" : "bg-transparent text-black"
       } ${isHovered ? "" : "border"}`}
       onMouseEnter={onMouseEnter}
