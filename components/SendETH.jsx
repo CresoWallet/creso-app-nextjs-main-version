@@ -20,7 +20,6 @@ import { WalletContext } from "@/providers/WalletProvider";
 import { tokenList } from "@/utils/data/coinlist";
 import { getTokenBalance } from "@/services/ethers/wallet";
 import { VscFeedback } from "react-icons/vsc";
-<VscFeedback />;
 
 // Import the sendTransactionApi function
 import { sendTransactionApi } from "@/clientApi/auth";

@@ -135,13 +135,13 @@ export const createAAWalletApi = async () => {
   return res;
 };
 
-export const setMultiSigThresholdApi = async (address, threshold) => {
-  const res = await axiosInstance(`/wallet/aa/${address}/threshold`, {
-    method: "POST",
-    data: { threshold },
-  });
-  return res;
-};
+// export const setMultiSigThresholdApi = async (address, threshold) => {
+//   const res = await axiosInstance(`/wallet/aa/${address}/threshold`, {
+//     method: "POST",
+//     data: { threshold },
+//   });
+//   return res;
+// };
 
 // Dual Sign Authorization
 export const initiateActionApi = async (actionType, formData) => {
@@ -153,46 +153,46 @@ export const initiateActionApi = async (actionType, formData) => {
 };
 
 export const approveActionOnMainDeviceApi = async (
-  confirmationRequestId,
+  transactionId,
   authenticationMethod
 ) => {
-  const res = await axiosInstance(`/actions/${confirmationRequestId}/approve`, {
+  const res = await axiosInstance(`/actions/${transactionId}/approve`, {
     method: "POST",
     data: { authenticationMethod },
   });
   return res;
 };
 
-// Security Features
-export const generateShamirSharesApi = async () => {
-  const res = await axiosInstance("/shamir/generate", {
-    method: "GET",
-  });
-  return res;
-};
+// // Security Features
+// export const generateShamirSharesApi = async () => {
+//   const res = await axiosInstance("/shamir/generate", {
+//     method: "GET",
+//   });
+//   return res;
+// };
 
-export const verifyShamirSharesApi = async (shares) => {
-  const res = await axiosInstance("/shamir/verify", {
-    method: "POST",
-    data: { shares },
-  });
-  return res;
-};
+// export const verifyShamirSharesApi = async (shares) => {
+//   const res = await axiosInstance("/shamir/verify", {
+//     method: "POST",
+//     data: { shares },
+//   });
+//   return res;
+// };
 
-export const createEncryptedBackupApi = async (formData) => {
-  const res = await axiosInstance("/backups", {
-    method: "POST",
-    data: formData,
-  });
-  return res;
-};
+// export const createEncryptedBackupApi = async (formData) => {
+//   const res = await axiosInstance("/backups", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
 
-export const manageAuthenticationMethodsApi = async () => {
-  const res = await axiosInstance("/auth/methods", {
-    method: "GET",
-  });
-  return res;
-};
+// export const manageAuthenticationMethodsApi = async () => {
+//   const res = await axiosInstance("/auth/methods", {
+//     method: "GET",
+//   });
+//   return res;
+// };
 
 // Wallet Operations
 export const getWalletBalanceApi = async (address, network) => {
@@ -237,13 +237,10 @@ export const viewTransactionDetailsApi = async (transactionId, network) => {
 
 // Token Management
 export const getTokenBalanceApi = async (address, tokenAddress, network) => {
-  const res = await axiosInstance(
-    `/tokens/${address}/balance/${tokenAddress}`,
-    {
-      method: "GET",
-      data: { network },
-    }
-  );
+  const res = await axiosInstance(`/token/${address}/balance/${tokenAddress}`, {
+    method: "GET",
+    data: { network },
+  });
   return res;
 };
 
@@ -359,3 +356,44 @@ export const notifyTransactionExecutionApi = async (
   );
   return res;
 };
+
+// // Guardian Management
+// export const addGuardianApi = async (formData) => {
+//   const res = await axiosInstance("/add/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+
+// export const removeGuardianApi = async (formData) => {
+//   const res = await axiosInstance("/remove/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+
+// export const startRecoveryApi = async (formData) => {
+//   const res = await axiosInstance("/start/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+
+// export const confirmRecoveryApi = async (formData) => {
+//   const res = await axiosInstance("/confirm/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+
+// export const getGuardiansApi = async (formData) => {
+//   const res = await axiosInstance("/get/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
