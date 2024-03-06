@@ -50,42 +50,46 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
     }
   };
 
+  const handleCreateAAWallet = async () => {
+    setLoading(true);
+    const walletAddress = localStorage.getItem("walletAddress");
+    const dataForCreateAAWallet = {
+      address: [walletAddress],
+      walletName: inputText,
+      network: "mumbai",
+    };
+    // Check if the inputText (name field) is empty
+    if (inputText.trim() === "") {
+      setError(true); // Set error state to true to indicate an issue
+      setLoading(false);
+      enqueueSnackbar(`Please fill in the name field.`, {
+        variant: "error",
+      });
+      return; // Exit the function early if the name field is empty
+    }
+
+    try {
+      // Call the API to create AA Wallet
+      const res = await createAAWalletApi(dataForCreateAAWallet);
+
+      if (res) {
+        await fetchWallet();
+        enqueueSnackbar(`Successful wallet creation`, {
+          variant: "success",
+        });
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(`Something went wrong`, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false); // Close loading button in both success and error scenarios
+    }
+  };
   const handleCreateEOAWallet = async () => {
     setLoading(true);
-
-    const handleCreateAAWallet = async () => {
-      setLoading(true);
-
-      // Check if the inputText (name field) is empty
-      if (inputText.trim() === "") {
-        setError(true); // Set error state to true to indicate an issue
-        setLoading(false);
-        enqueueSnackbar(`Please fill in the name field.`, {
-          variant: "error",
-        });
-        return; // Exit the function early if the name field is empty
-      }
-
-      try {
-        // Call the API to create AA Wallet
-        const res = await createAAWalletApi();
-
-        if (res) {
-          await fetchWallet();
-          enqueueSnackbar(`Successful wallet creation`, {
-            variant: "success",
-          });
-          handleClose();
-        }
-      } catch (error) {
-        console.log(error);
-        enqueueSnackbar(`Something went wrong`, {
-          variant: "error",
-        });
-      } finally {
-        setLoading(false); // Close loading button in both success and error scenarios
-      }
-    };
 
     // Check if the inputText (name field) is empty
     if (inputText.trim() === "") {
@@ -176,6 +180,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setLoading(false); // Close loading button in both success and error scenarios
     }
   };
+  const clickFn = type === "EOA" ? handleCreateEOAWallet : handleCreateAAWallet;
 
   const handleSelectNetwork = (item) => {
     setSelectedNetwork(item);
@@ -388,7 +393,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
             name="Confirm"
             bgColor="black"
             textColor="white"
-            handleClick={handleCreateEOAWallet}
+            handleClick={clickFn}
             isDisabled={false}
           />
         )}

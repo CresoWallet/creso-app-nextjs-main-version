@@ -128,9 +128,10 @@ export const connectExternalEOAWalletApi = async (formData) => {
   return res;
 };
 
-export const createAAWalletApi = async () => {
+export const createAAWalletApi = async (formData) => {
   const res = await axiosInstance("/wallet/aa", {
     method: "POST",
+    data: formData
   });
   return res;
 };
