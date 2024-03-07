@@ -22,7 +22,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { fetchWallet, setAaWalletList, setSecureWalletAddress } = useContext(WalletContext);
+  const { fetchWallet, setAaWalletList, setSecureWalletAddress } =
+    useContext(WalletContext);
   const [networkFirstValue] = networks.values();
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
@@ -55,7 +56,12 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setError(true); // Set error state if exceeding the limit
     }
   };
-
+  async function getAAWalletList(walletAddress) {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------", res);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+    setAaWalletList(res?.data);
+  }
   const handleCreateAAWallet = async () => {
     const walletAddress = localStorage.getItem("walletAddress"); getAAWalletList(walletAddress);
     setLoading(true);
@@ -93,6 +99,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
     } finally {
       setLoading(false); // Close loading button in both success and error scenarios
     }
+    getAAWalletList(walletAddress);
   };
   const handleCreateEOAWallet = async () => {
     setLoading(true);
@@ -249,14 +256,14 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                     className="w-6 h-6"
                     alt=""
                     src={
-                      networkFirstValue?.value === "ethereum" ||
-                        networkFirstValue?.value === "goerli"
-                        ? Ethereum
+                      networkFirstValue.value === "polygon" ||
+                      networkFirstValue?.value === "mumbai"
+                        ? Polygon
                         : networkFirstValue.value === "bnb"
-                          ? BNB
-                          : networkFirstValue.value === "polygon"
-                            ? Polygon
-                            : Creso
+                        ? BNB
+                        : networkFirstValue?.value === "ethereum"
+                        ? Ethereum
+                        : Creso
                     }
                   />
                 )}
@@ -280,10 +287,11 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                 {networks.map((item, key) => (
                   <div
                     key={key}
-                    className={`${item.key === "Goerli Testnet" && "cursor-pointer"
-                      } flex flex-col gap-4`}
+                    className={`${
+                      item.key === "Mumbai Testnet" && "cursor-pointer"
+                    } flex flex-col gap-4`}
                     onClick={() =>
-                      item.key === "Goerli Testnet" && handleSelectNetwork(item)
+                      item.key === "Mumbai Testnet" && handleSelectNetwork(item)
                     }
                   >
                     <div className="flex flex-row items-center justify-between min-h-[50px]">
@@ -305,10 +313,11 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                         </div>
                         <div className="flex flex-col items-start gap-2">
                           <p
-                            className={`${item.key === "Goerli Testnet"
-                              ? "text-black"
-                              : "text-sm text-gray-500"
-                              } `}
+                            className={`${
+                              item.key === "Mumbai Testnet"
+                                ? "text-black"
+                                : "text-sm text-gray-500"
+                            } `}
                           >
                             {item.key}{" "}
                           </p>

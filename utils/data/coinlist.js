@@ -7,35 +7,35 @@ export const coinList = [
     coinName: "USDC",
     tokenAddress: "0x7966Eb9c617062f396Bc798515134f30b701af44",
     value: "$2,321.79",
-    network: "goerli",
+    network: "mumbai",
     standard: "stable",
   },
   {
     coinName: "USDT",
     tokenAddress: "0x2227E4764be4c858E534405019488D9E5890Ff9E",
     value: "$2,321.79",
-    network: "goerli",
+    network: "mumbai",
     standard: "stable",
   },
   {
     coinName: "WIDE",
     tokenAddress: "0x80920B48664b45c8FD9C2f4201AcFf6249c72768",
     value: "$2,321.79",
-    network: "goerli",
+    network: "mumbai",
     standard: "stable",
   },
   {
     coinName: "ALPHA",
     tokenAddress: "0xef2B9E1495ee88d9940077a0210a43cd1B9CBB8c",
     value: "$2,321.79",
-    network: "goerli",
+    network: "mumbai",
     standard: "stable",
   },
   {
     coinName: "WETH",
     tokenAddress: "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
     value: "$2,321.79",
-    network: "goerli",
+    network: "mumbai",
     standard: "stable",
   },
   {
@@ -69,14 +69,14 @@ export const coinList = [
 ];
 
 export const tokenList = {
-  goerli: [
+  mumbai: [
     {
       tokenSymbol: "USDC",
       tokenName: "USD Coin",
       tokenContractAddress: "0x7966Eb9c617062f396Bc798515134f30b701af44",
       tokenLogoUrl: "https://static.okx.com/cdn/wallet/logo/USDC.png",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
     {
@@ -86,7 +86,7 @@ export const tokenList = {
       tokenLogoUrl:
         "https://static.okx.com/cdn/wallet/logo/USDT-991ffed9-e495-4d1b-80c2-a4c5f96ce22d.png",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
     {
@@ -95,7 +95,7 @@ export const tokenList = {
       tokenContractAddress: "0x62bD2A599664D421132d7C54AB4DbE3233f4f0Ae",
       tokenLogoUrl: "https://static.okx.com/cdn/wallet/logo/USDC.png",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
     {
@@ -105,7 +105,7 @@ export const tokenList = {
       tokenLogoUrl:
         "https://www.okx.com/cdn/wallet/logo/alpha-20220328.png?x-oss-process=image/format,webp/resize,w_88,h_88/format,webp",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
     {
@@ -115,7 +115,7 @@ export const tokenList = {
       tokenLogoUrl:
         "https://www.okx.com/cdn/wallet/logo/WETH-0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png?x-oss-process=image/format,webp",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
   ],
@@ -165,7 +165,7 @@ export const tokenList = {
       tokenLogoUrl:
         "https://www.okx.com/cdn/wallet/logo/BUSD-20220308.png?x-oss-process=image/format,webp",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
     {
@@ -175,7 +175,7 @@ export const tokenList = {
       tokenLogoUrl:
         "https://www.okx.com/cdn/wallet/logo/BTCB-20220308.png?x-oss-process=image/format,webp",
       value: "$2,321.79",
-      network: "goerli",
+      network: "mumbai",
       standard: "stable",
     },
   ],
@@ -207,9 +207,9 @@ export const tokenList = {
 
 export const network = [
   {
-    key: "Goerli Testnet",
-    value: "goerli",
-    symbol: "ETH",
+    key: "Mumbai Testnet",
+    value: "mumbai",
+    symbol: "MATIC",
     logoUrl: Ethereum,
   },
   {

@@ -1,33 +1,31 @@
 "use client";
 // import Image from "next/image";
 // import Header from "@/components/Header";
-import LeftHeader from "@/components/LeftHeader";
+import LeftHeader from "../../components/LeftHeader";
 // import SideNav from "@/components/navbar/SideNav";
 import React, { useState, useEffect, useContext } from "react";
 // import { useMediaQuery } from "react-responsive";
 import { CiSearch } from "react-icons/ci";
 import scanner from "../../assets/Dashboard/scanner.png";
 import LeftSide from "./LeftSide";
-import { useUser } from "@/providers/UserProvider";
+import { useUser } from "../../providers/UserProvider";
 import RightSide from "./RightSide";
 import { useRouter } from "next/navigation";
-import { WalletContext } from "@/providers/WalletProvider";
-import SecureWallet from "@/components/SecureWallet";
+import { WalletContext } from "../../providers/WalletProvider";
+import SecureWallet from "../../components/SecureWallet";
 // import TokenComponent from "@/components/Tokens/TokensComponent";
 // import TokensComponent from "@/components/Tokens/TokensComponent";
-import CoinWallet from "@/components/CoinWallet";
-import CreateWallet from "@/components/CreateWallet";
+import CoinWallet from "../../components/CoinWallet";
+import CreateWallet from "../../components/CreateWallet";
 // import SendETH from "@/components/SendETH";
 // import { network } from "@/utils/data/coinlist";
 import axios from "axios";
 import NotificationPopup from "../../components/Notification";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
-import Header from "@/components/Header";
-import OTP from "@/components/OTP/OTP";
-import createAAWalletApi, { getAAWallet } from "../../clientApi/auth";
-import WalletAddress from "@/components/WalletAddress";
-import { getUserWallets } from "@/clientApi/wallet";
+import Header from "../../components/Header";
+import OTP from "../../components/OTP/OTP";
+import { getAAWallet } from "@/clientApi/auth";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -66,7 +64,7 @@ const MainLayout = () => {
     setShowCreateWallet,
     aaWalletList,
     setAaWalletList,
-    setSecureWalletAddress
+    setSecureWalletAddress,
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -74,12 +72,18 @@ const MainLayout = () => {
       router.push("/");
     }
   }, [status]);
-  async function getAAWalletList(walletAddress) {
+  const getAAWalletList = async (walletAddress) => {
     const res = await getAAWallet(walletAddress);
     console.log("getUserWallets------------------", res);
     setAaWalletList(res?.data);
-    setSecureWalletAddress(res?.data[res?.data.length - 1].address)
-  }
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+  };
+  // async function getAAWalletList(walletAddress) {
+  //   const res = await getAAWallet(walletAddress);
+  //   console.log("getUserWallets------------------", res);
+  //   setAaWalletList(res?.data);
+  //   setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+  // }
   useEffect(() => {
     fetchWallet();
     const walletAddress = localStorage.getItem("walletAddress");
