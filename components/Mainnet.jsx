@@ -20,6 +20,7 @@ import { formatEther } from "viem";
 import HistoryCardSkelton from "./skeleton/HistoryCardSkelton";
 import { NEXT_PUBLIC_ALCHEMY_API_KEY_ETH } from "@/constants";
 import HistoryCard from "./cards/HistoryCard";
+import { getAAWallet } from "@/clientApi/auth";
 
 const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
   // const [newWalletName, setNewWalletName] = useState("");
@@ -38,6 +39,8 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
     setWalletAddress,
     history,
     showCreateWallet,
+    aaWalletList,
+    setaaWalletList
   } = useContext(WalletContext);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -251,6 +254,15 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
     delayedFetch();
   }, [activeButton]);
 
+  // const getAAWalletListData = async () => {
+  //   const res = await getAAWallet("0x942214483f40C9b5585D72121718cFaF6CC8A3DC")
+  //   console.log("🚀 ~ useEffect ~ res:", res)
+  // }
+  // useEffect(() => {
+
+  //   getAAWalletListData()
+  // }, [])
+
   // Add this line near the top of your component
 
   return (
@@ -261,9 +273,8 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
             Beta Version (Testnet){" "}
           </p>
           <div
-            className={`${
-              showCreateWallet === true && "font-bold"
-            } flex  gap-2 items-center cursor-pointer group  `}
+            className={`${showCreateWallet === true && "font-bold"
+              } flex  gap-2 items-center cursor-pointer group  `}
             onClick={handleCreateWallet}
           >
             <Image src={PinkPlus} alt="" />
@@ -277,11 +288,10 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
         <div className="flex xl:flex-row flex-col items-center xl:gap-4 md:gap-4 gap-2">
           {/* Keyless Secure Wallet */}
           <div
-            className={`${
-              activeButton === "AA"
-                ? "bg-black"
-                : "bg-white hover:bg-gray-200 duration-500 "
-            } rounded-full px-4 py-4 w-full border-2 border-black cursor-pointer group relative`}
+            className={`${activeButton === "AA"
+              ? "bg-black"
+              : "bg-white hover:bg-gray-200 duration-500 "
+              } rounded-full px-4 py-4 w-full border-2 border-black cursor-pointer group relative`}
           >
             <div className="flex flex-row justify-between items-center gap-3 group">
               <Image
@@ -291,21 +301,19 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
               />
               <div className="flex flex-col space-y-1">
                 <p
-                  className={`${
-                    activeButton === "AA" ? "text-white" : "text-black"
-                  }  font-semibold text-sm md:text-lg xl:text-sm`}
+                  className={`${activeButton === "AA" ? "text-white" : "text-black"
+                    }  font-semibold text-sm md:text-lg xl:text-sm`}
                 >
                   Keyless Secure Wallet
                 </p>
                 <div className="flex flex-row items-center gap-4 z-[1]">
                   <p className="text-[#A09FAA] xl:text-xs text-xs md:text-sm">
-                    {minifyEthereumAddress(secureWalletAddress)}
+                    {secureWalletAddress ? minifyEthereumAddress(secureWalletAddress) : "no wallet"}
                   </p>
                   <Image
                     src={activeButton === "AA" ? Copy : Copy2}
-                    className={`${
-                      activeButton === "AA" ? "text-white" : "text-black"
-                    }`}
+                    className={`${activeButton === "AA" ? "text-white" : "text-black"
+                      }`}
                     alt="copy"
                     onClick={() => {
                       copyToClipBoard(secureWalletAddress);
@@ -338,11 +346,10 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
 
           {/* EOA Wallet */}
           <div
-            className={`${
-              activeButton === "EOA"
-                ? "bg-black"
-                : "bg-white  hover:bg-gray-200 duration-500 "
-            } rounded-full px-4 py-4 w-full border-2 border-black cursor-pointer group relative`}
+            className={`${activeButton === "EOA"
+              ? "bg-black"
+              : "bg-white  hover:bg-gray-200 duration-500 "
+              } rounded-full px-4 py-4 w-full border-2 border-black cursor-pointer group relative`}
           >
             <div className="flex flex-row justify-between items-center gap-3">
               <Image
@@ -352,9 +359,8 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
               />
               <div className="flex flex-col space -y-1">
                 <p
-                  className={`${
-                    activeButton === "EOA" ? "text-white" : "text-black"
-                  }  font-semibold text-sm md:text-lg xl:text-sm`}
+                  className={`${activeButton === "EOA" ? "text-white" : "text-black"
+                    }  font-semibold text-sm md:text-lg xl:text-sm`}
                 >
                   EOA Wallet
                 </p>
@@ -364,7 +370,7 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
                   </p>
                   <Image
                     src={activeButton === "EOA" ? Copy : Copy2}
-                    alt=""
+                    alt="copy"
                     onClick={() => {
                       copyToClipBoard(eoaWalletAddress);
                       enqueueSnackbar("Address Copied", {
@@ -422,7 +428,7 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
           ))
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

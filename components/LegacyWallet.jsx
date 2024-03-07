@@ -7,7 +7,7 @@ import Ethereum from "../assets/Dashboard/etherum.png";
 import CustomButton1 from "./CustomButton1";
 import CreateWallet from "./CreateWallet";
 import { createEOAWalletAPI, createSmartWalletAPI } from "@/clientApi/wallet";
-import { createAAWalletApi } from "@/clientApi/auth";
+import { createAAWalletApi, getAAWallet } from "@/clientApi/auth";
 import { enqueueSnackbar } from "notistack";
 import { WalletContext } from "@/providers/WalletProvider";
 import { FiInfo } from "react-icons/fi";
@@ -22,7 +22,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { fetchWallet } = useContext(WalletContext);
+  const { fetchWallet, setAaWalletList, setSecureWalletAddress } =
+    useContext(WalletContext);
   const [networkFirstValue] = networks.values();
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
@@ -36,6 +37,12 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
     }
   };
 
+  async function getAAWalletList(walletAddress) {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------>>>", res);
+    setAaWalletList(res?.data);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+  }
   const popupRef = useRef();
 
   const handleChange = (e) => {
@@ -49,43 +56,53 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setError(true); // Set error state if exceeding the limit
     }
   };
-
+  async function getAAWalletList(walletAddress) {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------", res);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+    setAaWalletList(res?.data);
+  }
+  const handleCreateAAWallet = async () => {
+    const walletAddress = localStorage.getItem("walletAddress"); getAAWalletList(walletAddress);
+    setLoading(true);
+    const dataForCreateAAWallet = {
+      address: [walletAddress],
+      walletName: inputText,
+      network: "mumbai",
+    };
+    // Check if the inputText (name field) is empty
+    if (inputText.trim() === "") {
+      setError(true); // Set error state to true to indicate an issue
+      setLoading(false);
+      enqueueSnackbar(`Please fill in the name field.`, {
+        variant: "error",
+      });
+      return; // Exit the function early if the name field is empty
+    }
+    
+    try {
+      // Call the API to create AA Wallet
+      const res = await createAAWalletApi(dataForCreateAAWallet);
+      
+      if (res) {
+        await fetchWallet();
+        enqueueSnackbar(`Successful wallet creation`, {
+          variant: "success",
+        });
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(`Something went wrong`, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false); // Close loading button in both success and error scenarios
+    }
+    getAAWalletList(walletAddress);
+  };
   const handleCreateEOAWallet = async () => {
     setLoading(true);
-
-    const handleCreateAAWallet = async () => {
-      setLoading(true);
-
-      // Check if the inputText (name field) is empty
-      if (inputText.trim() === "") {
-        setError(true); // Set error state to true to indicate an issue
-        setLoading(false);
-        enqueueSnackbar(`Please fill in the name field.`, {
-          variant: "error",
-        });
-        return; // Exit the function early if the name field is empty
-      }
-
-      try {
-        // Call the API to create AA Wallet
-        const res = await createAAWalletApi();
-
-        if (res) {
-          await fetchWallet();
-          enqueueSnackbar(`Successful wallet creation`, {
-            variant: "success",
-          });
-          handleClose();
-        }
-      } catch (error) {
-        console.log(error);
-        enqueueSnackbar(`Something went wrong`, {
-          variant: "error",
-        });
-      } finally {
-        setLoading(false); // Close loading button in both success and error scenarios
-      }
-    };
 
     // Check if the inputText (name field) is empty
     if (inputText.trim() === "") {
@@ -176,6 +193,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setLoading(false); // Close loading button in both success and error scenarios
     }
   };
+  const confirmClick = type === "EOA" ? handleCreateEOAWallet : handleCreateAAWallet;
 
   const handleSelectNetwork = (item) => {
     setSelectedNetwork(item);
@@ -184,6 +202,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [hover, setHover] = useState(false);
   const style = { color: "white" };
   const hoverStyle = { color: "black" };
+
 
   return (
     <div className="absolute bg-white flex flex-col xl:mx-8 md:mx-4 mx-0 mt-10 xl:px-0 px-2 md:px-2 space-y-8 h-full">
@@ -223,13 +242,13 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                     alt=""
                     src={
                       selectedNetwork.value === "ethereum" ||
-                      selectedNetwork.value === "goerli"
+                        selectedNetwork.value === "goerli"
                         ? Ethereum
                         : selectedNetwork.value === "bnb"
-                        ? BNB
-                        : selectedNetwork.value === "polygon"
-                        ? Polygon
-                        : Creso
+                          ? BNB
+                          : selectedNetwork.value === "polygon"
+                            ? Polygon
+                            : Creso
                     }
                   />
                 ) : (
@@ -284,10 +303,10 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                               item.value === "ethereum"
                                 ? Ethereum
                                 : item.value === "bnb"
-                                ? BNB
-                                : item.value === "polygon"
-                                ? Polygon
-                                : Ethereum
+                                  ? BNB
+                                  : item.value === "polygon"
+                                    ? Polygon
+                                    : Ethereum
                             }
                             className="w-8 h-8"
                           />
@@ -388,7 +407,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
             name="Confirm"
             bgColor="black"
             textColor="white"
-            handleClick={handleCreateEOAWallet}
+            handleClick={confirmClick}
             isDisabled={false}
           />
         )}
@@ -399,9 +418,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
           onMouseLeave={() => setHover(false)}
           href="https://forms.gle/GBEKLjSH7hxQiuPv8"
           target="_blank"
-          className={`${
-            hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
-          } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
+          className={`${hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
+            } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
         >
           <div className="absolute grid place-items-center">
             <VscFeedback style={hover ? hoverStyle : style} size={30} />
@@ -420,9 +438,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
           onMouseLeave={() => setHover(false)}
           href="https://forms.gle/GBEKLjSH7hxQiuPv8"
           target="_blank"
-          className={`${
-            hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
-          } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
+          className={`${hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
+            } fixed bottom-24 lg:bottom-12 right-12 cursor-pointer shadow-2xl z-50 h-20 w-20 grid place-items-center rounded-full `}
         >
           <div className="absolute grid place-items-center">
             <VscFeedback style={hover ? hoverStyle : style} size={30} />

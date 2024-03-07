@@ -25,6 +25,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchField from "../../components/SearchFiled";
 import Header from "../../components/Header";
 import OTP from "../../components/OTP/OTP";
+import { getAAWallet } from "@/clientApi/auth";
 
 const MainLayout = () => {
   const router = useRouter();
@@ -61,6 +62,9 @@ const MainLayout = () => {
     setWalletAddress,
     showCreateWallet,
     setShowCreateWallet,
+    aaWalletList,
+    setAaWalletList,
+    setSecureWalletAddress,
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -68,9 +72,22 @@ const MainLayout = () => {
       router.push("/");
     }
   }, [status]);
-
+  const getAAWalletList = async (walletAddress) => {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------", res);
+    setAaWalletList(res?.data);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+  };
+  // async function getAAWalletList(walletAddress) {
+  //   const res = await getAAWallet(walletAddress);
+  //   console.log("getUserWallets------------------", res);
+  //   setAaWalletList(res?.data);
+  //   setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+  // }
   useEffect(() => {
     fetchWallet();
+    const walletAddress = localStorage.getItem("walletAddress");
+    getAAWalletList(walletAddress);
   }, []);
 
   const gettokenprice = async (data) => {
@@ -80,7 +97,8 @@ const MainLayout = () => {
     // console.log("Tokenprice😁--->", Tokenprice.data);
     setCoinDataprice(Tokenprice.data);
   };
-  const handleCreateWallet = () => {
+  const handleCreateWallet = async () => {
+    // const res = await createAAWalletApi({walletAddress,})
     setShowCreateWallet(!showCreateWallet);
     setActiveButton("");
 
@@ -199,11 +217,10 @@ const MainLayout = () => {
         {/* ------------ Leftside Main ---------- */}
         {
           <div
-            className={`${
-              isMobile && responsivCompo
-                ? "hidden"
-                : "lg:col-span-6 pt-16 md:px-10 px-6"
-            }`}
+            className={`${isMobile && responsivCompo
+              ? "hidden"
+              : "lg:col-span-6 pt-16 md:px-10 px-6"
+              }`}
           >
             <div className="">
               <LeftHeader
@@ -259,11 +276,10 @@ const MainLayout = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div
-          className={`${
-            responsivCompo
-              ? "px-0  border-l-2 "
-              : " md:px-10 px-6  md:pt-14 pt-8"
-          } lg:col-span-4`}
+          className={`${responsivCompo
+            ? "px-0  border-l-2 "
+            : " md:px-10 px-6  md:pt-14 pt-8"
+            } lg:col-span-4`}
         >
           <div className="hidden lg:block">
             <div className="hidden lg:flex">

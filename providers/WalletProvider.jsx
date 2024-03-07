@@ -51,6 +51,8 @@ const WalletContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [seedPhrase, setSeedPhrase] = useState("");
+  const [aaWalletList, setAaWalletList] = useState([]);
+
   // console.log("🚀 ~ WalletContextProvider ~ userEmail:", userEmail)
 
   // useEffect(() => {
@@ -130,10 +132,9 @@ const WalletContextProvider = ({ children }) => {
 
     try {
       const res = await getUserWallets();
-
+      const getWalletList = res?.data?.wallets;
       if (res?.data) {
-        setEoaWalletAddress(res?.data?.wallets[0].address);
-        setSecureWalletAddress(res?.data?.smartWallets[0].address);
+        setEoaWalletAddress(getWalletList[getWalletList.length - 1].address);
         let walletsEOA = await Promise.all(
           res.data.wallets.map(async (wallet, index) => {
             const balance = await getBlnce(wallet.address);
@@ -265,6 +266,9 @@ const WalletContextProvider = ({ children }) => {
         setUserEmail,
         seedPhrase,
         setSeedPhrase,
+        aaWalletList,
+        setAaWalletList,
+        setSecureWalletAddress
       }}
     >
       {/* {navbarTrigger && (
