@@ -2,11 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import Modal from "@/components/modal/Modal";
-import CustomButton2 from "@/components/CustomButton2";
-import User from "@/components/User";
+import Modal from "../../components/modal/Modal";
+import CustomButton2 from "../../components/CustomButton2";
+import User from "../../components/User";
 import Sure from "../../assets/Dashboard/gainers/sure.png";
-import CresoCard from "@/components/CresoCard";
+import CresoCard from "../../components/CresoCard";
 import CFX from "../../assets/gainers/cfx.png";
 import MINA from "../../assets/AboutUs/gainers/mina.png";
 import { usePathname } from "next/navigation";
@@ -15,11 +15,11 @@ import {
   getTopGainersLosers,
   fetchTopGainers,
   fetchTopLosers,
-} from "@/components/TopGainer_Losers/GainersLosersList";
+} from "../../components/TopGainer_Losers/GainersLosersList";
 
 import Image from "next/image";
-import CapCard from "@/components/CapCard";
-import { WalletContext } from "@/providers/WalletProvider";
+import CapCard from "../../components/CapCard";
+import { WalletContext } from "../../providers/WalletProvider";
 
 const RightSide = (props) => {
   const {
@@ -38,8 +38,7 @@ const RightSide = (props) => {
     handleClose,
     user,
   } = props;
-  const { isMobile } =
-    useContext(WalletContext);
+  const { isMobile } = useContext(WalletContext);
   const [hover, setHover] = useState(false);
 
   const [activeButton, setActiveButton] = useState("TopGainers");
@@ -308,11 +307,17 @@ const RightSide = (props) => {
           onMouseLeave={() => setHover(false)}
           href="https://forms.gle/GBEKLjSH7hxQiuPv8"
           target="_blank"
-          className={`${hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
-            } fixed bottom-2 lg:bottom-12 right-2 lg:right-12 cursor-pointer shadow-2xl z-50  ${isMobile ? "w-10 h-10" : "w-20 h-20"} grid place-items-center rounded-full `}
+          className={`${
+            hover ? "bg-white border border-[#2100EC] " : "bg-[#2100EC]"
+          } fixed bottom-2 lg:bottom-12 right-2 lg:right-12 cursor-pointer shadow-2xl z-50  ${
+            isMobile ? "w-10 h-10" : "w-20 h-20"
+          } grid place-items-center rounded-full `}
         >
           <div className="absolute grid place-items-center">
-            <VscFeedback style={hover ? hoverStyle : style} size={isMobile ? 15 : 30} />
+            <VscFeedback
+              style={hover ? hoverStyle : style}
+              size={isMobile ? 15 : 30}
+            />
           </div>
           {hover && (
             <p className="absolute p-2 rounded-lg font-semibold  -top-12 bg-black text-white ">

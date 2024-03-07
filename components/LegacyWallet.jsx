@@ -249,13 +249,13 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                     className="w-6 h-6"
                     alt=""
                     src={
-                      networkFirstValue?.value === "ethereum" ||
-                      networkFirstValue?.value === "goerli"
-                        ? Ethereum
+                      networkFirstValue.value === "polygon" ||
+                      networkFirstValue?.value === "mumbai"
+                        ? Polygon
                         : networkFirstValue.value === "bnb"
                         ? BNB
-                        : networkFirstValue.value === "polygon"
-                        ? Polygon
+                        : networkFirstValue?.value === "ethereum"
+                        ? Ethereum
                         : Creso
                     }
                   />
@@ -281,10 +281,10 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                   <div
                     key={key}
                     className={`${
-                      item.key === "Goerli Testnet" && "cursor-pointer"
+                      item.key === "Mumbai Testnet" && "cursor-pointer"
                     } flex flex-col gap-4`}
                     onClick={() =>
-                      item.key === "Goerli Testnet" && handleSelectNetwork(item)
+                      item.key === "Mumbai Testnet" && handleSelectNetwork(item)
                     }
                   >
                     <div className="flex flex-row items-center justify-between min-h-[50px]">
@@ -307,7 +307,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                         <div className="flex flex-col items-start gap-2">
                           <p
                             className={`${
-                              item.key === "Goerli Testnet"
+                              item.key === "Mumbai Testnet"
                                 ? "text-black"
                                 : "text-sm text-gray-500"
                             } `}

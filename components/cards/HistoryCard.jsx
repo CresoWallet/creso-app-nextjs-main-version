@@ -8,7 +8,7 @@ import Dai2 from "../../assets/Dashboard/Dai2.png";
 
 import { ethers } from "ethers";
 import { ETHERSCAN } from "@/constants";
-import { viewTransactionHistoryApi } from "@/clientApi/auth";
+import { getTransactionHistoryApi } from "@/clientApi/auth";
 
 const HistoryCard = ({
   secureWalletAddress,
@@ -18,22 +18,23 @@ const HistoryCard = ({
   value,
   usd,
 }) => {
-  // const [transactionDetails, setTransactionDetails] = useState(null);
-  // useEffect(() => {
-  //   // Fetch transaction details when component mounts
-  //   if (hash) {
-  //     fetchTransactionDetails(hash);
-  //   }
-  // }, [hash]);
+  const [transactionDetails, setTransactionDetails] = useState(null);
 
-  // const fetchTransactionDetails = async (transactionId) => {
-  //   try {
-  //     const response = await axiosInstance.get(`/transactions/${transactionId}`);
-  //     setTransactionDetails(response.data); // Assuming response contains transaction details
-  //   } catch (error) {
-  //     console.error("Error fetching transaction details:", error);
-  //   }
-  // };
+  useEffect(() => {
+    const fetchTransactionDetails = async () => {
+      try {
+        const response = await getTransactionHistoryApi({ hash });
+        setTransactionDetails(response.data);
+      } catch (error) {
+        console.error("Error fetching transaction details:", error);
+      }
+    };
+
+    if (hash) {
+      fetchTransactionDetails();
+    }
+  }, [hash]);
+
   const cryptoValue =
     value &&
     (value?.hex ? ethers.formatEther(value.hex) : ethers.formatEther(value));
@@ -78,12 +79,12 @@ const HistoryCard = ({
           <div className="flex flex-row"></div>
         </div>
       </div>
-      {/* {transactionDetails && (
-        <div> */}
-      {/* Render transaction details here */}
-      {/* <p>Transaction Details: {JSON.stringify(transactionDetails)}</p>
+      {/* Display transaction details if available */}
+      {transactionDetails && (
+        <div>
+          <p>Transaction Details: {JSON.stringify(transactionDetails)}</p>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

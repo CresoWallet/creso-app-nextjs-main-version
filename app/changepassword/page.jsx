@@ -7,7 +7,7 @@ import PasswordInput from "@/components/common/PasswordInput";
 import CustomCheckbox from "@/components/customcheckbox";
 import CustomButton from "@/components/CustomButton";
 import { changePasswordApi } from "@/clientApi/auth";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -15,12 +15,14 @@ function ChangePassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [currentPasswordError, setCurrentPasswordError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false); // New state for success message
   const [error, setError] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  // const router = useRouter();
+  const router = useRouter();
 
   const handleNewPasswordConfirm = async (authToken) => {
     setError("");
@@ -37,8 +39,8 @@ function ChangePassword() {
       setError("Please agree to the Terms of Use.");
     } else {
       setError("");
-      router.push(`/`);
     }
+    setLoading(true);
 
     try {
       const passwords = {
@@ -46,11 +48,24 @@ function ChangePassword() {
         newPassword: password,
       };
       const res = await changePasswordApi(passwords);
+      console.log("API Response:", res);
       console.log(res.data);
-      // Handle success message, redirection, or any other action as needed
+      // Check if the response status is 200 (OK)
+      if (res.status === 200) {
+        console.log("Password changed successfully!");
+        // Display success message
+        setSuccess(true);
+        setError(""); // Clear any previous error message
+        // You can remove the router push here if you don't want to redirect
+      } else {
+        // Handle other status codes
+        setError("Failed to change password. Please try again.");
+      }
     } catch (error) {
       console.error("Error changing password:", error);
       setError("Failed to change password. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,9 +123,18 @@ function ChangePassword() {
               onToggle={() => toggleFieldVisibility("confirmPassword")}
             />
             {currentPasswordError && (
-              <p className="text-red-500 ">{currentPasswordError}</p>
+              <p className="text-red-500  text-center">
+                {currentPasswordError}
+              </p>
             )}
-            {passwordError && <p className="text-red-500 ">{passwordError}</p>}
+            {passwordError && (
+              <p className="text-red-500   text-center">{passwordError}</p>
+            )}
+            {success && ( // Conditionally render success message
+              <p className="text-green-500 text-center">
+                Password changed successfully!
+              </p>
+            )}
             {error && <p className="text-red-500 text-center ">{error}</p>}
             <div className="flex items-center  mt-14 pb-2">
               <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
@@ -124,6 +148,7 @@ function ChangePassword() {
                 name="Create New Password"
                 onClick={handleNewPasswordConfirm}
                 bgColor="black"
+                disabled={loading}
               />
             </div>
           </form>

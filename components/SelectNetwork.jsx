@@ -24,10 +24,10 @@ const NetworkSelection = ({
               <div
                 key={key}
                 className={`${
-                  item.key === "Goerli Testnet" && "cursor-pointer"
+                  item.key === "Mumbai Testnet" && "cursor-pointer"
                 } flex flex-col gap-4`}
                 onClick={() =>
-                  item.key === "Goerli Testnet" && handleSelectNetwork(item)
+                  item.key === "Mumbai Testnet" && handleSelectNetwork(item)
                 }
               >
                 <div className="flex flex-row items-center justify-between min-h-[50px]">
@@ -50,7 +50,7 @@ const NetworkSelection = ({
                     <div className="flex flex-col items-start gap-2">
                       <p
                         className={`${
-                          item.key === "Goerli Testnet"
+                          item.key === "Mumbai Testnet"
                             ? "text-black"
                             : "text-sm text-gray-500"
                         } `}

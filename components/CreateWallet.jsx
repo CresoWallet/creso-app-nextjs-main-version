@@ -84,7 +84,7 @@ const CreateWallet = ({ handleClose }) => {
 
           <div className="flex flex-row items-center gap-2">
             <Image alt="" src={Ethereum} className="w-10 h-10" />
-            <p className="font-semibold">Goerli Testnet </p>
+            <p className="font-semibold">Mumbai Testnet </p>
             {/* <NetworkSelection /> */}
           </div>
           <div className="flex flex-col space-y-2">

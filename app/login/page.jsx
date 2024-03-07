@@ -35,9 +35,9 @@ const LoginPage = () => {
   //     router.push(`/welcome`);
   //   }
   // }, [authToken]);
-  console.log("====================================");
+
   console.log(authToken, "authToken");
-  console.log("====================================");
+
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     router.push(`/dashboard`);
@@ -50,7 +50,9 @@ const LoginPage = () => {
       const res = await loginApi(data);
       console.log(res);
       const tk = res?.data?.data?.token;
+      const userid = res?.data?.data?.userId;
       localStorage.setItem("authToken", tk);
+      localStorage.setItem("userId", userid);
       console.log(tk, "<---------tokrn");
       if (tk) {
         // localStorage.setItem(AUTH_TOKEN, tk);
@@ -70,19 +72,25 @@ const LoginPage = () => {
     setLoading(false);
   };
 
-  const handleTwitterLogin = async () => {
-    window.open(BASE_URL + "/api/login/twitter");
+  // const handleTwitterLogin = async () => {
+  //   window.open(BASE_URL + "/api/login/twitter");
+  // };
 
-    // const data = await axiosInstance("/twitter");
-    // console.log(data);
-    // const data2 = await axiosInstance("/twitter/callback");
-    // console.log(data2);
+  const handleTwitterLogin = async () => {
+    window.open(BASE_URL + "/api/auth/twitter");
   };
+  // const data = await axiosInstance("/twitter");
+  // console.log(data);
+  // const data2 = await axiosInstance("/twitter/callback");
+  // console.log(data2);
+
+  // const handleGoogleLogin = async () => {
+  //   window.open(BASE_URL + "/api/login/google");
+  // };
 
   const handleGoogleLogin = async () => {
-    window.open(BASE_URL + "/api/login/google");
+    window.open(BASE_URL + "/api/auth/google");
   };
-
   return (
     <div className="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 h-screen md:px-2 py-2 gap-2  xl:gap-0 md:gap-0">
       <div className="col-span-1 flex-col justify-center items-center bg-[#2100EC] md:py-8  hidden md:block rounded-2xl">
