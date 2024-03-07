@@ -357,47 +357,6 @@ export const notifyTransactionExecutionApi = async (
   return res;
 };
 
-// // Guardian Management
-// export const addGuardianApi = async (formData) => {
-//   const res = await axiosInstance("/add/guardian", {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
-
-// export const removeGuardianApi = async (formData) => {
-//   const res = await axiosInstance("/remove/guardian", {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
-
-// export const startRecoveryApi = async (formData) => {
-//   const res = await axiosInstance("/start/guardian", {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
-
-// export const confirmRecoveryApi = async (formData) => {
-//   const res = await axiosInstance("/confirm/guardian", {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
-
-// export const getGuardiansApi = async (formData) => {
-//   const res = await axiosInstance("/get/guardian", {
-//     method: "POST",
-//     data: formData,
-//   });
-//   return res;
-// };
-
 // //. Security Settings:
 // Manage Authentication Methods:
 // API: GET /auth/methods (listed in Section IV)

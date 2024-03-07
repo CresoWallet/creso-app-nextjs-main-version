@@ -93,6 +93,14 @@ export const backupWallet = async (formData) => {
   return res;
 };
 
+// // Guardian Management
+// export const addGuardianApi = async (formData) => {
+//   const res = await axiosInstance("/add/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
 export const addGuardian = async (formData) => {
   const res = await axiosInstance("/add/guardian", {
     method: "POST",
@@ -101,6 +109,62 @@ export const addGuardian = async (formData) => {
   //console.log("🚀 ~ addGuardian ~ res:", res);
   return res;
 };
+
+// export const removeGuardianApi = async (formData) => {
+//   const res = await axiosInstance("/remove/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+export const removeGuardian = async (formData) => {
+  const res = await axiosInstance("/remove/guardian", {
+    method: "POST",
+    data: formData,
+  });
+  //console.log("🚀 ~ removeGuardian ~ res:", res);
+  return res;
+};
+
+// export const startRecoveryApi = async (formData) => {
+//   const res = await axiosInstance("/start/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+export const startRecovery = async (formData) => {
+  const res = await axiosInstance("/start/guardian", {
+    method: "POST",
+    data: formData,
+  });
+  //console.log("🚀 ~ startRecovery ~ res:", res);
+  return res;
+};
+
+// export const confirmRecoveryApi = async (formData) => {
+//   const res = await axiosInstance("/confirm/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
+export const confirmRecovery = async (formData) => {
+  const res = await axiosInstance("/confirm/guardian", {
+    method: "POST",
+    data: formData,
+  });
+  //console.log("🚀 ~ confirmRecovery ~ res:", res);
+  return res;
+};
+
+// export const getGuardiansApi = async (formData) => {
+//   const res = await axiosInstance("/get/guardian", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
 
 export const getGuardians = async (formData) => {
   const res = await axiosInstance("/get/guardian", {
@@ -120,39 +184,12 @@ export const getGuardedWallets = async () => {
   return res;
 };
 
-export const confirmRecovery = async (formData) => {
-  const res = await axiosInstance("/confirm/guardian", {
-    method: "POST",
-    data: formData,
-  });
-  //console.log("🚀 ~ confirmRecovery ~ res:", res);
-  return res;
-};
-
 export const getRecoveryStatus = async (formData) => {
   const res = await axiosInstance("/recoveryStatus", {
     method: "POST",
     data: formData,
   });
   //console.log("🚀 ~ getRecoveryStatus ~ res:", res);
-  return res;
-};
-
-export const removeGuardian = async (formData) => {
-  const res = await axiosInstance("/remove/guardian", {
-    method: "POST",
-    data: formData,
-  });
-  //console.log("🚀 ~ removeGuardian ~ res:", res);
-  return res;
-};
-
-export const startRecovery = async (formData) => {
-  const res = await axiosInstance("/start/guardian", {
-    method: "POST",
-    data: formData,
-  });
-  //console.log("🚀 ~ startRecovery ~ res:", res);
   return res;
 };
 
