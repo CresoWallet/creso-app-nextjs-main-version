@@ -33,7 +33,8 @@ export function downloadFile(data, filename, mimeType) {
 
 export const getBalance = async (address) => {
   const provider = new ethers.JsonRpcProvider(
-    "https://ethereum-goerli.publicnode.com"
+    // "https://ethereum-goerli.publicnode.com",
+    "https://polygon-mumbai-bor-rpc.publicnode.com"
   );
 
   const balanceInWei = await provider.getBalance(address);

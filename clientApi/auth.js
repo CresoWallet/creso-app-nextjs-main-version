@@ -397,3 +397,22 @@ export const notifyTransactionExecutionApi = async (
 //   });
 //   return res;
 // };
+
+// //. Security Settings:
+// Manage Authentication Methods:
+// API: GET /auth/methods (listed in Section IV)
+// API: POST /auth/methods (listed in Section IV)
+// API: DELETE /auth/methods/{method_id}
+
+// View Backup Status:
+// API: GET /backups
+// Description: Retrieves information about existing wallet backups.
+// Inputs: user ID, authentication token
+// Outputs: list of backups with status
+
+// Restore Wallet from Backup:
+// API: POST /wallets/restore
+// Description: Restores a wallet from a backup.
+// Inputs: user ID, authentication token, backup ID, cloud storage credentials
+// Outputs: success/failure message
+// Here are the additional APIs for enabling/disabling 2FA, passkeys, and Face ID authentication:

@@ -10,6 +10,13 @@ export const getUserWallets = async () => {
 
   return res;
 };
+// export const getWalletBalanceApi = async (address, network) => {
+//   const res = await axiosInstance(`/wallets/${address}/balance`, {
+//     method: "GET",
+//     data: { network },
+//   });
+//   return res;
+// };
 
 export const transferEthAPI = async (formData) => {
   const res = await axiosInstance("/transfer", {
@@ -20,6 +27,13 @@ export const transferEthAPI = async (formData) => {
 
   return res;
 };
+// export const transferTokensApi = async (formData) => {
+//   const res = await axiosInstance("/tokens/transfer", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
 
 export const getHistory = async (formData) => {
   const res = await axiosInstance(`/history`, {
@@ -31,6 +45,14 @@ export const getHistory = async (formData) => {
   return res;
 };
 
+// export const getTransactionHistoryApi = async (address, filters) => {
+//   const res = await axiosInstance(`/wallets/${address}/transactions`, {
+//     method: "GET",
+//     params: filters,
+//   });
+//   return res;
+// };
+
 export const createEOAWalletAPI = async (formData) => {
   const res = await axiosInstance("/create/wallet", {
     method: "POST",
@@ -39,7 +61,13 @@ export const createEOAWalletAPI = async (formData) => {
   //console.log("🚀 ~ createEOAWalletAPI ~ res:", res);
   return res;
 };
-
+// export const createEOAWalletApi = async (formData) => {
+//   const res = await axiosInstance("/wallet/eoa", {
+//     method: "POST",
+//     data: formData,
+//   });
+//   return res;
+// };
 export const createSmartWalletAPI = async (formData) => {
   const res = await axiosInstance("/create/smartwallet", {
     method: "POST",
@@ -48,6 +76,12 @@ export const createSmartWalletAPI = async (formData) => {
   //console.log("🚀 ~ createSmartWalletAPI ~ res:", res);
   return res;
 };
+// export const createAAWalletApi = async () => {
+//   const res = await axiosInstance("/wallet/aa", {
+//     method: "POST",
+//   });
+//   return res;
+// };
 
 export const backupWallet = async (formData) => {
   const res = await axiosInstance(`/backup/wallet`, {
