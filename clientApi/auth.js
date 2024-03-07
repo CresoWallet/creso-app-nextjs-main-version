@@ -64,14 +64,14 @@ export const authenticateUser = async (formData) => {
 //   return res;
 // };
 
-export const createEoaWallet = async (formData) => {
-  const res = await axiosInstance(`/wallets/eoa`, {
-    method: "POST",
-    data: formData,
-  });
+// export const createEoaWallet = async (formData) => {
+//   const res = await axiosInstance(`/wallets/eoa`, {
+//     method: "POST",
+//     data: formData,
+//   });
 
-  return res;
-};
+//   return res;
+// };
 
 //-------------------Creso API-v1----------------
 
@@ -284,7 +284,7 @@ export const updateUserInformationApi = async (updatedInfo) => {
 
 export const changePasswordApi = async (passwords) => {
   const res = await axiosInstance("/users/change_password", {
-    method: "PUT",
+    method: "POST",
     data: passwords,
   });
   return res;
