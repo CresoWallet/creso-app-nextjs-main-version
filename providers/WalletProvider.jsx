@@ -135,7 +135,7 @@ const WalletContextProvider = ({ children }) => {
       const getWalletList = res?.data?.wallets;
       if (res?.data) {
         setEoaWalletAddress(getWalletList[getWalletList.length - 1].address);
-        setSecureWalletAddress(aaWalletList[aaWalletList.length - 1].address);
+        // setSecureWalletAddress(aaWalletList[aaWalletList.length - 1].address);
         let walletsEOA = await Promise.all(
           res.data.wallets.map(async (wallet, index) => {
             const balance = await getBlnce(wallet.address);
@@ -269,6 +269,7 @@ const WalletContextProvider = ({ children }) => {
         setSeedPhrase,
         aaWalletList,
         setAaWalletList,
+        setSecureWalletAddress
       }}
     >
       {/* {navbarTrigger && (
