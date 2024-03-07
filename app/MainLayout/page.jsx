@@ -66,6 +66,7 @@ const MainLayout = () => {
     setShowCreateWallet,
     aaWalletList,
     setAaWalletList,
+    setSecureWalletAddress
   } = useContext(WalletContext);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const MainLayout = () => {
     const res = await getAAWallet(walletAddress);
     console.log("getUserWallets------------------", res);
     setAaWalletList(res?.data);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
   }
   useEffect(() => {
     fetchWallet();

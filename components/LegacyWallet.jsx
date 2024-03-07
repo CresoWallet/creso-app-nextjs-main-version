@@ -7,7 +7,7 @@ import Ethereum from "../assets/Dashboard/etherum.png";
 import CustomButton1 from "./CustomButton1";
 import CreateWallet from "./CreateWallet";
 import { createEOAWalletAPI, createSmartWalletAPI } from "@/clientApi/wallet";
-import { createAAWalletApi } from "@/clientApi/auth";
+import { createAAWalletApi, getAAWallet } from "@/clientApi/auth";
 import { enqueueSnackbar } from "notistack";
 import { WalletContext } from "@/providers/WalletProvider";
 import { FiInfo } from "react-icons/fi";
@@ -22,7 +22,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { fetchWallet } = useContext(WalletContext);
+  const { fetchWallet, setAaWalletList, setSecureWalletAddress } =
+    useContext(WalletContext);
   const [networkFirstValue] = networks.values();
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
@@ -49,7 +50,12 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setError(true); // Set error state if exceeding the limit
     }
   };
-
+  async function getAAWalletList(walletAddress) {
+    const res = await getAAWallet(walletAddress);
+    console.log("getUserWallets------------------", res);
+    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+    setAaWalletList(res?.data);
+  }
   const handleCreateAAWallet = async () => {
     setLoading(true);
     const walletAddress = localStorage.getItem("walletAddress");
@@ -87,6 +93,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
     } finally {
       setLoading(false); // Close loading button in both success and error scenarios
     }
+    getAAWalletList(walletAddress);
   };
   const handleCreateEOAWallet = async () => {
     setLoading(true);

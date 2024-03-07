@@ -41,7 +41,7 @@ const SendETH = ({
     formState: { errors, isLoading },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const { fetchWallet } = useContext(WalletContext);
+  const { fetchWallet, aaWalletList } = useContext(WalletContext);
 
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
@@ -497,7 +497,7 @@ const SendETH = ({
           {openWalletList && (
             <>
               <div className="bg-white shadow-xl absolute px-4 py-6 top-[55px] w-full left-0 flex flex-col  gap-4 min-w-[350px] max-h-[400px] overflow-y-auto rounded-[20px] z-[2]">
-                {walletArr.map((wallet, key) => (
+                {aaWalletList.map((wallet, key) => (
                   <div
                     key={key}
                     className="flex flex-col cursor-pointer gap-4"
@@ -519,7 +519,7 @@ const SendETH = ({
                                 : ""}
                             </p>
 
-                            <p className="text-xs opacity-50">{`(${
+                            {/* <p className="text-xs opacity-50">{`(${
                               wallet.balance[
                                 selectedNetwork
                                   ? selectedNetwork?.value
@@ -527,7 +527,7 @@ const SendETH = ({
                               ]
                             } ${
                               selectedNetwork ? selectedNetwork?.symbol : "ETH"
-                            })`}</p>
+                            })`}</p> */}
                           </div>
                         </div>
                       </div>
