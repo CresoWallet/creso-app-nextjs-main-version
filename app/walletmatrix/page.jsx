@@ -2,14 +2,21 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import greenblub from "../../assets/eoa/greenblub.png";
 import pinkblub from "../../assets/eoa/pinkblub.png";
 import Header from "@/components/common/HeaderEOA";
 import CustomButton4 from "@/components/CustomButton4";
 
 function WalletMatrix() {
+  const router = useRouter();
+
   const [buttonNo, setButtonNo] = useState(false);
-  const [buttonI, setButtonI] = useState(true);
+  const [buttonI, setButtonI] = useState(false);
+
+  const handleBack = () => {
+    router.back();
+  };
 
   return (
     <div className=" h-full md:px-4  py-4 flex flex-col ">
@@ -82,6 +89,7 @@ function WalletMatrix() {
           onClick={() => {
             setButtonNo(true);
             setButtonI(false);
+            handleBack();
           }}
           padding="px-24 "
           className={`${buttonNo ? "bg-black text-white" : "border-black"}`}
@@ -91,25 +99,26 @@ function WalletMatrix() {
           No Thanks
         </CustomButton4>
 
-        <CustomButton4
-          isHovered={buttonI}
-          onClick={() => {
-            setButtonI(true);
-            setButtonNo(false);
-          }}
-          padding="px-28 "
-          className={`${buttonI ? "bg-black text-white" : "border-black"}`}
-          onMouseEnter={() => setButtonI(true)}
-          onMouseLeave={() => setButtonI(false)}
-        >
-          {/* <Link href="/create-password">I Agree</Link> */}
-          <Link
-            href="/create-password
+        <Link
+          href="/create-password
           "
+        >
+          <CustomButton4
+            isHovered={buttonI}
+            onClick={() => {
+              setButtonI(true);
+              setButtonNo(false);
+            }}
+            padding="px-28 "
+            className={`${buttonI ? "bg-black text-white" : "border-black"}`}
+            onMouseEnter={() => setButtonI(true)}
+            onMouseLeave={() => setButtonI(false)}
           >
+            {" "}
             I Agree
-          </Link>
-        </CustomButton4>
+          </CustomButton4>
+        </Link>
+
         {/* <button
           className={`rounded-full py-4 px-24 mx-2 mb-2 border-black ${
             buttonNo ? "bg-black text-white" : "bg-transparent text-black"

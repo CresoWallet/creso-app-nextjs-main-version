@@ -143,27 +143,6 @@ function ConfirmRecovery() {
   const [readOnly, setReadOnly] = useState(true);
   const getStoredSeedPhrase = useSelector(selectStoredSeedPhrase);
   const dispatch = useDispatch();
-  const handleRevealClick = async () => {
-    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
-    console.log(
-      "🚀 ~ handleRevealClick ~ storedSeedPhrase:",
-      deStoredSeedPhrase
-    );
-    if (deStoredSeedPhrase) {
-      const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
-      // Seed phrase already exists in local storage
-      const seedPhraseArray = storedSeedPhrase.split(" ");
-
-      const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-        word,
-        revealed: true,
-      }));
-
-      setseedPhraseData(phrasesWithRevealed);
-    } else {
-      // Seed phrase doesn't exist in local storage, make API call
-    }
-  };
 
   useEffect(() => {
     const numToRemove = Math.floor(Math.random() * 2) + 3;
@@ -175,7 +154,25 @@ function ConfirmRecovery() {
       }
     }
     setRemovedPhrases(removedPhrases);
-    handleRevealClick();
+
+    const storedSeedPhrase = localStorage.getItem("seedPhrase");
+    const seedPhraseArray = storedSeedPhrase.split(" ");
+
+    const phrasesWithRevealed = seedPhraseArray.map((word, index) => {
+      if (removedPhrases.includes(index)) {
+        return {
+          word: "",
+          revealed: false,
+        };
+      } else {
+        return {
+          word,
+          revealed: true,
+        };
+      }
+    });
+
+    setseedPhraseData(phrasesWithRevealed);
   }, []);
   const handleInputChange = (index, value) => {
     setseedPhraseData((prevSeedPhraseData) => {
@@ -183,6 +180,7 @@ function ConfirmRecovery() {
       newUserInput[index] = { ...newUserInput[index], word: value };
       return newUserInput;
     });
+
     // setseedPhraseData(...seedPhraseData,value)
   };
 
@@ -199,7 +197,9 @@ function ConfirmRecovery() {
 
   const handleConfirm = () => {
     const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
-    const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
+    const walletPassword = localStorage.getItem("walletPassword");
+    // const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
+    const storedSeedPhrase = deStoredSeedPhrase;
     for (let i = 0; i < removedPhrases.length; i++) {
       const storedSeedPhraseAry = storedSeedPhrase.split(" ");
       const index = removedPhrases[i];
@@ -213,10 +213,12 @@ function ConfirmRecovery() {
     setReadOnly(true); // Disable editing after confirmation
     // Persist removedPhrases and readOnly if needed
     // For now, I'm just alerting "Confirmed!"
-    const sha256Hash = generateSHA256Hash(storedSeedPhrase);
-    console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
-    dispatch(setStoredSeedPhrase(sha256Hash));
-    localStorage.setItem("seedshash", sha256Hash);
+    // const sha256Hash = generateSHA256Hash(storedSeedPhrase);
+    // console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
+    const encryptedData = encryptData(deStoredSeedPhrase, walletPassword);
+
+    dispatch(setStoredSeedPhrase(encryptedData));
+    localStorage.setItem("encryptedSeedPhrase", encryptedData);
     localStorage.removeItem("seedPhrase");
     navigation.push("/completion");
   };
@@ -272,10 +274,11 @@ function ConfirmRecovery() {
           ))}
         </div>
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <div className="text-center mt-20 w-full rounded-full border border-black bg-black text-white cursor-pointer">
-          <button className="p-2.5" onClick={handleConfirm}>
-            Confirm
-          </button>
+        <div
+          className="text-center mt-20 w-full rounded-full border border-black bg-black text-white cursor-pointer"
+          onClick={handleConfirm}
+        >
+          <button className="p-2.5">Confirm</button>
         </div>
       </div>
     </div>

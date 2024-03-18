@@ -157,7 +157,7 @@
 // export default Welcome;
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import create from "../../assets/eoa/createeoa.svg";
 import Header from "@/components/common/HeaderEOA";
@@ -166,12 +166,22 @@ import Link from "next/link";
 import CustomButton4 from "@/components/CustomButton4";
 import CustomCheckbox from "@/components/CustomCheckbox";
 import ConnectWalletBtn from "../components/connectWallet";
+import { useUser } from "@/providers/UserProvider";
+import { useRouter } from "next/navigation";
 
 function Welcome() {
+  const router = useRouter();
+  const { status } = useUser();
   const [importWalletHovered, setImportWalletHovered] = useState(false);
   const [connectWallet, setConnectWallet] = useState(false);
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (status === "failed") {
+      router.push("/");
+    }
+  }, [status]);
 
   const handleConnectWallet = async () => {
     if (!isChecked) {
@@ -209,7 +219,7 @@ function Welcome() {
           <p className="text-gray-500">
             Trusted by millions, creso is a secure wallet making the world of
             <span className="text-[#FF4085] ml-1"> web 3 </span>
-            <p>accessible to all.</p>
+            <span>accessible to all.</span>
           </p>
         </div>
         <Image alt="" src={create} className="mb-8  mx-auto" />
@@ -237,34 +247,42 @@ function Welcome() {
             //   setCreateWalletHovered(false);
             // }}
             padding="px-20 "
+            isDisabled={!isChecked}
           >
             {/* Connect Wallet */}
             <ConnectWalletBtn />
           </CustomButton4>
-          <CustomButton4
-            isHovered={importWalletHovered}
-            onMouseEnter={() => setImportWalletHovered(true)}
-            onMouseLeave={() => setImportWalletHovered(false)}
-            onClick={() => {
-              setImportWalletHovered(true);
-              setCreateWalletHovered(false);
-            }}
-            padding="px-12 "
-          >
-            <Link href="/importwallet">Import an existing wallet</Link>
-          </CustomButton4>
-          <CustomButton4
-            isHovered={createWalletHovered}
-            onMouseEnter={() => setCreateWalletHovered(true)}
-            onMouseLeave={() => setCreateWalletHovered(false)}
-            onClick={() => {
-              setCreateWalletHovered(true);
-              setImportWalletHovered(false);
-            }}
-            padding="px-16 "
-          >
-            <Link href="/walletmatrix">Create New Wallet</Link>
-          </CustomButton4>
+          <Link href={isChecked ? "/importwallet" : "#"}>
+            <CustomButton4
+              isHovered={importWalletHovered}
+              onMouseEnter={() => setImportWalletHovered(true)}
+              onMouseLeave={() => setImportWalletHovered(false)}
+              onClick={() => {
+                setImportWalletHovered(true);
+                setCreateWalletHovered(false);
+              }}
+              padding="px-12 "
+              isDisabled={!isChecked}
+            >
+              Import an existing wallet
+            </CustomButton4>
+          </Link>
+
+          <Link href={isChecked ? "/walletmatrix" : "#"}>
+            <CustomButton4
+              isHovered={createWalletHovered}
+              onMouseEnter={() => setCreateWalletHovered(true)}
+              onMouseLeave={() => setCreateWalletHovered(false)}
+              onClick={() => {
+                setCreateWalletHovered(true);
+                setImportWalletHovered(false);
+              }}
+              padding="px-16 "
+              isDisabled={!isChecked}
+            >
+              Create New Wallet
+            </CustomButton4>
+          </Link>
         </div>
       </div>
     </div>

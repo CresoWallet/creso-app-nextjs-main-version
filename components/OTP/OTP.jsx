@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import "./OTP.css";
 import { enqueueSnackbar } from "notistack";
@@ -13,71 +13,86 @@ import CustomButton from "../CustomButton";
 import { useUser } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
 import { WalletContext } from "@/providers/WalletProvider";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const OTP = () => {
   const [otp, setOtp] = useState("");
   console.log("🚀 ~ OTP ~ otp:", otp);
-  const [loading, setLoading] = useState(false);
-  const { user } = useUser();
+  const [verifyLoading, setVerifyLoading] = useState(false);
+  const [sendOtpLoading, setOtpLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState(null);
+  const { handleAuthentication } = useUser();
   const router = useRouter();
-  const { userEmail } = useContext(WalletContext);
-  console.log("🚀 ~ OTP ~ userEmail:", userEmail);
 
   const handleOtpChange = (value) => {
     setOtp(value);
   };
 
-  const handleVerifyOTP = async () => {
-    if (!userEmail) {
-      enqueueSnackbar(`Please enter OTP`, {
-        variant: "error",
-      });
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      setUserEmail(storedEmail);
     } else {
-      setLoading(true);
-      try {
-        const res = await verifyEmailApi({
-          email: userEmail,
-          otp: Number(otp),
+      router.push("/");
+    }
+  }, []);
+
+  const handleVerifyOTP = async () => {
+    setVerifyLoading(true);
+    try {
+      const res = await verifyEmailApi({
+        email: userEmail,
+        otp: Number(otp),
+      });
+      console.log("🚀 ~ handleVerifyOTP ~ res:", res);
+      if (res?.status === 200) {
+        await handleAuthentication();
+        router.push(`/welcome`);
+        enqueueSnackbar(`Email verified`, {
+          variant: "success",
         });
-        console.log("🚀 ~ handleVerifyOTP ~ res:", res);
-        if (res?.status === 200) {
-          enqueueSnackbar(`Email verified`, {
-            variant: "success",
-          });
-          setLoading(false);
-          router.push(`/`);
-        }
-      } catch (err) {
-        console.log("err : ", err);
+        setVerifyLoading(false);
+      }
+    } catch (err) {
+      console.log("err : ", err);
+      if (err?.response?.data?.message) {
         enqueueSnackbar(`${err.response.data.message}`, {
           variant: "error",
         });
-      } finally {
-        setLoading(false);
+      } else {
+        enqueueSnackbar(`Something went wrong!`, {
+          variant: "error",
+        });
       }
+    } finally {
+      setVerifyLoading(false);
     }
   };
   const handleSendOTPMail = async () => {
-    setLoading(true);
-
+    setOtpLoading(true);
     try {
       const res = await resendOTPApi({
         email: userEmail,
       });
       console.log("🚀 ~ handleSendOTPMail ~ res:", res);
       if (res?.status === 200) {
-        enqueueSnackbar(`otp resed successfully`, {
+        enqueueSnackbar(`OTP has been sent to your email.`, {
           variant: "success",
         });
-        setLoading(false);
+        setOtpLoading(false);
       }
     } catch (err) {
-      console.log("err : ", err);
-      // enqueueSnackbar(`${err.response.data.message}`, {
-      //   variant: "error",
-      // });
+      if (err?.response?.data?.message) {
+        enqueueSnackbar(`${err.response.data.message}`, {
+          variant: "error",
+        });
+      } else {
+        enqueueSnackbar(`Something went wrong!`, {
+          variant: "error",
+        });
+      }
     } finally {
-      setLoading(false);
+      setOtpLoading(false);
     }
   };
   return (
@@ -118,22 +133,30 @@ const OTP = () => {
         <div className="flex flex-col gap-8 justify-center items-center">
           <button
             className={`px-14 py-2 w-fit bg-[#FF4085] rounded-full text-white font-semibold`}
-            onClick={() => handleVerifyOTP()}
+            onClick={() => !verifyLoading && handleVerifyOTP()}
           >
-            Verify
+            {verifyLoading ? (
+              <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin text-sky-500" />
+            ) : (
+              "Verify"
+            )}
           </button>
         </div>
         <div className="flex justify-center text-lg text-black mt-2 ">
           <p>Not received?</p>
           &nbsp;
-          <p
-            className="text-[#FF4085] cursor-pointer"
-            onClick={() => {
-              handleSendOTPMail();
-            }}
-          >
-            Resend
-          </p>
+          {sendOtpLoading ? (
+            <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin text-sky-500" />
+          ) : (
+            <p
+              className="text-[#FF4085] cursor-pointer"
+              onClick={() => {
+                handleSendOTPMail();
+              }}
+            >
+              Resend
+            </p>
+          )}
         </div>
       </div>
       {/* <Toaster position="top-right" reverseOrder={false} /> */}

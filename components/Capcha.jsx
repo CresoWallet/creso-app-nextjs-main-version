@@ -28,14 +28,14 @@ const Capcha = ({ onSubmit }) => {
   // };
 
   return (
-    <form className="flex flex-col items-center py-5">
+    <div className="flex flex-col items-center py-5">
       <ReCAPTCHA
         sitekey="6LcxWE4pAAAAADTuZPl7FRbwvRiUQ8cndvvTZsNW"
         onChange={(value) => setValidCaptcha(value)}
         className="mx-auto"
       />
       <button type="submit" style={{ display: "none" }}></button>
-    </form>
+    </div>
   );
 };
 

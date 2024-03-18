@@ -48,10 +48,10 @@ const RegisterPage = () => {
       const res = await signUpApi(signUpData);
       if (res) {
         // console.log(res);
-        setUserEmail(signUpData?.email)
-        localStorage.setItem("userEmail", signUpData?.email)
+        setUserEmail(signUpData?.email);
+        localStorage.setItem("userEmail", signUpData?.email);
         router.push("/otp");
-        enqueueSnackbar(`User successfully registered`, {
+        enqueueSnackbar(`OTP has been sent to your email`, {
           variant: "success",
         });
       }
@@ -115,7 +115,15 @@ const RegisterPage = () => {
           <CustomTextField
             label={"Email"}
             placeholder={"email"}
-            validation={{ ...register("email", { required: true }) }}
+            validation={{
+              ...register("email", {
+                required: true,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              }),
+            }}
           />
 
           <div className="flex flex-col gap-2">
@@ -124,8 +132,13 @@ const RegisterPage = () => {
               label={"Password"}
               placeholder={"password"}
               type={"password"}
-              validation={{ ...register("password", { required: true }) }}
+              validation={{
+                ...register("password", {
+                  required: true,
+                }),
+              }}
             />
+
             <CustomTextField
               label={"Confirm Password"}
               placeholder={"confirm password"}

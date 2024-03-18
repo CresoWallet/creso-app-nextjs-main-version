@@ -23,7 +23,7 @@ const CommonComponent = ({
   return (
     <>
       <HeaderEOA title={title} className="ml-4" />
-      <div className="h-full md:p-4 p-4 md:px-4 md:mx-4 md:py-4 flex flex-col ">
+      <div className="h-full md:p-4 p-4 md:px-4 md:mx-4 md:py-4 flex flex-col -z-10">
         <div className="flex items-center pt-10">
           <Link href="createwallet1">
             <h1 className="flex items-center gap-2  text-xl font-bold md:text-black md:hidden ">

@@ -2,22 +2,24 @@
 
 import React, { useContext, useRef, useState } from "react";
 import Image from "next/image";
-import CustomButton3 from "./CustomButton3";
-import Ethereum from "../assets/Dashboard/etherum.png";
-import CustomButton1 from "./CustomButton1";
-import CreateWallet from "./CreateWallet";
+import Ethereum from "../../assets/Dashboard/etherum.png";
 import { createEOAWalletAPI, createSmartWalletAPI } from "@/clientApi/wallet";
 import { createAAWalletApi, getAAWallet } from "@/clientApi/auth";
 import { enqueueSnackbar } from "notistack";
 import { WalletContext } from "@/providers/WalletProvider";
+import { IoMdAddCircle } from "react-icons/io";
+import { TiDelete } from "react-icons/ti";
 import { FiInfo } from "react-icons/fi";
-import Sucess from "../assets/Dashboard/Sucess.svg";
-import BNB from "../assets/Dashboard/bnb2.png";
-import Polygon from "../assets/Dashboard/polygon.png";
+import Sucess from "../../assets/Dashboard/Sucess.svg";
+import BNB from "../../assets/Dashboard/bnb2.png";
+import Polygon from "../../assets/Dashboard/polygon.png";
+import Creso from "../../assets/Dashboard/creso2.png";
 import { VscFeedback } from "react-icons/vsc";
+import CustomButton3 from "../CustomButton3";
+import CustomButton1 from "../CustomButton1";
 <VscFeedback />;
 
-const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
+const CreateAA = ({ handleBackButton, type, handleClose, networks }) => {
   const [wallet, setWallet] = useState(false);
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState(false);
@@ -28,21 +30,41 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   const [openWalletList, setOpenWalletList] = useState(false);
   const [openNetowrkList, setOpenNetworkList] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState();
+  const [fields, setFields] = useState([[]]);
+  const [isDisable, setIsDisable] = useState(true);
+
+  const handleAdd = () => {
+    const addedValue = [...fields, []];
+    setFields(addedValue);
+    setIsDisable(true);
+  };
+
+  const handleInputChange = (onChangeValue, i) => {
+    setIsDisable(false);
+    const inputData = [...fields];
+    inputData[i] = onChangeValue.target.value;
+    inputData[fields.length - 1]?.length === 0
+      ? setIsDisable(true)
+      : setIsDisable(false);
+    setFields(inputData);
+  };
+
+  const handleInputDelete = (i) => {
+    const deleteField = [...fields];
+    deleteField.splice(i, 1);
+    deleteField[fields.length - 2]?.length === 0
+      ? setIsDisable(true)
+      : setIsDisable(false);
+    setFields(deleteField);
+  };
 
   const handleBackgroundClick = (e) => {
     if (popupRef.current === e.target) {
       setOpenWalletList(false);
       setOpenNetworkList(false);
-      setOpenCoinList(false);
     }
   };
 
-  async function getAAWalletList(walletAddress) {
-    const res = await getAAWallet(walletAddress);
-    console.log("getUserWallets------------------>>>", res);
-    setAaWalletList(res?.data);
-    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
-  }
   const popupRef = useRef();
 
   const handleChange = (e) => {
@@ -56,130 +78,32 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setError(true); // Set error state if exceeding the limit
     }
   };
-  async function getAAWalletList(walletAddress) {
-    const res = await getAAWallet(walletAddress);
-    console.log("getUserWallets------------------", res);
-    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
-    setAaWalletList(res?.data);
-  }
+
   const handleCreateAAWallet = async () => {
-    const walletAddress = localStorage.getItem("walletAddress");
-    getAAWalletList(walletAddress);
     setLoading(true);
     const dataForCreateAAWallet = {
-      address: [walletAddress],
+      address: fields,
       walletName: inputText,
-      network: "mumbai",
+      network: selectedNetwork
+        ? selectedNetwork.value
+        : networkFirstValue.value,
     };
+
     // Check if the inputText (name field) is empty
-    if (inputText.trim() === "") {
-      setError(true); // Set error state to true to indicate an issue
-      setLoading(false);
-      enqueueSnackbar(`Please fill in the name field.`, {
-        variant: "error",
-      });
-      return; // Exit the function early if the name field is empty
-    }
+    // if (inputText.trim() === "") {
+    //   setError(true); // Set error state to true to indicate an issue
+    //   setLoading(false);
+    //   enqueueSnackbar(`Please fill in the name field.`, {
+    //     variant: "error",
+    //   });
+    //   return; // Exit the function early if the name field is empty
+    // }
 
     try {
-      // Call the API to create AA Wallet
       const res = await createAAWalletApi(dataForCreateAAWallet);
 
       if (res) {
-        await fetchWallet();
-        enqueueSnackbar(`Successful wallet creation`, {
-          variant: "success",
-        });
-        handleClose();
-      }
-    } catch (error) {
-      console.log(error);
-      enqueueSnackbar(`Something went wrong`, {
-        variant: "error",
-      });
-    } finally {
-      setLoading(false); // Close loading button in both success and error scenarios
-    }
-    getAAWalletList(walletAddress);
-  };
-  const handleCreateEOAWallet = async () => {
-    setLoading(true);
-
-    // Check if the inputText (name field) is empty
-    if (inputText.trim() === "") {
-      setError(true); // Set error state to true to indicate an issue
-      setLoading(false);
-      enqueueSnackbar(`Please fill in the name field.`, {
-        variant: "error",
-      });
-      return; // Exit the function early if the name field is empty
-    }
-
-    //   if (type === "EOA") {
-    //     try {
-    //       const payload = {
-    //         walletName: inputText,
-    //       };
-    //       const res = await createEOAWalletAPI(payload);
-    //       if (res) {
-    //         await fetchWallet();
-    //         enqueueSnackbar(`Successful wallet creation`, {
-    //           variant: "success",
-    //         });
-    //         setLoading(false);
-    //         handleClose();
-    //       }
-
-    //       console.log(res);
-    //     } catch (error) {
-    //       console.log(error);
-    //       enqueueSnackbar(`Something went wrong`, {
-    //         variant: "error",
-    //       });
-    //     }
-    //   } else if ((type = "AAA")) {
-    //     try {
-    //       const payload = {
-    //         walletName: inputText,
-    //         network: "goerli",
-    //       };
-    //       const res = await createSmartWalletAPI(payload);
-    //       if (res) {
-    //         await fetchWallet();
-    //         enqueueSnackbar(`Successful wallet creation`, {
-    //           variant: "success",
-    //         });
-    //         setLoading(false);
-    //         handleClose();
-    //       }
-
-    //       console.log(res);
-    //     } catch (error) {
-    //       console.log(error);
-    //       enqueueSnackbar(`Something went wrong`, {
-    //         variant: "error",
-    //       });
-    //     }
-    //   }
-    // };
-    try {
-      let res;
-
-      if (type === "EOA") {
-        const payload = {
-          walletName: inputText,
-        };
-        res = await createEOAWalletAPI(payload);
-      } else if (type === "AA") {
-        const payload = {
-          walletName: inputText,
-          network: "",
-        };
-        res = await createSmartWalletAPI(payload);
-      }
-
-      if (res) {
-        await fetchWallet();
+        // await fetchWallet();
         enqueueSnackbar(`Successful wallet creation`, {
           variant: "success",
         });
@@ -194,8 +118,6 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
       setLoading(false); // Close loading button in both success and error scenarios
     }
   };
-  const confirmClick =
-    type === "EOA" ? handleCreateEOAWallet : handleCreateAAWallet;
 
   const handleSelectNetwork = (item) => {
     setSelectedNetwork(item);
@@ -207,11 +129,8 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
 
   return (
     <div className="absolute bg-white flex flex-col xl:mx-8 md:mx-4 mx-0 mt-10 xl:px-0 px-2 md:px-2 space-y-8 h-full">
-      {wallet && <CreateWallet handleBackButton={() => setWallet(false)} />}
       <div className="flex flex-row items-center justify-between">
-        <p className="text-black font-bold text-xl">
-          {type === "EOA" ? "Legacy Wallet" : "Smart Wallet"}
-        </p>
+        <p className="text-black font-bold text-xl">Smart Wallet</p>
         <div>
           <CustomButton3
             title="Back"
@@ -243,7 +162,7 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
                     alt=""
                     src={
                       selectedNetwork.value === "ethereum" ||
-                      selectedNetwork.value === "goerli"
+                      selectedNetwork.value === "mumbai"
                         ? Ethereum
                         : selectedNetwork.value === "bnb"
                         ? BNB
@@ -346,6 +265,48 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
           <span className="text-[#FF4085] px-1 font-bold">Learn More</span>
         </p>
       </div>
+
+      <div className="flex flex-col items-center">
+        {fields.map((data, i) => {
+          return (
+            <div
+              key={i}
+              className="border border-solid border-[#E5E5F0] rounded-full mx-3 py-3 mt-2 w-full"
+            >
+              <div className="flex flex-row items-center justify-between">
+                <input
+                  required={true}
+                  type="text"
+                  placeholder="Enter Owner Address"
+                  className="placeholder:text-xs placeholder:text-black placeholder:font-bold  px-5 focus:outline-none w-full"
+                  value={data}
+                  onChange={(e) => handleInputChange(e, i)}
+                  style={{ flex: 1 }}
+                />
+                <div className="px-2">
+                  {fields.length !== 1 && (
+                    <TiDelete
+                      className="w-8 h-8 text-red-600 cursor-pointer"
+                      onClick={() => handleInputDelete(i)}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        <button
+          disabled={isDisable}
+          className={`${
+            isDisable ? "bg-stone-400" : "bg-black"
+          } rounded-lg text-white text-sm text-center self-center px-3 py-2 my-2 mx-2 flex flex-row items-center gap-4 font-medium`}
+          onClick={() => handleAdd()}
+        >
+          Add Owner <IoMdAddCircle className="w-5 h-5" />
+        </button>
+      </div>
+
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between py-2 px-4 font-bold">
           <p className="px-4">Name Wallet</p>
@@ -406,10 +367,12 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
           <CustomButton1
             isLoading={loading}
             name="Confirm"
-            bgColor="black"
+            bgColor={
+              isDisable || inputText.length === 0 ? "stone-400" : "black"
+            }
             textColor="white"
-            handleClick={confirmClick}
-            isDisabled={false}
+            handleClick={handleCreateAAWallet}
+            isDisabled={isDisable || inputText.length === 0}
           />
         )}
       </div>
@@ -459,4 +422,4 @@ const LegacyWallet = ({ handleBackButton, type, handleClose, networks }) => {
   );
 };
 
-export default LegacyWallet;
+export default CreateAA;
