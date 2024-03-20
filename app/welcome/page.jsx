@@ -177,11 +177,11 @@ function Welcome() {
   const [createWalletHovered, setCreateWalletHovered] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    if (status === "failed") {
-      router.push("/");
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === "failed") {
+  //     router.push("/");
+  //   }
+  // }, [status]);
 
   const handleConnectWallet = async () => {
     if (!isChecked) {

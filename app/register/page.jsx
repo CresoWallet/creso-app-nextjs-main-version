@@ -47,9 +47,11 @@ const RegisterPage = () => {
     try {
       const res = await signUpApi(signUpData);
       if (res) {
+        const tk = res?.data?.data?.token;
         // console.log(res);
         setUserEmail(signUpData?.email);
         localStorage.setItem("userEmail", signUpData?.email);
+        localStorage.setItem("authToken", tk);
         router.push("/otp");
         enqueueSnackbar(`OTP has been sent to your email`, {
           variant: "success",
