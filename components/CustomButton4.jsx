@@ -1,6 +1,7 @@
 // CustomButton4.jsx
 import React from "react";
 import Link from "next/link";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CustomButton4 = ({
   children,
@@ -10,6 +11,8 @@ const CustomButton4 = ({
   onMouseEnter,
   onMouseLeave,
   padding,
+  isDisabled,
+  isLoading,
 }) => {
   return (
     <button
@@ -19,8 +22,14 @@ const CustomButton4 = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      disabled={isDisabled}
     >
-      {href ? <Link href={href}>{children}</Link> : children}
+      {isLoading ? (
+        <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin text-sky-500" />
+      ) : (
+        <>{href ? <Link href={href}>{children}</Link> : children}</>
+      )}
+      {/* {href ? <Link href={href}>{children}</Link> : children} */}
     </button>
   );
 };

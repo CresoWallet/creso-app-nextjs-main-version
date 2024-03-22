@@ -19,6 +19,10 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import useEncryption from "@/components/EncryptData/EncryptData";
 import instanceEnDe from "@/components/EncryptData/BaseURL";
+import { enqueueSnackbar } from "notistack";
+import { FaFileDownload } from "react-icons/fa";
+import { MdContentCopy } from "react-icons/md";
+import { copyToClipBoard, downloadFile } from "@/utils";
 
 function ReviewRecovery() {
   const { encryptData, decryptData } = useEncryption();
@@ -70,10 +74,8 @@ function ReviewRecovery() {
       setHideSeed(false);
     }
     const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
-    // const storedWalletAddress = localStorage.getItem("walletAddress");
-    const storedWalletName = localStorage.getItem("walletName");
     if (deStoredSeedPhrase) {
-      const storedSeedPhrase = decryptData(deStoredSeedPhrase).seeds;
+      const storedSeedPhrase = deStoredSeedPhrase;
       // Seed phrase already exists in local storage
       const seedPhraseArray = storedSeedPhrase.split(" ");
 
@@ -89,49 +91,22 @@ function ReviewRecovery() {
       console.log("🚀 ~ handleRevealClick ~ sha256Hash:", sha256Hash);
       dispatch(setStoredSeedPhrase(sha256Hash));
     } else {
-      // Seed phrase doesn't exist in local storage, make API call
-      try {
-        console.log("Calling createEOAWalletApi...");
-        const res = await createEOAWalletApi({
-          walletName: storedWalletName,
-        });
-        console.log("createEOAWalletApi response:", res);
-        const { data } = res;
-        console.log(data?.data, "<------------handleRevealClick Data");
-
-        // Update local storage with the newly generated seed phrase
-        const enSeedPharsh = encryptData(
-          JSON.stringify({
-            seeds: data?.data?.seedPhrase,
-          })
-        );
-        // console.log("encrypt-------------------->", enSeedPharsh);
-        localStorage.setItem("seedPhrase", enSeedPharsh);
-        localStorage.setItem("walletAddress", data?.data?.walletAddress);
-
-        const SeedPhrase = data?.data?.seedPhrase || "";
-        console.log("🚀 ~ handleRevealClick ~ SeedPhrase:", SeedPhrase);
-        if (SeedPhrase.length > 0) {
-          const seedPhraseArray = SeedPhrase.split(" ");
-
-          const phrasesWithRevealed = seedPhraseArray.map((word) => ({
-            word,
-            revealed: true,
-          }));
-
-          setRecoveryPhrases(phrasesWithRevealed);
-          setRevealed(true);
-
-          const sha256Hash = generateSHA256Hash(SeedPhrase);
-          console.log("🚀 ~ ReviewRecovery ~ sha256Hash:", sha256Hash);
-          dispatch(setStoredSeedPhrase(sha256Hash));
-        } else {
-          console.error("Seed phrase is empty or not provided.");
-        }
-      } catch (err) {
-        console.error("Error fetching recovery phrases:", err);
-      }
+      enqueueSnackbar(`Couldn't get the private key`, {
+        variant: "error",
+      });
     }
+  };
+
+  const handleFileDownload = async () => {
+    const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+    const walletName = localStorage.getItem("walletName");
+    const walletPassword = localStorage.getItem("walletPassword");
+    const encryptedData = encryptData(deStoredSeedPhrase, walletPassword);
+    downloadFile(
+      JSON.stringify(encryptedData),
+      `${walletName}_privateKey.creso`,
+      "application/json"
+    );
   };
 
   return (
@@ -201,7 +176,26 @@ function ReviewRecovery() {
           )}
         </div> */}
 
-        <div className="text-center mt-20 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
+        <div className="flex justify-end pr-3 gap-5">
+          <FaFileDownload
+            size={15}
+            className="h-10 mt-3 cursor-pointer text-[#3f3f46]"
+            onClick={() => handleFileDownload()}
+          />
+          <MdContentCopy
+            size={17}
+            className="h-10 mt-3 cursor-pointer text-[#3f3f46]"
+            onClick={() => {
+              const deStoredSeedPhrase = localStorage.getItem("seedPhrase");
+              copyToClipBoard(deStoredSeedPhrase);
+              enqueueSnackbar("Private Key Copied", {
+                variant: "info",
+              });
+            }}
+          />
+        </div>
+
+        <div className="text-center mt-10 w-full rounded-full border border-black  bg-black text-white cursor-pointer">
           <button className="p-2.5" onClick={(e) => handleRevealClick(e)}>
             {hideSeed
               ? "Reveal Secret Recovery Phrase"
@@ -211,14 +205,19 @@ function ReviewRecovery() {
           </button>
         </div>
         {revealed ? (
-          <CustomButton4
-            padding="px-14 py-4"
-            className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+          // <CustomButton4
+          //   padding="px-14"
+          //   className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+          //   onClick={handleConfirmClick}
+          // >
+          //   Confirm
+          // </CustomButton4>
+          <div
+            className="text-center mt-4 w-full rounded-full border border-black bg-black text-white cursor-pointer"
+            onClick={handleConfirmClick}
           >
-            <div onClick={handleConfirmClick} className="">
-              Confirm
-            </div>
-          </CustomButton4>
+            <button className="p-2.5">Confirm</button>
+          </div>
         ) : null}
       </div>
     </div>

@@ -73,10 +73,14 @@ const MainLayout = () => {
     }
   }, [status]);
   const getAAWalletList = async (walletAddress) => {
-    const res = await getAAWallet(walletAddress);
-    console.log("getUserWallets------------------", res);
-    setAaWalletList(res?.data);
-    setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+    try {
+      const res = await getAAWallet(walletAddress);
+      console.log("getUserWallets------------------", res);
+      if (res?.data.length > 0) {
+        setAaWalletList(res?.data);
+        setSecureWalletAddress(res?.data[res?.data.length - 1].address);
+      }
+    } catch (error) {}
   };
   // async function getAAWalletList(walletAddress) {
   //   const res = await getAAWallet(walletAddress);
@@ -198,7 +202,17 @@ const MainLayout = () => {
             />
           )}
           <div className="">
-            {showCreateWallet && <CreateWallet handleClose={handleClose} />}
+            {showCreateWallet && (
+              <SecureWallet
+                handleClose={handleCloseShowWallet}
+                wallets={wallets}
+                walletType={walletType}
+                secureWalletBalance={secureWalletBalance}
+                eoaWalletBalance={eoaWalletBalance}
+                setShowWallet={setShowWallet}
+              />
+            )}
+            {/* {showCreateWallet && <CreateWallet handleClose={handleClose} />} */}
           </div>
           {/* <div className="overflow-x-scroll"> */}
           <div className="">
@@ -217,10 +231,11 @@ const MainLayout = () => {
         {/* ------------ Leftside Main ---------- */}
         {
           <div
-            className={`${isMobile && responsivCompo
-              ? "hidden"
-              : "lg:col-span-6 pt-16 md:px-10 px-6"
-              }`}
+            className={`${
+              isMobile && responsivCompo
+                ? "hidden"
+                : "lg:col-span-6 pt-16 md:px-10 px-6"
+            }`}
           >
             <div className="">
               <LeftHeader
@@ -276,13 +291,14 @@ const MainLayout = () => {
 
         {/* ------------ Rightside Main ---------- */}
         <div
-          className={`${responsivCompo
-            ? "px-0  border-l-2 "
-            : " md:px-10 px-6  md:pt-14 pt-8"
-            } lg:col-span-4`}
+          className={`${
+            responsivCompo
+              ? "px-0  border-l-2 "
+              : " md:px-10 px-6  md:pt-14 pt-8"
+          } lg:col-span-4`}
         >
           <div className="hidden lg:block">
-            <div className="hidden lg:flex">
+            <div className="hidden lg:block lg:cols-span-4">
               {showCreateWallet && <CreateWallet handleClose={handleClose} />}
             </div>
             <div className=" hidden lg:flex">

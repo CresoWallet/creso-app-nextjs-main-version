@@ -13,6 +13,7 @@ import CustomCheckbox from "@/components/customcheckbox";
 import { createEOAWalletApi } from "@/clientApi/auth";
 import { useRouter } from "next/navigation";
 import { WalletContext } from "@/providers/WalletProvider";
+import { enqueueSnackbar } from "notistack";
 // import {
 //   encryptData,
 //   decryptData,
@@ -22,11 +23,14 @@ import { WalletContext } from "@/providers/WalletProvider";
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [buttonI, setButtonI] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkedError, setCheckedError] = useState("");
   const [walletName, setWalletName] = useState("");
   const router = useRouter();
   const { seedPhrase, setSeedPhrase } = useContext(WalletContext);
@@ -42,26 +46,35 @@ function CreatePassword() {
     } else if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
     } else if (!isChecked) {
-      setError("Please agree to the Terms of Use.");
+      setCheckedError("Please agree to the Terms of Use.");
     } else {
-      localStorage.setItem("walletName", walletName);
-      router.push(`/review-recovery-pharse`);
-      localStorage.setItem("walletName", walletName)
-
-      // try {
-      //   const res = await createEOAWalletApi({
-      //     walletName: walletName,
-      //   });
-      //   console.log("Response:", res?.data);
-      //   setSeedPhrase(res?.data?.data?.seedPhrase);
-      //   if (res?.data?.message === "EOA wallet Successfully created") {
-      //     // router.push(`/review-recovery-pharse`);
-      //     // localStorage.setItem("walletName", walletName)
-      //   }
-      // } catch (error) {
-      //   console.error("Error creating wallet:", error);
-      //   // Handle error scenario
-      // }
+      try {
+        setIsLoading(true);
+        const createWalletRes = await createEOAWalletApi({ walletName });
+        if (createWalletRes) {
+          localStorage.setItem("walletName", walletName);
+          localStorage.setItem("walletPassword", password);
+          localStorage.setItem(
+            "seedPhrase",
+            createWalletRes?.data?.data?.seedPhrase
+          );
+          router.push(`/review-recovery-pharse`);
+          enqueueSnackbar(`Wallet Successfully Created`, {
+            variant: "success",
+          });
+        }
+      } catch (error) {
+        if (error?.response?.data?.message) {
+          enqueueSnackbar(`${error?.response?.data?.message}`, {
+            variant: "error",
+          });
+        } else {
+          enqueueSnackbar(`Error Creating ${walletName} wallet`, {
+            variant: "error",
+          });
+        }
+      }
+      setIsLoading(false);
     }
   };
   const toggleShowNewPassword = () => {
@@ -109,12 +122,12 @@ function CreatePassword() {
       <div className="items-center justify-center mx-4">
         <form onSubmit={handleCreatePassword} className="">
           <div className="my-4 mx-auto max-w-md">
-            <label
+            <span
               htmlFor="walletName"
               className="block text-gray-700 font-bold md:mb-2 mb-1"
             >
               Wallet Name
-            </label>
+            </span>
             <input
               type="text"
               id="walletName"
@@ -149,7 +162,13 @@ function CreatePassword() {
 
           {/* Terms of Use */}
           <div className="flex items-center md:mb-8 md:mt-2 mt-20 mb-2 mx-auto max-w-md">
-            <CustomCheckbox checked={isChecked} onChange={setIsChecked} />
+            <CustomCheckbox
+              checked={isChecked}
+              onChange={() => {
+                setIsChecked(!isChecked);
+                setCheckedError("");
+              }}
+            />
 
             <span className="ml-2 ">
               I understand that Creso cannot recover this password for me.
@@ -157,14 +176,26 @@ function CreatePassword() {
             </span>
           </div>
 
+          {checkedError && (
+            <p className="text-red-500 text-center ">{checkedError}</p>
+          )}
+
           <div className="flex items-center justify-center">
             <CustomButton4
+              onMouseEnter={() => setButtonI(true)}
+              onMouseLeave={() => setButtonI(false)}
+              isHovered={buttonI}
               onClick={handleCreatePassword}
               padding="px-14 py-4"
-              className="rounded-full border border-black bg-white text-black hover:bg-black hover:text-white focus:outline-none"
+              className={`${buttonI ? "bg-black text-white" : "border-black"}`}
               disabled={
-                passwordError || !password || !confirmPassword || !walletName
+                passwordError ||
+                !password ||
+                !confirmPassword ||
+                !walletName ||
+                !isChecked
               }
+              isLoading={isLoading}
             >
               Create New Password
             </CustomButton4>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import BgImage from "../../assets/auth/bgImage.png";
-import { loginApi } from "@/clientApi/auth";
+import { loginApi, resendOTPApi } from "@/clientApi/auth";
 import { AUTH_TOKEN, BASE_URL } from "@/constants";
 import { useUser } from "@/providers/UserProvider";
 import { CustomTextField } from "@/components/fields/CustomTextField";
@@ -20,15 +20,22 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { WalletContext } from "@/providers/WalletProvider";
 
 import Header from "@/components/common/LoginRegister";
+import { axiosInstance } from "@/services/axios";
 
 const LoginPage = () => {
   const router = useRouter();
-  const { validCaptcha, setAuthToken, authToken } = useContext(WalletContext);
+  const { validCaptcha, setAuthToken, authToken, setUserEmail } =
+    useContext(WalletContext);
 
-  const { user, isAuthenticated, handleAuthentication } = useUser();
+  const { handleAuthentication } = useUser();
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, watch, formState } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   // useEffect(() => {
   //   if (authToken) {
@@ -36,35 +43,63 @@ const LoginPage = () => {
   //   }
   // }, [authToken]);
 
-  console.log(authToken, "authToken");
-
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     router.push(`/dashboard`);
   //   }
   // }, [isAuthenticated, user]);
 
+  const sendEmail = async (data) => {
+    try {
+      const otpEmailRes = await resendOTPApi({ email: data.email });
+      if (otpEmailRes) {
+        setUserEmail(data.email);
+        router.push("/otp");
+        enqueueSnackbar(`OTP has been sent to your email`, {
+          variant: "success",
+        });
+      }
+    } catch (error) {}
+  };
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await loginApi(data);
-      console.log(res);
-      const tk = res?.data?.data?.token;
-      const userid = res?.data?.data?.userId;
-      localStorage.setItem("authToken", tk);
-      localStorage.setItem("userId", userid);
-      console.log(tk, "<---------tokrn");
-      if (tk) {
-        // localStorage.setItem(AUTH_TOKEN, tk);
-        // authenticate();
-        // setLoading(false);
-        handleAuthentication();
-        router.push(`/welcome`);
+      const loginResponse = await loginApi(data);
+      // const tk = res?.data?.data?.token;
+      // const userid = res?.data?.data?.userId;
+      // localStorage.setItem("authToken", tk);
+      // localStorage.setItem("userId", userid);
+      // console.log(tk, "<---------tokrn");
+      if (loginResponse.status === 200) {
+        const tk = loginResponse?.data?.data?.token;
+        console.log("tk : ", tk);
+        const userid = loginResponse?.data?.data?.userId;
+        const userEmail = loginResponse?.data?.data?.userEmail;
+        localStorage.setItem("authToken", tk);
+        localStorage.setItem("userId", userid);
+        localStorage.setItem("userEmail", userEmail);
+
+        if (loginResponse?.data?.data?.isEmailVerified) {
+          // authenticate();
+          // setLoading(false);
+          handleAuthentication();
+          // router.push(`/welcome`);
+          router.push(`/dashboard`);
+        } else {
+          await sendEmail(data);
+        }
       }
-    } catch (err) {
-      enqueueSnackbar(`${err?.response?.data?.message}`, {
-        variant: "error",
-      });
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        enqueueSnackbar(`${error?.response?.data?.message}`, {
+          variant: "error",
+        });
+      } else {
+        enqueueSnackbar(`Something went wrong!`, {
+          variant: "error",
+        });
+      }
     } finally {
       // setLoading(false);
     }
@@ -123,14 +158,28 @@ const LoginPage = () => {
           <CustomTextField
             label={"Email"}
             placeholder={"email"}
-            validation={{ ...register("email", { required: true }) }}
+            validation={{
+              ...register("email", {
+                required: true,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              }),
+            }}
             className="ml-4 font-bold"
+            error={errors.email && errors.email.message}
           />
+
           <CustomTextField
             label={"Password"}
             placeholder={"password"}
             type={"password"}
-            validation={{ ...register("password", { required: true }) }}
+            validation={{
+              ...register("password", {
+                required: true,
+              }),
+            }}
             className="ml-4 font-bold"
           />
           <div className="text-[#FF4085] text-sm cursor-pointer hover:font-bold text-end">

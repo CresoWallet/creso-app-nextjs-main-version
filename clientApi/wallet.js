@@ -54,7 +54,7 @@ export const getHistory = async (formData) => {
 // };
 
 export const createEOAWalletAPI = async (formData) => {
-  const res = await axiosInstance("/create/wallet", {
+  const res = await axiosInstance("/wallet/eoa", {
     method: "POST",
     data: formData,
   });
@@ -69,7 +69,7 @@ export const createEOAWalletAPI = async (formData) => {
 //   return res;
 // };
 export const createSmartWalletAPI = async (formData) => {
-  const res = await axiosInstance("/create/smartwallet", {
+  const res = await axiosInstance("/wallet/aa", {
     method: "POST",
     data: formData,
   });

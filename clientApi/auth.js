@@ -1,4 +1,6 @@
+import { BASE_URL } from "@/constants";
 import { axiosInstance } from "@/services/axios";
+import axios from "axios";
 
 // export const loginApi = async (formData) => {
 //   const res = await axiosInstance(`/login`, {
@@ -16,17 +18,17 @@ export const logOut = async (formData) => {
   return res;
 };
 
-export const getAAWallet = async ( address) => {
+export const getAAWallet = async (address) => {
   const res = await axiosInstance(`/wallets/aa/${address}`, {
     method: "GET",
   });
-  return res
+  return res;
 };
 export const getEoaWallet = async () => {
   const res = await axiosInstance(`/wallets/Eoa`, {
     method: "GET",
   });
-  return res
+  return res;
 };
 
 // export const signUpAPI = async (formData) => {

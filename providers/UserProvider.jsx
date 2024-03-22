@@ -41,15 +41,19 @@ export const UserProvider = ({ children }) => {
   const [status, setStatus] = useState("idle");
 
   const handleAuthentication = async () => {
-    try {
-      const res = await authenticateUser();
-      console.log(res);
-      if (res) {
-        setUser(res?.data?.user);
-        setStatus("authenticated");
+    const auth = localStorage.getItem("authToken");
+    if (auth) {
+      try {
+        const res = await authenticateUser();
+        if (res && res?.data?.user?.isEmailVerified === true) {
+          setUser(res?.data?.user);
+          setStatus("authenticated");
+        } else {
+          setStatus("failed");
+        }
+      } catch (error) {
+        setStatus("failed");
       }
-    } catch (error) {
-      setStatus("failed");
     }
   };
   useEffect(() => {
