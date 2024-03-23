@@ -227,6 +227,7 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
       //         (token) => token.contractAddress === WETH_TOKEN_ADDRESS,
       //     )?.balance ?? "0"
       // const totalBalance = +formatEther(rawMaticBalance.toBigInt());
+      //TODO: fix this
       const totalBalance = 0;
       setTotalBalance(totalBalance);
       // const wethBalance = +rawWethBalance
