@@ -111,7 +111,7 @@
 
 "use client";
 import React, { useState, useEffect } from "react";
-import lockpassword1 from "../../assets/eoa/TempLockpassword1.png";
+import lockpassword1 from "../../assets/eoa/Lockpassword1.png";
 import lock2 from "../../assets/eoa/Lock2.png";
 import phone1 from "../../assets/eoa/Phone1.png";
 import CommonComponent from "@/components/common/CommonEOA";
