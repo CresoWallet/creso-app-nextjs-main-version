@@ -11,7 +11,7 @@ import { useMediaQuery } from "react-responsive";
 import { useUser } from "@/providers/UserProvider";
 import { WalletContext } from "@/providers/WalletProvider";
 import { BsArrowLeft } from "react-icons/bs";
-import CustomCheckbox from "@/components/Customcheckbox";
+import CustomCheckbox from "@/components/TestCustomcheckbox";
 
 const LanguagePage = () => {
   const [navbarTrigger, setNavbarTrigger] = useState(false);

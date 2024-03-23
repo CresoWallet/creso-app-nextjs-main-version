@@ -9,7 +9,7 @@ import phone from "../../assets/eoa/Phone.png";
 import CommonComponent from "@/components/common/CommonEOA";
 import PasswordInput from "@/components/common/PasswordInput";
 import CustomButton4 from "@/components/CustomButton4";
-import CustomCheckbox from "@/components/Customcheckbox";
+import CustomCheckbox from "@/components/TestCustomcheckbox";
 import { createEOAWalletApi } from "@/clientApi/auth";
 import { useRouter } from "next/navigation";
 import { WalletContext } from "@/providers/WalletProvider";
