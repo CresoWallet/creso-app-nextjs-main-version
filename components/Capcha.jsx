@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react";
 import { WalletContext } from "@/providers/WalletProvider";
 import ReCAPTCHA from "react-google-recaptcha";
+import { NEXT_PUBLIC_VERCEL_SITE_KEY } from "@/constants";
 
 const Capcha = ({ onSubmit }) => {
   // const [captcha, setCaptcha] = useState(false);
@@ -30,7 +31,7 @@ const Capcha = ({ onSubmit }) => {
   return (
     <div className="flex flex-col items-center py-5">
       <ReCAPTCHA
-        sitekey="6LcxWE4pAAAAADTuZPl7FRbwvRiUQ8cndvvTZsNW"
+        sitekey={NEXT_PUBLIC_VERCEL_SITE_KEY}
         onChange={(value) => setValidCaptcha(value)}
         className="mx-auto"
       />

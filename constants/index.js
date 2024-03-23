@@ -25,9 +25,12 @@ export const CRYPTO_TO_USD =
 
 export const ETHERSCAN = "https://goerli.etherscan.io";
 
+export const NEXT_PUBLIC_VERCEL_SITE_KEY =
+  "6Ld3iqIpAAAAAK3u5mjFehMj6bY-pYxznZUh3rLQ";
+
 export const NEXT_PUBLIC_ALCHEMY_API_KEY_ETH =
   "https://eth-mainnet.g.alchemy.com/v2/vBwEupHTfqXRo7CLn6GOVIy6g2oZ8i5H";
 
-  export const NEXT_PUBLIC_ENCRYPT_KEY = "thisiscryptosecret"
+export const NEXT_PUBLIC_ENCRYPT_KEY = "thisiscryptosecret";
 // email: crouprotrepressoi-4048@yopmail.com
 // pass: 1 to 9
