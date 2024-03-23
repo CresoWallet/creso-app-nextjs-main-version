@@ -212,7 +212,7 @@ import Image from "next/image";
 import CustomButton from "@/components/CustomButton";
 import CommonComponent from "@/components/common/CommonBackup";
 import CustomTextField from "@/components/fields/CustomTextField";
-import CustomCheckbox from "@/components/TestCustomcheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 import mail from "../../assets/backup/mail.png";
 import key from "../../assets/backup/Key.png";
 import wallet from "../../assets/backup/Wallet.png";

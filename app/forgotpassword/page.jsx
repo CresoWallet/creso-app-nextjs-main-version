@@ -4,7 +4,7 @@ import Link from "next/link";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
 import PasswordInput from "@/components/common/PasswordInput";
-import CustomCheckbox from "@/components/TestCustomcheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 import CustomButton from "@/components/CustomButton";
 
 function ForgotPassword() {

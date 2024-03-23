@@ -4,7 +4,7 @@ import Link from "next/link";
 import HeaderEOA from "@/components/common/HeaderEOA";
 import { BsArrowLeft } from "react-icons/bs";
 import { importEOAWalletApi } from "@/clientApi/auth";
-import CustomCheckbox from "@/components/TestCustomcheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
