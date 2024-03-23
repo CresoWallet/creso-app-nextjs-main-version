@@ -22,7 +22,7 @@ import Device2 from "../../assets/backup/device2.png";
 import Cloud from "../../assets/backup/cloud.png";
 import Google from "../../assets/backup/google.png";
 import Baidu from "../../assets/backup/baidu.png";
-import { sendOTPMail, verifyOTP } from "@/clientApi/auth";
+import { resendOTPApi, verifyEmailApi } from "@/clientApi/auth";
 import FileSaver from "file-saver";
 import { backupWallet } from "@/clientApi/wallet";
 import { useUser } from "@/providers/UserProvider";
@@ -58,7 +58,7 @@ const Modal = ({ onClose, title, user }) => {
     } else {
       setLoading(true);
       try {
-        const res = await sendOTPMail({
+        const res = await resendOTPApi({
           email: user.email,
         });
         if (res?.status === 200) {
@@ -136,7 +136,7 @@ const Modal = ({ onClose, title, user }) => {
     } else {
       setLoading(true);
       try {
-        const res = await verifyOTP({
+        const res = await verifyEmailApi({
           otp: otp,
           // email: user.email,
         });

@@ -212,7 +212,7 @@ import Image from "next/image";
 import CustomButton from "@/components/CustomButton";
 import CommonComponent from "@/components/common/CommonBackup";
 import CustomTextField from "@/components/fields/CustomTextField";
-import CustomCheckbox from "@/components/customcheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 import mail from "../../assets/backup/mail.png";
 import key from "../../assets/backup/Key.png";
 import wallet from "../../assets/backup/Wallet.png";
@@ -224,7 +224,7 @@ import loop from "../../assets/backup/loop.png";
 import device2 from "../../assets/backup/device2.png";
 import device from "../../assets/backup/device.png";
 import backupModalStyles from "./BackupModal.css";
-import { sendOTPMail, verifyOTP, backupWallet } from "@/clientApi/auth";
+import { backupWallet, verifyEmailApi, resendOTPApi } from "@/clientApi/auth";
 import { enqueueSnackbar } from "notistack";
 import FileSaver from "file-saver";
 
@@ -249,7 +249,7 @@ const BackupModal = ({ closeModal, user }) => {
           return;
         }
         try {
-          const res = await sendOTPMail({ email: email });
+          const res = await resendOTPApi({ email: email });
           if (res?.status === 200) {
             enqueueSnackbar(`Email sent successfully`, {
               variant: "success",
@@ -275,7 +275,7 @@ const BackupModal = ({ closeModal, user }) => {
           return;
         }
         try {
-          const res = await verifyOTP({ otp: otp });
+          const res = await verifyEmailApi({ otp: otp });
           if (res?.status === 200) {
             enqueueSnackbar(`Email verified`, {
               variant: "success",

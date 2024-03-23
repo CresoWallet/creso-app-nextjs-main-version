@@ -282,12 +282,20 @@ const Discover = () => {
             <div className="flex lg:flex-col flex-row xl:flex-row xl:gap-2 lg:space-y-2 xl:space-y-0 justify-center items-center">
               {/* Conditional rendering based on screen size */}
               <Image
-                src={window.innerWidth <= 768 ? card1m : Card1}
+                src={
+                  typeof window !== "undefined" && window.innerWidth <= 768
+                    ? card1m
+                    : Card1
+                }
                 alt=""
                 className="lg:w-full lg:mx-auto  mx-2 w-1/2"
               />
               <Image
-                src={window.innerWidth <= 768 ? card2m : Card2}
+                src={
+                  typeof window !== "undefined" && window.innerWidth <= 768
+                    ? card2m
+                    : Card2
+                }
                 alt=""
                 className="lg:w-full lg:mx-auto mx-2 w-1/2"
               />

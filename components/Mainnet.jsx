@@ -16,7 +16,7 @@ import { copyToClipBoard, minifyEthereumAddress } from "@/utils";
 import { WalletContext } from "@/providers/WalletProvider";
 import History from "./dashboard/History";
 import { alchemy } from "@/utils/alchemy";
-import { formatEther } from "viem";
+// import { formatEther } from "viem";
 import HistoryCardSkelton from "./skeleton/HistoryCardSkelton";
 import { NEXT_PUBLIC_ALCHEMY_API_KEY_ETH } from "@/constants";
 import HistoryCard from "./cards/HistoryCard";
@@ -226,7 +226,8 @@ const Mainnet = ({ handleOpenWallet, handleCreateWallet, showWallet }) => {
       //     tokenBalances.tokens.find(
       //         (token) => token.contractAddress === WETH_TOKEN_ADDRESS,
       //     )?.balance ?? "0"
-      const totalBalance = +formatEther(rawMaticBalance.toBigInt());
+      // const totalBalance = +formatEther(rawMaticBalance.toBigInt());
+      const totalBalance = 0;
       setTotalBalance(totalBalance);
       // const wethBalance = +rawWethBalance
       // const totalBalance = maticBalance + wethBalance * 131.62

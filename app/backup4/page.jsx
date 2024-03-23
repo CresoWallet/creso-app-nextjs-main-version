@@ -11,7 +11,7 @@ import wallet from "../../assets/backup/Wallet1.png";
 import loop from "../../assets/backup/loop.png";
 import CommonComponent from "@/components/common/CommonBackup";
 import CustomButton from "@/components/CustomButton";
-import CustomCheckbox from "@/components/customcheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 
 const Backup4 = () => {
   const [selectStorage, setSelectStorage] = useState("iCloud Drive");

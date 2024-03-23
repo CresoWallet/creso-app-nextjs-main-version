@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -18,12 +19,15 @@ import Modal from "@/components/modal/Modal";
 import { useUser } from "@/providers/UserProvider";
 import AccountHeader from "@/components/AccountHeader";
 import { VscFeedback } from "react-icons/vsc";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { IoArrowBackCircle } from "react-icons/io5";
-<VscFeedback />;
+{
+  /* <VscFeedback />; */
+}
 
-const NetworkPage2 = (params) => {
-  console.log("TCL: params", params);
+const NetworkPage = (params) => {
+  // const getNetworkParams = useSearchParams();
+
   const [navbarTrigger, setNavbarTrigger] = useState(false);
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
@@ -33,9 +37,8 @@ const NetworkPage2 = (params) => {
   const style = { color: "white" };
   const hoverStyle = { color: "black" };
 
-  const getNetworkParams = useSearchParams();
-  const getNetworkParamsObj = getNetworkParams.get("network");
-  const parseNetworkData = JSON.parse(decodeURIComponent(getNetworkParamsObj));
+  // const getNetworkParamsObj = getNetworkParams.get("network");
+  // const parseNetworkData = JSON.parse(decodeURIComponent(getNetworkParamsObj));
 
   return (
     <div id="modal-root">
@@ -60,13 +63,13 @@ const NetworkPage2 = (params) => {
                 <BsArrowLeft className="h-6 w-6 md:hidden block" />
               </Link>
               <div className="flex flex-row items-center gap-1">
-                <Image alt="" src={parseNetworkData.icon} />
+                {/* <Image alt="" src={parseNetworkData.icon} />
                 <p className="text-xl font-bold">{parseNetworkData.name}</p>
                 {parseNetworkData.test && (
                   <div className="border border-solid px-4 py-1 text-[10px] border-black font-bold rounded-3xl  bg-[#D0F500]">
                     <p>TEST</p>
                   </div>
-                )}
+                )} */}
                 <span className="text-base upcomming">Upcoming</span>
               </div>
             </div>
@@ -102,14 +105,14 @@ const NetworkPage2 = (params) => {
             <hr className="text-[#A09FAA]" />
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-semibold">Network Name</p>
-              <p className="text-xs text-[#A09FAA]">{parseNetworkData.info}</p>
+              {/* <p className="text-xs text-[#A09FAA]">{parseNetworkData.info}</p> */}
             </div>
             <hr className="text-[#A09FAA]" />
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-semibold">Symbol</p>
-              <p className="text-xs text-[#A09FAA]">
+              {/* <p className="text-xs text-[#A09FAA]">
                 {parseNetworkData.shortname}
-              </p>
+              </p> */}
             </div>
             <hr className="text-[#A09FAA]" />
             <div className="flex flex-col space-y-1">
@@ -144,4 +147,4 @@ const NetworkPage2 = (params) => {
   );
 };
 
-export default NetworkPage2;
+export default NetworkPage;

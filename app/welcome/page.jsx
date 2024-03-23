@@ -164,7 +164,7 @@ import Header from "@/components/common/HeaderEOA";
 import Link from "next/link";
 // import ConnectWallet from "@/components/connectbutton/ConnectWallet";
 import CustomButton4 from "@/components/CustomButton4";
-import CustomCheckbox from "@/components/CustomCheckbox";
+import CustomCheckbox from "@/components/Customcheckbox";
 import ConnectWalletBtn from "../components/connectWallet";
 import { useUser } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";

@@ -137,7 +137,7 @@ function ConfirmRecovery() {
       .fill("")
       .map((word) => ({ word, revealed: false }))
   );
-  console.log("🚀 ~ ConfirmRecovery ~ seedPhraseData:", seedPhraseData);
+  // console.log("🚀 ~ ConfirmRecovery ~ seedPhraseData:", seedPhraseData);
   const [error, setError] = useState("");
   const navigation = useRouter();
   const [readOnly, setReadOnly] = useState(true);
@@ -148,7 +148,8 @@ function ConfirmRecovery() {
     const numToRemove = Math.floor(Math.random() * 2) + 3;
     const removedPhrases = [];
     while (removedPhrases.length < numToRemove) {
-      const index = Math.floor(Math.random() * seedPhraseData.length);
+      const index =
+        seedPhraseData && Math.floor(Math.random() * seedPhraseData.length);
       if (!removedPhrases.includes(index)) {
         removedPhrases.push(index);
       }
@@ -174,6 +175,7 @@ function ConfirmRecovery() {
 
     setseedPhraseData(phrasesWithRevealed);
   }, []);
+
   const handleInputChange = (index, value) => {
     setseedPhraseData((prevSeedPhraseData) => {
       const newUserInput = [...prevSeedPhraseData];

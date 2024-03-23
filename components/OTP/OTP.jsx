@@ -3,12 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import "./OTP.css";
 import { enqueueSnackbar } from "notistack";
-import {
-  sendOTPMail,
-  verifyEmailApi,
-  resendOTPApi,
-  verifyOTP,
-} from "@/clientApi/auth";
+import { verifyEmailApi, resendOTPApi } from "@/clientApi/auth";
 import CustomButton from "../CustomButton";
 import { useUser } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
